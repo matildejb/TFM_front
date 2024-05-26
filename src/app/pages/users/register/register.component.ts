@@ -19,9 +19,7 @@ export class RegisterComponent {
   formRegister: FormGroup;
 
   formBuilder = inject(FormBuilder);
-
   usersService = inject(UsersService);
-
   router = inject(Router);
 
   constructor() {
