@@ -1,0 +1,9 @@
+.btn-se-2 {
+  padding: 10px;
+  border: 1px solid #f16744;
+  color: #f16744;
+  &:hover {
+    background-color: #f16744;
+    color: white;
+  }
+}

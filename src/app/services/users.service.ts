@@ -32,7 +32,10 @@ export class UsersService {
 
   register(newUser: RegisterBody) {
     return lastValueFrom(
-      this.httpClient.post<IUser>(`${this.baseUrl}/register`, newUser)
+      this.httpClient.post<IUser & string[]>(
+        `${this.baseUrl}/register`,
+        newUser
+      )
     );
   }
   login(body: LoginBody) {
