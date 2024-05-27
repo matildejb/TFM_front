@@ -1,0 +1,20 @@
+.menu-container {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #f6a278;
+}
+
+.btn {
+  margin: 0 7px;
+  background-color: white; /* Cambia este valor al color que desees */
+  color: #f16744;
+}
+
+.btn:hover {
+    background-color: #f16744; /* Cambia este valor al color que desees cuando el ratón pasa por encima del botón */
+    color: #FFFFFF; /* Cambia este valor al color que desees para el texto cuando el ratón pasa por encima del botón */
+}
