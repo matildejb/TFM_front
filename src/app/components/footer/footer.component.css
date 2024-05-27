@@ -1,0 +1,12 @@
+p {
+    color: #F16744;
+    font-weight: bolder;
+}
+
+.github {
+    color: black;
+    font-size: 2rem;
+}
+.github:hover {
+    color: #027184;
+}
