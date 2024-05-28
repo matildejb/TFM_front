@@ -1,0 +1,55 @@
+.navbar {
+  background: linear-gradient(
+    to bottom right,
+    white 0%,
+    white 50%,
+    #f6a278 50%,
+    #f6a278 75%,
+    #f16744 75%,
+    #f16744 90%,
+    #027184 90%,
+    #027184 100%
+  );
+}
+
+.btn-custom {
+  border-color: #027184;
+  color: #027184;
+}
+
+.offcanvas-header {
+  border-bottom: #f6a278 2px solid;
+  margin-bottom: 0;
+}
+
+.offcanvas {
+  width: 300px;
+  background: linear-gradient(to bottom right, white 55%, #f6a278);
+}
+
+/* icono usuario*/
+.icon-black {
+  color: black;
+  font-size: 2rem;
+
+  &:hover {
+    color: white;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .navbar {
+    background: linear-gradient(
+      to bottom right,
+      white 0%,
+      white 50%,
+      white 50%,
+      #f6a278 75%,
+      #f16744 75%,
+      #f16744 90%,
+      #027184 90%,
+      #027184 100%
+    );
+  }
+}

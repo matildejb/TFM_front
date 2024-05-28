@@ -1,12 +1,18 @@
 p {
-    color: #F16744;
-    font-weight: bolder;
+  color: black;
+  font-weight: bolder;
 }
 
 .github {
-    color: black;
-    font-size: 2rem;
-}
-.github:hover {
+  color: black;
+  font-size: 1.5rem;
+  &:hover {
     color: #027184;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  p {
+    font-size: 0.8rem;
+  }
 }
