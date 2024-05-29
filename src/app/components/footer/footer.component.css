@@ -3,6 +3,10 @@ p {
   font-weight: bolder;
 }
 
+span {
+  color: #027184;
+}
+
 .github {
   color: black;
   font-size: 1.5rem;
