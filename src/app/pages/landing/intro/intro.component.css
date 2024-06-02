@@ -6,6 +6,9 @@
   gap: 1rem;
   width: 400px;
   padding: 20px;
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .text {
@@ -28,12 +31,9 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-  /* Estilos específicos para pantallas pequeñas */
-@media (max-width: 767px) { 
-
-.btn {
-  font-size: 1.1rem;
+/* Estilos específicos para pantallas pequeñas */
+@media (max-width: 767px) {
+  .btn {
+    font-size: 1.1rem;
+  }
 }
-
-}
-
