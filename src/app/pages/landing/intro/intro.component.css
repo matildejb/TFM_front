@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 400px;
+  padding: 20px;
+}
+
+.text {
+  font-size: 1.3rem;
+}
+
+.btn {
+  background: #027184;
+  color: white;
+  padding: 10px;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: #004a59;
+  }
+}
+
+.typed {
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+}
+
+  /* Estilos específicos para pantallas pequeñas */
+@media (max-width: 767px) { 
+
+.btn {
+  font-size: 1.1rem;
+}
+
+}
+
