@@ -1,0 +1,19 @@
+.menu-container {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.btn {
+  margin: 0 7px;
+  background-color: #f16744; 
+  color: white;
+}
+
+.btn:hover {
+    background-color: #f16744; 
+    color: #FFFFFF; 
+}
