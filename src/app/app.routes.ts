@@ -4,7 +4,12 @@ import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
   {
-    path: '',
+
+    //Configuración rutas,
+    //al tener dos rutas con el mismo  path: '' (vacio)
+    //Genera un conflicto y no se visualiza la landing al abrir app 
+    //he puesto users, COMENTARLO!!!
+    path: 'users',
     loadChildren: () =>
       import('./pages/users/users.routes').then((m) => m.USERS_ROUTES),
   },
