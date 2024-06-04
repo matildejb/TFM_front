@@ -12,9 +12,20 @@
   );
 
   .btn-custom {
+    position: relative;
     color: #027184;
-    &:hover {
-      border: #027184 1px solid;
+    border-radius: 100%;
+    top: 5px;
+
+    /* icono usuario*/
+    .icon-user {
+      color: black;
+      font-size: 2rem;
+      padding-top: 10px;
+
+      &:hover {
+        color: #027184;
+      }
     }
   }
 
@@ -24,16 +35,6 @@
     .offcanvas-header {
       border-bottom: #f6a278 2px solid;
       margin-bottom: 0;
-    }
-  }
-
-  /* icono usuario*/
-  .icon-user {
-    color: black;
-    font-size: 2rem;
-
-    &:hover {
-      color: white;
     }
   }
 }

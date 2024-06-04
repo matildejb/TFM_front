@@ -2,7 +2,7 @@
   <div>
     <button class="navbar-toggler mx-3 btn-custom" type="button" data-bs-toggle="offcanvas"
       data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <i class="bi bi-person-lines-fill icon-user"></i>
     </button>
 
     <a class="navbar-brand" [routerLink]="['/landing']">
@@ -20,23 +20,26 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Mis grupos</a>
+            <a class="nav-link active" aria-current="page" href="#">Mi perfil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Crear un nuevo grupo</a>
+            <a class="nav-link" href="#">Mis grupos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Unirse a un grupo</a>
+            <a class="nav-link" href="#">Mis amigos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Estadísticas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Historial</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-danger" id="logoutButton">Cerrar Sesión</button>
           </li>
         </ul>
       </div>
     </div>
 
-  </div>
-
-  <div>
-    <a href="" class="me-3">
-      <i class="bi bi-person-lines-fill icon-user"></i>
-    </a>
   </div>
 </nav>
