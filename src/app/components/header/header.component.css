@@ -1,4 +1,4 @@
- .navbar {
+.navbar {
   background: linear-gradient(
     to bottom right,
     white 0%,
@@ -10,30 +10,31 @@
     #027184 90%,
     #027184 100%
   );
-}
 
-.btn-custom {
-  border-color: #027184;
-  color: #027184;
-}
+  .btn-custom {
+    color: #027184;
+    &:hover {
+      border: #027184 1px solid;
+    }
+  }
 
-.offcanvas-header {
-  border-bottom: #f6a278 2px solid;
-  margin-bottom: 0;
-}
+  .offcanvas {
+    width: 300px;
+    background: linear-gradient(to bottom right, white 55%, #f6a278);
+    .offcanvas-header {
+      border-bottom: #f6a278 2px solid;
+      margin-bottom: 0;
+    }
+  }
 
-.offcanvas {
-  width: 300px;
-  background: linear-gradient(to bottom right, white 55%, #f6a278);
-}
+  /* icono usuario*/
+  .icon-user {
+    color: black;
+    font-size: 2rem;
 
-/* icono usuario*/
-.icon-black {
-  color: black;
-  font-size: 2rem;
-
-  &:hover {
-    color: white;
+    &:hover {
+      color: white;
+    }
   }
 }
 
