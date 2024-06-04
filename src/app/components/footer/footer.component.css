@@ -1,12 +1,36 @@
-p {
-    color: #F16744;
-    font-weight: bolder;
+.footer {
+  color: black;
+  font-weight: bolder;
+
+  span {
+    color: #027184;
+
+    &.c {
+      padding: 0 2px;
+      border-radius: 100%;
+      background-color: white;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .github {
+    color: black;
+    font-size: 1.5rem;
+    &:hover {
+      color: white;
+      background-color: black;
+      border-radius: 50%;
+    }
+  }
 }
 
-.github {
-    color: black;
-    font-size: 2rem;
-}
-.github:hover {
-    color: #027184;
+/*Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .footer {
+    font-size: 0.8rem;
+  }
 }
