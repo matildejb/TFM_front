@@ -1,0 +1,27 @@
+<div class="container d-flex flex-column gap-3">
+
+    <div class="d-flex justify-content-around align-items-center gap-5 mt-4">
+        <h4>Mi perfil</h4>
+
+        <button class="btn edit-profile" [routerLink]="['/profile-setting']">Editar
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f6a278 " class="bi bi-sliders setting ms-2"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="card m-auto mb-5" style="width: 20rem;">
+        <img src="https://placehold.co/300x300" class="card-img-top mt-2" [src]="" [alt]="">
+        <div class="card-body">
+            <h5 class="card-title mb-2 text-center">
+                Nombre usuario
+            </h5>
+            <p>Fecha nacimiento</p>
+            <p>Email</p>
+            <p>Teléfono</p>
+        </div>
+    </div>
+
+</div>

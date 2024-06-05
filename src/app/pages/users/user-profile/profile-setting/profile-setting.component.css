@@ -1,0 +1,21 @@
+.arrow {
+  background-color: white;
+}
+
+.card {
+  border-radius: 10%;
+  background-color: rgb(227, 233, 233);
+   
+  img {
+    width: 200px;
+    border-radius: 100%;
+    margin: auto;
+  }
+}
+
+.btn-success {
+  background-color: #027184;
+  &:hover {
+    background-color: #004a59;
+  }
+}

@@ -1,0 +1,18 @@
+.container {
+  width: 500px;
+
+  .edit-profile {
+    color: #f6a278;
+  }
+
+  .card {
+    border-radius: 10%;
+    background-color: rgb(227, 233, 233);
+
+    img {
+         width: 200px;
+         border-radius: 100%;
+         margin: auto;
+    }
+  }
+}

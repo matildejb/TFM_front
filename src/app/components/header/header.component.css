@@ -11,6 +11,10 @@
     #027184 100%
   );
 
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
   .btn-custom {
     position: relative;
     color: #027184;
@@ -35,6 +39,21 @@
     .offcanvas-header {
       border-bottom: #f6a278 2px solid;
       margin-bottom: 0;
+    }
+    .offcanvas-body {
+      a:hover {
+        color: #027184;
+        font-weight: bolder;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+      }
+
+      .bi {
+        margin-right: 5px;
+      }
     }
   }
 }
