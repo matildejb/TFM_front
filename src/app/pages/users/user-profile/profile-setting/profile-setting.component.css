@@ -1,20 +1,9 @@
 .container {
   width: 700px;
   margin: auto;
-  background: linear-gradient(
-    to top right,
-    #f6a278 0%,
-    #f6a278 50%,
-    #f8c1aa 60%,
-    #e88b66 75%,
-    #f7b191 90%,
-    #f9d1c3 100%
-  );
-  padding: 20px;
-  border-radius: 15px;
 
   .card {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(227, 233, 233);
     padding: 20px;
     border-radius: 10px;
     width: 40rem;
@@ -31,6 +20,14 @@
         background-color: #004a59;
       }
     }
+    .delete-account {
+      color: #004a59;
+      text-decoration: none;
+      font-size: 0.9rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
 
@@ -42,15 +39,19 @@
       width: 20rem;
       margin: auto;
 
-      .edit-profile {
-        justify-content: end;
-      }
-
       img {
         width: 200px;
         border-radius: 100%;
         margin: auto;
       }
+    }
+
+    .btn-container {
+      position: static !important;
+    }
+    .delete-account {
+      position: static !important;
+      margin-top: 50px;
     }
   }
 }
