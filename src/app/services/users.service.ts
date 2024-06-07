@@ -43,4 +43,20 @@ export class UsersService {
       this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
     );
   }
+
+
+  //Obtener usuarios por Id
+  getUsers(userId: string): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.get<IUser>(`${this.baseUrl}/${userId}`)
+      ); 
+  }
+
+  //Eliminar cuenta usuario
+   deleteUser(id: string): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.delete<IUser>(`${this.baseUrl}/${id}`)
+    );
+  }
+
 }
