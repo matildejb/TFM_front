@@ -1,17 +1,6 @@
 .container {
   width: 700px;
   margin: auto;
-  background: linear-gradient(
-    to top right,
-    #f6a278 0%,
-    #f6a278 50%,
-    #f8c1aa 60%,
-    #e88b66 75%,
-    #f7b191 90%,
-    #f9d1c3 100%
-  );
-  padding: 20px;
-  border-radius: 15px;
 
   .card {
     background-color: rgba(255, 255, 255, 0.8);
