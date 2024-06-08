@@ -7,8 +7,9 @@ import { IUser } from '../interfaces/iuser.interfaces';
 type RegisterBody = {
   name: string;
   email: string;
+  phone: number;
+  username: string;
   password: string;
-  role: string;
 };
 
 type LoginBody = {
