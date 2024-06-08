@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 
@@ -19,8 +24,8 @@ export class LoginComponent {
 
   constructor() {
     this.formLogin = this.formBuilder.group({
-      email: null,
-      password: null,
+      email: [null, Validators.required],
+      password: [null, Validators.required],
     });
   }
 

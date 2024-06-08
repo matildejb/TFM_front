@@ -1,9 +1,19 @@
-.btn-se-2 {
+.btn-se {
   padding: 10px;
-  border: 1px solid #f16744;
-  color: #f16744;
+  border: 1px solid #027184;
+  color: #027184;
   &:hover {
-    background-color: #f16744;
+    background-color: #027184;
     color: white;
+  }
+}
+
+.width {
+  width: 70%;
+}
+
+@media (min-width: 1200px) {
+  .width {
+    width: 35%;
   }
 }

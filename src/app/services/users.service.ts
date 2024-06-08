@@ -5,7 +5,8 @@ import { lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: number;
   username: string;

@@ -1,41 +1,55 @@
-<div class="h-100 d-flex justify-content-center align-items-center flex-column">
+<section class="d-flex justify-content-center align-items-center flex-column">
   <h1 class="h2 mt-4">Registro de usuario</h1>
-  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()" class="py-3 w-25">
-    <div class="mb-3">
-      <label for="inputName" class="form-label">Nombre:</label>
-      <input
-        type="text"
-        id="inputName"
-        class="form-control"
-        formControlName="name"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email:</label>
-      <input
-        type="email"
-        id="inputEmail"
-        class="form-control"
-        formControlName="email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword" class="form-label">Contraseña:</label>
-      <input
-        type="password"
-        id="inputPassword"
-        class="form-control"
-        formControlName="password"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputRole" class="form-label">Rol:</label>
-      <select id="inputRole" formControlName="role" class="form-select">
-        <option value="admin">Administrador</option>
-        <option value="regular">Miembro</option>
-      </select>
-    </div>
-
-    <input type="submit" value="Registrarse" class="btn btn-se-2" />
-  </form>
-</div>
+  <div class="p-3 width">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="inputName" class="form-label">Nombre:</label>
+        <input
+          type="text"
+          id="inputName"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputUsername" class="form-label">Nombre de usuario:</label>
+        <input
+          type="text"
+          id="inputUsername"
+          class="form-control"
+          formControlName="username"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputPhone" class="form-label">Número de teléfono:</label>
+        <input
+          type="tel"
+          id="inputPhone"
+          class="form-control"
+          formControlName="phone"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label"
+          >Dirección de correo electrónico:</label
+        >
+        <input
+          type="email"
+          id="inputEmail"
+          class="form-control"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Contraseña:</label>
+        <input
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          formControlName="password"
+        />
+      </div>
+      <input type="submit" value="Registrarse" class="btn btn-se d-flex" />
+    </form>
+  </div>
+</section>

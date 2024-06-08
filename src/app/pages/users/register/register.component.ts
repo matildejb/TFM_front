@@ -25,9 +25,10 @@ export class RegisterComponent {
   constructor() {
     this.formRegister = this.formBuilder.group({
       name: [null, Validators.required],
-      email: null,
-      password: null,
-      role: null,
+      username: [null, Validators.required],
+      phone: [null, Validators.required],
+      email: [null, Validators.required],
+      password: [null, Validators.required],
     });
   }
 
