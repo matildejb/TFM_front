@@ -12,6 +12,8 @@
       color: #f6a278;
       display: flex;
       padding: 0;
+      position: absolute;
+      right: 0;
     }
 
     img {
@@ -19,7 +21,7 @@
       height: 200px;
       border-radius: 100%;
       border: 2px solid;
-      margin: auto;
+      margin-left: 20px;
       background-image: url("/assets/IMG/default-img.png");
       overflow: hidden; /* Para asegurarte de que la imagen se ajuste al contenedor */
       background-size: 7rem; /* Para que la imagen de fondo cubra todo el contenedor */

@@ -5,23 +5,19 @@
     </div>
 
     <div class="card m-auto flex-md-row p-0  mb-5 p-lg-4">
-        <button class="btn edit-profile order-md-3 pt-3 pt-lg-0 pe-3 pe-lg-0" [routerLink]="['/profile-setting']">Editar
+        <button class="btn edit-profile me-3 mt-3 mt-md-0" [routerLink]="['/profile-setting']">Editar
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f6a278 "
                 class="bi bi-sliders setting ms-2" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z" />
             </svg>
         </button>
-        <img class="card-img-top mt-2"
-         [src]=""
-          [alt]="">
+        <img class="card-img-top mt-3 mt-lg-0" [src]="unUser.imageUrl" [alt]="unUser.name">
         <div class="card-body ms-0 ms-lg-4">
-            <h5 class="card-title text-center text-lg-start">
-                {{ user?.name }} NAME
-            </h5>
-            <p>Fecha nacimiento: {{ user?.birthDate }}</p>
-            <p>Teléfono: {{ user?.phone }} </p>
-            <p>Email: {{ user?.email }}</p>
+            <p>Nombre:<b> {{ unUser.name }} </b></p>
+            <p>Fecha nacimiento:<b> {{ unUser.birthDate }} </b></p>
+            <p>Teléfono: <b>{{ unUser.phone }} </b></p>
+            <p>Email:<b> {{ unUser.email }} </b></p>
         </div>
 
     </div>

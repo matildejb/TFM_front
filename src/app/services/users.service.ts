@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
@@ -26,7 +26,8 @@ type LoginResponse = {
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl: string = `${environment.apiUrl}/users`;
+  //private baseUrl: string = `${environment.apiUrl}/users`;
+  private baseUrl = 'http://localhost:3000/api/users';
 
   private httpClient = inject(HttpClient);
 
@@ -45,11 +46,11 @@ export class UsersService {
   }
 
 
-  //Obtener usuarios por Id
-  getUsers(userId: string): Promise<IUser> {
+  //Obtener usuario por Id
+  getUserById(id: number): Promise<IUser> {
     return lastValueFrom(
-      this.httpClient.get<IUser>(`${this.baseUrl}/${userId}`)
-      ); 
+      this.httpClient.get<IUser>(`${this.baseUrl}/${id}`)
+    );
   }
 
   //Eliminar cuenta usuario

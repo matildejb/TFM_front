@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IUser } from '../../../../interfaces/iuser.interfaces';
 import { UsersService } from '../../../../services/users.service';
@@ -12,19 +12,29 @@ import { UsersService } from '../../../../services/users.service';
 })
 export class ProfileInfoComponent {
 
-  user: IUser | null = null;
+  @Input() unUser: IUser = {
+    id: 1,
+    name: 'Marco',
+    email: 'marco@gmail.com',
+    birthDate: '02-05-96',
+    phone: '123455',
+    password: '12344'
+  };
+
   private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params: any) => {
-      const id = params.idUsuario;
+      const id = params.userId;
       try {
-        this.user = await this.userService.getUsers(id);
+        this.unUser = await this.userService.getUserById(id);
       } catch (error) {
         console.log(error);
       }
-    });
+
+    })
   }
 
-}
+  }
+
