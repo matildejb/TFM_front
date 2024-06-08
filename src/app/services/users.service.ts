@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
@@ -53,8 +52,18 @@ export class UsersService {
     );
   }
 
+  //Actualizar usuario por id 
+   updateById(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.put<IUser>(
+        `${this.baseUrl}/${formValue.id}`,
+        formValue
+      )
+    );
+  }
+
   //Eliminar cuenta usuario
-   deleteUser(id: string): Promise<IUser> {
+   deleteUser(id: number): Promise<IUser> {
     return lastValueFrom(
       this.httpClient.delete<IUser>(`${this.baseUrl}/${id}`)
     );

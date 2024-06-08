@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrl: './profile-setting.component.css'
 })
 export class ProfileSettingComponent {
+  userId: number = 0;
   user: IUser | null = null;
   private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
@@ -22,16 +23,22 @@ export class ProfileSettingComponent {
   //GUARDAR CAMBIOS EN EL FORM LLEVA AL PERFIL-INFO
   //CANCELAR LLEVA AL PERFIL-INFO
   
+
+   cancel(idUser: number): void {
+    // Navegar a la ruta '/user-profile/profile-info'
+    this.router.navigate(['/profile-info', idUser]);
+  } 
+ 
   //ELIMINAR CUENTA USUARIO DEFINITIVAMENTE, TE LLEVA AL WELCOME
   
-  deleteUser(id: string) {
+  deleteUser(id: number) {
 
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Perderás tu usuario definitivamente",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#004a59",
       cancelButtonColor: "#d33",
       cancelButtonText: "cancelar",
       confirmButtonText: "¡SÍ, Quiero hacerlo!"

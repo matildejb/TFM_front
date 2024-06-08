@@ -1,7 +1,7 @@
 <div class="container d-flex flex-column gap-3 mt-4 mb-4">
 
     <h4>
-        <button class="btn" [routerLink]="['/profile-info']">
+        <button class="btn" [routerLink]="['/profile-info/:idUser']">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f6a278"
                 class="bi bi-arrow-left-square-fill arrow" viewBox="0 0 16 16">
                 <path
@@ -13,9 +13,7 @@
 
 
     <div class="card flex-md-row m-auto mb-5 p-lg-4">
-        <img class="card-img-top mt-2" 
-        [src]="" 
-        [alt]="">
+        <img class="card-img-top mt-2" [src]="" [alt]="">
         <div class="card-body mb-0 mb-md-4 ms-0 ms-md-4">
             <h5 class="card-title mb-2 text-center">
                 Nombre usuario
@@ -29,13 +27,13 @@
 
         <div class="btn-container w-100 position-absolute bottom-0 start-0 d-flex justify-content-end p-1 p-md-3">
 
-            <button type="button" class="btn btn-light border border-black me-3">Cancelar</button>
+            <button type="button" class="btn btn-light border border-black me-3" (click)="cancel(userId)">Cancelar</button>
 
             <button type="button" class="btn btn-success">Guardar</button>
 
         </div>
 
-        <a type="button" class="delete-account p-0 p-md-3">Eliminar cuenta</a>
+        <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser(userId)">Eliminar cuenta</a>
 
 
 

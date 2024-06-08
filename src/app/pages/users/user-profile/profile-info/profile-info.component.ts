@@ -16,9 +16,9 @@ export class ProfileInfoComponent {
     id: 1,
     name: 'Marco',
     email: 'marco@gmail.com',
-    birthDate: '02-05-96',
-    phone: '123455',
-    password: '12344'
+    username: 'marcopolo',
+    phone: 123455,
+    password: '12344',
   };
 
   private userService = inject(UsersService);
