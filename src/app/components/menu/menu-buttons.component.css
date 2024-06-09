@@ -7,13 +7,18 @@
   padding: 10px;
 }
 
-.btn {
-  margin: 0 7px;
-  background-color: #f16744; 
-  color: white;
-}
-
-.btn:hover {
-    background-color: #f16744; 
-    color: #FFFFFF; 
+.btn-menu{
+  margin: 0 3px;
+  color: #027184;
+  padding: 8px;
+  border: 1px solid #027184;
+  font-size: 11px;
+  text-align: center;
+  line-height: 10px;
+  width: 60px;
+  height: 40px;
+  &:hover {
+    background-color: #027184;
+    color: white;
+  }
 }
