@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -17,18 +17,43 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   formRegister: FormGroup;
-
-  formBuilder = inject(FormBuilder);
   usersService = inject(UsersService);
   router = inject(Router);
 
   constructor() {
-    this.formRegister = this.formBuilder.group({
-      name: [null, Validators.required],
-      username: [null, Validators.required],
-      phone: [null, Validators.required],
-      email: [null, Validators.required],
-      password: [null, Validators.required],
+    this.formRegister = new FormGroup({
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/),
+        // Procedencia de la expresión regular: https://regexr.com/3f8cm
+      ]),
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/),
+        // Procedencia de la expresión regular: https://regexr.com/3f8cm
+      ]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[0-9A-Za-z]{6,12}$/),
+        // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/),
+        // Procedencia de la expresión regular (evaluada en Copilot): https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
+        // Procedencia de la expresión regular: la vimos en clase
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
+        ),
+        // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
+      ]),
     });
   }
 
@@ -41,5 +66,15 @@ export class RegisterComponent {
     //   alert('Registro OK');
     //   this.router.navigateByUrl("/login")
     // }
+  }
+
+  checkControl(
+    formControlName: string,
+    validador: string
+  ): boolean | undefined {
+    return (
+      this.formRegister.get(formControlName)?.hasError(validador) &&
+      this.formRegister.get(formControlName)?.touched
+    );
   }
 }

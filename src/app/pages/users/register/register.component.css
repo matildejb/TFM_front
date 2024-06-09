@@ -1,13 +1,3 @@
-.btn-se {
-  padding: 10px;
-  border: 1px solid #027184;
-  color: #027184;
-  &:hover {
-    background-color: #027184;
-    color: white;
-  }
-}
-
 .width {
   width: 70%;
 }
@@ -15,5 +5,34 @@
 @media (min-width: 1200px) {
   .width {
     width: 35%;
+  }
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(255, 66, 66);
+}
+
+input.ng-valid.ng-touched {
+  border: 2px solid rgb(72, 255, 72);
+}
+
+.error {
+  color: red;
+  font-size: 80%;
+  margin: 0 0 0 20px;
+}
+
+.clarification {
+  font-size: 0.9rem;
+  color: rgb(170, 170, 170);
+}
+
+.btn-se {
+  padding: 10px;
+  border: 1px solid #027184;
+  color: #027184;
+  &:hover {
+    background-color: #027184;
+    color: white;
   }
 }
