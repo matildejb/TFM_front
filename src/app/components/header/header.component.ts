@@ -16,6 +16,19 @@ export class HeaderComponent {
 
   //Mostrar boton hamburguesa si el usuario esta logeado.
 
+  //Mostrar burger
+  collapseNavbar() {
+     //0cultar el burger si está abierto
+    const offcanvasNavbar = document.getElementById('offcanvasNavbar');
+    if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
+      const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
+      if (offcanvasBackdrop) {
+        offcanvasBackdrop.remove();
+      }
+      offcanvasNavbar.classList.remove('show');
+    }
+ }
+
   //CERRAR SESION
    onLogout() {
     this.authService.logout();

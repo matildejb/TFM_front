@@ -16,15 +16,15 @@ export class ProfileInfoComponent {
   activatedRoute = inject(ActivatedRoute);
   
 
-  @Input() unUser: IUser = {
-    //DEBERIA IR VACIO ESTE ARRAY
-    id: 1,
-    name: 'Marco',
-    email: 'marco@gmail.com',
-    username: 'marcopolo',
-    phone: 123455,
-    password: '12344',
-  };
+  unUser: IUser = {
+  id: 0,
+  name: '',
+  email: '',
+  username: '',
+  phone: undefined,
+  password: '',
+  imageUrl: ''
+};
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params: any) => {

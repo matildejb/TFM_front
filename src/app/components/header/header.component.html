@@ -20,7 +20,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/user-profile']">
+            <a class="nav-link" aria-current="page" [routerLink]="['/user-profile']" (click)="collapseNavbar()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square"
                 viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -30,7 +30,7 @@
               Mi perfil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" (click)="collapseNavbar()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill"
                 viewBox="0 0 16 16">
                 <path
@@ -39,7 +39,7 @@
               Mis grupos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" (click)="collapseNavbar()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes-fill"
                 viewBox="0 0 16 16">
                 <path
@@ -48,7 +48,7 @@
               Mis amigos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" (click)="collapseNavbar()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill"
                 viewBox="0 0 16 16">
                 <path
@@ -57,7 +57,7 @@
               Estadísticas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" (click)="collapseNavbar()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill"
                 viewBox="0 0 16 16">
                 <path
@@ -66,7 +66,7 @@
               Historial</a>
           </li>
           <li class="nav-item text-center">
-            <button class="btn btn-outline-danger mt-2" id="logoutButton" (click)="onLogout()">Cerrar Sesión</button>
+            <button class="btn btn-outline-danger mt-2" id="logoutButton" (click)="onLogout()" (click)="collapseNavbar()">Cerrar Sesión</button>
           </li>
         </ul>
       </div>
