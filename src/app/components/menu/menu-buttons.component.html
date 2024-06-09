@@ -1,3 +1,15 @@
+<div class="btn-settings">
+    <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-cog fa-lg"></i>
+    </button>
+    <div class="dropdown-settings">
+        <a class="element-settings" [routerLink]="['/']">Privacidad</a>
+        <a class="element-settings" [routerLink]="['/']">Términos y condiciones</a>
+        <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
+        <a class="element-settings" [routerLink]="['/']">Aplicación</a>
+    </div>
+</div>
+
 <div class="menu-container">
     <button type="button" class="btn btn-menu"><i class="fa-solid fa-user-plus"></i></button>
     <button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>

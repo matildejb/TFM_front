@@ -7,11 +7,7 @@
   padding: 10px;
 }
 
-.btn-menu{
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+.btn-menu {
   margin: 0 3px;
   color: #027184;
   padding: 8px;
@@ -31,15 +27,42 @@
   font-size: 20px;
 }
 
-.button span {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
+.btn-settings {
+  position: relative;
+  display: flex; 
+  justify-content: flex-end; 
 }
 
-.button:hover span {
-  visibility: visible;
-  opacity: 1;
+.icon-settings {
+  background: none; 
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  color: #027184; 
+}
+
+.dropdown-settings {
+  position: absolute; 
+  top: 80%;
+  right: 0; 
+  background-color: white;  
+  display: none; 
+  list-style: none; 
+  padding: 0; 
+}
+
+.element-settings {
+  display: block; 
+  padding: 10px 15px; 
+  text-decoration: none; 
+  color: #333; 
+}
+
+.element-settings:hover {
+  background-color: #027184; 
+  color: white;
+}
+
+.btn-settings:hover .dropdown-settings {
+  display: block; 
 }
