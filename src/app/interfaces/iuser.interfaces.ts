@@ -1,7 +1,6 @@
 export interface IUser {
   id: number;
-  first_name: string;
-  last_name: string;
+  name: string;
   username: string;
   phone?: number;//Propiedad opcional
   email: string;

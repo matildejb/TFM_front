@@ -14,10 +14,10 @@
         </button>
 
         <img class="card-img-top mt-3 mt-lg-0" [src]="unUser.imageUrl || 'assets/images/default-img.png'"
-            [alt]="unUser.first_name || 'img-personal '" title="imagen-perfil">
+            [alt]="unUser.name || 'img-personal '" title="imagen-perfil">
 
         <div class="card-body ms-0 ms-lg-4">
-            <p>Nombre:<b> {{ unUser.first_name }} {{ unUser.last_name }}</b></p>
+            <p>Nombre:<b> {{ unUser.name }}</b></p>
             <p>Usuario:<b> {{ unUser.username }} </b></p>
             <p>Email:<b> {{ unUser.email }} </b></p>
             <p>Teléfono: <b>{{ unUser.phone }} </b></p>

@@ -19,8 +19,7 @@ export class ProfileInfoComponent {
   @Input() unUser: IUser = {
     //DEBERIA IR VACIO ESTE ARRAY
     id: 1,
-    first_name: 'Marco',
-    last_name: 'Aurelio',
+    name: 'Marco',
     email: 'marco@gmail.com',
     username: 'marcopolo',
     phone: 123455,

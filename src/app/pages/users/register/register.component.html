@@ -4,12 +4,8 @@
   }
   <form [formGroup]="formRegister" (ngSubmit)="onSubmit()" class="py-3">
     <div class="mb-3">
-      <label for="inputFirst_name" class="form-label">Nombre:</label>
-      <input type="text" id="inputFirt_name" class="form-control" formControlName="first_name" />
-    </div>
-    <div class="mb-3">
-      <label for="inputLast_name" class="form-label">Apellido:</label>
-      <input type="text" id="inputLast_name" class="form-control" formControlName="last_name" />
+      <label for="inputName" class="form-label">Nombre:</label>
+      <input type="text" id="inputName" class="form-control" formControlName="name" />
     </div>
     <div class="mb-3">
       <label for="inputPhone" class="form-label">Teléfono:</label>

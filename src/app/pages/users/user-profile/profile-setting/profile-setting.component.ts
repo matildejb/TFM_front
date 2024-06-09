@@ -17,8 +17,7 @@ export class ProfileSettingComponent {
   @Input() unUser: IUser = {
     //DEBERIA IR VACIO ESTE ARRAY
     id: 1,
-    first_name: 'Marco',
-    last_name: 'Aurelio',
+    name: 'Marco',
     email: 'marco@gmail.com',
     username: 'marcopolo',
     phone: 123455,
@@ -51,7 +50,7 @@ export class ProfileSettingComponent {
          Swal.fire({
           position: 'center',
           icon: 'success',
-          title: `Usuario: ${formValue.first_name} ${formValue.last_name} se ha actualizado correctamente`,
+          title: `Usuario: ${formValue.name} se ha actualizado correctamente`,
           showConfirmButton: false,
           timer: 2000,
         });
