@@ -21,13 +21,7 @@
                 <i class="bi bi-camera"></i></label>
         </div>
         <div class="card-body mb-0 mb-md-4 ms-0 ms-md-4 ps-0 ps-md-2">
-            <h5 class="card-title mb-2 text-center">
-                Nombre Completo
-            </h5>
-            <p>Usuario:</p>
-            <p>Teléfono:</p>
-            <p>Email:</p>
-            <p>Contraseña:</p>
+           <app-register [showSubmitButton]="false" [showHeader]="false"></app-register>
         </div>
 
         <div
@@ -36,7 +30,7 @@
             <button type="button" class="btn btn-light border border-black me-3"
                 (click)="cancel(userId)">Cancelar</button>
 
-            <button type="button" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-success" (click)="actualizarUsuario(unUser)">Guardar</button>
 
         </div>
 

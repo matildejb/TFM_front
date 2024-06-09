@@ -1,41 +1,31 @@
 <div class="h-100 d-flex justify-content-center align-items-center flex-column">
+  @if(showHeader) {
   <h1 class="h2 mt-4">Registro de usuario</h1>
-  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()" class="py-3 w-25">
+  }
+  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()" class="py-3">
     <div class="mb-3">
-      <label for="inputName" class="form-label">Nombre:</label>
-      <input
-        type="text"
-        id="inputName"
-        class="form-control"
-        formControlName="name"
-      />
+      <label for="inputFirst_name" class="form-label">Nombre:</label>
+      <input type="text" id="inputFirt_name" class="form-control" formControlName="first_name" />
+    </div>
+    <div class="mb-3">
+      <label for="inputLast_name" class="form-label">Apellido:</label>
+      <input type="text" id="inputLast_name" class="form-control" formControlName="last_name" />
+    </div>
+    <div class="mb-3">
+      <label for="inputPhone" class="form-label">Teléfono:</label>
+      <input type="string" id="inputPhone" class="form-control" formControlName="phone" />
     </div>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email:</label>
-      <input
-        type="email"
-        id="inputEmail"
-        class="form-control"
-        formControlName="email"
-      />
+      <input type="email" id="inputEmail" class="form-control" formControlName="email" />
     </div>
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Contraseña:</label>
-      <input
-        type="password"
-        id="inputPassword"
-        class="form-control"
-        formControlName="password"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="inputRole" class="form-label">Rol:</label>
-      <select id="inputRole" formControlName="role" class="form-select">
-        <option value="admin">Administrador</option>
-        <option value="regular">Miembro</option>
-      </select>
+      <input type="password" id="inputPassword" class="form-control" formControlName="password" />
     </div>
 
+    @if(showSubmitButton) {
     <input type="submit" value="Registrarse" class="btn btn-se-2" />
+    }
   </form>
 </div>

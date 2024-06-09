@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IUser } from '../../../../interfaces/iuser.interfaces';
 import { UsersService } from '../../../../services/users.service';
 import Swal from 'sweetalert2';
+import { RegisterComponent } from '../../register/register.component';
 
 @Component({
   selector: 'app-profile-setting',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RegisterComponent],
   templateUrl: './profile-setting.component.html',
   styleUrl: './profile-setting.component.css'
 })
@@ -26,7 +27,7 @@ export class ProfileSettingComponent {
   private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
- imageUrl: string | ArrayBuffer | null = null;
+  imageUrl: string | ArrayBuffer | null = null;
   fileName: string | null = null;
   
   //Cambiar foto
@@ -42,9 +43,29 @@ export class ProfileSettingComponent {
   }
   
   //GUARDAR CAMBIOS EN EL FORM LLEVA AL PERFIL-INFO
-  //CANCELAR LLEVA AL PERFIL-INFO
-  
+ actualizarUsuario(formValue: IUser): void {
+    this.userService.updateById(formValue)
+      .then(updatedUser => {
+        console.log('Usuario actualizado:', updatedUser);
+        // Puedes mostrar un mensaje de éxito o redirigir a otra página
+         Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `Usuario: ${formValue.first_name} ${formValue.last_name} se ha actualizado correctamente`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.router.navigate(['/home']);
+      })
+      .catch(error => {
+        console.error('Error al actualizar el usuario:', error);
+        // Puedes mostrar un mensaje de error al usuario
+         alert('Ops parece que hubo un problema, inténtelo de nuevo');
+      });
+  }
 
+
+  //CANCELAR LLEVA AL PERFIL-INFO
    cancel(idUser: number): void {
     // Navegar a la ruta '/user-profile/profile-info'
     this.router.navigate(['/profile-info', idUser]);

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,6 +16,10 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+
+  @Input() showSubmitButton: boolean = true;
+  @Input() showHeader: boolean = true; 
+     
   formRegister: FormGroup;
 
   formBuilder = inject(FormBuilder);
@@ -27,7 +31,7 @@ export class RegisterComponent {
       name: [null, Validators.required],
       email: null,
       password: null,
-      role: null,
+      phone: null,
     });
   }
 

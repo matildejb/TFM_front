@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,12 @@ import { UsersService } from '../../services/users.service';
 })
 export class HeaderComponent {
   userService = inject(UsersService);
+  authService = inject(AuthService);
 
   //Mostrar boton hamburguesa si el usuario esta logeado.
 
   //CERRAR SESION
-
- 
+   onLogout() {
+    this.authService.logout();
+  }
 }

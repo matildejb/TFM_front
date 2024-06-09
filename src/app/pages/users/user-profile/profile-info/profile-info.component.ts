@@ -12,10 +12,9 @@ import { UsersService } from '../../../../services/users.service';
 })
 export class ProfileInfoComponent {
 
-    private userService = inject(UsersService);
+   userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
-  imageUrl: string | ArrayBuffer | null = null;
-    fileName: string | null = null;
+  
 
   @Input() unUser: IUser = {
     //DEBERIA IR VACIO ESTE ARRAY
