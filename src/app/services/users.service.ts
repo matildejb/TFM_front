@@ -62,6 +62,14 @@ export class UsersService {
     );
   }
 
+  //SUBIR IMAGEN USUARIO???
+  uploadUserImage(userId: number, image: File) {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
+  }
+
   //Eliminar cuenta usuario
    deleteUser(id: number): Promise<IUser> {
     return lastValueFrom(

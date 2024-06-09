@@ -13,31 +13,47 @@
       height: 200px;
       border-radius: 100%;
       border: 2px solid;
-      margin: auto;
-      background-image: url("/assets/IMG/default-img.png");
-      overflow: hidden; /* Para asegurarte de que la imagen se ajuste al contenedor */
-      background-size: 7rem; /* Para que la imagen de fondo cubra todo el contenedor */
-      background-position: center; /* Para centrar la imagen de fondo */
-      background-repeat: no-repeat;
+      object-fit: contain;
+    }
+    /* Estilo para ocultar el input file original */
+    input[type="file"] {
+      display: none;
+    }
+    .bi-camera {
+      font-size: 1.5rem;
     }
 
-    .btn-success {
-      background-color: #027184;
-      &:hover {
-        background-color: #004a59;
-      }
-    }
-    .delete-account {
-      color: #004a59;
-      text-decoration: none;
-      font-size: 0.9rem;
-      position: absolute;
-      bottom: 0;
+    /* Estilo para el botón personalizado */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 100%;
+      font-size: 14px;
+      top: 0;
       left: 0;
     }
+
+    .custom-file-upload:hover {
+      background-color: #ddd;
+    }
+  }
+
+  .btn-success {
+    background-color: #027184;
+    &:hover {
+      background-color: #004a59;
+    }
+  }
+  .delete-account {
+    color: #004a59;
+    text-decoration: none;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }
-
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
@@ -50,14 +66,14 @@
         width: 160px;
         height: 160px;
       }
-    }
 
-    .btn-container {
-      position: static !important;
-    }
-    .delete-account {
-      position: static !important;
-      margin-top: 50px;
+      .btn-container {
+        position: static !important;
+      }
+      .delete-account {
+        position: static !important;
+        margin-top: 50px;
+      }
     }
   }
 }

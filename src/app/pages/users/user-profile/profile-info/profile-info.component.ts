@@ -12,17 +12,21 @@ import { UsersService } from '../../../../services/users.service';
 })
 export class ProfileInfoComponent {
 
+    private userService = inject(UsersService);
+  activatedRoute = inject(ActivatedRoute);
+  imageUrl: string | ArrayBuffer | null = null;
+    fileName: string | null = null;
+
   @Input() unUser: IUser = {
+    //DEBERIA IR VACIO ESTE ARRAY
     id: 1,
-    name: 'Marco',
+    first_name: 'Marco',
+    last_name: 'Aurelio',
     email: 'marco@gmail.com',
     username: 'marcopolo',
     phone: 123455,
     password: '12344',
   };
-
-  private userService = inject(UsersService);
-  activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params: any) => {
@@ -33,8 +37,10 @@ export class ProfileInfoComponent {
         console.log(error);
       }
 
-    })
+    });
   }
+
+
 
   }
 

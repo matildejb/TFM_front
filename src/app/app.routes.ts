@@ -15,8 +15,8 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'profile-info/:idUser', component: ProfileInfoComponent },
-  { path: 'profile-setting/:idUser', component: ProfileSettingComponent },
+  { path: 'profile-info/:userId', component: ProfileInfoComponent },
+  { path: 'profile-setting/:userId', component: ProfileSettingComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: '/page-not-found' }
 ];

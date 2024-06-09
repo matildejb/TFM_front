@@ -22,11 +22,7 @@
       border-radius: 100%;
       border: 2px solid;
       margin-left: 20px;
-      background-image: url("/assets/IMG/default-img.png");
-      overflow: hidden; /* Para asegurarte de que la imagen se ajuste al contenedor */
-      background-size: 7rem; /* Para que la imagen de fondo cubra todo el contenedor */
-      background-position: center; /* Para centrar la imagen de fondo */
-      background-repeat: no-repeat;
+      object-fit: contain;
     }
   }
 }

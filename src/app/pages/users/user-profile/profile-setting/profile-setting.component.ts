@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IUser } from '../../../../interfaces/iuser.interfaces';
 import { UsersService } from '../../../../services/users.service';
@@ -13,12 +13,33 @@ import Swal from 'sweetalert2';
 })
 export class ProfileSettingComponent {
   userId: number = 0;
-  user: IUser | null = null;
+  @Input() unUser: IUser = {
+    //DEBERIA IR VACIO ESTE ARRAY
+    id: 1,
+    first_name: 'Marco',
+    last_name: 'Aurelio',
+    email: 'marco@gmail.com',
+    username: 'marcopolo',
+    phone: 123455,
+    password: '12344',
+  };
   private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-
+ imageUrl: string | ArrayBuffer | null = null;
+  fileName: string | null = null;
   
+  //Cambiar foto
+   onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.imageUrl = e.target?.result || null;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
   
   //GUARDAR CAMBIOS EN EL FORM LLEVA AL PERFIL-INFO
   //CANCELAR LLEVA AL PERFIL-INFO
