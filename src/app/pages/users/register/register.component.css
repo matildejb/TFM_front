@@ -2,7 +2,7 @@
   width: 70%;
 }
 
-@media (min-width: 1200px) {
+@media only screen and (min-width: 768px) {
   .width {
     width: 35%;
   }
@@ -28,11 +28,22 @@ input.ng-valid.ng-touched {
 }
 
 .btn-se {
+  background-color: #027184;
+  color: white;
   padding: 10px;
-  border: 1px solid #027184;
-  color: #027184;
-  &:hover {
-    background-color: #027184;
-    color: white;
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn-se {
+    padding: 10px;
+    border: 1px solid #027184;
+    background-color: white;
+    color: #027184;
+
+    &:hover {
+      background-color: #027184;
+      color: white;
+    }
   }
 }
