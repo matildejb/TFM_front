@@ -14,17 +14,20 @@ export class GroupsListComponent {
     {
       icon: 'fa-plane-departure',
       title: 'Viaje a Menorca',
-      amount: 210.00
+      amount: 210.00,
+      navigateTo: './group/1'
     },
     {
       icon: 'fa-receipt',
       title: 'Compras Súper',
-      amount: -75.00
+      amount: -75.00,
+      navigateTo: '/group/2'
     },
     {
       icon: 'fa-gift',
       title: 'Regalo cumpleaños',
-      amount: 48.00
+      amount: 48.00,
+      navigateTo: '/group/3'
     }
   ];
 

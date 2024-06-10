@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-group-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './group-card.component.html',
-  styleUrl: './group-card.component.css'
+  styleUrls: ['./group-card.component.css']
 })
 export class GroupCardComponent {
-  @Input() icon: string = '';
-  @Input() title: string = '';
-  @Input() amount: number = 0;
+  	@Input() icon: string = '';
+  	@Input() title: string = '';
+	@Input() amount: number = 0;
+	@Input() navigateTo: string = '';
 
-amountColor: string = 'green';
+	amountColor: string = 'green';
 
 ngOnChanges(changes: SimpleChanges) {
     if (changes['amount']) {

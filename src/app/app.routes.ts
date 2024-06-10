@@ -3,6 +3,7 @@ import { WelcomeComponent } from './pages/users/welcome/welcome.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { GroupsListComponent } from './pages/groups-list/groups-list.component';
+import { GroupComponent } from './pages/group/group.component';
 
 export const routes: Routes = [
   {
@@ -18,7 +19,11 @@ export const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'groupsList', component: GroupsListComponent },
+  {
+    path: 'groupsList', component: GroupsListComponent, children: [
+      { path: 'group/:id', component: GroupComponent }
+    ]
+  },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: '/page-not-found' }
 ];

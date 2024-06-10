@@ -4,7 +4,7 @@
     </section>
 
     <ng-container *ngFor="let card of groupCards">
-        <app-group-card [icon]="card.icon" [title]="card.title" [amount]="card.amount">
+        <app-group-card [icon]="card.icon" [title]="card.title" [amount]="card.amount" [navigateTo]="card.navigateTo">
         </app-group-card>
     </ng-container>
 
