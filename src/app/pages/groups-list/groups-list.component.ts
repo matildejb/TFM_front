@@ -14,17 +14,22 @@ export class GroupsListComponent {
     {
       icon: 'fa-plane-departure',
       title: 'Viaje a Menorca',
-      amount: '+210,00€'
+      amount: 210.00
     },
     {
       icon: 'fa-receipt',
       title: 'Compras Súper',
-      amount: '-75,00€'
+      amount: -75.00
     },
     {
       icon: 'fa-gift',
       title: 'Regalo cumpleaños',
-      amount: '+48,00€'
+      amount: 48.00
     }
   ];
+
+  get TotalBalance(): number {
+    return this.groupCards.reduce((acc, groupCard) => acc + groupCard.amount, 0);
+  }
 }
+

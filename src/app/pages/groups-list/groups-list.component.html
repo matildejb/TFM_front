@@ -8,13 +8,11 @@
         </app-group-card>
     </ng-container>
 
-    <!-- <app-group-card></app-group-card> -->
-
-
     <hr class="mx-auto mt-5">
-    <div class="flex d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
         <span>BALANCE</span>
-        <span class="price-text">+183.00€</span>
+        <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">{{ TotalBalance |
+            currency: 'EUR' }}</span>
     </div>
     <hr class="mx-auto mb-5">
 
