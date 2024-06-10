@@ -25,7 +25,6 @@ type LoginResponse = {
   providedIn: 'root',
 })
 export class UsersService {
-  //private baseUrl: string = `${environment.apiUrl}/users`;
   private baseUrl = 'http://localhost:3000/api/users';
 
   private httpClient = inject(HttpClient);
