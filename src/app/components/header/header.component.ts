@@ -14,10 +14,19 @@ export class HeaderComponent {
   userService = inject(UsersService);
   authService = inject(AuthService);
 
-  //Mostrar boton hamburguesa si el usuario esta logeado.
+  
+  //Mostrar boton hamburguesa si el usuario esta logeado???
+
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated()
+  }
 
   //Mostrar burger
-  collapseNavbar() {
+ collapseNavbar() {
+   const navbarNav = document.getElementById('navbarNav');
+    if (navbarNav && navbarNav.classList.contains('show')) {
+      navbarNav.classList.remove('show');
+    }
      //0cultar el burger si está abierto
     const offcanvasNavbar = document.getElementById('offcanvasNavbar');
     if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
@@ -26,10 +35,12 @@ export class HeaderComponent {
         offcanvasBackdrop.remove();
       }
       offcanvasNavbar.classList.remove('show');
-    }
+   }
+     // Restaurar el scroll en el body
+    document.body.style.overflow = 'auto';
  }
 
-  //CERRAR SESION
+  //CERRAR SESION ???
    onLogout() {
     this.authService.logout();
   }
