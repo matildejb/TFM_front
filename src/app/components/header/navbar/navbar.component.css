@@ -1,0 +1,40 @@
+.btn-custom {
+  position: relative;
+  color: #027184;
+  border-radius: 100%;
+  top: 5px;
+}
+/* icono usuario*/
+.icon-user {
+  color: black;
+  font-size: 2rem;
+  padding-top: 10px;
+
+  &:hover {
+    color: #027184;
+  }
+}
+
+.offcanvas {
+  width: 300px;
+  background: linear-gradient(to bottom right, white 55%, #f6a278);
+  .offcanvas-header {
+    border-bottom: #f6a278 2px solid;
+    margin-bottom: 0;
+  }
+  .offcanvas-body {
+    a:hover {
+      color: #027184;
+      font-weight: bolder;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+
+    .bi {
+      margin-right: 5px;
+    }
+  }
+}

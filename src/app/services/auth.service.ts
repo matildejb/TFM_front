@@ -5,7 +5,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private router: Router) { } 
+  constructor(private router: Router) { }
+  private loggedIn = false;
+
+  //Verificación del estado de autenticación
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
   
   isAuthenticated(): boolean {
     // Verifica si el token de autenticación existe en el almacenamiento local
