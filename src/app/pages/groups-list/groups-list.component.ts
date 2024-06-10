@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [GroupCardComponent, CommonModule],
   templateUrl: './groups-list.component.html',
-  styleUrl: './groups-list.component.css'
+  styleUrls: ['./groups-list.component.css']
 })
 export class GroupsListComponent {
   groupCards = [
@@ -15,7 +15,7 @@ export class GroupsListComponent {
       icon: 'fa-plane-departure',
       title: 'Viaje a Menorca',
       amount: 210.00,
-      navigateTo: './group/1'
+      navigateTo: '/group/1'
     },
     {
       icon: 'fa-receipt',
@@ -35,4 +35,3 @@ export class GroupsListComponent {
     return this.groupCards.reduce((acc, groupCard) => acc + groupCard.amount, 0);
   }
 }
-
