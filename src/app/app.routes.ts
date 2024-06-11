@@ -3,7 +3,7 @@ import { WelcomeComponent } from './pages/users/welcome/welcome.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { GroupsListComponent } from './pages/groups-list/groups-list.component';
-import { GroupComponent } from './pages/group/group.component';
+import { GroupComponent } from './components/group/group.component';
 
 
 export const routes: Routes = [
