@@ -12,24 +12,23 @@
     <div class="flex d-flex justify-content-between align-items-center">
         <h3 class="h5 mt-1 mb-3">MIS GRUPOS</h3>
         <a href="javascript:void(0)" (click)="openGroupsModal()"><img class="img-menu"
-                src="../../../assets/IMG/menu.gif" alt="menu-gif"></a>
+                src="../../../assets/images/menu.gif" alt="menu-gif"></a>
     </div>
     <section class="img-bg-gif container border border-2 rounded-5 d-flex justify-content-center align-items-center"
         style="height: 200px;">
-        <a href="../../pages/groups/groups-list.html" class="d-flex justify-content-center align-items-center">
-            <img class="img-gif" src="../../../assets/IMG/groups.gif" alt="group-icon">
-        </a>
+        <a [routerLink]="['/groupsList']" class="d-flex justify-content-center align-items-center"><img class="img-gif"
+                src="../../../assets/images/groups.gif" alt="group-icon"></a>
     </section>
 
     <div class="flex d-flex justify-content-between align-items-center pt-3">
         <h3 class="h5 mt-3 mb-3">MIS AMIGOS</h3>
-        <a href="javascript:void(0)" (click)="openFriendsModal()"><img class="img-menu" src="../../../assets/IMG/menu.gif"
-                alt="menu-gif"></a>
+        <a href="javascript:void(0)" (click)="openFriendsModal()"><img class="img-menu"
+                src="../../../assets/images/menu.gif" alt="menu-gif"></a>
     </div>
     <section class="img-bg-gif container border border-2 rounded-5 d-flex justify-content-center align-items-center"
         style="height: 200px;">
-        <a href="../../pages/groups/friends-list.html" class="d-flex justify-content-center align-items-center">
-            <img class="img-gif" src="../../../assets/IMG/teams.gif" alt="group-icon">
+        <a [routerLink]="['/friendsList']" class="d-flex justify-content-center align-items-center">
+            <img class="img-gif" src="../../../assets/images/teams.gif" alt="group-icon">
         </a>
     </section>
 
@@ -41,19 +40,19 @@
 
             <ul class="flex d-flex justify-content-end pt-3">
                 <li class="menu-item">
-                    <a href="../../pages/groups/group-list.html">
+                    <a [routerLink]="['/groupsList']">
                         <i class="fa-solid fa-people-group fa-2x pb-2" style="color: #027184;"></i>
                         Ver grupos
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a>
                         <i class="fa-solid fa-pen fa-2x pb-2" style="color: #027184;"></i>
                         Editar nombre
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a>
                         <i class="fa-solid fa-image fa-2x pb-2" style="color: #027184;"></i>
                         Editar imagen
                     </a>
@@ -71,19 +70,19 @@
 
             <ul class="flex d-flex justify-content-end pt-3">
                 <li class="menu-item">
-                    <a href="../../pages/groups/group-list.html">
+                    <a [routerLink]="['/friendsList']">
                         <i class="fa-solid fa-user-group fa-2x pb-2" style="color: #027184;"></i>
                         Ver amigos
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a>
                         <i class="fa-solid fa-pen fa-2x pb-2" style="color: #027184;"></i>
                         Editar nombre
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a>
                         <i class="fa-solid fa-image fa-2x pb-2" style="color: #027184;"></i>
                         Editar imagen
                     </a>
@@ -100,10 +99,10 @@
 
 
 
-        
-        
-        
-        <!-- <script>
+
+
+
+<!-- <script>
                     $(document).ready(function () {
                         $(".img-menu").hover(function () {
                             $(this).attr("../../../assets/IMG/menu.png");
