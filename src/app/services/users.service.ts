@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {

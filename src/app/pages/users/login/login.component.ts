@@ -46,7 +46,7 @@ export class LoginComponent {
       const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
       alert(response.message);
-      this.router.navigateByUrl('/welcome'); // Falta por definir la ruta definitiva
+      this.router.navigateByUrl('/summary'); // Falta por definir la ruta definitiva
     } catch (err: any) {
       alert(err.error.error);
     }
