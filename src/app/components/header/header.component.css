@@ -10,8 +10,51 @@
     #027184 90%,
     #027184 100%
   );
+
+  .btn-settings {
+  position: relative;
+  display: flex; 
+  justify-content: flex-end; 
+}
+
+.icon-settings {
+  background: none; 
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  color: #027184; 
+}
+
+.dropdown-settings {
+  position: absolute; 
+  top: 80%;
+  right: 0; 
+  background-color: white;  
+  display: none; 
+  list-style: none; 
+  padding: 0; 
+}
+
+.element-settings {
+  display: block; 
+  padding: 10px 15px; 
+  text-decoration: none; 
+  color: #333; 
+}
+
+.element-settings:hover {
+  background-color: #027184; 
+  color: white;
+}
+
+.btn-settings:hover .dropdown-settings {
+  display: block; 
+}
   
 }
+
+
+
 
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {

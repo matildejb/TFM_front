@@ -15,8 +15,16 @@
       </a>
     </div>
 
-    <div class="ajustes me-3 me-md-1 ms-3">
-      A
+    <div class="btn-settings me-3 me-md-1 ms-3">
+      <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-cog fa-lg"></i>
+      </button>
+      <div class="dropdown-settings">
+        <a class="element-settings" [routerLink]="['/settings/privacy']">Privacidad</a>
+        <a class="element-settings" [routerLink]="['/settings/terms']">Términos y condiciones</a>
+        <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
+        <a class="element-settings" [routerLink]="['/settings/about']">Aplicación</a>
+      </div>
     </div>
   </div>
 </nav>
