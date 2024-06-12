@@ -23,15 +23,15 @@ export class LoginComponent {
   constructor() {
     this.formLogin = new FormGroup({
       email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
+        // Validators.required,
+        // Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
         // Procedencia de la expresión regular: la vimos en clase
       ]),
       password: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
-        ),
+        // Validators.required,
+        // Validators.pattern(
+        //   /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
+        // ),
         // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
       ]),
     });
@@ -46,7 +46,7 @@ export class LoginComponent {
       const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
       alert(response.message);
-      this.router.navigateByUrl('nombre de la URL de la página de inicio');
+      this.router.navigateByUrl('/welcome'); // Falta por definir la ruta definitiva
     } catch (err: any) {
       alert(err.error.error);
     }

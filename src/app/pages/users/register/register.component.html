@@ -3,33 +3,18 @@
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="first_name" class="form-label">Nombre:</label>
+        <label for="name" class="form-label">Nombre:</label>
         <input
           type="text"
           placeholder="Introduce tu nombre"
-          id="first_name"
+          id="name"
           class="form-control"
-          formControlName="first_name"
+          formControlName="name"
         />
         @if (checkControl('first_name', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('first_name', 'pattern')) {
         <p class="error">Debes introducir un nombre propio válido</p>
-        }
-      </div>
-      <div class="mb-3">
-        <label for="last_name" class="form-label">Apellido:</label>
-        <input
-          type="text"
-          placeholder="Introduce tus apellidos"
-          id="last_name"
-          class="form-control"
-          formControlName="last_name"
-        />
-        @if (checkControl('last_name', 'required')) {
-        <p class="error">Campo requerido</p>
-        } @if (checkControl('last_name', 'pattern')) {
-        <p class="error">Debes introducir un apellido válido</p>
         }
       </div>
       <div class="mb-3">
@@ -52,7 +37,9 @@
         }
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label">Número de teléfono:</label>
+        <label for="phone" class="form-label"
+          >Número de teléfono (¿opcional?):</label
+        >
         <input
           type="tel"
           placeholder="Introduce tu número de teléfono móvil"
@@ -96,6 +83,9 @@
           class="form-control"
           formControlName="password"
         />
+        <!-- <button type="button" class="btn btn-outline-secondary" id="toggle-password">
+        <i class="bi bi-eye"></i> <!-- Use Bootstrap Icons or any other icon library 
+    </button> -->
         @if (checkControl('password', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('password', 'pattern')) {

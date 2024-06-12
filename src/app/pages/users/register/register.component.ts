@@ -22,12 +22,7 @@ export class RegisterComponent {
 
   constructor() {
     this.formRegister = new FormGroup({
-      first_name: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/),
-        // Procedencia de la expresión regular: https://regexr.com/3f8cm
-      ]),
-      last_name: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
         Validators.pattern(/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/),
         // Procedencia de la expresión regular: https://regexr.com/3f8cm
@@ -59,13 +54,12 @@ export class RegisterComponent {
 
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);
-    // A partir de aquí da error porque la API no se ha creado todavía
-    // if (response.length > 0) {
-    //   alert(response.join('\n'));
-    // } else {
-    //   alert('Registro OK');
-    //   this.router.navigateByUrl("/login")
-    // }
+    if (response.length > 0) {
+      alert(response.join('\n'));
+    } else {
+      alert('Registro OK');
+      this.router.navigateByUrl('/welcome'); // Falta por definir la ruta definitiva
+    }
   }
 
   checkControl(
