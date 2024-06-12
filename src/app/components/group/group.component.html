@@ -1,0 +1,48 @@
+<section class="wp justify-content-center">
+    <div>
+        <h2 class="mt-5 mb-3 w-700">Detalles de grupo</h2>
+    </div>
+    <section class="bg-comp container border border-2 rounded-4 align-items-center px-4 py-4 mt-4">
+        <div class="d-flex pt-1 w-100 align-items-center">
+            <a href="#"><i class="fa-solid {{ groupData?.icon }} fa-2x" style="color: #027184;"></i></a>
+            <h3 class="px-3 fw-bold mb-0">{{ groupData?.title }}</h3>
+            <a href="#" class="ms-auto"><i class="fa-solid fa-ellipsis-vertical" style="color: #027184;"></i></a>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-1 w-100">
+            <p class="font-75 mt-2 mb-2">HISTORIAL DE TRANSACCIONES</p>
+        </div>
+        <div *ngFor="let transaction of transactions"
+            class="bg-card border-custom container align-items-center px-4 py-4 mt-3 border border-1 rounded-4 border-black">
+            <div class="d-flex">
+                <!-- Columna 1: Imagen y Nombre -->
+                <div class="d-flex flex-column align-items-center pe-3" style="flex: 0 0 15%;">
+                    <img [src]="transaction.userImage" alt="{{ transaction.user }}" class="user-image">
+                    <p class="user-name mt-2">{{ transaction.user }}</p>
+                </div>
+                <!-- Columna 2: Detalles de la Transacción -->
+                <div class="transaction-details" style="flex: 0 0 85%;">
+                    <div class="d-flex justify-content-between">
+                        <p class="concept font-125 fw-bold m-0 p-0 pb-1">{{ transaction.concept }}</p>
+                        <p class="amount font-125 fw-bold m-0"
+                            [ngStyle]="{'color': transaction.amount < 0 ? 'Crimson' : 'Limegreen'}">
+                            {{ transaction.amount | currency: 'EUR' }}
+                        </p>
+                    </div>
+                    <p class="font-75 m-0 p-0">Concepto de la transacción</p>
+                    <p class="description m-0 p-0">{{ transaction.description }}</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class=" balance container justify-content-center mb-3">
+        <hr class="mx-auto mt-5">
+        <div class="d-flex justify-content-between">
+            <span>BALANCE</span>
+            <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">{{ TotalBalance |
+                currency: 'EUR' }}</span>
+        </div>
+        <hr class="mx-auto mb-5">
+    </section>
+</section>
