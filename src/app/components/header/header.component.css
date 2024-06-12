@@ -11,12 +11,6 @@
     #027184 100%
   );
 
-  .btn-settings {
-  position: relative;
-  display: flex; 
-  justify-content: flex-end; 
-}
-
 .icon-settings {
   background: none; 
   border: none;
