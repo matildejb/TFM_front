@@ -6,9 +6,10 @@ import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
   name: string;
+  username: string;
+  phone: number;
   email: string;
   password: string;
-  role: string;
 };
 
 type LoginBody = {
@@ -30,7 +31,7 @@ export class UsersService {
 
   private httpClient = inject(HttpClient);
 
-  register(newUser: RegisterBody) {
+  register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
       this.httpClient.post<IUser & string[]>(
         `${this.baseUrl}/register`,
@@ -38,7 +39,7 @@ export class UsersService {
       )
     );
   }
-  login(body: LoginBody) {
+  login(body: LoginBody): Promise<LoginResponse> {
     return lastValueFrom(
       this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
     );

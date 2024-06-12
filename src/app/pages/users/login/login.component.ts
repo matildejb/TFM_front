@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 
@@ -12,15 +17,23 @@ import { UsersService } from '../../../services/users.service';
 })
 export class LoginComponent {
   formLogin: FormGroup;
-
-  formBuilder = inject(FormBuilder);
   usersService = inject(UsersService);
   router = inject(Router);
 
   constructor() {
-    this.formLogin = this.formBuilder.group({
-      email: null,
-      password: null,
+    this.formLogin = new FormGroup({
+      email: new FormControl('', [
+        // Validators.required,
+        // Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
+        // Procedencia de la expresión regular: la vimos en clase
+      ]),
+      password: new FormControl('', [
+        // Validators.required,
+        // Validators.pattern(
+        //   /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
+        // ),
+        // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
+      ]),
     });
   }
 
@@ -33,9 +46,19 @@ export class LoginComponent {
       const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
       alert(response.message);
-      this.router.navigateByUrl('nombre de la URL de la página de inicio');
+      this.router.navigateByUrl('/welcome'); // Falta por definir la ruta definitiva
     } catch (err: any) {
       alert(err.error.error);
     }
+  }
+
+  checkControl(
+    formControlName: string,
+    validador: string
+  ): boolean | undefined {
+    return (
+      this.formLogin.get(formControlName)?.hasError(validador) &&
+      this.formLogin.get(formControlName)?.touched
+    );
   }
 }
