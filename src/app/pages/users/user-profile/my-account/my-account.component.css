@@ -1,0 +1,11 @@
+.container {
+    width: 300px;
+
+}
+
+  img {
+    position: absolute;
+    left: 50%;
+    border-radius: 50%;
+    color: white;
+    }

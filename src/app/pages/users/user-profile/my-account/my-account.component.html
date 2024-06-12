@@ -1,0 +1,59 @@
+<div class="container d-flex flex-row justify-content-around">
+
+   <div class="info"> <p>Nombre:<b> {{ unUser.name }}</b></p>
+
+    <p>Email:<b> {{ unUser.email }} </b></p>
+</div>
+
+<img class="card-img-top" [src]="unUser.imageUrl || 'assets/images/default-img.png'"
+    [alt]="unUser.name || 'img-personal '" title="imagen-perfil" style="width: 50px;">
+
+    </div>
+
+
+
+
+
+<!--
+                    @auth
+                    <div class="select" tabindex="0" role="button">
+                        <div class="text-links">
+                            <div class="d-flex gap-2 align-items-center">
+                                <img src="{{ asset('storage/images/' . Auth::user()->photo) }}" class="rounded-circle"
+                                    style="width: 50px;" alt="">
+                                <div class="d-flex flex-column text-white">
+                                    <p class="m-0" style="font-weight: 700; font-size:14px;">
+                                        {{ Auth::user()->name }} {{ Auth::user()->subname }}</p>
+                                    <p class="m-0" style="font-size:12px">{{ Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="links-login text-white" id="links-login">
+                            <a href="logoutUser" style="text-decoration: none" role="button" tabindex="0">Cerrar
+                                Sesión</a>
+                        </div>
+                    </div>
+                    @else
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Iniciar sesión | Registrarse</button>
+                    </li>
+
+                    <script>
+                        $(".text-links").click(function(e) {
+                            e.preventDefault();
+                            var $linksLogin = $("#links-login");
+                            if ($linksLogin.hasClass("activeLogin")) {
+                                $linksLogin.removeClass("activeLogin");
+                            } else {
+                                $linksLogin.addClass("activeLogin");
+                            }
+                        });
+                    </script>
+
+
+                    CSS
+                    
+
+    -->
+
