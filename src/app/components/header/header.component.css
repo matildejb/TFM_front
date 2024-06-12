@@ -28,4 +28,8 @@
       #027184 100%
     );
   }
+
+  .myAccount {
+    display: none;
+  }
 }
