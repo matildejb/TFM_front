@@ -3,5 +3,6 @@ export interface IUser {
   username: string;
   phone: number;
   email: string;
-  password: string;
+  password: string; 
+  imageUrl?: string; //Propiedad opcional
 }

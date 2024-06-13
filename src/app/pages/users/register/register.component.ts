@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
+import { IUser } from '../../../interfaces/iuser.interfaces';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,9 @@ export class RegisterComponent {
   formRegister: FormGroup;
   usersService = inject(UsersService);
   router = inject(Router);
+  user: IUser | null = null;
+  tipo: string = 'Registro de usuario';
+  boton: string = 'Registrarse';
 
   constructor() {
     this.formRegister = new FormGroup({
@@ -51,6 +55,25 @@ export class RegisterComponent {
       ]),
     });
   }
+
+  //MATILDE
+  
+
+  getUserProfile(): void {
+    this.usersService.getProfile().subscribe(
+      (data: IUser) => {
+        this.user = data;
+        this.formRegister.patchValue(data); // Set form values with user data
+      },
+      (error) => {
+        console.log('Error fetching user profile', error);
+      }
+    );
+  }
+
+
+
+  //RAMON
 
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);

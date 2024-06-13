@@ -1,0 +1,32 @@
+<div class="container d-flex flex-column gap-3 mt-4">
+
+    <h4>
+        <button class="btn" [routerLink]="['/profile-info/:idUser']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f6a278"
+                class="bi bi-arrow-left-square-fill arrow" viewBox="0 0 16 16">
+                <path
+                    d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1" />
+            </svg>
+        </button>
+        Mi perfil
+    </h4>
+
+    <div class="card flex-md-row m-auto">
+        <div class="imge-upload">
+            <img class="card-img-top mt-0 ms-5 ms-md-0" [src]="unUser.imageUrl || 'assets/images/default-img.png'"
+                [alt]="unUser.name || 'img-personal '" title="imagen-perfil">
+            <label class="custom-file-upload position-absolute">
+                <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                <i class="bi bi-camera"></i></label>
+        </div>
+   
+       
+        <app-register></app-register>
+    
+    
+        <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser(userId)">Eliminar cuenta</a>
+    
+    </div>
+    
+    </div>
+
