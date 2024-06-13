@@ -13,8 +13,8 @@
 
     <div class="card flex-md-row m-auto">
         <div class="imge-upload">
-            <img class="card-img-top mt-0 ms-5 ms-md-0" [src]="unUser.imageUrl || 'assets/images/default-img.png'"
-                [alt]="unUser.name || 'img-personal '" title="imagen-perfil">
+            <img class="card-img-top mt-0 ms-5 ms-md-0" [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
+                [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
             <label class="custom-file-upload position-absolute">
                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
                 <i class="bi bi-camera"></i></label>
@@ -24,7 +24,7 @@
         <app-register></app-register>
     
     
-        <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser(userId)">Eliminar cuenta</a>
+        <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser()">Eliminar cuenta</a>
     
     </div>
     

@@ -28,6 +28,7 @@ type LoginResponse = {
 })
 export class UsersService {
   private baseUrl: string = `${environment.apiUrl}/users`;
+   private profileUrl = `${this.baseUrl}/profile`;
 
   private httpClient = inject(HttpClient);
 
@@ -45,12 +46,9 @@ export class UsersService {
     );
   }
 
-
-  private profileUrl = `${this.baseUrl}/profile`;
-
-  //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
-  getProfile(): Observable<IUser> {
-    return  this.httpClient.get<IUser>(this.profileUrl);
+ 
+  getProfile(): Promise<IUser> {
+    return  lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
   //Actualizar profile usuario   Hace falta token autenticacion??
@@ -66,9 +64,9 @@ export class UsersService {
     return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
   }
 
-  //Eliminar cuenta usuario
-   deleteUser(): Observable<IUser> {
-    return  this.httpClient.delete<IUser>(this.profileUrl);
+  
+   deleteUser(id: number): Promise<IUser> {
+    return  lastValueFrom(this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`));
   }
 
 }

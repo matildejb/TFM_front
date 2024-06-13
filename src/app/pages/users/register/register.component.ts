@@ -56,24 +56,7 @@ export class RegisterComponent {
     });
   }
 
-  //MATILDE
-  
 
-  getUserProfile(): void {
-    this.usersService.getProfile().subscribe(
-      (data: IUser) => {
-        this.user = data;
-        this.formRegister.patchValue(data); // Set form values with user data
-      },
-      (error) => {
-        console.log('Error fetching user profile', error);
-      }
-    );
-  }
-
-
-
-  //RAMON
 
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);

@@ -13,15 +13,8 @@ import { RegisterComponent } from '../../register/register.component';
   styleUrl: './profile-setting.component.css'
 })
 export class ProfileSettingComponent {
-  userId: number = 0;
-  @Input() unUser: IUser = {
-    //DEBERIA IR VACIO ESTE ARRAY
-    name: 'Marco',
-    email: 'marco@gmail.com',
-    username: 'marcopolo',
-    phone: 123455,
-    password: '12344',
-  };
+
+  unUser: IUser | null = null;
 
   private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
@@ -30,7 +23,7 @@ export class ProfileSettingComponent {
   fileName: string | null = null;
   
   //Cambiar foto
-   onFileSelected(event: Event): void {
+  onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -41,10 +34,9 @@ export class ProfileSettingComponent {
     }
   }
   
- 
-  //ELIMINAR CUENTA USUARIO DEFINITIVAMENTE, TE LLEVA AL WELCOME
   
-  deleteUser(id: number) {
+  async deleteUser(): Promise<void> {
+    if (!this.unUser) return;
 
     Swal.fire({
       title: "¿Estás seguro?",
@@ -55,17 +47,26 @@ export class ProfileSettingComponent {
       cancelButtonColor: "#d33",
       cancelButtonText: "cancelar",
       confirmButtonText: "¡SÍ, Quiero hacerlo!"
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Eliminado",
-          text: "Tu usuario ha sido eliminado correctamente",
-          icon: "success"
-          
-        });
-        this.router.navigate(['/landing'])
+        try {
+          await this.userService.deleteUser(this.unUser!.id);
+          Swal.fire({
+            title: "Eliminado",
+            text: "Tu usuario ha sido eliminado correctamente",
+            icon: "success"
+          });
+          this.router.navigate(['/landing'])
+        } catch (error) {
+          console.error('Error deleting user', error);
+          Swal.fire({
+            title: "Error",
+            text: "No se pudo eliminar tu usuario",
+            icon: "error"
+          });
+     
+        }
       }
     });
-     
   }
 }
