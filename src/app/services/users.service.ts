@@ -1,13 +1,15 @@
 import { Injectable, inject } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
   name: string;
+  username: string;
+  phone: number;
   email: string;
   password: string;
-  role: string;
 };
 
 type LoginBody = {
@@ -25,11 +27,11 @@ type LoginResponse = {
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl = 'http://localhost:3000/api/users';
+  private baseUrl: string = `${environment.apiUrl}/users`;
 
   private httpClient = inject(HttpClient);
 
-  register(newUser: RegisterBody) {
+  register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
       this.httpClient.post<IUser & string[]>(
         `${this.baseUrl}/register`,
@@ -37,27 +39,23 @@ export class UsersService {
       )
     );
   }
-  login(body: LoginBody) {
+  login(body: LoginBody): Promise<LoginResponse> {
     return lastValueFrom(
       this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
     );
   }
 
-  private profileUrl = 'http://localhost:3000/profile';
 
-  //Obtener usuario para mostrar perfil
+  private profileUrl = `${this.baseUrl}/profile`;
+
+  //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
   getProfile(): Observable<IUser> {
     return  this.httpClient.get<IUser>(this.profileUrl);
   }
 
-  //Actualizar usuario por id 
-   updateById(formValue: IUser): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.put<IUser>(
-        `${this.baseUrl}/${formValue.id}`,
-        formValue
-      )
-    );
+  //Actualizar profile usuario   Hace falta token autenticacion??
+  updateProfile(updatedUser: IUser): Observable<IUser> {
+    return this.httpClient.put<IUser>(this.profileUrl, updatedUser);
   }
 
   //SUBIR IMAGEN USUARIO???
@@ -69,10 +67,8 @@ export class UsersService {
   }
 
   //Eliminar cuenta usuario
-   deleteUser(id: number): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.delete<IUser>(`${this.baseUrl}/${id}`)
-    );
+   deleteUser(): Observable<IUser> {
+    return  this.httpClient.delete<IUser>(this.profileUrl);
   }
 
 }

@@ -1,12 +1,15 @@
 .container {
   width: 700px;
-  margin: auto;
 
   .card {
     background-color: rgba(2, 113, 132, 0.15);
     padding: 20px;
     border-radius: 10px;
     width: 40rem;
+
+    .full-width {
+      width: 100% !important;
+    }
 
     img {
       width: 200px;

@@ -1,27 +1,70 @@
-<div class="h-100 d-flex justify-content-center align-items-center flex-column">
-  @if(showHeader) {
-  <h1 class="h2 mt-4">Registro de usuario</h1>
-  }
-  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()" class="py-3">
-    <div class="mb-3">
-      <label for="inputName" class="form-label">Nombre:</label>
-      <input type="text" id="inputName" class="form-control" formControlName="name" />
-    </div>
-    <div class="mb-3">
-      <label for="inputPhone" class="form-label">Teléfono:</label>
-      <input type="string" id="inputPhone" class="form-control" formControlName="phone" />
-    </div>
-    <div class="mb-3">
-      <label for="inputEmail" class="form-label">Email:</label>
-      <input type="email" id="inputEmail" class="form-control" formControlName="email" />
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword" class="form-label">Contraseña:</label>
-      <input type="password" id="inputPassword" class="form-control" formControlName="password" />
-    </div>
-
-    @if(showSubmitButton) {
-    <input type="submit" value="Registrarse" class="btn btn-se-2" />
-    }
-  </form>
-</div>
+<section class="d-flex justify-content-center align-items-center flex-column">
+  <h1 class="h2 mt-4"> {{ tipo }} </h1>
+  <div class="p-3 width">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre:</label>
+        <input type="text" placeholder="Introduce tu nombre" id="name" class="form-control" formControlName="name" />
+        @if (checkControl('first_name', 'required')) {
+        <p class="error">Campo requerido</p>
+        } @if (checkControl('first_name', 'pattern')) {
+        <p class="error">Debes introducir un nombre propio válido</p>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario:</label>
+        <p class="clarification">
+          Introduce un nombre de usuario de entre 6 y 12 caracteres que contenga
+          únicamente letras o números.
+        </p>
+        <input type="text" placeholder="Introduce un nombre de usuario" id="username" class="form-control"
+          formControlName="username" />
+        @if (checkControl('username', 'required')) {
+        <p class="error">Campo requerido</p>
+        } @if (checkControl('username', 'pattern')) {
+        <p class="error">Debes introducir un nombre de usuario válido</p>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Número de teléfono (¿opcional?):</label>
+        <input type="tel" placeholder="Introduce tu número de teléfono móvil" id="phone" class="form-control"
+          formControlName="phone" />
+        @if (checkControl('phone', 'required')) {
+        <p class="error">Campo requerido</p>
+        } @if (checkControl('phone', 'pattern')) {
+        <p class="error">Debes introducir un número de teléfono válido</p>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico:</label>
+        <input type="email" placeholder="Introduce tu dirección de correo electrónico" id="email" class="form-control"
+          formControlName="email" />
+        @if (checkControl('email', 'required')) {
+        <p class="error">Campo requerido</p>
+        } @if (checkControl('email', 'pattern')) {
+        <p class="error">
+          Debes introducir una dirección de correo electrónico válida
+        </p>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña:</label>
+        <p class="clarification">
+          Introduce una constraseña de entre 8 y 16 caracteres que contenga al
+          menos una minúscula, una mayúscula, un número y un carácter especial.
+        </p>
+        <input type="password" placeholder="Introduce una contraseña" id="password" class="form-control"
+          formControlName="password" />
+        <!-- <button type="button" class="btn btn-outline-secondary" id="toggle-password">
+        <i class="bi bi-eye"></i>  Use Bootstrap Icons or any other icon library 
+    </button> -->
+        @if (checkControl('password', 'required')) {
+        <p class="error">Campo requerido</p>
+        } @if (checkControl('password', 'pattern')) {
+        <p class="error">Debes introducir una contraseña válida</p>
+        }
+      </div>
+      <input type="submit" [value]="boton" class="btn btn-se" />
+    </form>
+  </div>
+</section>

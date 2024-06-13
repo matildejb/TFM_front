@@ -11,31 +11,22 @@
         Mi perfil
     </h4>
 
-    <div class="card flex-md-row m-auto mb-5 p-md-4">
+    <div class="card flex-md-row m-auto">
         <div class="imge-upload">
-            <img class="card-img-top mt-3 mt-md-0 ms-5 ms-md-0"
-                [src]="unUser.imageUrl || 'assets/images/default-img.png'" [alt]="unUser.name || 'img-personal '"
-                title="imagen-perfil">
+            <img class="card-img-top mt-0 ms-5 ms-md-0" [src]="unUser.imageUrl || 'assets/images/default-img.png'"
+                [alt]="unUser.name || 'img-personal '" title="imagen-perfil">
             <label class="custom-file-upload position-absolute">
                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
                 <i class="bi bi-camera"></i></label>
         </div>
-        <div class="card-body mb-0 mb-md-4 ms-0 ms-md-4 ps-0 ps-md-2">
-           <app-register [showSubmitButton]="false" [showHeader]="false"></app-register>
-        </div>
-
-        <div
-            class="btn-container w-100 position-absolute bottom-0 start-0 d-flex justify-content-center justify-content-md-end p-1 p-md-3">
-
-            <button type="button" class="btn btn-light border border-black me-3"
-                (click)="cancel(userId)">Cancelar</button>
-
-            <button type="button" class="btn btn-success" (click)="actualizarUsuario(unUser)">Guardar</button>
-
-        </div>
-
+   
+       
+        <app-register></app-register>
+    
+    
         <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser(userId)">Eliminar cuenta</a>
-
+    
+    </div>
+    
     </div>
 
-</div>
