@@ -11,32 +11,44 @@
     #027184 100%
   );
 
-  .btn-custom {
-    color: #027184;
-    &:hover {
-      border: #027184 1px solid;
-    }
-  }
-
-  .offcanvas {
-    width: 300px;
-    background: linear-gradient(to bottom right, white 55%, #f6a278);
-    .offcanvas-header {
-      border-bottom: #f6a278 2px solid;
-      margin-bottom: 0;
-    }
-  }
-
-  /* icono usuario*/
-  .icon-user {
-    color: black;
-    font-size: 2rem;
-
-    &:hover {
-      color: white;
-    }
-  }
+.icon-settings {
+  background: none; 
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  color: #027184; 
 }
+
+.dropdown-settings {
+  position: absolute; 
+  top: 80%;
+  right: 0; 
+  background-color: white;  
+  display: none; 
+  list-style: none; 
+  padding: 0; 
+}
+
+.element-settings {
+  display: block; 
+  padding: 10px 15px; 
+  text-decoration: none; 
+  color: #333; 
+}
+
+.element-settings:hover {
+  background-color: #027184; 
+  color: white;
+}
+
+.btn-settings:hover .dropdown-settings {
+  display: block; 
+}
+  
+}
+
+
+
 
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
@@ -52,5 +64,9 @@
       #027184 90%,
       #027184 100%
     );
+  }
+
+  .myAccount {
+    display: none;
   }
 }

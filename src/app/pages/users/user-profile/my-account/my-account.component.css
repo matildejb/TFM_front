@@ -1,0 +1,27 @@
+.container {
+  .cardAccount {
+    background-color: rgba(2, 113, 132, 0);
+    display: flex;
+    flex-direction: row;
+    padding-left: 1px;
+    padding-right: 1px;
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      overflow: hidden;
+    }
+
+    img {
+      border-radius: 100%;
+      color: white;
+      width: 40px;
+      height: 40px;
+      margin: auto;
+      margin-left: 1px;
+      margin-right: 1px;
+      border: 1px solid black;
+    }
+  }
+}

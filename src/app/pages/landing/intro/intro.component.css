@@ -6,9 +6,6 @@
   gap: 1rem;
   width: 400px;
   padding: 20px;
-  font-family: "Roboto Slab", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
   box-sizing: border-box;
 
   .text {

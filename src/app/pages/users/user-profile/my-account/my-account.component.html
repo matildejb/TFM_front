@@ -1,0 +1,13 @@
+<div class="container d-flex flex-row">
+    <div class="cardAccount">
+        <img class="card-img-top" [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
+            [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
+
+        <div class="card-body p-1 m-1">
+            <span>Nombre Usuario<b> {{ unUser?.name }}</b></span>
+
+            <span>nombreusuariogmail.com<b> {{ unUser?.email }} </b></span>
+        </div>
+
+    </div>
+</div>
