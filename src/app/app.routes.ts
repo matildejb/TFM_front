@@ -24,5 +24,5 @@ export const routes: Routes = [
   { path: 'settings/terms', component: TermsComponent },
   { path: 'settings/about', component: AboutComponent },
   { path: 'page-not-found', component: ErrorComponent },
-  { path: '**', redirectTo: '/page-not-found' }
+  { path: '**', redirectTo: 'page-not-found' }
 ];
