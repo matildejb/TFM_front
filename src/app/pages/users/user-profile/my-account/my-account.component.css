@@ -1,9 +1,8 @@
 .container {
-  .card {
+  .cardAccount {
     background-color: rgba(2, 113, 132, 0);
     display: flex;
     flex-direction: row;
-    border: 1px solid;
     padding-left: 1px;
     padding-right: 1px;
 

@@ -12,17 +12,25 @@ import { IUser } from '../../../../interfaces/iuser.interfaces';
 })
 export class MyAccountComponent {
 
-     userService = inject(UsersService);
+  userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
 
-  unUser: IUser = {
-  id: 0,
-  name: '',
-  email: '',
-  username: '',
-  phone: undefined,
-  password: '',
-  imageUrl: ''
-  };
+  unUser: IUser | null = null;
+
+
+    ngOnInit(): void {
+      this.getUserProfile();
+  }
+
+  getUserProfile(): void {
+    this.userService.getProfile().subscribe(
+      (data: IUser) => {
+        this.unUser = data;
+      },
+      (error) => {
+        console.log('Error fetching user profile', error)
+      }
+    );
+  }
 
 }

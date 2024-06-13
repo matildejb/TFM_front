@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 
 type RegisterBody = {
@@ -43,12 +43,11 @@ export class UsersService {
     );
   }
 
+  private profileUrl = 'http://localhost:3000/profile';
 
-  //Obtener usuario por Id
-  getUserById(id: number): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.get<IUser>(`${this.baseUrl}/${id}`)
-    );
+  //Obtener usuario para mostrar perfil
+  getProfile(): Observable<IUser> {
+    return  this.httpClient.get<IUser>(this.profileUrl);
   }
 
   //Actualizar usuario por id 

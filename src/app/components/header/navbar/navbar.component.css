@@ -1,7 +1,7 @@
 .btn-custom {
   position: relative;
   color: #027184;
-  border-radius: 100%;
+  border-radius: 10px;
   top: 5px;
 }
 /* icono usuario*/
@@ -36,6 +36,5 @@
     .bi {
       margin-right: 5px;
     }
-   
   }
 }

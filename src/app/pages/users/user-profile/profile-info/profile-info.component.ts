@@ -12,29 +12,25 @@ import { UsersService } from '../../../../services/users.service';
 })
 export class ProfileInfoComponent {
 
-   userService = inject(UsersService);
+  userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
 
-  unUser: IUser = {
-  id: 0,
-  name: '',
-  email: '',
-  username: '',
-  phone: undefined,
-  password: '',
-  imageUrl: ''
-  };
+  unUser: IUser | null = null;
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(async (params: any) => {
-      const id = params.userId;
-      try {
-        this.unUser = await this.userService.getUserById(id);
-      } catch (error) {
-        console.log(error);
+
+    ngOnInit(): void {
+      this.getUserProfile();
+  }
+
+  getUserProfile(): void {
+    this.userService.getProfile().subscribe(
+      (data: IUser) => {
+        this.unUser = data;
+      },
+      (error) => {
+        console.log('Error fetching user profile', error)
       }
-
-    });
+    );
   }
 
   }
