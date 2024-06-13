@@ -1,7 +1,7 @@
 <div class="container d-flex flex-column gap-3 mt-4">
 
     <h4>
-        <button class="btn" [routerLink]="['/profile-info/:idUser']">
+        <button class="btn" [routerLink]="['/profile-info']">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f6a278"
                 class="bi bi-arrow-left-square-fill arrow" viewBox="0 0 16 16">
                 <path
@@ -19,14 +19,13 @@
                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
                 <i class="bi bi-camera"></i></label>
         </div>
-   
-       
+
+
         <app-register></app-register>
-    
-    
+
+
         <a type="button" class="delete-account p-0 p-md-3" (click)="deleteUser()">Eliminar cuenta</a>
-    
-    </div>
-    
+
     </div>
 
+</div>

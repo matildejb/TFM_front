@@ -46,12 +46,15 @@ export class UsersService {
     );
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+  }
  
   getProfile(): Promise<IUser> {
     return  lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
-  //Actualizar profile usuario   Hace falta token autenticacion??
+  //Actualizar profile usuario??
   updateProfile(updatedUser: IUser): Observable<IUser> {
     return this.httpClient.put<IUser>(this.profileUrl, updatedUser);
   }
@@ -64,9 +67,9 @@ export class UsersService {
     return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
   }
 
-  
-   deleteUser(id: number): Promise<IUser> {
-    return  lastValueFrom(this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`));
+  //elimnar usuario
+   deleteUser(userId: number): Promise<IUser> {
+     return lastValueFrom(this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${userId}`));
   }
 
 }

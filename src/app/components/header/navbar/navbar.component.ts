@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
+import { UsersService } from '../../../services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -11,11 +12,9 @@ import { MyAccountComponent } from '../../../pages/users/user-profile/my-account
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  authService = inject(AuthService);
+  userService = inject(UsersService);
+  private router = inject(Router);
 
-  //Si estas autenticado se mostrará el navbar(burger)
-
-  
   
   //Ocultar burger automaticamente
  collapseNavbar() {
@@ -38,8 +37,15 @@ export class NavbarComponent {
 
   
   //CERRAR SESION ???
-   onLogout() {
-    this.authService.logout();
+   logout(): void {
+     this.userService.logout();
+      Swal.fire({
+      title: "Cerraste sesión",
+      text: "Has cerrado sesión correctamente",
+      icon: "success"
+    }).then(() => {
+      this.router.navigate(['/welcome']);
+    });
   }
 
 }

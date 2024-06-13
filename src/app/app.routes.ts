@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'profile-info/:userId', component: ProfileInfoComponent },
+  { path: 'profile-info', component: ProfileInfoComponent },
   { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'settings/privacy', component: PrivacyComponent },
   { path: 'settings/terms', component: TermsComponent },
