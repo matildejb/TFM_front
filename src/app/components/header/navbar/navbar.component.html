@@ -4,23 +4,23 @@
 </button>
 
 
-<div class="offcanvas offcanvas-start show" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title text-center w-100" id="offcanvasNavbarLabel">SharExpen
             <img src="assets/images/logo.png" alt="logotipo" width="60px">
         </h5>
-        <button type="button" class="btn-close  d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/user-profile']"
-                    >
+                <a class="nav-link myAccount" aria-current="page" [routerLink]="['/user-profile']"
+                    (click)="collapseNavbar()">
                     <app-my-account></app-my-account>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/']" >
+                <a class="nav-link" aria-current="page" [routerLink]="['/']" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-person-vcard" viewBox="0 0 16 16">
                         <path
@@ -31,7 +31,7 @@
                     Area personal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/groupsList']" >
+                <a class="nav-link" [routerLink]="['/groupsList']" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path
@@ -40,7 +40,7 @@
                     Mis grupos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/friends']">
+                <a class="nav-link" [routerLink]="['/friends']" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
                         <path
@@ -49,7 +49,7 @@
                     Mis amigos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" [routerLink]="['/statistics']" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                         <path
@@ -59,7 +59,7 @@
             </li>
             <li class="nav-item text-center">
                 <button class="btn btn-outline-danger mt-2" id="logoutButton" (click)="logout()"
-                    >Cerrar Sesión</button>
+                    (click)="collapseNavbar()">Cerrar Sesión</button>
             </li>
         </ul>
     </div>

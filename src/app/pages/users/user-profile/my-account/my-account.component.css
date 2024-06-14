@@ -1,27 +1,27 @@
-.container {
-  .cardAccount {
+
+  .c {
     background-color: rgba(2, 113, 132, 0);
     display: flex;
-    flex-direction: row;
-    padding-left: 1px;
-    padding-right: 1px;
+    flex-direction: column;
+     align-items: center; /* Alinea verticalmente */
+    white-space: wrap; /* Evita el wrap del contenido */
+    max-width: 100%; /* Ancho máximo */
 
     .card-body {
-      display: flex;
-      flex-direction: column;
       font-size: 12px;
-      overflow: hidden;
+        overflow: hidden; /* Oculta el contenido que desborda */
+        margin-left: 10px; 
+         max-width: calc(100% - 50px); /* Ajusta según el espacio disponible */
+       
+        
     }
 
     img {
+     
       border-radius: 100%;
-      color: white;
       width: 40px;
       height: 40px;
-      margin: auto;
-      margin-left: 1px;
-      margin-right: 1px;
       border: 1px solid black;
     }
   }
-}
+

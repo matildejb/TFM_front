@@ -17,17 +17,29 @@
 
 .offcanvas {
   width: 250px;
-  background: linear-gradient(to bottom right, white 55%, #f6a278);
+  background: linear-gradient(
+    to bottom right,
+    white 60%,
+    rgba(2, 113, 132, 0.481)
+  );
 }
 .offcanvas-header {
-  border-bottom: #f6a278 2px solid;
   margin-bottom: 0;
-  padding-bottom: 6px;
+  border-bottom: 2px solid #f6a278;
+  padding-bottom: 7px;
 }
 .offcanvas-body {
+  height: 100vh;
   a:hover {
     color: #027184;
     font-weight: bolder;
+  }
+
+  .myAccount {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+
   }
 
   a {
@@ -40,11 +52,10 @@
   }
 }
 
-
 /* Media query para pantallas md a grandes */
 @media (min-width: 768px) {
   .offcanvas {
-    width: 220px;
+    width: 203px;
     display: block !important;
     visibility: visible !important;
     transform: none !important;

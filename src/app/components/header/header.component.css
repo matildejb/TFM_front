@@ -2,8 +2,8 @@
   background: linear-gradient(
     to bottom right,
     white 0%,
-    white 50%,
-    #f6a278 50%,
+    white 56%,
+    #f6a278 56%,
     #f6a278 75%,
     #f16744 75%,
     #f16744 90%,
@@ -61,5 +61,4 @@
       #027184 100%
     );
   }
-
 }
