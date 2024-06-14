@@ -1,11 +1,13 @@
 .container {
-  width: 700px;
-  margin: auto;
+  width: 45rem;
+  padding-left: 190px;
+  
 
   .card {
     background-color: rgba(2, 113, 132, 0.15);
+    padding: 20px;
     border-radius: 10px;
-    width: 40rem;
+    width: 35rem;
 
     .edit-profile {
       color: #f6a278;
@@ -16,10 +18,11 @@
     }
 
     img {
-       width: 160px;
+      width: 160px;
       height: 160px;
       border-radius: 100%;
-      border: 1px solid;
+      border: 2px solid;
+      margin-left: 20px;
       object-fit: contain;
     }
   }
@@ -28,7 +31,8 @@
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
-    width: 25rem;
+    width: auto;  
+    padding: 1rem;
     .card {
       width: 20rem;
       margin: auto;

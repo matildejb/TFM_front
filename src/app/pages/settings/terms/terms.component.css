@@ -1,6 +1,7 @@
 .container {
-    max-width: 900px;
-}
+    width: 45rem;
+    padding-left: 200px;
+
 
 p {
     color: black;
@@ -15,4 +16,16 @@ h1{
     text-align: justify;
     margin-bottom: 20px;
     margin-top: 30px;
+}
+
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+
+    .container {
+    width: auto;  
+   padding: 1rem;
+}
+  
 }
