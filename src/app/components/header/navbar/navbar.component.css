@@ -30,19 +30,25 @@
 }
 .offcanvas-body {
   height: 100vh;
-  a:hover {
+
+  .active {
     color: #027184;
     font-weight: bolder;
+    text-decoration: underline;
   }
 
-  a {
-    display: flex;
-    align-items: center;
+  .active-border {
+    border-bottom: 2px solid #027184;
   }
+}
 
-  .bi {
-    margin-right: 5px;
-  }
+a {
+  display: flex;
+  align-items: center;
+}
+
+.bi {
+  margin-right: 5px;
 }
 
 /* Media query para pantallas md a grandes */

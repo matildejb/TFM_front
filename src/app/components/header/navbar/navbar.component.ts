@@ -1,13 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, NavigationError, Router, RouterLink } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
 import { UsersService } from '../../../services/users.service';
 import Swal from 'sweetalert2';
+import { NgClass } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, MyAccountComponent],
+  imports: [RouterLink, MyAccountComponent, NgClass],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -15,14 +17,22 @@ export class NavbarComponent {
   userService = inject(UsersService);
   private router = inject(Router);
 
-  
-  //Ocultar burger automaticamente
- collapseNavbar() {
+  activeLink: string = 'groupsList'; // Variable para almacenar el enlace activo
+
+
+   // Función para establecer el enlace activo
+  setActive(link: string) {
+    this.activeLink = link;
+  }
+
+
+  collapseNavbar(): void {
+   // Cerrar menú desplegable de Bootstrap si está abierto
    const navbarNav = document.getElementById('navbarNav');
     if (navbarNav && navbarNav.classList.contains('show')) {
       navbarNav.classList.remove('show');
     }
-     //0cultar el burger si está abierto
+     // Cerrar offcanvas si está abierto
     const offcanvasNavbar = document.getElementById('offcanvasNavbar');
     if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
       const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
