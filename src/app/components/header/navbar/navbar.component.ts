@@ -17,7 +17,7 @@ export class NavbarComponent {
 
   
   //Ocultar burger automaticamente
- collapseNavbar() {
+ /*collapseNavbar() {
    const navbarNav = document.getElementById('navbarNav');
     if (navbarNav && navbarNav.classList.contains('show')) {
       navbarNav.classList.remove('show');
@@ -33,7 +33,7 @@ export class NavbarComponent {
    }
      // Restaurar el scroll en el body
     document.body.style.overflow = 'auto';
-  }
+  }*/
 
   
   //CERRAR SESION ???

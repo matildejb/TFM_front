@@ -16,25 +16,46 @@
 }
 
 .offcanvas {
-  width: 300px;
+  width: 250px;
   background: linear-gradient(to bottom right, white 55%, #f6a278);
-  .offcanvas-header {
-    border-bottom: #f6a278 2px solid;
-    margin-bottom: 0;
+}
+.offcanvas-header {
+  border-bottom: #f6a278 2px solid;
+  margin-bottom: 0;
+  padding-bottom: 6px;
+}
+.offcanvas-body {
+  a:hover {
+    color: #027184;
+    font-weight: bolder;
   }
-  .offcanvas-body {
-    a:hover {
-      color: #027184;
-      font-weight: bolder;
-    }
 
-    a {
-      display: flex;
-      align-items: center;
-    }
+  a {
+    display: flex;
+    align-items: center;
+  }
 
-    .bi {
-      margin-right: 5px;
-    }
+  .bi {
+    margin-right: 5px;
+  }
+}
+
+
+/* Media query para pantallas md a grandes */
+@media (min-width: 768px) {
+  .offcanvas {
+    width: 220px;
+    display: block !important;
+    visibility: visible !important;
+    transform: none !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1030;
+  }
+
+  .navbar-toggler {
+    display: none !important;
   }
 }
