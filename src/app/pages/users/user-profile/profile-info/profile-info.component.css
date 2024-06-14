@@ -1,13 +1,12 @@
 .container {
-  width: 45rem;
-  padding-left: 190px;
-  
+  padding-left: 15rem;
 
   .card {
     background-color: rgba(2, 113, 132, 0.15);
     padding: 20px;
     border-radius: 10px;
-    width: 35rem;
+    width: 45rem;
+    font-size: 1.2rem;
 
     .edit-profile {
       color: #f6a278;
@@ -28,19 +27,20 @@
   }
 }
 
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
+}
+
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
-    width: auto;  
-    padding: 1rem;
     .card {
+      font-size: 1rem;
       width: 20rem;
       margin: auto;
-
-      .edit-profile {
-        justify-content: end;
-      }
-
     }
   }
 }

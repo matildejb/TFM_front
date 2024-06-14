@@ -1,8 +1,8 @@
+@if(isLoggedIn){
 <button class="navbar-toggler mx-3 btn-custom" type="button" data-bs-toggle="offcanvas"
     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
     <i class="bi bi-person-lines-fill icon-user"></i>
 </button>
-
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
@@ -15,13 +15,13 @@
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
                 <a class="nav-link d-block" aria-current="page" [routerLink]="['/user-profile']"
-                  [ngClass]="{ 'active-border': activeLink === 'user-profile' }"
-                    (click)="setActive('user-profile')" (click)="collapseNavbar()">
+                    [ngClass]="{ 'active-border': activeLink === 'user-profile' }" (click)="setActive('user-profile')"
+                    (click)="collapseNavbar()">
                     <app-my-account></app-my-account>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/']" 
+                <a class="nav-link" aria-current="page" [routerLink]="['/']"
                     [ngClass]="{ 'active': activeLink === 'personal-area' }" (click)="setActive('personal-area')"
                     (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -34,9 +34,8 @@
                     Area personal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/groupsList']" 
-                    [ngClass]="{ 'active': activeLink === 'groupsList' }" (click)="setActive('groupsList')"
-                    (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/groupsList']" [ngClass]="{ 'active': activeLink === 'groupsList' }"
+                    (click)="setActive('groupsList')" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path
@@ -45,9 +44,8 @@
                     Mis grupos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/friends']" 
-                    [ngClass]="{ 'active': activeLink === 'friends' }" (click)="setActive('friends')"
-                    (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/friends']" [ngClass]="{ 'active': activeLink === 'friends' }"
+                    (click)="setActive('friends')" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
                         <path
@@ -56,9 +54,8 @@
                     Mis amigos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/statistics']" 
-                    [ngClass]="{ 'active': activeLink === 'statistics' }" (click)="setActive('statistics')"
-                    (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/statistics']" [ngClass]="{ 'active': activeLink === 'statistics' }"
+                    (click)="setActive('statistics')" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                         <path
@@ -73,3 +70,5 @@
         </ul>
     </div>
 </div>
+
+}

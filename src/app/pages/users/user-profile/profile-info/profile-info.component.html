@@ -1,10 +1,8 @@
-<div class="container d-flex flex-column mt-2">
+<div class="container d-flex flex-column gap-2 mt-4  mb-4">
 
-    <div class="mt-4 ms-4">
-        <h4>Mi perfil</h4>
-    </div>
+    <h4 class="ms-5 ps-5 ms-md-0 ps-md-0">Mi perfil</h4>
 
-    <div class="card m-auto flex-md-row">
+    <div class="card flex-md-row">
         <button class="btn edit-profile me-3 mt-3 mt-md-0" [routerLink]="['/profile-setting']">Editar
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f6a278 "
                 class="bi bi-sliders setting ms-2" viewBox="0 0 16 16">
@@ -16,7 +14,7 @@
         <img class="card-img-top m-1" [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
             [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
 
-        <div class="card-body ms-0 ms-lg-1">
+        <div class="card-body ms-0 ms-md-2">
             <p>Nombre:<b> {{ unUser?.name }}</b></p>
             <p>Usuario:<b> {{ unUser?.username }} </b></p>
             <p>Email:<b> {{ unUser?.email }} </b></p>

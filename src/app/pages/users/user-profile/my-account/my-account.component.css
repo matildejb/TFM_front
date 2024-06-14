@@ -10,12 +10,13 @@
     word-wrap: break-word; /* Permite que las palabras se rompan y se envuelvan */
     overflow-wrap: break-word; /* Alternativa para garantizar el wrap en espacios */
     text-align: center;
+    font-size: 1rem;
   }
 
   img {
     border-radius: 100%;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border: 1px solid black;
   }
 }

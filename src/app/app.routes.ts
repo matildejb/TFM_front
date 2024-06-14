@@ -13,6 +13,7 @@ import { AboutComponent } from './pages/settings/about/about.component';
 import { GroupsListComponent } from './pages/groups-list/groups-list.component';
 import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
+import { loginGuard } from './guards/login.guard';
 
 
 export const routes: Routes = [
@@ -21,15 +22,17 @@ export const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user-profile', component: UserProfileComponent },
-  { path: 'profile-info', component: ProfileInfoComponent },
-  { path: 'profile-setting', component: ProfileSettingComponent },
-  { path: 'settings/privacy', component: PrivacyComponent },
-  { path: 'settings/terms', component: TermsComponent },
-  { path: 'settings/about', component: AboutComponent },
-  { path: 'group/:id', component: GroupComponent },
-  { path: 'groupsList', component: GroupsListComponent },
-  { path: 'summary', component: SummaryComponent },
+ 
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
+  { path: 'profile-info', component: ProfileInfoComponent, canActivate: [loginGuard]},
+  { path: 'profile-setting', component: ProfileSettingComponent, canActivate: [loginGuard] },
+  { path: 'settings/privacy', component: PrivacyComponent, canActivate: [loginGuard]},
+  { path: 'settings/terms', component: TermsComponent, canActivate: [loginGuard] },
+  { path: 'settings/about', component: AboutComponent, canActivate: [loginGuard]},
+  { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },
+  { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
+  { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
+
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' }
 ];

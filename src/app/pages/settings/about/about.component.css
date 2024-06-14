@@ -1,37 +1,30 @@
 .container {
-    width: 45rem;
-    padding-left: 200px;
+  padding-left: 15rem;
 
-
-    p {
+  p {
     color: black;
     text-align: justify;
+  }
 
-}
-
-h1{
+  h1 {
     color: #027184;
     text-align: justify;
     margin-bottom: 20px;
     margin-top: 30px;
-    
-}.accordion-button{
+  }
+  .accordion-button {
     background-color: #027184;
     color: white;
+  }
+
+  .accordion-button::after {
+    color: white;
+  }
 }
 
-.accordion-button::after {
-  color: white;
-}
-}
-
-
-/* Dispositivo movil*/
-@media only screen and (max-width: 767px) {
-
-    .container {
-    width: auto;  
-    padding: 1rem;
-}
-  
+/* Dispositivo movil y tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
 }

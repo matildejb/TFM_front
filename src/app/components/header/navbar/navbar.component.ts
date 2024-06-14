@@ -19,6 +19,16 @@ export class NavbarComponent {
 
   activeLink: string = 'groupsList'; // Variable para almacenar el enlace activo
 
+  // Ocultar elementos del navbar si no estas logado
+  isLoggedIn: boolean = false; 
+
+ ngOnInit(): void {
+    this.userService.isLoggedIn.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+  }
+
+
 
    // Función para establecer el enlace activo
   setActive(link: string) {

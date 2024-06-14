@@ -1,21 +1,16 @@
 .container {
-  width: 45rem;
-  padding-left: 190px;
-
+  padding-left: 15rem;
 
   .card {
-    background-color: rgba(2, 113, 132, 0.15);
+    background-color: #02718426;
     padding: 20px;
     border-radius: 10px;
-    width: 35rem;
-
-    .full-width {
-      width: 100% !important;
-    }
+    width: 45rem;
+    font-size: 1.2rem;
 
     img {
-       width: 160px;
-        height: 160px;
+      width: 160px;
+      height: 160px;
       border-radius: 100%;
       border: 2px solid;
       object-fit: contain;
@@ -59,18 +54,22 @@
     left: 0;
   }
 }
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
+}
+
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
-    width: auto;  
-    padding: 1rem;
     .card {
       width: 20rem;
       margin: auto;
+      font-size: 1rem;
 
-      .btn-container {
-        position: static !important;
-      }
       .delete-account {
         position: static !important;
         margin-top: 50px;

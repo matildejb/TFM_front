@@ -31,6 +31,10 @@
 .offcanvas-body {
   height: 100vh;
 
+  a:hover {
+    color: #027184;
+  }
+
   .active {
     color: #027184;
     font-weight: bolder;
@@ -51,8 +55,8 @@ a {
   margin-right: 5px;
 }
 
-/* Media query para pantallas md a grandes */
-@media (min-width: 768px) {
+/* Media query para pantallas grandes */
+@media (min-width: 992px) {
   .offcanvas {
     width: 203px;
     display: block !important;
@@ -63,6 +67,7 @@ a {
     left: 0;
     height: 100vh;
     z-index: 1030;
+    font-size: 1.2rem;
   }
 
   .navbar-toggler {

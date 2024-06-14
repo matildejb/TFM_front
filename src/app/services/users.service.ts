@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
 
@@ -28,7 +28,8 @@ type LoginResponse = {
 })
 export class UsersService {
   private baseUrl: string = `${environment.apiUrl}/users`;
-   private profileUrl = `${this.baseUrl}/profile`;
+  private profileUrl = `${this.baseUrl}/profile`;
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
   private httpClient = inject(HttpClient);
 
@@ -46,9 +47,19 @@ export class UsersService {
     );
   }
 
+
   logout(): void {
     localStorage.removeItem('token');
   }
+
+    get isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');  // Verifica si el token está presente en el localStorage
+  }
+
  
   getProfile(): Promise<IUser> {
     return  lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
