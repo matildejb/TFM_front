@@ -3,8 +3,7 @@
   margin: auto;
 
   .card {
-     background-color: rgba(2, 113, 132, 0.15);
-    padding: 20px;
+    background-color: rgba(2, 113, 132, 0.15);
     border-radius: 10px;
     width: 40rem;
 
@@ -17,11 +16,10 @@
     }
 
     img {
-      width: 200px;
-      height: 200px;
+       width: 160px;
+      height: 160px;
       border-radius: 100%;
-      border: 2px solid;
-      margin-left: 20px;
+      border: 1px solid;
       object-fit: contain;
     }
   }
@@ -39,10 +37,6 @@
         justify-content: end;
       }
 
-      img {
-        width: 160px;
-        height: 160px;
-      }
     }
   }
 }

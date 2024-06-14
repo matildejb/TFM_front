@@ -16,7 +16,7 @@
 }
 
 .offcanvas {
-  width: 250px;
+  width: 270px;
   background: linear-gradient(
     to bottom right,
     white 60%,
@@ -33,13 +33,6 @@
   a:hover {
     color: #027184;
     font-weight: bolder;
-  }
-
-  .myAccount {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-
   }
 
   a {

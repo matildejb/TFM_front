@@ -13,10 +13,10 @@
             </svg>
         </button>
 
-        <img class="card-img-top mt-3 mt-lg-0" [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
+        <img class="card-img-top mt-2 ms-2 ms-md-0" [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
             [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
 
-        <div class="card-body ms-0 ms-lg-4">
+        <div class="card-body ms-0 ms-lg-1">
             <p>Nombre:<b> {{ unUser?.name }}</b></p>
             <p>Usuario:<b> {{ unUser?.username }} </b></p>
             <p>Email:<b> {{ unUser?.email }} </b></p>

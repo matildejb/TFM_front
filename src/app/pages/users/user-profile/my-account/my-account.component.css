@@ -1,27 +1,21 @@
+.c {
+  background-color: rgba(2, 113, 132, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .c {
-    background-color: rgba(2, 113, 132, 0);
-    display: flex;
-    flex-direction: column;
-     align-items: center; /* Alinea verticalmente */
-    white-space: wrap; /* Evita el wrap del contenido */
-    max-width: 100%; /* Ancho máximo */
-
-    .card-body {
-      font-size: 12px;
-        overflow: hidden; /* Oculta el contenido que desborda */
-        margin-left: 10px; 
-         max-width: calc(100% - 50px); /* Ajusta según el espacio disponible */
-       
-        
-    }
-
-    img {
-     
-      border-radius: 100%;
-      width: 40px;
-      height: 40px;
-      border: 1px solid black;
-    }
+  .c-b {
+    font-size: 12px;
+    max-width: calc(100% - 10px); /* Ajusta según el espacio disponible */
+    word-wrap: break-word; /* Permite que las palabras se rompan y se envuelvan */
+    overflow-wrap: break-word; /* Alternativa para garantizar el wrap en espacios */
+    text-align: center;
   }
 
+  img {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+  }
+}
