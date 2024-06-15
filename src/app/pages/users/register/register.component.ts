@@ -5,20 +5,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
+import { FooterComponent } from '../../../components/footer/footer.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FooterComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   formRegister: FormGroup;
-  usersService = inject(UsersService);
+  authService = inject(AuthService);
   router = inject(Router);
   user: IUser | null = null;
   tipo: string = 'Registro de usuario';
@@ -59,7 +60,7 @@ export class RegisterComponent {
 
 
   async onSubmit() {
-    const response = await this.usersService.register(this.formRegister.value);
+    const response = await this.authService.register(this.formRegister.value);
     if (response.length > 0) {
       alert(response.join('\n'));
     } else {

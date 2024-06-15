@@ -7,18 +7,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsersService } from '../../../services/users.service';
+import { FooterComponent } from '../../../components/footer/footer.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   formLogin: FormGroup;
-  usersService = inject(UsersService);
+  authService = inject(AuthService);
   router = inject(Router);
 
   constructor() {
@@ -44,7 +45,7 @@ export class LoginComponent {
 
   async onSubmit() {
     try {
-      const response = await this.usersService.login(this.formLogin.value);
+      const response = await this.authService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
       alert(response.message);
       this.router.navigateByUrl('/summary');

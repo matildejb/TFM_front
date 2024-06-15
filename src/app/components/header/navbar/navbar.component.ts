@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
-import { UsersService } from '../../../services/users.service';
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  userService = inject(UsersService);
+  authService = inject(AuthService);
   private router = inject(Router);
   isLoggedIn = false;
 
@@ -45,18 +45,19 @@ export class NavbarComponent {
   }
 
    ngOnInit(): void {
-    this.userService.isLoggedIn.subscribe((loggedIn) => {
+    this.authService.isLoggedIn.subscribe((loggedIn) => {
       this.isLoggedIn = loggedIn;
     });
   }
   
-  //CERRAR SESION ???
+  //CERRAR SESION 
    logout(): void {
-     this.userService.logout();
+     this.authService.logout();
       Swal.fire({
       title: "Cerraste sesión",
-      text: "Has cerrado sesión correctamente",
-      icon: "success"
+      icon: "success",
+      timer: 1500, 
+      showConfirmButton: false
     }).then(() => {
       this.router.navigate(['/welcome']);
     });
