@@ -7,13 +7,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
-import { FooterComponent } from '../../../components/footer/footer.component';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FooterComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })

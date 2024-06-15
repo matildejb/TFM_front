@@ -18,7 +18,7 @@ export class NavbarComponent {
   private router = inject(Router);
   isLoggedIn = false;
 
-  activeLink: string = 'groupsList'; // Variable para almacenar el enlace activo
+  activeLink: string = ''; // Variable para almacenar el enlace activo
 
    // Función para establecer el enlace activo
   setActive(link: string) {
