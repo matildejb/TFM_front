@@ -14,14 +14,15 @@ import { GroupsListComponent } from './pages/groups-list/groups-list.component';
 import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 import { loginGuard } from './guards/login.guard';
+import { redirectGuard } from './guards/redirect.guard';
 
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
-  { path: 'landing', component: LandingComponent },
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'landing', component: LandingComponent, canActivate: [redirectGuard]},
+  { path: 'welcome', component: WelcomeComponent, canActivate: [redirectGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [redirectGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },
  
   { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
   { path: 'profile-info', component: ProfileInfoComponent, canActivate: [loginGuard]},

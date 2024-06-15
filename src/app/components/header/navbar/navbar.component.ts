@@ -16,15 +16,14 @@ import { NgClass } from '@angular/common';
 export class NavbarComponent {
   userService = inject(UsersService);
   private router = inject(Router);
+  isLoggedIn = false;
 
   activeLink: string = 'groupsList'; // Variable para almacenar el enlace activo
-
 
    // Función para establecer el enlace activo
   setActive(link: string) {
     this.activeLink = link;
   }
-
 
   collapseNavbar(): void {
    // Cerrar menú desplegable de Bootstrap si está abierto
@@ -45,6 +44,11 @@ export class NavbarComponent {
     document.body.style.overflow = 'auto';
   }
 
+   ngOnInit(): void {
+    this.userService.isLoggedIn.subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
+  }
   
   //CERRAR SESION ???
    logout(): void {

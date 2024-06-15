@@ -47,9 +47,9 @@ export class UsersService {
     );
   }
 
-
   logout(): void {
     localStorage.removeItem('token');
+     this.loggedIn.next(false);  
   }
 
     get isLoggedIn(): Observable<boolean> {
@@ -60,17 +60,16 @@ export class UsersService {
     return !!localStorage.getItem('token');  // Verifica si el token está presente en el localStorage
   }
 
- 
   getProfile(): Promise<IUser> {
     return  lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
-  //Actualizar profile usuario??
+  //Actualizar profile usuario????FALTA
   updateProfile(updatedUser: IUser): Observable<IUser> {
     return this.httpClient.put<IUser>(this.profileUrl, updatedUser);
   }
 
-  //SUBIR IMAGEN USUARIO???
+  //SUBIR IMAGEN USUARIO???FALTA
   uploadUserImage(userId: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
@@ -78,7 +77,7 @@ export class UsersService {
     return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
   }
 
-  //elimnar usuario
+  //elimnar usuario?? FALTA
    deleteUser(userId: number): Promise<IUser> {
      return lastValueFrom(this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${userId}`));
   }
