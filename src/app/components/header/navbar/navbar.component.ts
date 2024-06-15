@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { NavigationEnd, NavigationError, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
 import { UsersService } from '../../../services/users.service';
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
-import { filter } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -18,16 +18,6 @@ export class NavbarComponent {
   private router = inject(Router);
 
   activeLink: string = 'groupsList'; // Variable para almacenar el enlace activo
-
-  // Ocultar elementos del navbar si no estas logado
-  isLoggedIn: boolean = false; 
-
- ngOnInit(): void {
-    this.userService.isLoggedIn.subscribe(status => {
-      this.isLoggedIn = status;
-    });
-  }
-
 
 
    // Función para establecer el enlace activo

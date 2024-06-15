@@ -1,15 +1,23 @@
 <nav class="navbar shadow ps-3 pe-lg-4 d-flex  align-items-center">
 
+  @if(!isLoggedIn)
+  {
   <div class="botonNavbar-Logotipo">
-    <app-navbar></app-navbar>
     <a class="navbar-brand fs-3 fs-md-2" [routerLink]="['/landing']">
       <strong>SharExpen</strong>
       <img src="assets/images/logo.png" alt="logotipo" width="70px">
     </a>
   </div>
+  }
 
   @if(isLoggedIn)
   {
+  <div>
+    <app-navbar></app-navbar>
+    <strong>SharExpen</strong>
+    <img src="assets/images/logo.png" alt="logotipo" width="70px">
+  </div>
+
   <div class="btn-settings me-3 me-md-1 ms-3">
     <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-cog fa-lg"></i>
@@ -21,6 +29,7 @@
       <a class="element-settings" [routerLink]="['/settings/about']">Aplicación</a>
     </div>
   </div>
+
   }
 
 </nav>

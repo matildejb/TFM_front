@@ -17,7 +17,7 @@ import { loginGuard } from './guards/login.guard';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', redirectTo: '/landing' },
   { path: 'landing', component: LandingComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'register', component: RegisterComponent },
