@@ -1,13 +1,19 @@
 <section class="d-flex justify-content-center align-items-center flex-column">
-  <h1 class="h2 mt-4"> {{ tipo }} </h1>
+  <h1 class="h2 mt-4">{{ tipo }}</h1>
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Nombre:</label>
-        <input type="text" placeholder="Introduce tu nombre" id="name" class="form-control" formControlName="name" />
-        @if (checkControl('first_name', 'required')) {
+        <input
+          type="text"
+          placeholder="Introduce tu nombre"
+          id="name"
+          class="form-control"
+          formControlName="name"
+        />
+        @if (checkControl('name', 'required')) {
         <p class="error">Campo requerido</p>
-        } @if (checkControl('first_name', 'pattern')) {
+        } @if (checkControl('name', 'pattern')) {
         <p class="error">Debes introducir un nombre propio válido</p>
         }
       </div>
@@ -15,10 +21,15 @@
         <label for="username" class="form-label">Nombre de usuario:</label>
         <p class="clarification">
           Introduce un nombre de usuario de entre 6 y 12 caracteres que contenga
-          únicamente letras o números.
+          únicamente números o letras (sin tildes).
         </p>
-        <input type="text" placeholder="Introduce un nombre de usuario" id="username" class="form-control"
-          formControlName="username" />
+        <input
+          type="text"
+          placeholder="Introduce un nombre de usuario"
+          id="username"
+          class="form-control"
+          formControlName="username"
+        />
         @if (checkControl('username', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('username', 'pattern')) {
@@ -26,9 +37,16 @@
         }
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label">Número de teléfono (¿opcional?):</label>
-        <input type="tel" placeholder="Introduce tu número de teléfono móvil" id="phone" class="form-control"
-          formControlName="phone" />
+        <label for="phone" class="form-label"
+          >Número de teléfono (¿opcional?):</label
+        >
+        <input
+          type="tel"
+          placeholder="Introduce tu número de teléfono móvil"
+          id="phone"
+          class="form-control"
+          formControlName="phone"
+        />
         @if (checkControl('phone', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('phone', 'pattern')) {
@@ -37,8 +55,13 @@
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico:</label>
-        <input type="email" placeholder="Introduce tu dirección de correo electrónico" id="email" class="form-control"
-          formControlName="email" />
+        <input
+          type="email"
+          placeholder="Introduce tu dirección de correo electrónico"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
         @if (checkControl('email', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('email', 'pattern')) {
@@ -53,8 +76,13 @@
           Introduce una constraseña de entre 8 y 16 caracteres que contenga al
           menos una minúscula, una mayúscula, un número y un carácter especial.
         </p>
-        <input type="password" placeholder="Introduce una contraseña" id="password" class="form-control"
-          formControlName="password" />
+        <input
+          type="password"
+          placeholder="Introduce una contraseña"
+          id="password"
+          class="form-control"
+          formControlName="password"
+        />
         <!-- <button type="button" class="btn btn-outline-secondary" id="toggle-password">
         <i class="bi bi-eye"></i>  Use Bootstrap Icons or any other icon library 
     </button> -->
@@ -64,7 +92,12 @@
         <p class="error">Debes introducir una contraseña válida</p>
         }
       </div>
-      <input type="submit" [value]="boton" class="btn btn-se" />
+      <input
+        type="submit"
+        [value]="boton"
+        class="btn btn-se"
+        [disabled]="!formRegister.valid"
+      />
     </form>
   </div>
 </section>

@@ -1,13 +1,21 @@
 <section class="d-flex justify-content-center align-items-center flex-column">
   <h1 class="h2 mt-4">Inicio de sesión</h1>
-  <img src="../../../../assets/images/login_animation.gif" class="img-fluid d-flex justify-content-center image"
-    alt="Animación de inicio de sesión del usuario" />
+  <img
+    src="../../../../assets/images/login_animation.gif"
+    class="img-fluid d-flex justify-content-center image"
+    alt="Animación de inicio de sesión del usuario"
+  />
   <div class="p-3 width">
     <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico:</label>
-        <input type="email" placeholder="Introduce tu dirección de correo electrónico" id="email" class="form-control"
-          formControlName="email" />
+        <input
+          type="email"
+          placeholder="Introduce tu dirección de correo electrónico"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
         @if (checkControl('email', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('email', 'pattern')) {
@@ -18,15 +26,25 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña:</label>
-        <input type="password" placeholder="Introduce tu contraseña" id="password" class="form-control"
-          formControlName="password" />
+        <input
+          type="password"
+          placeholder="Introduce tu contraseña"
+          id="password"
+          class="form-control"
+          formControlName="password"
+        />
         @if (checkControl('password', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('password', 'pattern')) {
         <p class="error">Debes introducir una contraseña válida</p>
         }
       </div>
-      <input type="submit" value="Iniciar sesión" class="btn btn-se" />
+      <input
+        type="submit"
+        value="Iniciar sesión"
+        class="btn btn-se"
+        [disabled]="!formLogin.valid"
+      />
     </form>
   </div>
 </section>
