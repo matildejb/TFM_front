@@ -1,15 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
 import Swal from 'sweetalert2';
-import { NgClass } from '@angular/common';
 import { UsersService } from '../../../services/users.service';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, MyAccountComponent, NgClass],
+  imports: [RouterLink, MyAccountComponent, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -18,12 +17,6 @@ export class NavbarComponent {
   private router = inject(Router);
   isLoggedIn = false;
 
-  activeLink: string = ''; // Variable para almacenar el enlace activo
-
-   // Función para establecer el enlace activo
-  setActive(link: string) {
-    this.activeLink = link;
-  }
 
   collapseNavbar(): void {
   // Cerrar offcanvas (menu desplegable) si está abierto

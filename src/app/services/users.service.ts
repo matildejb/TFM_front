@@ -94,13 +94,9 @@ export class UsersService {
   }
 
   
-  deleteUser(): Promise<IUser> {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token') || ""
-    }
+  deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
-       this.httpClient.delete<IUser>(`${this.profileUrl}/delete`, { headers })
+       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
      );
   }
 

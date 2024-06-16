@@ -17,7 +17,7 @@ import { redirectGuard } from './guards/redirect.guard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
-  { path: 'landing', component: LandingComponent, canActivate: [redirectGuard]},
+  { path: 'landing', component: LandingComponent, canActivate: [redirectGuard] },
   { path: 'welcome', component: WelcomeComponent, canActivate: [redirectGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [redirectGuard] },
   { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },

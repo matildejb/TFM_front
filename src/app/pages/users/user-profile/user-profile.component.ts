@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent {
-  @Input() user!: IUser;
   userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
@@ -47,41 +46,43 @@ export class UserProfileComponent {
       reader.readAsDataURL(input.files[0]);
     }
   }
-  
-  async delete(): Promise<void> { 
-    const response = await this.userService.deleteUser();
-    console.log('Usuario eliminado', response);
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Perderás tu cuenta definitivamente",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#004a59",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "cancelar",
-      confirmButtonText: "¡SÍ, Quiero hacerlo!"
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-            await this.userService.deleteUser();
-            Swal.fire({
-              title: "Eliminado",
-              text: "Tu usuario ha sido eliminado correctamente",
-              icon: "success"
-            }).then(() => {
-              this.userService.logout(); 
-              this.router.navigate(['/landing']);
-            });
-          
-        } catch (error) {
-          console.error('Error deleting user', error);
-          Swal.fire({
-            title: "Error",
-            text: "No se pudo eliminar tu usuario",
-            icon: "error"
-          });
-        }
-      }
-    });
+
+  async deleteUser(): Promise<void> {
+    if (!this.unUser) {
+      return;
     }
+   Swal.fire({
+    title: "¿Estás seguro?",
+    text: "Perderás tu cuenta definitivamente",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#004a59",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Cancelar",
+    confirmButtonText: "¡SÍ, Quiero hacerlo!"
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await this.userService.deleteUser(this.unUser!.id);
+        Swal.fire({
+          title: "Eliminado",
+          text: "Tu usuario ha sido eliminado correctamente",
+          icon: "success",
+          timer: 3000, 
+          timerProgressBar: true
+        }).then(() => {
+          this.userService.logout();
+          this.router.navigate(['/landing']);
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error",
+          text: "No se pudo eliminar tu usuario",
+          icon: "error"
+        });
+      }
+    }
+  });
+  }
+  
 }
