@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MyAccountComponent } from '../../../pages/users/user-profile/my-account/my-account.component';
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
+import { UsersService } from '../../../services/users.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  authService = inject(AuthService);
+  usersService = inject(UsersService);
   private router = inject(Router);
   isLoggedIn = false;
 
@@ -26,33 +26,35 @@ export class NavbarComponent {
   }
 
   collapseNavbar(): void {
-   // Cerrar menú desplegable de Bootstrap si está abierto
-   const navbarNav = document.getElementById('navbarNav');
-    if (navbarNav && navbarNav.classList.contains('show')) {
-      navbarNav.classList.remove('show');
+  // Cerrar offcanvas (menu desplegable) si está abierto
+  const offcanvasNavbar = document.getElementById('offcanvasNavbar');
+  if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
+    offcanvasNavbar.classList.remove('show');
+    offcanvasNavbar.setAttribute('aria-hidden', 'true');
+    offcanvasNavbar.setAttribute('aria-expanded', 'false');
+
+    // Eliminar el backdrop si existe (bootstrap desenfoca el body)
+    const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
+    if (offcanvasBackdrop) {
+      offcanvasBackdrop.remove();
     }
-     // Cerrar offcanvas si está abierto
-    const offcanvasNavbar = document.getElementById('offcanvasNavbar');
-    if (offcanvasNavbar && offcanvasNavbar.classList.contains('show')) {
-      const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
-      if (offcanvasBackdrop) {
-        offcanvasBackdrop.remove();
-      }
-      offcanvasNavbar.classList.remove('show');
-   }
-     // Restaurar el scroll en el body
-    document.body.style.overflow = 'auto';
   }
 
+  // Restaurar el scroll en el body y eliminar el padding derecho añadido
+  document.body.style.overflow = 'auto';
+  document.body.style.paddingRight = `0px`;
+
+}
+
    ngOnInit(): void {
-    this.authService.isLoggedIn.subscribe((loggedIn) => {
+    this.usersService.isLoggedIn.subscribe((loggedIn) => {
       this.isLoggedIn = loggedIn;
     });
   }
   
   //CERRAR SESION 
    logout(): void {
-     this.authService.logout();
+     this.usersService.logout();
       Swal.fire({
       title: "Cerraste sesión",
       icon: "success",

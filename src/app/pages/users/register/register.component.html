@@ -1,5 +1,5 @@
-<section class="d-flex justify-content-center align-items-center flex-column">
-  <h1 class="h2 mt-4"> {{ tipo }} </h1>
+<section class="d-flex justify-content-center align-items-center flex-column mb-4">
+  <h1 class="h2 mt-4"> Registro de usuario </h1>
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -64,7 +64,7 @@
         <p class="error">Debes introducir una contraseña válida</p>
         }
       </div>
-      <input type="submit" [value]="boton" class="btn btn-se" />
+      <input type="submit" value="Registrarse" class="btn btn-se" />
     </form>
   </div>
 </section>

@@ -7,7 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
-import { AuthService } from '../../../services/auth.service';
+import { UsersService } from '../../../services/users.service';
+
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,9 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class RegisterComponent {
   formRegister: FormGroup;
-  authService = inject(AuthService);
+  usersService = inject(UsersService);
   router = inject(Router);
   user: IUser | null = null;
-  tipo: string = 'Registro de usuario';
-  boton: string = 'Registrarse';
 
   constructor() {
     this.formRegister = new FormGroup({
@@ -59,7 +58,7 @@ export class RegisterComponent {
 
 
   async onSubmit() {
-    const response = await this.authService.register(this.formRegister.value);
+    const response = await this.usersService.register(this.formRegister.value);
     if (response.length > 0) {
       alert(response.join('\n'));
     } else {

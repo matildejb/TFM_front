@@ -17,13 +17,13 @@ export class WelcomeComponent {
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/summary'])
     }
 
     this.activatedRoute.queryParams.subscribe((queryParams: any) => {
       if (queryParams.error === '1') {
         this.error = queryParams.error
-        this.msg = "No tienes permiso para acceder a esta página, Por favor, inicia sesión o regístrate para continuar."
+        this.msg = "No tienes permiso para acceder a esta página. Por favor, inicia sesión o regístrate para continuar."
       }
     })
   }

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginComponent {
   formLogin: FormGroup;
-  authService = inject(AuthService);
+  usersService = inject(UsersService);
   router = inject(Router);
 
   constructor() {
@@ -44,7 +44,7 @@ export class LoginComponent {
 
   async onSubmit() {
     try {
-      const response = await this.authService.login(this.formLogin.value);
+      const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
       alert(response.message);
       this.router.navigateByUrl('/summary');
