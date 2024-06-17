@@ -30,8 +30,7 @@ export class UsersService {
 
   private httpClient = inject(HttpClient);
   private baseUrl: string = `${environment.apiUrl}/users`;
-  private profileUrl = `${this.baseUrl}/perfil`;
-  private deleteeUrl = `${this.baseUrl}/profile`;
+  private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   
 
@@ -97,7 +96,7 @@ export class UsersService {
   
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
-       this.httpClient.delete<IUser>(`${this.deleteeUrl}/delete/${id}`)
+       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
      );
   }
 
