@@ -28,9 +28,9 @@ export class ProfileSettingComponent {
   router = inject(Router);
   imageUrl: string | ArrayBuffer | null = null;
   fileName: string | null = null;
-  
+
   //Cambiar foto
-   onFileSelected(event: Event): void {
+  onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
@@ -40,10 +40,10 @@ export class ProfileSettingComponent {
       reader.readAsDataURL(input.files[0]);
     }
   }
-  
- 
+
+
   //ELIMINAR CUENTA USUARIO DEFINITIVAMENTE, TE LLEVA AL WELCOME
-  
+
   deleteUser(id: number) {
 
     Swal.fire({
@@ -61,11 +61,11 @@ export class ProfileSettingComponent {
           title: "Eliminado",
           text: "Tu usuario ha sido eliminado correctamente",
           icon: "success"
-          
+
         });
         this.router.navigate(['/landing'])
       }
     });
-     
+
   }
 }

@@ -13,8 +13,6 @@ import { AboutComponent } from './pages/settings/about/about.component';
 import { GroupsListComponent } from './pages/groups-list/groups-list.component';
 import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
-import { FriendsComponent } from './pages/friends/friends.component';
-import { StatisticsComponent } from './pages/statistics/statistics.component';
 
 
 export const routes: Routes = [
@@ -31,9 +29,6 @@ export const routes: Routes = [
   { path: 'settings/about', component: AboutComponent },
   { path: 'group/:id', component: GroupComponent },
   { path: 'groupsList', component: GroupsListComponent },
-  { path: 'group/:id', component: GroupComponent },
-  { path: 'friends', component: FriendsComponent},
-  { path: 'statistics', component: StatisticsComponent},
   { path: 'summary', component: SummaryComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' }
