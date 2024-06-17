@@ -22,14 +22,14 @@ export class GroupComponent implements OnInit {
       icon: 'fa-plane-departure',
       title: 'Viaje a Menorca',
       amount: 210.00,
-      details: 'Nuestro viaje a Menorca será una escapada inolvidable. Descubriremos sus calas de aguas cristalinas, exploraremos pueblos encantadores como Ciutadella y Mahón, y nos maravillaremos con su rica historia en sitios como la Fortaleza de la Mola. Disfrutaremos de la gastronomía local, realizaremos excursiones en kayak y nos relajaremos bajo el resplandor de las estrellas. Será una experiencia que atesoraremos para siempre.',
+      time: '2024-05-06 12:00:00',
       transactions: [
-        { user: 'Ibon', userImage: 'path_to_image', concept: 'Billetes de avión', amount: 50, description: 'Compra de billetes de avión para todos' },
-        { user: 'Ramon', userImage: 'path_to_image', concept: 'Comida', amount: 30, description: 'Compra de comida para el viaje' },
-        { user: 'Julia', userImage: 'path_to_image', concept: 'Reserva de hotel', amount: 60, description: 'Reserva del hotel para todos' },
-        { user: 'María', userImage: 'path_to_image', concept: 'Museos y monumentos', amount: 20, description: 'Entradas a museos y monumentos' },
-        { user: 'Matilde', userImage: 'path_to_image', concept: 'Trenes y autobuses', amount: 25, description: 'Tickets de trenes y autobuses' },
-        { user: 'Alberto', userImage: 'path_to_image', concept: 'Fiesta y copas', amount: 25, description: 'Gastos en fiesta y copas' }
+        { user: 'Ibon', concept: 'Billetes de avión', time: '2024-06-05 12:05:08', amount: 50 },
+        { user: 'Ramon', concept: 'Comida', time: '2024-06-05 12:05:08', amount: 30 },
+        { user: 'Julia', concept: 'Reserva de hotel', time: '2024-06-05 12:05:08', amount: 60 },
+        { user: 'María', concept: 'Museos y monumentos', time: '2024-06-05 12:05:08', amount: 20 },
+        { user: 'Matilde', concept: 'Trenes y autobuses', time: '2024-06-05 12:05:08', amount: 25 },
+        { user: 'Alberto', concept: 'Fiesta y copas', time: '2024-06-05 12:05:08', amount: 25 }
       ]
     },
     {
@@ -37,29 +37,29 @@ export class GroupComponent implements OnInit {
       icon: 'fa-receipt',
       title: 'Compras Súper',
       amount: -75.00,
-      details: 'Necesidades del supermercado para el viaje',
+      time: '2024-05-06 12:00:00',
       transactions: [
-        { user: 'Ibon', userImage: 'path_to_image', concept: 'Productos del desayuno', amount: 10, description: 'Compra de productos para el desayuno' },
-        { user: 'Ramon', userImage: 'path_to_image', concept: 'Frutas y verduras', amount: 20, description: 'Compra de frutas y verduras frescas' },
-        { user: 'Julia', userImage: 'path_to_image', concept: 'Carne y pescado', amount: 25, description: 'Compra de carne y pescado para las comidas' },
-        { user: 'María', userImage: 'path_to_image', concept: 'Bebidas', amount: 10, description: 'Compra de bebidas para el viaje' },
-        { user: 'Matilde', userImage: 'path_to_image', concept: 'Productos de higiene', amount: 5, description: 'Compra de productos de higiene personal' },
-        { user: 'Tú', userImage: 'path_to_image', concept: 'Compras en el súper', amount: -70, description: 'Pago de las compras en el supermercado para todos' }
+        { user: 'Ibon', concept: 'Productos del desayuno', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'Ramon', concept: 'Frutas y verduras', time: '2024-06-05 12:05:08', amount: 20 },
+        { user: 'Julia', concept: 'Carne y pescado', time: '2024-06-05 12:05:08', amount: 25 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'Matilde', concept: 'Productos de higiene', time: '2024-06-05 12:05:08', amount: 50 },
+        { user: 'Tú', concept: 'Compras en el súper', time: '2024-06-05 12:05:08', amount: -70 }
       ]
     },
     {
       id: 3,
       icon: 'fa-gift',
       title: 'Regalo cumpleaños',
-      amount: 48.00,
-      details: 'Detalles del regalo de cumpleaños para ti',
+      amount: 28.00,
+      time: '2024-05-06 12:00:00',
       transactions: [
-        { user: 'Ibon', userImage: 'path_to_image', concept: 'Contribución al regalo', amount: 10, description: 'Contribución al regalo de cumpleaños' },
-        { user: 'Ramon', userImage: 'path_to_image', concept: 'Contribución al regalo', amount: 15, description: 'Contribución al regalo de cumpleaños' },
-        { user: 'Julia', userImage: 'path_to_image', concept: 'Contribución al regalo', amount: 10, description: 'Contribución al regalo de cumpleaños' },
-        { user: 'María', userImage: 'path_to_image', concept: 'Contribución al regalo', amount: 5, description: 'Contribución al regalo de cumpleaños' },
-        { user: 'Matilde', userImage: 'path_to_image', concept: 'Contribución al regalo', amount: 5, description: 'Contribución al regalo de cumpleaños' },
-        { user: 'Tú', userImage: 'path_to_image', concept: 'Aportación adicional', amount: 48, description: 'Aportación adicional al regalo de cumpleaños' }
+        { user: 'Ibon', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'Ramon', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 15 },
+        { user: 'Julia', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 5 },
+        { user: 'Matilde', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 5 },
+        { user: 'Tú', concept: 'Aportación adicional', time: '2024-06-05 12:05:08', amount: 48 }
       ]
     }
   ];
@@ -74,6 +74,7 @@ export class GroupComponent implements OnInit {
       this.title = this.groupData.title;
       this.TotalBalance = this.groupData.amount;
       this.transactions = this.groupData.transactions;
+      this.TotalBalance = this.transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
     });
   }
 }

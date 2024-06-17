@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
+import { environment } from '../../environments/environment.development';
 
 type RegisterBody = {
   name: string;
@@ -49,7 +50,7 @@ export class UsersService {
 
   //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
   getProfile(): Observable<IUser> {
-    return  this.httpClient.get<IUser>(this.profileUrl);
+    return this.httpClient.get<IUser>(this.profileUrl);
   }
 
   //Actualizar profile usuario   Hace falta token autenticacion??
@@ -66,8 +67,8 @@ export class UsersService {
   }
 
   //Eliminar cuenta usuario
-   deleteUser(): Observable<IUser> {
-    return  this.httpClient.delete<IUser>(this.profileUrl);
+  deleteUser(): Observable<IUser> {
+    return this.httpClient.delete<IUser>(this.profileUrl);
   }
 
 }

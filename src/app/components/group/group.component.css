@@ -1,5 +1,5 @@
 .wp {
-    padding: 0px 75px;
+    padding: 0px 100px;
 }
 
 .price-text {
@@ -13,12 +13,16 @@
     height: 30px;
 }
 
-.font-125{
-    font-size: 1.25rem;
-}
-
 .font-75 {
     font-size: 0.75rem;
+}
+
+.font-110 {
+    font-size: 1.1rem;
+}
+
+.font-125 {
+    font-size: 1.25rem;
 }
 
 .balance {
@@ -33,7 +37,7 @@
     background-color: white;
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
     .wp {
         padding: 0px 250px;
     }
