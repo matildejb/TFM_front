@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
@@ -30,7 +30,8 @@ export class UsersService {
 
   private httpClient = inject(HttpClient);
   private baseUrl: string = `${environment.apiUrl}/users`;
-  private profileUrl = `${this.baseUrl}/profile`;
+  private profileUrl = `${this.baseUrl}/perfil`;
+  private deleteeUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   
 
@@ -96,7 +97,7 @@ export class UsersService {
   
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
-       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
+       this.httpClient.delete<IUser>(`${this.deleteeUrl}/delete/${id}`)
      );
   }
 

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -46,10 +47,21 @@ export class LoginComponent {
     try {
       const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
-      alert(response.message);
+       Swal.fire({
+          title: 'Login exitoso',
+          text: '¡Has iniciado sesión correctamente!',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
       this.router.navigateByUrl('/summary');
     } catch (err: any) {
-      alert(err.error.error);
+        Swal.fire({
+        title: 'Error',
+        text: 'Usuario o contraseña incorrectos',
+        icon: 'error',
+        confirmButtonText: 'Inténtalo de nuevo'
+      });
     }
   }
 
