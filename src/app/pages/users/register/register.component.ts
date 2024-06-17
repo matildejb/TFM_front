@@ -56,14 +56,13 @@ export class RegisterComponent {
   }
 
 
-
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);
     if (response.length > 0) {
       alert(response.join('\n'));
     } else {
       alert('Registro OK');
-      this.router.navigateByUrl('/welcome'); // Falta por definir la ruta definitiva
+      this.router.navigateByUrl('/summary');
     }
   }
 

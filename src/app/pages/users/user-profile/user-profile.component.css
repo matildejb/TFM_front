@@ -1,5 +1,6 @@
 .container {
-  padding-left: 15rem;
+  padding-left: 22%;
+  margin: auto;
 
   .card {
     background-color: rgba(2, 113, 132, 0.15);
@@ -16,7 +17,7 @@
       right: 0;
     }
 
-      img {
+    img {
       width: 160px;
       height: 160px;
       border-radius: 100%;
@@ -62,13 +63,11 @@
     left: 0;
   }
 }
-  
-
 
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {
   .container {
-    padding: 15px;
+    padding-left: 0%;
   }
 }
 
@@ -77,8 +76,12 @@
   .container {
     .card {
       font-size: 1rem;
-      width: 20rem;
+      width: 80%;
       margin: auto;
+    }
+
+    h2 {
+      margin-left: 3rem;
     }
   }
 }

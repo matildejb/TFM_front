@@ -58,7 +58,7 @@ a {
 /* Media query para pantallas grandes */
 @media (min-width: 992px) {
   .offcanvas {
-    width: 230px;
+    width: 220px;
     display: block !important;
     visibility: visible !important;
     transform: none !important;
