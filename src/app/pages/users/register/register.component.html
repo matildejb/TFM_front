@@ -19,10 +19,6 @@
       </div>
       <div class="mb-3">
         <label for="username" class="form-label">Nombre de usuario:</label>
-        <p class="clarification">
-          Introduce un nombre de usuario de entre 6 y 12 caracteres que contenga
-          únicamente números o letras (sin tildes).
-        </p>
         <input
           type="text"
           placeholder="Introduce un nombre de usuario"
@@ -33,7 +29,10 @@
         @if (checkControl('username', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('username', 'pattern')) {
-        <p class="error">Debes introducir un nombre de usuario válido</p>
+        <p class="error">
+          Debes introducir un nombre de usuario de entre 6 y 12 caracteres que
+          contenga únicamente números o letras (sin tildes)
+        </p>
         }
       </div>
       <div class="mb-3">
@@ -72,24 +71,34 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña:</label>
-        <p class="clarification">
-          Introduce una constraseña de entre 8 y 16 caracteres que contenga al
-          menos una minúscula, una mayúscula, un número y un carácter especial.
-        </p>
-        <input
-          type="password"
-          placeholder="Introduce una contraseña"
-          id="password"
-          class="form-control"
-          formControlName="password"
-        />
-        <!-- <button type="button" class="btn btn-outline-secondary" id="toggle-password">
-        <i class="bi bi-eye"></i>  Use Bootstrap Icons or any other icon library 
-    </button> -->
+        <div class="position-relative">
+          <input
+            [type]="passwordFieldType"
+            placeholder="Introduce una contraseña"
+            id="password"
+            class="form-control pe-5"
+            formControlName="password"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm position-absolute top-50 end-0 translate-middle-y me-1"
+            (click)="togglePasswordVisibility()"
+          >
+            <i
+              class="bi {{
+                passwordFieldType === 'password' ? 'bi-eye-slash' : 'bi-eye'
+              }}"
+            ></i>
+          </button>
+        </div>
         @if (checkControl('password', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('password', 'pattern')) {
-        <p class="error">Debes introducir una contraseña válida</p>
+        <p class="error">
+          Debes introducir una contraseña de entre 8 y 16 caracteres que
+          contenga al menos una minúscula, una mayúscula, un número y un
+          carácter especial
+        </p>
         }
       </div>
       <input

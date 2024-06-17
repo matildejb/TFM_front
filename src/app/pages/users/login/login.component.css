@@ -30,6 +30,15 @@ input.ng-invalid.ng-touched {
   margin: 0 0 0 20px;
 }
 
+.btn-outline-secondary {
+  border: none;
+
+  &:hover {
+    background-color: transparent;
+    color: black;
+  }
+}
+
 .btn-se {
   background-color: #027184;
   color: white;

@@ -22,9 +22,13 @@ input.ng-valid.ng-touched {
   margin: 0 0 0 20px;
 }
 
-.clarification {
-  font-size: 0.9rem;
-  color: rgb(170, 170, 170);
+.btn-outline-secondary {
+  border: none;
+
+  &:hover {
+    background-color: transparent;
+    color: black;
+  }
 }
 
 .btn-se {

@@ -21,6 +21,16 @@ export class RegisterComponent {
   usersService = inject(UsersService);
   router = inject(Router);
   user: IUser | null = null;
+
+  // Mostrar u ocultar contraseña
+  passwordFieldType: string = 'password';
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+  // Solución de Matilde para la reutilización del formulario
   tipo: string = 'Registro de usuario';
   boton: string = 'Registrarse';
 

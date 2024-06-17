@@ -20,6 +20,14 @@ export class LoginComponent {
   usersService = inject(UsersService);
   router = inject(Router);
 
+  // Mostrar u ocultar contraseña
+  passwordFieldType: string = 'password';
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
   constructor() {
     this.formLogin = new FormGroup({
       email: new FormControl('', [
