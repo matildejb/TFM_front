@@ -79,11 +79,6 @@ export class UsersService {
       this.httpClient.get<IUser>(this.profileUrl));
   }
 
-  //Actualizar profile usuario????FALTA
-  updateProfile(formValue: IUser): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.put<IUser>(`${this.profileUrl}/${formValue._id}/update`, formValue));
-  }
 
   //SUBIR IMAGEN USUARIO???FALTA
   uploadUserImage(userId: number, image: File) {
