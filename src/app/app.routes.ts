@@ -23,7 +23,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },
  
   { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
-  { path: 'update-user', component: RegisterComponent, canActivate: [loginGuard] },
   { path: 'settings/privacy', component: PrivacyComponent, canActivate: [loginGuard]},
   { path: 'settings/terms', component: TermsComponent, canActivate: [loginGuard] },
   { path: 'settings/about', component: AboutComponent, canActivate: [loginGuard]},
