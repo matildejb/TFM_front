@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MyAccountComponent } from '../../pages/users/user-profile/my-account/my-account.component';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -12,14 +12,15 @@ import { MyAccountComponent } from '../../pages/users/user-profile/my-account/my
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  authService = inject(AuthService);
 
+  usersService = inject(UsersService);
 
+   // Ocultar elementos del navbar si no estas logado
+  isLoggedIn: boolean = false; 
 
-    //Mostrar boton hamburguesa si el usuario esta logeado???
-
-  isLoggedIn(): boolean {
-    return this.authService.isAuthenticated()
+ ngOnInit(): void {
+    this.usersService.isLoggedIn.subscribe(status => {
+      this.isLoggedIn = status;
+    });
   }
-
 }

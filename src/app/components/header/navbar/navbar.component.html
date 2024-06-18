@@ -1,37 +1,37 @@
-
 <button class="navbar-toggler mx-3 btn-custom" type="button" data-bs-toggle="offcanvas"
     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
     <i class="bi bi-person-lines-fill icon-user"></i>
 </button>
 
-
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SharExpen
+        <h5 class="offcanvas-title text-center w-100" id="offcanvasNavbarLabel">SharExpen
             <img src="assets/images/logo.png" alt="logotipo" width="60px">
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-                <a class="nav-link d-md-none d-block" aria-current="page" [routerLink]="['/user-profile']" (click)="collapseNavbar()">
+                <a class="nav-link d-block" aria-current="page" [routerLink]="['/user-profile']"
+                    routerLinkActive="active-border" (click)="collapseNavbar()">
                     <app-my-account></app-my-account>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/user-profile']" (click)="collapseNavbar()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard"
-                        viewBox="0 0 16 16">
+                <a class="nav-link" aria-current="page" [routerLink]="['/summary']" routerLinkActive="active"
+                    (click)="collapseNavbar()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-vcard" viewBox="0 0 16 16">
                         <path
                             d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
                         <path
                             d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
                     </svg>
-                   Area personal</a>
+                    Area personal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/groupsList']" routerLinkActive="active" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path
@@ -40,7 +40,7 @@
                     Mis grupos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/groupsList']" (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/friends']" routerLinkActive="active" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
                         <path
@@ -49,7 +49,7 @@
                     Mis amigos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" (click)="collapseNavbar()">
+                <a class="nav-link" [routerLink]="['/statistics']" routerLinkActive="active" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                         <path
@@ -58,8 +58,7 @@
                     Estadísticas</a>
             </li>
             <li class="nav-item text-center">
-                <button class="btn btn-outline-danger mt-2" id="logoutButton" (click)="onLogout()"
-                    (click)="collapseNavbar()">Cerrar Sesión</button>
+                <button class="btn btn-outline-danger mt-4" id="logoutButton" (click)="logout()">Cerrar Sesión</button>
             </li>
         </ul>
     </div>

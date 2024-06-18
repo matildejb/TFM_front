@@ -22,15 +22,13 @@ export class MyAccountComponent {
       this.getUserProfile();
   }
 
-  getUserProfile(): void {
-    this.userService.getProfile().subscribe(
-      (data: IUser) => {
-        this.unUser = data;
-      },
-      (error) => {
-        console.log('Error fetching user profile', error)
-      }
-    );
+    async getUserProfile(): Promise<void> {
+    try {
+      this.unUser = await this.userService.getProfile();
+    } catch (error) {
+      console.error('Error fetching user profile', error);
+    }
   }
+
 
 }
