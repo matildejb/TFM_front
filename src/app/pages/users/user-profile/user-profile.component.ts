@@ -16,8 +16,7 @@ export class UserProfileComponent {
   userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-  imageUrl: string | ArrayBuffer | null = null;
-  fileName: string | null = null;
+  selectedFile: File | undefined;
 
   unUser: IUser | null = null;
 
@@ -34,18 +33,17 @@ export class UserProfileComponent {
     }
   }
 
+
+   onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
   
   //Cambiar foto
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        this.imageUrl = e.target?.result || null;
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
+  onSubmit() {
+    
   }
+
+
 
   async deleteUser(): Promise<void> {
     if (!this.unUser) {
