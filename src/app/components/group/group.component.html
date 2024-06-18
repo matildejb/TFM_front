@@ -2,7 +2,7 @@
     <div>
         <h2 class="mt-5 mb-3 w-700">Detalles de grupo</h2>
     </div>
-    <section class="bg-comp container border border-2 rounded-4 align-items-center px-4 py-4 mt-4">
+    <section class="bg-comp container border border-2 rounded-4 align-items-center m-0 px-4 py-4 mt-4">
         <div class="d-flex pt-1 w-100 align-items-center">
             <a href="#"><i class="fa-solid {{ groupData?.icon }} fa-2x" style="color: #027184;"></i></a>
             <h3 class="px-3 fw-bold mb-0">{{ groupData?.title }}</h3>
@@ -64,7 +64,8 @@
         <!-- Botonera -->
         <div class="row justify-content-center">
             <div class="col-12 d-flex justify-content-center">
-                <button type="button" class="btn btn-menu"><i class="fa-solid fa-user-plus"></i></button>
+                <button [routerLink]="['/addmemberForm']" type="button" class="btn btn-menu"><i
+                        class="fa-solid fa-user-plus"></i></button>
                 <button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>
                 <button type="button" class="btn btn-menu"><i class="fa-solid fa-handshake"></i></button>
                 <button type="button" class="btn btn-menu"><i class="fa-solid fa-users"></i></button>

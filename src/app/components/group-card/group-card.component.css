@@ -1,5 +1,9 @@
 .wp {
-    padding: 0px 100px 120px;
+    padding: 0px 100px;
+}
+
+.text-75 {
+    font-size: 0.75rem;
 }
 
 .price-text {
