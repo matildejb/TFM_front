@@ -3,27 +3,24 @@
 }
 
 .price-text {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: rgb(0, 212, 0);
 }
 
 .img-gif {
-    width: 40%;
+    width: 25%;
     height: auto;
 }
 
 .img-gif2 {
-    width: 50%;
+    width: 35%;
     height: auto;
 }
 
 .img-bg-gif {
     background-color: rgba(2, 113, 132, 0.15);
-}
-
-.img-menu {
-    height: 30px;
+    height: 125px;
 }
 
 /* Modal Styles */
@@ -108,8 +105,6 @@
     color: #027184;
     font-weight: 700;
 }
-
-
 
 @media (min-width: 992px) and (max-width: 1200px) {
     .wp {

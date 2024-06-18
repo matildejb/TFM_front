@@ -114,7 +114,9 @@
     display: block;
 }
 
-
+.strong-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
+}
 
 @media (min-width: 992px) and (max-width: 1200px) {
     .wp {
