@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
 
 @Component({
@@ -19,6 +19,7 @@ import { IUser } from '../../../interfaces/iuser.interfaces';
 export class RegisterComponent {
   formRegister: FormGroup;
   usersService = inject(UsersService);
+  activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
   user: IUser | null = null;
 
@@ -69,6 +70,14 @@ export class RegisterComponent {
     });
   }
 
+  ngOnInit(): void {
+    // this.activatedRoute.params.subscribe((params: any) => {
+    //   let id: string = params.userId
+    //   let response = this.usersService.getProfile(id)
+    //   console.log(response);
+    // })
+  }
+
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);
     if (response.length > 0) {
@@ -89,16 +98,16 @@ export class RegisterComponent {
     );
   }
 
-  // Matilde
-  getUserProfile(): void {
-    this.usersService.getProfile().subscribe(
-      (data: IUser) => {
-        this.user = data;
-        this.formRegister.patchValue(data); // Set form values with user data
-      },
-      (error) => {
-        console.log('Error fetching user profile', error);
-      }
-    );
-  }
+  //   // Matilde
+  //   getUserProfile(): void {
+  //     this.usersService.getProfile().subscribe(
+  //       (data: IUser) => {
+  //         this.user = data;
+  //         this.formRegister.patchValue(data); // Set form values with user data
+  //       },
+  //       (error) => {
+  //         console.log('Error fetching user profile', error);
+  //       }
+  //     );
+  //   }
 }
