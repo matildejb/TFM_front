@@ -1,124 +1,123 @@
 .wp {
-    padding: 0px 75px 120px;
+  padding: 0px 75px 120px;
 }
 
 .price-text {
-    font-size: 2rem;
-    font-weight: 700;
-    color: rgb(0, 212, 0);
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(0, 212, 0);
 }
 
 .img-gif {
-    width: 40%;
-    height: auto;
+  width: 40%;
+  height: auto;
 }
 
 .img-gif2 {
-    width: 50%;
-    height: auto;
+  width: 50%;
+  height: auto;
 }
 
 .img-bg-gif {
-    background-color: rgba(2, 113, 132, 0.15);
+  background-color: rgba(2, 113, 132, 0.15);
 }
 
 .img-menu {
-    height: 30px;
+  height: 30px;
 }
 
 /* Modal Styles */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4 );
-    padding-top: 150px;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 150px;
 }
 
 .modal.show {
-    display: block;
+  display: block;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 300px;
-    text-align: center;
-    border-radius: 10px;
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.close:hover, .close:focus {  
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .modal ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .modal ul li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .menu-item {
-    display: grid;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .menu-item a {
-    display: grid;
-    grid-template-rows: auto auto;
-    justify-items: center;
-    text-align: center;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  text-align: center;
 }
 
 .menu-item i {
-    grid-row: 1;
+  grid-row: 1;
 }
 
 .menu-item a span {
-    grid-row: 2;
+  grid-row: 2;
 }
 
 .menu-item a {
-    color: #027184;
-    text-decoration: none;
+  color: #027184;
+  text-decoration: none;
 }
 
 .menu-item a:hover {
-    color: #027184;
-    font-weight: 700;
+  color: #027184;
+  font-weight: 700;
 }
 
-
-
 @media (min-width: 768px) and (max-width: 1200px) {
-    .wp {
-        padding: 0px 250px 150px;
-    }
-}   
+  .wp {
+    padding: 0px 250px 150px;
+  }
+}
 
 @media (min-width: 1201px) {
-    .wp {
-        padding: 0px 400px 150px;
-    }
+  .wp {
+    padding: 0px 400px 150px;
+  }
 }

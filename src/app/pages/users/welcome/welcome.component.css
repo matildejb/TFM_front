@@ -4,21 +4,41 @@
 }
 
 .btn-se-1 {
+  background-color: #f6a278;
+  color: white;
   padding: 10px;
-  border: 1px solid #f6a278;
-  color: #f6a278;
-  &:hover {
-    background-color: #f6a278;
-    color: white;
-  }
+  font-size: 1.2rem;
 }
 
 .btn-se-2 {
+  background-color: #f16744;
+  color: white;
   padding: 10px;
-  border: 1px solid #f16744;
-  color: #f16744;
-  &:hover {
-    background-color: #f16744;
-    color: white;
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 992px) {
+  .btn-se-1 {
+    padding: 10px;
+    border: 1px solid #f6a278;
+    background-color: white;
+    color: #f6a278;
+
+    &:hover {
+      background-color: #f6a278;
+      color: white;
+    }
+  }
+
+  .btn-se-2 {
+    padding: 10px;
+    border: 1px solid #f16744;
+    background-color: white;
+    color: #f16744;
+
+    &:hover {
+      background-color: #f16744;
+      color: white;
+    }
   }
 }

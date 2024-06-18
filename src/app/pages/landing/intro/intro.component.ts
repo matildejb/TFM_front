@@ -25,7 +25,7 @@ export class IntroComponent {
     setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.texts.length;
       this.currentText = this.texts[this.currentIndex];
-    }, 3000); // Cambia cada 3 segundos
+    }, 3000);
   }
 
    ngAfterViewInit(): void {

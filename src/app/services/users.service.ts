@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
 
@@ -27,9 +27,14 @@ type LoginResponse = {
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl: string = `${environment.apiUrl}/users`;
 
   private httpClient = inject(HttpClient);
+  private baseUrl: string = `${environment.apiUrl}/users`;
+  private profileUrl = `${this.baseUrl}/profile`;
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+  
+
+  // autenticacion usuario
 
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
@@ -39,36 +44,62 @@ export class UsersService {
       )
     );
   }
+
   login(body: LoginBody): Promise<LoginResponse> {
     return lastValueFrom(
       this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
-    );
+    ).then(response => {
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        this.loggedIn.next(true);  // Notifica a los suscriptores que el usuario ha iniciado sesión
+      }
+      return response;
+    });
   }
 
-
-  private profileUrl = `${this.baseUrl}/profile`;
-
-  //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
-  getProfile(): Observable<IUser> {
-    return  this.httpClient.get<IUser>(this.profileUrl);
+   logout(): void {
+    localStorage.removeItem('token');
+     this.loggedIn.next(false);  
+  }
+    //permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
+    get isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
   }
 
-  //Actualizar profile usuario   Hace falta token autenticacion??
-  updateProfile(updatedUser: IUser): Observable<IUser> {
-    return this.httpClient.put<IUser>(this.profileUrl, updatedUser);
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');  // Verifica si el token está presente en el localStorage
   }
 
-  //SUBIR IMAGEN USUARIO???
+  
+  
+  // funcionalidades de los usuarios
+
+  getProfile(): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.get<IUser>(this.profileUrl));
+  }
+
+  //Actualizar profile usuario????FALTA
+  updateProfile(formValue: IUser): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.put<IUser>(`${this.profileUrl}/${formValue._id}/update`, formValue));
+  }
+
+  //SUBIR IMAGEN USUARIO???FALTA
   uploadUserImage(userId: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
 
-    return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
+    return this.httpClient.post(
+      `${this.baseUrl}/${userId}/upload-image`,
+      formData
+    );
   }
 
-  //Eliminar cuenta usuario
-   deleteUser(): Observable<IUser> {
-    return  this.httpClient.delete<IUser>(this.profileUrl);
+  
+  deleteUser(id: number): Promise<IUser> {
+     return lastValueFrom(
+       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
+     );
   }
-
 }
