@@ -1,4 +1,4 @@
-<section class="wp justify-content-center">
+<section class="wp trans-section justify-content-center">
     <div>
         <h2 class="mt-5 mb-3 w-700">Detalles de grupo</h2>
     </div>
@@ -45,7 +45,7 @@
 
     </section>
 
-    <section class="balance container justify-content-center mb-3 px-5">
+    <!-- <section class="balance container justify-content-center mb-3 px-5">
         <div class="d-flex justify-content-between mt-5">
             <span>BALANCE</span>
             <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
@@ -53,6 +53,46 @@
             </span>
         </div>
         <hr class="mx-auto mb-5">
+    </section> -->
+
+</section>
+
+<!-- Botonera -->
+<!-- <div class="btn-settings">
+    <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-cog fa-lg"></i>
+    </button>
+    <div class="dropdown-settings">
+        <a [routerLink]="['/settings/privacy']" class="element-settings">Privacidad</a>
+        <a class="element-settings" [routerLink]="['settings/terms']">Términos y condiciones</a>
+        <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
+        <a class="element-settings" [routerLink]="['settings/about']">Aplicación</a>
+    </div>
+</div> -->
+
+<section class="menu-container pb-5 pt-3 shadow-lg">
+
+    <section class="row d-flex justify-content-center m-0 p-0">
+        <!-- Balance -->
+        <div class="row d-flex justify-content-center px-5 mb-0">
+            <div class="col d-flex justify-content-between">
+                <span>BALANCE</span>
+                <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
+                    {{ TotalBalance | currency: 'EUR' }}
+                </span>
+            </div>
+            <hr class="mx-auto mb-4">
+        </div>
+
+        <!-- Botonera -->
+        <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-user-plus"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-handshake"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-users"></i></button>
+            </div>
+        </div>
     </section>
 
 </section>

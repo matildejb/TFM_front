@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
 })
@@ -42,6 +42,21 @@ export class GroupComponent implements OnInit {
         { user: 'Ibon', concept: 'Productos del desayuno', time: '2024-06-05 12:05:08', amount: 10 },
         { user: 'Ramon', concept: 'Frutas y verduras', time: '2024-06-05 12:05:08', amount: 20 },
         { user: 'Julia', concept: 'Carne y pescado', time: '2024-06-05 12:05:08', amount: 25 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
+        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
         { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
         { user: 'Matilde', concept: 'Productos de higiene', time: '2024-06-05 12:05:08', amount: 50 },
         { user: 'Tú', concept: 'Compras en el súper', time: '2024-06-05 12:05:08', amount: -70 }
