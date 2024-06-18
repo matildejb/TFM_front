@@ -36,9 +36,7 @@
         }
       </div>
       <div class="mb-3">
-        <label for="phone" class="form-label"
-          >Número de teléfono (¿opcional?):</label
-        >
+        <label for="phone" class="form-label">Número de teléfono:</label>
         <input
           type="tel"
           placeholder="Introduce tu número de teléfono móvil"
@@ -49,7 +47,10 @@
         @if (checkControl('phone', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('phone', 'pattern')) {
-        <p class="error">Debes introducir un número de teléfono válido</p>
+        <p class="error">
+          Debes introducir un número de teléfono móvil que sea español o que
+          tenga prefijo de España
+        </p>
         }
       </div>
       <div class="mb-3">
