@@ -45,7 +45,6 @@ export class UsersService {
     );
   }
 
-
   private profileUrl = `${this.baseUrl}/profile`;
 
   //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
@@ -63,12 +62,14 @@ export class UsersService {
     const formData = new FormData();
     formData.append('image', image);
 
-    return this.httpClient.post(`${this.baseUrl}/${userId}/upload-image`, formData);
+    return this.httpClient.post(
+      `${this.baseUrl}/${userId}/upload-image`,
+      formData
+    );
   }
 
   //Eliminar cuenta usuario
   deleteUser(): Observable<IUser> {
     return this.httpClient.delete<IUser>(this.profileUrl);
   }
-
 }

@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .width {
     width: 35%;
   }
@@ -13,7 +13,7 @@
   width: 50%;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .image {
     height: 20%;
     width: 20%;
@@ -24,14 +24,19 @@ input.ng-invalid.ng-touched {
   border: 2px solid rgb(255, 66, 66);
 }
 
-input.ng-valid.ng-touched {
-  border: 2px solid rgb(72, 255, 72);
-}
-
 .error {
   color: red;
   font-size: 80%;
   margin: 0 0 0 20px;
+}
+
+.btn-outline-secondary {
+  border: none;
+
+  &:hover {
+    background-color: transparent;
+    color: black;
+  }
 }
 
 .btn-se {
@@ -41,7 +46,7 @@ input.ng-valid.ng-touched {
   font-size: 1.2rem;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .btn-se {
     padding: 10px;
     border: 1px solid #027184;

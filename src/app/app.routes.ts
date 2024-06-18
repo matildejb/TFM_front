@@ -3,7 +3,6 @@ import { WelcomeComponent } from './pages/users/welcome/welcome.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { UserProfileComponent } from './pages/users/user-profile/user-profile.component';
-import { ProfileInfoComponent } from './pages/users/user-profile/profile-info/profile-info.component';
 import { ProfileSettingComponent } from './pages/users/user-profile/profile-setting/profile-setting.component';
 import { RegisterComponent } from './pages/users/register/register.component';
 import { LoginComponent } from './pages/users/login/login.component';
@@ -14,7 +13,6 @@ import { GroupsListComponent } from './pages/groups-list/groups-list.component';
 import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 
-
 export const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
@@ -22,7 +20,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'profile-info/:userId', component: ProfileInfoComponent },
+  { path: 'updateUser/:userId', component: RegisterComponent },
   { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'settings/privacy', component: PrivacyComponent },
   { path: 'settings/terms', component: TermsComponent },
@@ -31,5 +29,5 @@ export const routes: Routes = [
   { path: 'groupsList', component: GroupsListComponent },
   { path: 'summary', component: SummaryComponent },
   { path: 'page-not-found', component: ErrorComponent },
-  { path: '**', redirectTo: 'page-not-found' }
+  { path: '**', redirectTo: 'page-not-found' },
 ];

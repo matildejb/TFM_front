@@ -1,4 +1,3 @@
-
 import { Component, inject } from '@angular/core';
 import {
   FormControl,
@@ -21,26 +20,30 @@ export class LoginComponent {
   usersService = inject(UsersService);
   router = inject(Router);
 
+  // Mostrar u ocultar contraseña
+  passwordFieldType: string = 'password';
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
   constructor() {
     this.formLogin = new FormGroup({
       email: new FormControl('', [
-        // Validators.required,
-        // Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
+        Validators.required,
+        Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
         // Procedencia de la expresión regular: la vimos en clase
       ]),
       password: new FormControl('', [
-        // Validators.required,
-        // Validators.pattern(
-        //   /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
-        // ),
+        Validators.required,
+        Validators.pattern(
+          /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
+        ),
         // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
       ]),
     });
   }
-
-  // // En el login de la API, se genera un error cuando se aplica este método (consultar clase del 22/05 minuto 01:26:00)
-
-  // A partir de aquí da error porque la API no se ha creado todavía
 
   async onSubmit() {
     try {
