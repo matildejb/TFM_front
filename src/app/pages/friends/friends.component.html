@@ -1,1 +1,13 @@
-<p>friends works!</p>
+<section class="wp justify-content-center">
+    <section>
+        <h2 class="mt-5 mb-5 text-left">Mis Amigos</h2>
+    </section>
+    <ng-container *ngFor="let friend of members">
+      <app-friend-card [title]="friend.name" >
+
+      </app-friend-card>
+        
+    </ng-container>
+
+
+

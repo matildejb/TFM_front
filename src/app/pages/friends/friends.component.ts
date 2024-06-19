@@ -2,7 +2,7 @@
     import { CommonModule, NgFor } from '@angular/common';
     import { UsersService } from '../../services/users.service';
     import { ActivatedRoute } from '@angular/router';
-import { FriendsCardComponent } from '../../components/friend-card/friends-card.component';
+import { FriendsCardComponent } from '../../components/friend-card/friend-card.component';
     
     @Component({
       selector: 'app-friends',
