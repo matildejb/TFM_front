@@ -18,6 +18,6 @@ export class FilterComponent {
 
   async getAllUsers(): Promise<void> {
     let response = await this.groupsService.getAllUsers();
-    this.name = response.email;
+    this.name = response[0].email;
   }
 }
