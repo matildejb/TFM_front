@@ -103,3 +103,16 @@ export class UsersService {
      );
   }
 }
+
+
+  // private membersUrl = `${environment.apiUrl}/members`;
+  // // Obtener miembros de un grupo
+  // getMembersByGroupId(groupId:string): Observable<any>{
+  //   const url = `${this.membersUrl}/${groupId}`;
+  //   const headers = new HttpHeaders({
+  //     'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNzIwMTAzOTcxLCJpYXQiOjE3MTc1MTE5NzF9.DvjbKRqmnyzr1wBENLBv3j-qrhp9qxXvn9NBCjjZSgE'
+  //   });
+  //   return this.httpClient.get<any>(url, {headers});
+  // }
+
+  // // apiUrl: 'http://localhost:3000/api',
