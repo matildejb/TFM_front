@@ -16,7 +16,8 @@ export class UserProfileComponent {
   userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-  selectedFile: File | undefined;
+   selectedFile: File | null = null;
+  previewUrl: any = null;
 
   unUser: IUser | null = null;
 
@@ -33,16 +34,37 @@ export class UserProfileComponent {
     }
   }
 
-
+//Cambiar foto
    onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+     this.selectedFile = event.target.files[0];
+     this.previewImage();
+  }
+
+   previewImage(): void {
+    if (!this.selectedFile) {
+      return;
+     }
+       const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewUrl = e.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
   
-  //Cambiar foto
-  onSubmit() {
-    
+   onUpload(): void {
+    if (this.selectedFile) {
+      this.userService.uploadImage(this.selectedFile).subscribe(
+        (response) => {
+          console.log('Imagen subida con éxito', response);
+        },
+        (error) => {
+          console.error('Error subiendo la imagen', error);
+        }
+      );
+    } else {
+      console.error('No se ha seleccionado ningún archivo');
+    }
   }
-
 
 
   async deleteUser(): Promise<void> {

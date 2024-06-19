@@ -21,7 +21,7 @@
       width: 160px;
       height: 160px;
       border-radius: 100%;
-      border: 2px solid;
+      border: 1px solid;
       object-fit: contain;
     }
     /* Estilo para ocultar el input file original */

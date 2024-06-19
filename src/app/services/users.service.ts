@@ -80,15 +80,11 @@ export class UsersService {
   }
 
 
-  //SUBIR IMAGEN USUARIO???FALTA
-  uploadUserImage(userId: number, image: File) {
+ uploadImage(image: File): Observable<any> {
     const formData = new FormData();
     formData.append('image', image);
 
-    return this.httpClient.post(
-      `${this.baseUrl}/${userId}/upload-image`,
-      formData
-    );
+    return this.httpClient.post(this.baseUrl, formData);
   }
 
   
