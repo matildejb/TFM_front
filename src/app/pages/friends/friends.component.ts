@@ -20,21 +20,10 @@ import { FriendCardComponent} from '../../components/friend-card/friend-card.com
       groupId: string= '18'
     
       ngOnInit(){
-        this.memberService.getMembersByGroupId(this.groupId).subscribe((data: any[])=>{
-          this.members = data;
-          console.log(data)
+        this.memberService.getMembersOfSharedGroups(this.userId).then(members => {
+          console.log(members);
         })
       }
-    
-        // ngOnInit(){
-        //   const token = localStorage.getItem('token');
-        //   console.log('Token:' , token);
-        //     this.memberService.getAllMembersByUserId(this.userId).subscribe((data: any[])=>{
-        //     this.members = data;
-        //   }, error =>{
-        //     console.error('Error al obtener los miembros', error);
-        //   });
-        // }
     
     }
     

@@ -110,9 +110,30 @@ export class UsersService {
   getMembersByGroupId(groupId:string): Observable<any>{
     const url = `${this.membersUrl}/${groupId}`;
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNzIwMTAzOTcxLCJpYXQiOjE3MTc1MTE5NzF9.DvjbKRqmnyzr1wBENLBv3j-qrhp9qxXvn9NBCjjZSgE'
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     });
     return this.httpClient.get<any>(url, {headers});
   }
+
+     // Obtener grupos del usuario
+    getUserGroups(userId: string): Promise<any> {
+    const url = `${environment.apiUrl}/groups/${userId}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return lastValueFrom(this.httpClient.get<any>(url, { headers }));
+  }
+
+
+  // Obtener miembros que comparten grupos con el usuario
+  async getMembersOfSharedGroups(userId: string): Promise<any[]> {
+    const groups = await this.getUserGroups(userId);
+    const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
+    return members.flat(); // Combina los arrays de miembros en uno solo
+  }
+
+
+
+
 }
   // // apiUrl: 'http://localhost:3000/api',
