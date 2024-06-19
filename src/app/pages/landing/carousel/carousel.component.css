@@ -29,8 +29,22 @@
   }
 }
 
-/* Media query para pantallas tablet y grandes */
+/* Media query para pantallas medianas */
 @media (min-width: 767px) {
+  #carouselExampleDark {
+      h5 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+  }
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 992px) {
   #carouselExampleDark {
     h5 {
       font-size: 1.3rem;

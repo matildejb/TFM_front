@@ -32,8 +32,13 @@
 /*Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
+    padding: 25px;
     .btn {
       font-size: 1rem;
+    }
+
+    .text {
+      font-size: 1.2rem;
     }
   }
 }
