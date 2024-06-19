@@ -2,12 +2,12 @@
     import { CommonModule, NgFor } from '@angular/common';
     import { UsersService } from '../../services/users.service';
     import { ActivatedRoute } from '@angular/router';
-import { FriendsCardComponent } from '../../components/friend-card/friend-card.component';
+import { FriendCardComponent} from '../../components/friend-card/friend-card.component';
     
     @Component({
       selector: 'app-friends',
       standalone: true,
-      imports: [FriendsCardComponent,  CommonModule],
+      imports: [FriendCardComponent,  CommonModule],
       templateUrl: './friends.component.html',
       styleUrl: './friends.component.css'
     })
