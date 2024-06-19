@@ -17,13 +17,26 @@ import { FriendCardComponent} from '../../components/friend-card/friend-card.com
     
       members: any[]= [];
       userId: string = '11';
-      groupId: string= '18'
+   
     
-      ngOnInit(){
-        this.memberService.getMembersOfSharedGroups(this.userId).then(members => {
-          console.log(members);
-        })
+      ngOnInit(): void {
+        this.loadMembers();
       }
+    
+      loadMembers(): void {
+        this.memberService.getMembersOfSharedGroups(this.userId).then(members => {
+          this.members = members;
+          console.log('Members sharing groups with user:', members);
+        });
+      }
+
+
+
+      // ngOnInit(){
+      //   this.memberService.getMembersOfSharedGroups(this.userId).then(members => {
+      //     console.log(members);
+      //   })
+      // }
     
     }
     

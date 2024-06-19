@@ -129,11 +129,10 @@ export class UsersService {
   async getMembersOfSharedGroups(userId: string): Promise<any[]> {
     const groups = await this.getUserGroups(userId);
     const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
-    return members.flat(); // Combina los arrays de miembros en uno solo
-  }
-
-
-
-
+   const uniqueMembers = members.flat().filter((member, index, self) =>
+    index === self.findIndex((m) => m.id === member.id)
+  );
+  return uniqueMembers;
+}
 }
   // // apiUrl: 'http://localhost:3000/api',
