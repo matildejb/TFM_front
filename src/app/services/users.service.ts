@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
@@ -102,17 +102,17 @@ export class UsersService {
        this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
      );
   }
+
+
+
+  private membersUrl = `${environment.apiUrl}/members`;
+  // Obtener miembros de un grupo
+  getMembersByGroupId(groupId:string): Observable<any>{
+    const url = `${this.membersUrl}/${groupId}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNzIwMTAzOTcxLCJpYXQiOjE3MTc1MTE5NzF9.DvjbKRqmnyzr1wBENLBv3j-qrhp9qxXvn9NBCjjZSgE'
+    });
+    return this.httpClient.get<any>(url, {headers});
+  }
 }
-
-
-  // private membersUrl = `${environment.apiUrl}/members`;
-  // // Obtener miembros de un grupo
-  // getMembersByGroupId(groupId:string): Observable<any>{
-  //   const url = `${this.membersUrl}/${groupId}`;
-  //   const headers = new HttpHeaders({
-  //     'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZXhwIjoxNzIwMTAzOTcxLCJpYXQiOjE3MTc1MTE5NzF9.DvjbKRqmnyzr1wBENLBv3j-qrhp9qxXvn9NBCjjZSgE'
-  //   });
-  //   return this.httpClient.get<any>(url, {headers});
-  // }
-
   // // apiUrl: 'http://localhost:3000/api',

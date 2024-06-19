@@ -13,6 +13,7 @@ import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 import { loginGuard } from './guards/login.guard';
 import { redirectGuard } from './guards/redirect.guard';
+import { FriendsComponent } from './pages/friends/friends.component';
 
 export const routes: Routes = [
   { path: 'updateUser/:userId', component: RegisterComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },
   { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
+  { path: 'friends', component: FriendsComponent, canActivate: [loginGuard] },
 
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },

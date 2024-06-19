@@ -17,13 +17,14 @@ import { FriendCardComponent} from '../../components/friend-card/friend-card.com
     
       members: any[]= [];
       userId: string = '11';
+      groupId: string= '18'
     
-      // ngOnInit(){
-      //   this.memberService.getMembersByGroupId(this.groupId).subscribe((data: any[])=>{
-      //     this.members = data;
-      //     console.log(data)
-      //   })
-      // }
+      ngOnInit(){
+        this.memberService.getMembersByGroupId(this.groupId).subscribe((data: any[])=>{
+          this.members = data;
+          console.log(data)
+        })
+      }
     
         // ngOnInit(){
         //   const token = localStorage.getItem('token');
