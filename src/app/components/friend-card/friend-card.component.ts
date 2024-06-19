@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-friends-card',
   standalone: true,
   imports: [],
-  templateUrl: './friends-card.component.html',
-  styleUrl: './friends-card.component.css'
+  templateUrl: './friend-card.component.html',
+  styleUrl: './friend-card.component.css'
 })
 export class FriendsCardComponent {
 
