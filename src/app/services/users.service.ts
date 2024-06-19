@@ -134,5 +134,17 @@ export class UsersService {
   );
   return uniqueMembers;
 }
+
+
+getUserPayments(userId: string): Promise<any> {
+  const url = `${environment.apiUrl}/payments/user/${userId}/participated`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(this.httpClient.get<any>(url, { headers }));
+}
+
+
+
 }
   // // apiUrl: 'http://localhost:3000/api',
