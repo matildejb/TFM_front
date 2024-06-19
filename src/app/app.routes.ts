@@ -3,6 +3,8 @@ import { WelcomeComponent } from './pages/users/welcome/welcome.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { UserProfileComponent } from './pages/users/user-profile/user-profile.component';
+import { ProfileInfoComponent } from './pages/users/user-profile/profile-info/profile-info.component';
+import { ProfileSettingComponent } from './pages/users/user-profile/profile-setting/profile-setting.component';
 import { RegisterComponent } from './pages/users/register/register.component';
 import { LoginComponent } from './pages/users/login/login.component';
 import { PrivacyComponent } from './pages/settings/privacy/privacy.component';
@@ -13,6 +15,9 @@ import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 import { loginGuard } from './guards/login.guard';
 import { redirectGuard } from './guards/redirect.guard';
+import { FriendsComponent } from './pages/friends/friends.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 export const routes: Routes = [
   { path: 'updateUser/:userId', component: RegisterComponent },
@@ -30,6 +35,9 @@ export const routes: Routes = [
   { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
 
+  { path: 'filter', component: FilterComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'statistics', component: StatisticsComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];

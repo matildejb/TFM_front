@@ -1,0 +1,8 @@
+.wp {
+    padding: 0px 100px;
+}
+
+.btn:hover {
+    background-color: rgb(12, 113, 132);
+    color: white;
+}

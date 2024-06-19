@@ -14,19 +14,22 @@ export class GroupsListComponent {
     {
       icon: 'fa-plane-departure',
       title: 'Viaje a Menorca',
+      time: '2024-05-18 16:50:23',
       amount: 210.00,
       navigateTo: '/group/1'
     },
     {
       icon: 'fa-receipt',
       title: 'Compras Súper',
+      time: '2024-05-06 12:25:37',
       amount: -75.00,
       navigateTo: '/group/2'
     },
     {
       icon: 'fa-gift',
       title: 'Regalo cumpleaños',
-      amount: 48.00,
+      time: '2024-05-12 15:16:08',
+      amount: 75.00,
       navigateTo: '/group/3'
     }
   ];

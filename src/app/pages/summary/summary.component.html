@@ -1,113 +1,27 @@
 <section class="wp justify-content-center">
     <section>
         <h2 class="mt-5 text-left">Sumario</h2>
-        <hr class="mx-auto mt-3">
-        <div class="flex d-flex justify-content-between">
+        <div class="flex d-flex justify-content-between mt-5 px-5">
             <span>BALANCE</span>
             <span class="price-text">+183.00€</span>
         </div>
-        <hr class="mx-auto mb-5">
+        <hr class="mx-auto pb-4 w-80">
     </section>
 
-    <div class="flex d-flex justify-content-between align-items-center">
-        <h3 class="h5 mt-1 mb-3">MIS GRUPOS</h3>
-        <a href="javascript:void(0)" (click)="openGroupsModal()"><img class="img-menu"
-                src="../../../assets/images/menu.gif" alt="menu-gif"></a>
+    <div class="flex d-flex justify-content-between align-items-center pt-2">
+        <h3 class="h5 mb-3">MIS GRUPOS</h3>
     </div>
-    <section class="img-bg-gif container border border-2 rounded-5 d-flex justify-content-center align-items-center"
-        style="height: 200px;">
-        <a [routerLink]="['/groupsList']" class="d-flex justify-content-center align-items-center"><img class="img-gif"
+    <div class="img-bg-gif container border border-2 rounded-4 d-flex justify-content-center align-items-center"><a
+            [routerLink]="['/groupsList']" class="d-flex justify-content-center align-items-center"><img class="img-gif"
                 src="../../../assets/images/groups.gif" alt="group-icon"></a>
-    </section>
+    </div>
 
     <div class="flex d-flex justify-content-between align-items-center pt-3">
-        <h3 class="h5 mt-3 mb-3">MIS AMIGOS</h3>
-        <a href="javascript:void(0)" (click)="openFriendsModal()"><img class="img-menu"
-                src="../../../assets/images/menu.gif" alt="menu-gif"></a>
+        <h3 class="h5 mt-2 mb-3">MIS AMIGOS</h3>
     </div>
-    <section class="img-bg-gif container border border-2 rounded-5 d-flex justify-content-center align-items-center"
-        style="height: 200px;">
+    <div class="img-bg-gif container border border-2 rounded-4 d-flex justify-content-center align-items-center">
         <a [routerLink]="['/friendsList']" class="d-flex justify-content-center align-items-center">
             <img class="img-gif" src="../../../assets/images/teams.gif" alt="group-icon">
         </a>
-    </section>
-
-    <!-- Modal de grupos -->
-    <div id="myGroupsModal" class="modal" [ngClass]="{'show': isGroupsModalOpen}">
-        <div class="modal-content shadow shadow-lg">
-            <span class="close flex d-flex justify-content-start px-2" (click)="closeGroupsModal()">&times;</span>
-            <h4 class="flex d-flex align-items-center justify-content-center pt-3">Ajustes de Grupos</h4>
-
-            <ul class="flex d-flex justify-content-end pt-3">
-                <li class="menu-item">
-                    <a [routerLink]="['/groupsList']">
-                        <i class="fa-solid fa-people-group fa-2x pb-2" style="color: #027184;"></i>
-                        Ver grupos
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a>
-                        <i class="fa-solid fa-pen fa-2x pb-2" style="color: #027184;"></i>
-                        Editar nombre
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a>
-                        <i class="fa-solid fa-image fa-2x pb-2" style="color: #027184;"></i>
-                        Editar imagen
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
-    <!-- Modal de amigos -->
-    <div id="myFriendsModal" class="modal" [ngClass]="{'show': isFriendsModalOpen}">
-        <div class="modal-content shadow shadow-lg">
-            <span class="close flex d-flex justify-content-start px-2" (click)="closeFriendsModal()">&times;</span>
-            <h4 class="flex d-flex align-items-center justify-content-center pt-3">Ajustes de Amigos</h4>
-
-            <ul class="flex d-flex justify-content-end pt-3">
-                <li class="menu-item">
-                    <a [routerLink]="['/friendsList']">
-                        <i class="fa-solid fa-user-group fa-2x pb-2" style="color: #027184;"></i>
-                        Ver amigos
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a>
-                        <i class="fa-solid fa-pen fa-2x pb-2" style="color: #027184;"></i>
-                        Editar nombre
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a>
-                        <i class="fa-solid fa-image fa-2x pb-2" style="color: #027184;"></i>
-                        Editar imagen
-                    </a>
-                </li>
-            </ul>
-
-        </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-<!-- <script>
-                    $(document).ready(function () {
-                        $(".img-menu").hover(function () {
-                            $(this).attr("../../../assets/IMG/menu.png");
-                        }, function () {
-                            $(this).attr("../../../assets/IMG/menu.gif");
-                        });
-                    });
-                </script> -->
