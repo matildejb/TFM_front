@@ -16,21 +16,4 @@ export class MyAccountComponent {
   activatedRoute = inject(ActivatedRoute);
 
   unUser: IUser | null = null;
-
-
-    ngOnInit(): void {
-      this.getUserProfile();
-  }
-
-  getUserProfile(): void {
-    this.userService.getProfile().subscribe(
-      (data: IUser) => {
-        this.unUser = data;
-      },
-      (error) => {
-        console.log('Error fetching user profile', error)
-      }
-    );
-  }
-
 }

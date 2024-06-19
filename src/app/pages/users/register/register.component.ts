@@ -1,20 +1,16 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   formRegister: FormGroup;
@@ -56,25 +52,7 @@ export class RegisterComponent {
     });
   }
 
-  //MATILDE
-  
-
-  getUserProfile(): void {
-    this.usersService.getProfile().subscribe(
-      (data: IUser) => {
-        this.user = data;
-        this.formRegister.patchValue(data); // Set form values with user data
-      },
-      (error) => {
-        console.log('Error fetching user profile', error);
-      }
-    );
-  }
-
-
-
   //RAMON
-
   async onSubmit() {
     const response = await this.usersService.register(this.formRegister.value);
     if (response.length > 0) {

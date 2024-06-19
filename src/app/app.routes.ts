@@ -15,7 +15,7 @@ import { GroupComponent } from './components/group/group.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 import { FriendsComponent } from './pages/friends/friends.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
-
+import { FilterComponent } from './components/filter/filter.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -32,8 +32,9 @@ export const routes: Routes = [
   { path: 'group/:id', component: GroupComponent },
   { path: 'groupsList', component: GroupsListComponent },
   { path: 'group/:id', component: GroupComponent },
-  { path: 'friends', component: FriendsComponent},
-  { path: 'statistics', component: StatisticsComponent},
+  { path: 'filter', component: FilterComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'statistics', component: StatisticsComponent },
   { path: 'summary', component: SummaryComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' }

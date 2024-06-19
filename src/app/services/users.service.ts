@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
@@ -49,8 +49,11 @@ export class UsersService {
   private profileUrl = `${this.baseUrl}/profile`;
 
   //Obtener usuario para mostrar perfil   Hace falta token autenticacion??
-  getProfile(): Observable<IUser> {
-    return this.httpClient.get<IUser>(this.profileUrl);
+  // getProfile(): Observable<IUser> {
+  //   return this.httpClient.get<IUser>(this.profileUrl);
+  // }
+  getProfile(): Promise<IUser> {
+    return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
   //Actualizar profile usuario   Hace falta token autenticacion??
@@ -69,6 +72,11 @@ export class UsersService {
   //Eliminar cuenta usuario
   deleteUser(): Observable<IUser> {
     return this.httpClient.delete<IUser>(this.profileUrl);
+  }
+
+  // Método para obtener el token de autenticación
+  private getToken(): string | null {
+    return localStorage.getItem('authToken'); // Ajusta esto según donde guardes el token
   }
 
 }
