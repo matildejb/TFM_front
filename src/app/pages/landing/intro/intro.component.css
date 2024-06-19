@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .text {
+    font-size: 1.3rem;
+
+    .typed {
+      display: inline-block;
+      transition: opacity 0.5s ease-in-out;
+    }
+  }
+
+  .btn {
+    background: #027184;
+    color: white;
+    padding: 10px;
+    font-size: 1.2rem;
+
+    &:hover {
+      background-color: #004a59;
+    }
+  }
+}
+
+/*Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    .btn {
+      font-size: 1rem;
+    }
+  }
+}

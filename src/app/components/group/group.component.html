@@ -1,0 +1,76 @@
+<section class="wp trans-section justify-content-center">
+    <div>
+        <h2 class="mt-5 mb-3 w-700">Detalles de grupo</h2>
+    </div>
+    <section class="bg-comp container border border-2 rounded-4 align-items-center m-0 px-4 py-4 mt-4">
+        <div class="d-flex pt-1 w-100 align-items-center">
+            <a href="#"><i class="fa-solid {{ groupData?.icon }} fa-2x" style="color: #027184;"></i></a>
+            <h3 class="px-3 fw-bold mb-0">{{ groupData?.title }}</h3>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-1 w-100">
+            <p class="font-75 mt-2 mb-2">HISTORIAL DE TRANSACCIONES</p>
+        </div>
+
+        <!-- Fila de títulos de tabla-->
+        <div class="d-flex mt-4">
+            <table class="table container font-75">
+                <tr class="container row d-flex">
+                    <th class="col-2 text-center">USUARIO</th>
+                    <th class="col-6 text-left px-5">CONCEPTO</th>
+                    <th class="col-2 text-left">FECHA</th>
+                    <th class="col-2 text-end">CANTIDAD</th>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Fila de transacciones -->
+        <div *ngFor="let transaction of transactions"
+            class="bg-card border-custom container align-items-center mt-1 border border-1 rounded-3 border-black">
+            <div class="container row align-items-center justify-content-center align-items-center m-0">
+                <table class="table container font-75 m-0 p-0">
+                    <tr class="row align-items-center">
+                        <td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ transaction.user
+                            }}</td>
+                        <td class="col-5 d-flex concept font-110 fw-bold px-1 justify-content-start">{{
+                            transaction.concept }}</td>
+                        <td class="col-3 d-flex justify-content-center">{{ transaction.time }}</td>
+                        <td class="col-2 d-flex amount font-125 fw-bold justify-content-center"
+                            [ngStyle]="{'color': transaction.amount < 0 ? 'Crimson' : 'Limegreen'}">
+                            {{ transaction.amount | currency: 'EUR' }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+</section>
+
+<section class="menu-container pb-5 pt-3 strong-shadow">
+
+    <section class="row d-flex justify-content-center m-0 p-0">
+        <!-- Balance -->
+        <div class="row d-flex justify-content-center px-5 mb-0">
+            <div class="col d-flex justify-content-between">
+                <span>BALANCE</span>
+                <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
+                    {{ TotalBalance | currency: 'EUR' }}
+                </span>
+            </div>
+            <hr class="mx-auto mb-4">
+        </div>
+
+        <!-- Botonera -->
+        <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center">
+                <button [routerLink]="['/filter']" type="button" class="btn btn-menu"><i
+                        class="fa-solid fa-user-plus"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-handshake"></i></button>
+                <button type="button" class="btn btn-menu"><i class="fa-solid fa-users"></i></button>
+            </div>
+        </div>
+    </section>
+
+</section>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LandingComponent } from './pages/landing/landing.component';
 import { MenuButtonsComponent } from './components/menu/menu-buttons.components';
 
 @Component({

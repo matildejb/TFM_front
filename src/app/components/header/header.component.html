@@ -1,48 +1,36 @@
-<nav class="navbar shadow pe-lg-4 ps-lg-4">
-  <div>
-    <button class="navbar-toggler mx-3 btn-custom" type="button" data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar shadow ps-3 ps-lg-5">
 
-    <a class="navbar-brand" [routerLink]="['/landing']">
+  @if(!isLoggedIn)
+  {
+  <div class="botonNavbar-Logotipo">
+    <a class="navbar-brand fs-3 fs-md-2" [routerLink]="['/landing']">
       <strong>SharExpen</strong>
-      <img src="assets/IMG/logo.png" alt="logotipo" width="70px">
+      <img src="assets/images/logo.png" alt="logotipo" width="70px">
     </a>
+  </div>
+  }
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SharExpen
-          <img src="assets/IMG/logo.png" alt="logotipo" width="60px">
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Mis grupos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Mis amigos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial de actividad</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar sesión</a>
-          </li>
-        </ul>
-      </div>
+  @if(isLoggedIn)
+  {
+  <div>
+    <app-navbar></app-navbar>
+    <strong>SharExpen</strong>
+    <img src="assets/images/logo.png" alt="logotipo" width="70px">
+  </div>
+
+  <div class="btn-settings me-3 me-md-1 ms-3">
+    <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-cog fa-lg"></i>
+    </button>
+    <div class="dropdown-settings">
+      <a class="element-settings" [routerLink]="['/settings/privacy']">Privacidad</a>
+      <a class="element-settings" [routerLink]="['/settings/terms']">Términos y condiciones</a>
+      <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
+      <a class="element-settings" [routerLink]="['/settings/about']">Aplicación</a>
     </div>
 
   </div>
 
-  <div>
-    <a href="" class="me-3">
-      <i class="bi bi-person-lines-fill icon-black"></i>
-    </a>
-  </div>
+  }
+
 </nav>

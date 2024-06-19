@@ -1,0 +1,76 @@
+.btn-custom {
+  position: relative;
+  color: #027184;
+  border-radius: 10px;
+  top: 5px;
+}
+/* icono usuario*/
+.icon-user {
+  color: black;
+  font-size: 2rem;
+  padding-top: 10px;
+
+  &:hover {
+    color: #027184;
+  }
+}
+
+.offcanvas {
+  width: 270px;
+  background: linear-gradient(
+    to bottom right,
+    white 60%,
+    rgba(2, 113, 132, 0.481)
+  );
+}
+.offcanvas-header {
+  margin-bottom: 0;
+  border-bottom: 2px solid #f6a278;
+  padding-bottom: 7px;
+}
+.offcanvas-body {
+  height: 100vh;
+
+  a:hover {
+    color: #027184;
+  }
+
+  .active {
+    color: #027184;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+
+  .active-border {
+    border-bottom: 2px solid #027184;
+  }
+}
+
+a {
+  display: flex;
+  align-items: center;
+}
+
+.bi {
+  margin-right: 5px;
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 992px) {
+  .offcanvas {
+    width: 220px;
+    display: block !important;
+    visibility: visible !important;
+    transform: none !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1030;
+    font-size: 1.2rem;
+  }
+
+  .navbar-toggler {
+    display: none !important;
+  }
+}
