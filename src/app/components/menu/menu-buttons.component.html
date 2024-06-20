@@ -1,18 +1,18 @@
-<div class="btn-settings">
-    <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-cog fa-lg"></i>
-    </button>
-    <div class="dropdown-settings">
-        <a class="element-settings" [routerLink]="['/settings/privacy']">Privacidad</a>
-        <a class="element-settings" [routerLink]="['/settings/terms']">Términos y condiciones</a>
-        <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
-        <a class="element-settings" [routerLink]="['/settings/about']">Aplicación</a>
-    </div>
-</div>
-
 <div class="menu-container">
-    <button type="button" class="btn btn-menu"><i class="fa-solid fa-user-plus"></i></button>
-    <button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>
-    <button type="button" class="btn btn-menu"><i class="fa-solid fa-handshake"></i></button>
-    <button type="button" class="btn btn-menu"><i class="fa-solid fa-users"></i></button>
+    @if (parent === 'detailGroup'){
+    <a class="btn btn-menu" [routerLink]="['/filter']" data-bs-toggle="tooltip" data-bs-placement="top"
+        title="Añadir amigos">
+        <i class="fa-solid fa-user-plus"></i></a>
+    <a type="button" class="btn btn-menu" [routerLink]="['/payments']" data-bs-toggle="modal"
+        data-bs-target="#modalAgregarProducto" title="Añadir gastos">
+        <i class="fa-solid fa-coins"></i>
+    </a>
+
+    }@else if (parent === 'groups') {
+    <a class="btn btn-menu" data-bs-toggle="tooltip" data-bs-placement="top" title="Añadir grupo">
+        <i class="fa-solid fa-users"></i></a>
+    <a type="button" class="btn btn-menu" data-bs-toggle="tooltip" data-bs-placement="top" title="Cerrar grupo">
+        <i class="fa-solid fa-handshake"></i>
+    </a>
+    }
 </div>

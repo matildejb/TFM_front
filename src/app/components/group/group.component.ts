@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MenuButtonsComponent } from '../menu/menu-buttons.components';
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MenuButtonsComponent],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
 })

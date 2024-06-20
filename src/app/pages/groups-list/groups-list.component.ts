@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { GroupCardComponent } from '../../components/group-card/group-card.component';
 import { CommonModule } from '@angular/common';
+import { MenuButtonsComponent } from '../../components/menu/menu-buttons.components';
 
 @Component({
   selector: 'app-groups-list',
   standalone: true,
-  imports: [GroupCardComponent, GroupsListComponent, CommonModule],
+  imports: [GroupCardComponent, GroupsListComponent, CommonModule,MenuButtonsComponent],
   templateUrl: './groups-list.component.html',
   styleUrls: ['./groups-list.component.css']
 })
