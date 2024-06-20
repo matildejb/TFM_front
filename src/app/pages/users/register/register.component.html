@@ -1,5 +1,5 @@
 <section class="d-flex justify-content-center align-items-center flex-column">
-  <h1 class="h2 mt-4">{{ tipo }}</h1>
+  <h1 class="h2 mt-4">{{ title }} de usuario</h1>
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -87,7 +87,7 @@
           >
             <i
               class="bi {{
-                passwordFieldType === 'password' ? 'bi-eye' : 'bi-eye-slash'
+                passwordFieldType === 'password' ? 'bi-eye-slash' : 'bi-eye'
               }}"
             ></i>
           </button>
@@ -104,7 +104,7 @@
       </div>
       <input
         type="submit"
-        [value]="boton"
+        [value]="button"
         class="btn btn-se"
         [disabled]="!formRegister.valid"
       />

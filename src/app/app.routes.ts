@@ -15,19 +15,51 @@ import { loginGuard } from './guards/login.guard';
 import { redirectGuard } from './guards/redirect.guard';
 
 export const routes: Routes = [
-  { path: 'updateUser/:userId', component: RegisterComponent },
+  { path: 'updateUser/:user_id', component: RegisterComponent },
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
-  { path: 'landing', component: LandingComponent, canActivate: [redirectGuard] },
-  { path: 'welcome', component: WelcomeComponent, canActivate: [redirectGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [redirectGuard] },
+  {
+    path: 'landing',
+    component: LandingComponent,
+    canActivate: [redirectGuard],
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
+    canActivate: [redirectGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [redirectGuard],
+  },
   { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },
- 
-  { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
-  { path: 'settings/privacy', component: PrivacyComponent, canActivate: [loginGuard]},
-  { path: 'settings/terms', component: TermsComponent, canActivate: [loginGuard] },
-  { path: 'settings/about', component: AboutComponent, canActivate: [loginGuard]},
+
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'settings/privacy',
+    component: PrivacyComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'settings/terms',
+    component: TermsComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'settings/about',
+    component: AboutComponent,
+    canActivate: [loginGuard],
+  },
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },
-  { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
+  {
+    path: 'groupsList',
+    component: GroupsListComponent,
+    canActivate: [loginGuard],
+  },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
 
   { path: 'page-not-found', component: ErrorComponent },

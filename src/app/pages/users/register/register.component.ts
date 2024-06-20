@@ -5,11 +5,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UsersService } from '../../../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
 import { UsersService } from '../../../services/users.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -25,25 +24,33 @@ export class RegisterComponent {
   router = inject(Router);
   user: IUser | null = null;
 
+  // Reutilización del formulario para la actualización de datos
+  title: string = 'Registro';
+  button: string = 'Registrarse';
+
   // Mostrar u ocultar contraseña
   passwordFieldType: string = 'password';
-
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-  // Solución de Matilde para la reutilización del formulario
-  tipo: string = 'Registro de usuario';
-  boton: string = 'Registrarse';
+  // Controlador de los validadores
+  checkControl(
+    formControlName: string,
+    validador: string
+  ): boolean | undefined {
+    return (
+      this.formRegister.get(formControlName)?.hasError(validador) &&
+      this.formRegister.get(formControlName)?.touched
+    );
+  }
 
   constructor() {
     this.formRegister = new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        Validators.pattern(
-          /^\b([A-ZÀ-ÿ][-,a-z. ']*)+( [A-ZÀ-ÿ][-,a-z. ']*)*\b$/
-        ),
+        Validators.pattern(/^[A-ZÀ-Ÿ][a-zà-ÿ.']*( [A-ZÀ-Ÿ][a-zà-ÿ.']*)*$/),
         // Procedencia de la expresión regular (posteriormente corregida por ChatGPT para que no incorpore espacios al final): https://regexr.com/3f8cm
       ]),
       username: new FormControl('', [
@@ -73,43 +80,104 @@ export class RegisterComponent {
   }
 
   ngOnInit(): void {
-    // this.activatedRoute.params.subscribe((params: any) => {
-    //   let id: string = params.userId
-    //   let response = this.usersService.getProfile(id)
-    //   console.log(response);
-    // })
+    this.activatedRoute.params.subscribe(async (params: any) => {
+      let id: number = params.user_id;
+      if (id) {
+        this.title = 'Actualización';
+        this.button = 'Actualizar';
+        let userById: any = await this.usersService.getUserById(id);
+        const response: IUser = userById[0];
+
+        this.formRegister = new FormGroup({
+          id: new FormControl(response.id, []),
+          name: new FormControl(response.name, [
+            Validators.required,
+            Validators.pattern(/^[A-ZÀ-Ÿ][a-zà-ÿ.']*( [A-ZÀ-Ÿ][a-zà-ÿ.']*)*$/),
+            // Procedencia de la expresión regular (posteriormente corregida por ChatGPT para que no incorpore espacios al final): https://regexr.com/3f8cm
+          ]),
+          username: new FormControl(response.username, [
+            Validators.required,
+            Validators.pattern(/^[0-9A-Za-z]{6,12}$/),
+            // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
+          ]),
+          phone: new FormControl(response.phone, [
+            Validators.required,
+            Validators.pattern(
+              /^(?:\+34|0034|34)?[ -]?(6|7)([0-9]{1}[ -]?){8}$/
+            ),
+
+            // Procedencia de la expresión regular (evaluada en Copilot y posteriormente corregida por ChatGPT para que no exceda el número de caracteres máximo): https://es.stackoverflow.com/questions/415/regex-para-validar-numeros-de-movil-espa%C3%B1oles
+          ]),
+          email: new FormControl(response.email, [
+            Validators.required,
+            Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/),
+            // Procedencia de la expresión regular: la vimos en clase
+          ]),
+          password: new FormControl('', [
+            Validators.required,
+            Validators.pattern(
+              /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^0-9A-Za-z]).{8,16}$/
+            ),
+            // Procedencia de la expresión regular (evaluada en Copilot): https://dev.to/fromwentzitcame/username-and-password-validation-using-regex-2175
+          ]),
+        });
+      }
+    });
   }
 
   async onSubmit() {
-    const response = await this.usersService.register(this.formRegister.value);
-    if (response.length > 0) {
-      alert(response.join('\n'));
+    if (this.formRegister.value.id) {
+      // Para actualizar un usuario existente
+      try {
+        let response: IUser = await this.usersService.updateProfile(
+          this.formRegister.value
+        );
+        if (response) {
+          Swal.fire({
+            title: 'Actualización exitosa',
+            text: `${response.name} se ha actualizado correctamente`,
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          this.router.navigateByUrl('/user-profile');
+        }
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Ha habido un error con la actualización de usuario',
+          icon: 'error',
+          confirmButtonText: 'Inténtalo de nuevo',
+        });
+      }
     } else {
-      alert('Registro OK');
-      this.router.navigateByUrl('/summary'); // Falta por definir la ruta definitiva
+      // Para añadir un nuevo usuario
+      try {
+        const response = await this.usersService.register(
+          this.formRegister.value
+        );
+        if (response.length > 0) {
+          alert(response.join('\n'));
+        } else {
+          Swal.fire({
+            title: 'Registro exitoso',
+            text: `Te has registrado correctamente`,
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          this.router.navigateByUrl('/summary');
+        }
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Ha habido un error con el registro de usuario',
+          icon: 'error',
+          confirmButtonText: 'Inténtalo de nuevo',
+        });
+      }
     }
   }
-
-  checkControl(
-    formControlName: string,
-    validador: string
-  ): boolean | undefined {
-    return (
-      this.formRegister.get(formControlName)?.hasError(validador) &&
-      this.formRegister.get(formControlName)?.touched
-    );
-  }
-
-  //   // Matilde
-  //   getUserProfile(): void {
-  //     this.usersService.getProfile().subscribe(
-  //       (data: IUser) => {
-  //         this.user = data;
-  //         this.formRegister.patchValue(data); // Set form values with user data
-  //       },
-  //       (error) => {
-  //         console.log('Error fetching user profile', error);
-  //       }
-  //     );
-  //   }
 }
