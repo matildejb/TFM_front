@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, map, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
+import { IMember } from '../interfaces/imember';
 
 type RegisterBody = {
   name: string;
@@ -144,6 +145,27 @@ getUserPayments(userId: string): Promise<any> {
   return lastValueFrom(this.httpClient.get<any>(url, { headers }));
 }
 
+
+getMemberIds(userId: string): Promise<number[]> {
+  const url = `${environment.apiUrl}/members/${userId}/known`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(
+    this.httpClient.get<any[]>(url, { headers }).pipe(
+      map(members => members.map(member => member.id))
+    )
+  );
+  }
+
+  private membersData: IMember[] = [];
+  setMembers(members: IMember[]): void {
+    this.membersData = members;
+  }
+
+  getMembers(): IMember[] {
+    return this.membersData;
+  }
 
 
 }

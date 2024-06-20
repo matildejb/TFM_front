@@ -3,6 +3,7 @@
     import { UsersService } from '../../services/users.service';
     import { ActivatedRoute } from '@angular/router';
 import { FriendCardComponent} from '../../components/friend-card/friend-card.component';
+import { IMember } from '../../interfaces/imember';
     
     @Component({
       selector: 'app-friends',
@@ -15,7 +16,7 @@ import { FriendCardComponent} from '../../components/friend-card/friend-card.com
       memberService = inject(UsersService);
     
     
-      members: any[]= [];
+      members: IMember[]= [];
       userId: string = '11';
    
     
@@ -27,7 +28,9 @@ import { FriendCardComponent} from '../../components/friend-card/friend-card.com
         this.memberService.getMembersOfSharedGroups(this.userId).then(members => {
           this.members = members;
           console.log('Members sharing groups with user:', members);
+          this.memberService.setMembers(members)
         });
+    
       }
 
 
