@@ -1,0 +1,25 @@
+<section class="container">
+    <div class="p-3 width">
+        <form [formGroup]="formPayment" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción</label>
+                <input type="text" placeholder="Introduce una descripción para el gasto" id="description"
+                    class="form-control" formControlName="description" />
+            </div>
+            <div class="mb-3">
+                <label for="payment" class="form-label">Importe</label>
+                <input type="number" placeholder="Introduce el importe del gasto" id="payment" class="form-control"
+                    formControlName="payment" />
+            </div>
+            <div class="mb-3">
+                <label for="user" class="form-label">Participante</label>
+                <select id="user" class="form-control" formControlName="user">
+                    <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Añadir" class="btn btn-se" />
+        </form>
+    </div>
+</section>
+

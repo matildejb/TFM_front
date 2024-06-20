@@ -57,6 +57,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../interfaces/iuser.interfaces';
+import { IGroup } from '../interfaces/igroup.interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -77,4 +78,8 @@ export class GroupService {
 			this.httpClient.get<{ results: any[] }>(`${this.baseUrl}/getAllUsers`, { params: query })
 		);
 	}
+
+	deleteGroup(id: number): Promise<IGroup> {
+    return lastValueFrom(this.httpClient.delete<IGroup>(`${this.baseUrl}/${id}`));
+  }
 }
