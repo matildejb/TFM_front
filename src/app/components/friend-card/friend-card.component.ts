@@ -19,4 +19,11 @@ export class FriendCardComponent implements OnInit {
   ngOnInit(): void {
     // Aquí podrías inicializar datos adicionales o manejar eventos del componente
   }
+
+
+  isExpanded: boolean = false;
+
+  toggleAccordion(): void {
+    this.isExpanded = !this.isExpanded;
+  }
 }
