@@ -11,18 +11,18 @@ import { IMember } from '../../interfaces/imember';
   
 })
 export class AccordeonComponent {
-  activePanel = -1;
-  @Input() members: IMember[] = [];
-  @Input() userPayments: { [userId: number]: any[] } = {}; // Cambiado a número
+  // activePanel = -1;
+  // @Input() members: IMember[] = [];
+  // @Input() userPayments: { [userId: number]: any[] } = {}; // Cambiado a número
   
 
 
 
-  ngOnInit(): void {
-    console.log('members:', this.members);
-    console.log('userPayments:', this.userPayments);
+  // ngOnInit(): void {
+  //   console.log('members:', this.members);
+  //   console.log('userPayments:', this.userPayments);
     
-  }
+  // }
 
   
 }

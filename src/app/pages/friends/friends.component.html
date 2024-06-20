@@ -2,9 +2,11 @@
   <section>
     <h2 class="mt-5 mb-5 text-left">Mis Amigos</h2>
   </section>
+
+  
   <ul *ngIf="members.length > 0; else noFriends">
     <li *ngFor="let friend of members">
-      <app-friend-card [title]="friend.name"></app-friend-card>
+      <app-friend-card [title]="friend.name" [userPayments]="userPayments[friend.id]" ></app-friend-card>
     </li>
   </ul>
   <ng-template #noFriends>

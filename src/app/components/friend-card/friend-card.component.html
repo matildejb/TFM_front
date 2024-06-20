@@ -1,25 +1,26 @@
 <section class="box img-bg-gif container border border-2 rounded-4 align-items-center px-4 py-4 mt-3">
   <div class="d-flex pt-1 w-100 align-items-center">
-    <img src="https://placehold.co/400" class="rounded d-block" alt="">
     <h3 class="px-3 fw-bold mb-0">{{ title }}</h3>
     <a href="#" class="ms-auto"><i class="fa-solid fa-ellipsis-vertical" style="color: #027184;"></i></a>
-  </div>
-
-  <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
-    <!-- Iteramos sobre members para mostrar un acordeón por cada usuario -->
-    <div class="accordion-item" *ngFor="let member of members">
+  </div> 
+  <div class="accordion accordion-flush mt-3">
+    <div class="accordion-item">
       <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                [attr.data-bs-target]="'#collapse-' + member.id" aria-expanded="false">
-          Usuario {{ member.id }}
-        </button>
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePayments">RESUMEN </button>
       </h2>
-      <div [id]="'collapse-' + member.id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div id="collapsePayments" class="accordion-collapse collapse">
         <div class="accordion-body">
           <ul>
-            <li *ngFor="let payment of userPayments[member.id]">
-              {{ payment.description }} - {{ payment.amount }}€
+            <li *ngFor="let payment of userPayments">
+              {{ payment.description }} - {{ payment.participant_amount}}€ 
             </li>
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+  <li *ngFor="let payment of userPayments[members[2].id]">
+              {{ payment.description }} - {{ payment.amount }}€  -->
