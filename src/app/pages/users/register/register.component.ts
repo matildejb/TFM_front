@@ -173,7 +173,7 @@ export class RegisterComponent {
         console.log(error);
         Swal.fire({
           title: 'Error',
-          text: 'Ha habido un error con el registro de usuario',
+          text: 'Puede que el correo electrónico que estás utilizando ya esté registrado en la aplicación',
           icon: 'error',
           confirmButtonText: 'Inténtalo de nuevo',
         });

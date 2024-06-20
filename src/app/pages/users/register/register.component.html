@@ -14,7 +14,10 @@
         @if (checkControl('name', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('name', 'pattern')) {
-        <p class="error">Debes introducir un nombre propio válido</p>
+        <p class="error">
+          Debes introducir un nombre propio válido (con la primera letra de cada
+          palabra en mayúscula)
+        </p>
         }
       </div>
       <div class="mb-3">
@@ -48,8 +51,8 @@
         <p class="error">Campo requerido</p>
         } @if (checkControl('phone', 'pattern')) {
         <p class="error">
-          Debes introducir un número de teléfono móvil que sea español o que
-          tenga prefijo de España
+          Debes introducir un número de teléfono móvil que sea español (que
+          empiece por el número 6 o el 7) o que tenga prefijo de España (+34)
         </p>
         }
       </div>
@@ -97,7 +100,7 @@
         } @if (checkControl('password', 'pattern')) {
         <p class="error">
           Debes introducir una contraseña de entre 8 y 16 caracteres que
-          contenga al menos una minúscula, una mayúscula, un número y un
+          contenga al menos una letra minúscula, una mayúscula, un número y un
           carácter especial
         </p>
         }
