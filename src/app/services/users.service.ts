@@ -84,7 +84,7 @@ export class UsersService {
     const formData = new FormData();
     formData.append('image', image);
 
-    return this.httpClient.post(this.baseUrl, formData);
+    return this.httpClient.post(`${this.profileUrl}/upload/${image}`, formData);
   }
 
   

@@ -30,6 +30,10 @@
     }
     .bi-camera {
       font-size: 1.5rem;
+    }  
+    .actualizar {
+      display: flex;
+      
     }
 
     /* Estilo para el botón personalizado */

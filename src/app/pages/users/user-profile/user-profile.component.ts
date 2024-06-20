@@ -16,7 +16,7 @@ export class UserProfileComponent {
   userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-   selectedFile: File | null = null;
+  selectedFile: File | null = null;
   previewUrl: any = null;
 
   unUser: IUser | null = null;
