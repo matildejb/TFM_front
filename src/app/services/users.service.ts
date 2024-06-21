@@ -81,9 +81,9 @@ export class UsersService {
   }
 
 
- async  uploadImage(id: number, imageFile: File): Promise<any> {
+ async  uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
-    formData.append('profile_image', imageFile, imageFile.name);
+    formData.append('profile_image', file);
        
    try {
     const token = localStorage.getItem('token');

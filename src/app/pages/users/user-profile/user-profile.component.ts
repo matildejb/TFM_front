@@ -25,41 +25,35 @@ export class UserProfileComponent {
 
     ngOnInit(): void {
       this.getUserProfile();
-      this.loadProfileImage();
   }
 
      async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
+      this.loadProfileImage();
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
   }
+  
 
-  async loadProfileImage() {
-      try {
-    // Obtener datos del perfil del usuario
-    this.unUser = await this.userService.getProfile();
-
-    // Verificar si el usuario tiene una imagen de perfil
-    if (this.unUser && this.unUser.profileImage) {
-      // Construir la URL completa de la imagen
-      this.imageUrl = `{{environment.apiUrl}}/uploads/${this.unUser.profileImage}`;
+      loadProfileImage(): void {
+   
+        // Verificar si la imagen está en localStorage
+    const savedImageUrl = localStorage.getItem('profileImage');
+    if (savedImageUrl) {
+      this.imageUrl = savedImageUrl;
+    } else if (this.unUser && this.unUser.profileImage) {
+      this.imageUrl = `http://localhost:3000/uploads/${this.unUser.profileImage}`;
     } else {
-      // Si el usuario no tiene imagen de perfil, mostrar una imagen por defecto
       this.imageUrl = 'assets/images/default-img.png';
-      this.previewUrl = this.imageUrl;
     }
-  } catch (error) {
-    console.error('Error al cargar la imagen de perfil', error);
+   
   }
-    }
-
 
   //Cambiar foto
    onFileSelected(event: any): void {
      this.selectedFile = event.target.files[0] as File;
-     console.log('Archivo seleccionado:', this.selectedFile);
      this.previewImage();
   }
   
@@ -70,7 +64,6 @@ export class UserProfileComponent {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.previewUrl = e.target.result;
-        console.log('Vista previa de la imagen:', this.previewUrl);
     };
     reader.readAsDataURL(this.selectedFile);
   }
@@ -90,8 +83,15 @@ export class UserProfileComponent {
     this.unUser.profileImage = response.profileImage;
 
     // Construir la nueva URL completa de la imagen
-    this.previewUrl = `{{environment.apiUrl}}/uploads/${this.unUser.profileImage}`;
+    this.imageUrl =  `http://localhost:3000/uploads/${this.unUser.profileImage}`;
 
+
+    // Guardar la URL en localStorage
+      localStorage.setItem('profileImage', this.imageUrl);
+      
+      // Resetear previewUrl para mostrar la imagen actualizada
+      this.previewUrl = null;
+    
     Swal.fire('Éxito', 'Imagen subida con éxito', 'success');
   } catch (error) {
     console.error('Error subiendo la imagen', error);
@@ -99,18 +99,7 @@ export class UserProfileComponent {
   }
 }
 
-    
 
-   async  subirArchivo(): Promise<void> {
-
-     try {
-       await this.onUpload();
-      
-    } catch (error) {
-          console.error('Error al subir archivo', error);
-    }
-    
-  }
 
 //  
 
