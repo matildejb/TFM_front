@@ -3,11 +3,9 @@
         <h2 class="mt-5 mb-4 text-left">Mis Grupos</h2>
     </section>
 
-    <ng-container *ngFor="let card of groupCards">
-        <app-group-card [icon]="card.icon" [title]="card.title" [time]="card.time" [amount]="card.amount"
-            [navigateTo]="card.navigateTo">
-        </app-group-card>
-    </ng-container>
+    <section>
+        <app-group-card></app-group-card>
+    </section>
 </section>
 
 <section class="menu-container pb-5 pt-3 strong-shadow">
@@ -16,9 +14,8 @@
         <div class="row justify-content-center px-5 mb-0">
             <div class="col-12 d-flex justify-content-between">
                 <p class="balance-text">BALANCE</p>
-                <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
-                    {{ TotalBalance | currency: 'EUR' }}
-                </p>
+                <!-- <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> -->
+                <!-- {{ TotalBalance | currency: 'EUR' }} </p>-->
             </div>
             <hr class="mx-auto mb-4">
         </div>
