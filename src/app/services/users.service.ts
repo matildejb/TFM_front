@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
+import axios from 'axios';
 
 type RegisterBody = {
   name: string;
@@ -57,12 +58,12 @@ export class UsersService {
     });
   }
 
-   logout(): void {
+  logout(): void {
     localStorage.removeItem('token');
-     this.loggedIn.next(false);  
+    this.loggedIn.next(false);
   }
-    //permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
-    get isLoggedIn(): Observable<boolean> {
+  //permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
+  get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
 
@@ -80,14 +81,30 @@ export class UsersService {
   }
 
 
- uploadImage(image: File): Observable<any> {
+ async  uploadImage(id: number, imageFile: File): Promise<any> {
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('profile_image', imageFile, imageFile.name);
+       
+   try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró un token de autorización en el almacenamiento local.');
+    }
 
-    return this.httpClient.post(`${this.profileUrl}/upload/${image}`, formData);
+    const response = await axios.put(`${this.profileUrl}/image/${id}`, formData, {
+      headers: {
+        'Authorization': token || `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error subiendo la imagen:', error);
+    throw error;
   }
+  }
+   
 
-  
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
        this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)

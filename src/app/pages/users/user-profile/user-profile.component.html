@@ -11,13 +11,13 @@
             </svg>
         </button>
 
-        <form (submit)="onUpload()" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-3">
-            <img class="card-img-top mt-0 me-5" [src]="previewUrl || 'assets/images/default-img.png'"
+        <form (ngSubmit)="onUpload()" method="PUT" enctype="multipart/form-data" class="d-flex flex-column gap-3">
+            <img class="card-img-top mt-0 me-5" [src]="previewUrl ?  previewUrl : 'assets/images/default-img.png'"
                 [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
             <label class="custom-file-upload position-absolute">
-                <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                <input type="file" (change)="onFileSelected($event)" name="profile_image" accept="image/*">
                 <i class="bi bi-camera"></i></label>
-            <button type="submit" class="btn actualizar">Actualizar imagen</button>
+            <button type="button" (click)="subirArchivo()" class="btn actualizar">Actualizar imagen</button>
         </form>
 
         <div class="card-body mb-4">
