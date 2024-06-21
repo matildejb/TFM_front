@@ -11,7 +11,7 @@
             </svg>
         </button>
 
-        <form (ngSubmit)="onUpload()" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3">
+        <form (ngSubmit)="onUpload()" method="PUT" enctype="multipart/form-data" class="d-flex flex-column gap-3">
             <img class="card-img-top mt-0 me-5" [src]="previewUrl ? previewUrl : imageUrl"
                 [alt]="unUser?.name || 'img-personal '" title="imagen-perfil">
             <label class="custom-file-upload position-absolute">
