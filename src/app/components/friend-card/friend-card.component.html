@@ -6,10 +6,10 @@
   <div class="accordion mt-3" id="accordion-{{ title }}">
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading-{{ title }}">
-        <button class="accordion-button" type="button" (click)="toggleAccordion()"
+        <button class="accordion-button custom-accordion-button d-flex align-items-center justify-content-between" type="button" (click)="toggleAccordion()"
                 [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
-                [attr.aria-controls]="'collapse-' + title">
-          RESUMEN
+                [attr.aria-controls]="'collapse-' + title">RESUMEN
+          <i class="ms-auto fa" [ngClass]="{'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded}"></i>
         </button>
       </h2>
       <div [id]="'collapse-' + title"
@@ -18,8 +18,8 @@
            [attr.aria-labelledby]="'heading-' + title">
         <div class="accordion-body">
           <ul>
-            <li *ngFor="let payment of userPayments">
-              {{ payment.description }} - {{ payment.amount }}€ 
+            <li *ngFor="let payment of userPayments" class="list d-flex justify-content-between">
+              <span>{{ payment.description }}</span> <span>{{ payment.participant_amount }}€ </span>
             </li>
           </ul>
         </div>
@@ -27,6 +27,7 @@
     </div>
   </div>
 </section>
+
 
 
   <!-- <li *ngFor="let payment of userPayments[members[2].id]">
