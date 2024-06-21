@@ -1,9 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom, map, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, lastValueFrom, map, Observable, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
+import { IDebt } from '../interfaces/idebt';
 import { IMember } from '../interfaces/imember';
+import { group } from '@angular/animations';
+
 
 type RegisterBody = {
   name: string;
@@ -105,9 +108,10 @@ export class UsersService {
   }
 
 
+// -------------------------------------------- page friends --------------------------------------------------
 
   private membersUrl = `${environment.apiUrl}/members`;
-  // Obtener miembros de un grupo
+ 
   getMembersByGroupId(groupId:string): Observable<any>{
     const url = `${this.membersUrl}/${groupId}`;
     const headers = new HttpHeaders({
@@ -116,7 +120,7 @@ export class UsersService {
     return this.httpClient.get<any>(url, {headers});
   }
 
-     // Obtener grupos del usuario
+   
     getUserGroups(userId: string): Promise<any> {
     const url = `${environment.apiUrl}/groups/${userId}`;
     const headers = new HttpHeaders({
@@ -126,7 +130,7 @@ export class UsersService {
   }
 
 
-  // Obtener miembros que comparten grupos con el usuario
+
   async getMembersOfSharedGroups(userId: string): Promise<any[]> {
     const groups = await this.getUserGroups(userId);
     const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
@@ -158,15 +162,23 @@ getMemberIds(userId: string): Promise<number[]> {
   );
   }
 
-  private membersData: IMember[] = [];
-  setMembers(members: IMember[]): void {
-    this.membersData = members;
-  }
+// -------------------------------------------- page statistics--------------------------------------------------
 
-  getMembers(): IMember[] {
-    return this.membersData;
-  }
-
-
+getGroupDetails(groupId: string): Promise<any> {
+  const url = `${environment.apiUrl}/groups/${groupId}`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(this.httpClient.get<any>(url, { headers }));
 }
+
+getMemberById(memberId: string): Promise<IMember> {
+  const url = `${environment.apiUrl}/members/${memberId}/known`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(this.httpClient.get<IMember>(url, { headers }));
+}
+
   // // apiUrl: 'http://localhost:3000/api',
+}

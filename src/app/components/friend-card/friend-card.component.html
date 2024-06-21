@@ -1,25 +1,28 @@
 <section class="box img-bg-gif container border border-2 rounded-4 align-items-center px-4 py-4 mt-3">
   <div class="d-flex pt-1 w-100 align-items-center">
     <h3 class="px-3 fw-bold mb-0">{{ title }}</h3>
-    <a href="#" class="ms-auto"><i class="fa-solid fa-ellipsis-vertical" style="color: #027184;"></i></a>
   </div> 
-  <div class="accordion mt-3" id="accordion-{{ title }}">
+  <div class="accordion mt-3" id="accordion-{{ title }}" >
     <div class="accordion-item">
       <h2 class="accordion-header" id="heading-{{ title }}">
-        <button class="accordion-button custom-accordion-button d-flex align-items-center justify-content-between" type="button" (click)="toggleAccordion()"
+        <button class="accordion-button" type="button" (click)="toggleAccordion()"
                 [attr.aria-expanded]="isExpanded ? 'true' : 'false'"
-                [attr.aria-controls]="'collapse-' + title">RESUMEN
-          <i class="ms-auto fa" [ngClass]="{'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded}"></i>
+                [attr.aria-controls]="'collapse-' + title" style="color: rgb(255, 251, 251);"> <strong> RESUMEN de {{ title }}</strong>
         </button>
       </h2>
       <div [id]="'collapse-' + title"
            class="accordion-collapse collapse"
            [ngClass]="{'show': isExpanded}"
            [attr.aria-labelledby]="'heading-' + title">
-        <div class="accordion-body">
+        <div class="acordeon_box accordion-body">
           <ul>
-            <li *ngFor="let payment of userPayments" class="list d-flex justify-content-between">
-              <span>{{ payment.description }}</span> <span>{{ payment.participant_amount }}€ </span>
+            <li *ngFor="let payment of userPayments" class="">
+              <div class="box_resumen">
+                <span>{{ payment.description }}</span>
+              <span class="span">{{ payment.participant_amount }}€</span>
+              </div>
+              
+              
             </li>
           </ul>
         </div>
@@ -27,7 +30,6 @@
     </div>
   </div>
 </section>
-
 
 
   <!-- <li *ngFor="let payment of userPayments[members[2].id]">

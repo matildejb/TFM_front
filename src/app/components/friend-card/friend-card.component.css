@@ -13,18 +13,14 @@ img{
    padding-right: 30px;
 }
 
-/* Eliminar flechas predeterminadas de Bootstrap */
-.custom-accordion-button {
-    background-image: none !important;
-    padding-right: 1.25rem !important; /* Asegurar espacio suficiente para la flecha personalizada */
-  }
-  
-  /* Estilos para la flecha personalizada */
-  .custom-accordion-button .fa {
-    transition: transform 0.2s;
-  }
-  
-  .fa-chevron-up {
-    transform: rotate(180deg);
-  }
+ul{
+  list-style: none;
+}
+.box_resumen{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+
 
