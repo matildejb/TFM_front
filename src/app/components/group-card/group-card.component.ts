@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,8 @@ import { UsersService } from '../../services/users.service';
 export class GroupCardComponent implements OnInit {
 	arrGroups: any[] = [];
 	user_id: number = 1;
+	@Input() navigateTo: string = '';
+	@Input() amount: number = 0;
 
 	constructor(
 		private http: HttpClient,
@@ -25,14 +27,27 @@ export class GroupCardComponent implements OnInit {
 
 	unUser: IUser | null = null;
 
+	amountColor: string = 'green';
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['amount']) {
+			this.amountColor = this.amount < 0 ? 'Crimson' : 'Limegreen';
+		}
+	}
+
+
 	ngOnInit(): void {
 		this.getMyGroups();
 	}
 
 	async getMyGroups(): Promise<void> {
 		try {
-			this.arrGroups = await this.groupService.getMyGroups(this.user_id);
-			console.log('Mis grupos obtenidos:', this.arrGroups);
+			const user = await this.userService.getProfile();
+			if (user) {
+				this.unUser = user;
+				this.arrGroups = await this.groupService.getMyGroups(user.id);
+				console.log('Mis grupos obtenidos:', this.arrGroups);
+			}
 		} catch (error) {
 			console.error('Error al obtener mis grupos:', error);
 		}

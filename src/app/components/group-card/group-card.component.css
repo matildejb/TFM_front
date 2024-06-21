@@ -2,8 +2,16 @@
     padding: 0px 100px;
 }
 
+.text-50 {
+    font-size: 0.5rem;
+}
+
 .text-75 {
     font-size: 0.75rem;
+}
+
+.text-125 {
+    font-size: 1.25rem;
 }
 
 .price-text {
