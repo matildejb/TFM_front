@@ -34,16 +34,7 @@ export class UsersService {
   private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  private imageUrlSubject = new BehaviorSubject<string | null>(null); // Subject para la URL de la imagen
-  
-   constructor() {
-    // Al inicializar el servicio, obtener la URL de la imagen de localStorage si está disponible
-    const storedImageUrl = localStorage.getItem('profileImageUrl');
-    if (storedImageUrl) {
-      this.imageUrlSubject.next(storedImageUrl);
-    }
-  }
-
+  private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
 
   // autenticacion usuario
   // REGISTAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
@@ -81,17 +72,27 @@ export class UsersService {
   private hasToken(): boolean {
     return !!localStorage.getItem('token');  // Verifica si el token está presente en el localStorage
   }
-
   
   
   // funcionalidades de los usuarios  
   // DATOS POR USUARIO/ACTUALIZAR IMG/ ELIMINAR USUARIO
 
   getProfile(): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.get<IUser>(this.profileUrl))
-   };
-  
+      return lastValueFrom(
+      this.httpClient.get<IUser>(this.profileUrl)
+    ).then(profile => {
+      const userId = profile.id;
+      let imageUrl: string | null = this.getImageUrlFromLocalStorage(userId);
+
+      if (!imageUrl) {
+        imageUrl = 'assets/images/default-img.png';
+      }
+
+      this.updateImageUrl(userId, imageUrl); // Guarda la URL de la imagen asociada al usuario
+
+      return profile;
+    });
+  }
 
 
   async uploadImage(id: number, file: File): Promise<any> {
@@ -113,10 +114,10 @@ export class UsersService {
      
       if (response.data.profileImage) {
         const newImageUrl = `http://localhost:3000/uploads/${response.data.profileImage}`;
-        this.updateImageUrl(newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
-         this.saveImageUrlToLocalStorage(newImageUrl);
+        this.updateImageUrl(id, newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
       } else {
-        console.error('La respuesta del servidor no contiene profileImage'); 
+        console.error('La respuesta del servidor no contiene profileImage');
+        this.updateImageUrl(id, 'assets/images/default-img.png');
       }
 
       return response.data;
@@ -126,32 +127,43 @@ export class UsersService {
     }
   }
    
-  get imageUrl$(): Observable<string | null> {
+  get imageUrl$(): Observable<string> {
     return this.imageUrlSubject.asObservable();
-       
+  }
+
+ updateImageUrl(userId: number, imageUrl: string): void {
+    this.imageUrlSubject.next(imageUrl);
+    localStorage.setItem(`imageUrl_${userId}`, imageUrl); // Almacenar la URL de la imagen en el localStorage
+  }
+
+
+  private getImageUrlFromLocalStorage(userId: number): string | null {
+    return localStorage.getItem(`profileImageUrl_${userId}`);
+  }
+
+ 
+private getCurrentUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    try {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      return tokenPayload.user_id || null;
+    } catch (error) {
+      console.error('Error al decodificar el token JWT:', error);
+      return null;
+    }
   }
   
-   private updateImageUrl(imageUrl: string): void {
-    this.imageUrlSubject.next(imageUrl);
-  }
-
-  private saveImageUrlToLocalStorage(imageUrl: string): void {
-    localStorage.setItem('profileImageUrl', imageUrl);
-  }
-
-  getImageUrl(): Observable<string | null> {
-    return this.imageUrlSubject.asObservable();
-  }
-
-  clearImageUrl(): void {
-    this.imageUrlSubject.next(null);
-    localStorage.removeItem('profileImageUrl');
-  }
-
 
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
        this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
      );
+  }
+
+   private clearImageUrl(userId: number): void {
+    localStorage.removeItem(`imageUrl_${userId}`);
   }
 }

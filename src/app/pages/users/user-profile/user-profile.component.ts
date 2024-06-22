@@ -18,21 +18,29 @@ export class UserProfileComponent {
   router = inject(Router);
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
-  imageUrl: string | undefined;
+  imageUrl: string = 'assets/images/default-img.png';
 
   unUser: IUser | null = null;
 
 
      ngOnInit(): void {
-      this.getUserProfile();
-      this.userService.imageUrl$.subscribe(url => {
-      this.imageUrl = url || 'assets/images/default-img.png';
-    });
+       this.userService.imageUrl$.subscribe(
+      imageUrl => {
+        if (imageUrl) {
+          this.imageUrl = imageUrl;
+        }
+      }
+    );
+    this.getUserProfile();
   }
 
-    async getUserProfile(): Promise<void> {
+  // Datos personales por usuario
+     async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
+      if (this.unUser?.profileImage) {
+        this.imageUrl = this.unUser.profileImage;
+      }
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
@@ -57,25 +65,26 @@ export class UserProfileComponent {
   }
 
 
-  async onUpload(): Promise<void> {
-  if (!this.selectedFile || !this.unUser) {
-    console.error('No se ha seleccionado ningún archivo o no se ha cargado el usuario');
-    return;
-  }
-
-  try {
-    const response = await this.userService.uploadImage(this.unUser.id, this.selectedFile);
-     if (response.profileImage) {
-      this.unUser.profileImage = response.profileImage;
-      this.imageUrl = this.unUser.profileImage; // Actualiza la imagen en la vista
+   async onUpload(): Promise<void> {
+    if (!this.selectedFile || !this.unUser) {
+      console.error('No se ha seleccionado ningún archivo o no se ha cargado el usuario');
+      return;
     }
-    
-    Swal.fire('Éxito', 'Imagen subida con éxito', 'success');
-  } catch (error) {
-    console.error('Error subiendo la imagen', error);
-    Swal.fire('Error', 'Error subiendo la imagen', 'error');
+
+    try {
+      const response = await this.userService.uploadImage(this.unUser.id, this.selectedFile);
+      if (response.profileImage) {
+        this.unUser.profileImage = response.profileImage;
+        this.imageUrl = this.unUser.profileImage!; // Actualiza la imagen en la vista
+        this.userService.updateImageUrl(this.unUser.id, this.imageUrl); 
+      }
+
+      Swal.fire('Éxito', 'Imagen subida con éxito', 'success');
+    } catch (error) {
+      console.error('Error subiendo la imagen', error);
+      Swal.fire('Error', 'Error subiendo la imagen', 'error');
+    }
   }
-}
 
 // Borrar cuenta usuario 
   async deleteUser(): Promise<void> {

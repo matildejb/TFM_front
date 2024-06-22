@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { UsersService } from '../../../../services/users.service';
-import { ActivatedRoute } from '@angular/router';
 import { IUser } from '../../../../interfaces/iuser.interfaces';
 
 @Component({
@@ -13,22 +12,27 @@ import { IUser } from '../../../../interfaces/iuser.interfaces';
 export class MyAccountComponent {
 
   userService = inject(UsersService);
-  activatedRoute = inject(ActivatedRoute);
-
   unUser: IUser | null = null;
-  imageUrl: string | undefined;
+  imageUrl: string = 'assets/images/default-img.png';
 
 
-    ngOnInit(): void {
-      this.getUserProfile();
-      this.userService.imageUrl$.subscribe(url => {
-      this.imageUrl = url || 'assets/images/default-img.png';
-    });
+      ngOnInit(): void {
+       this.userService.imageUrl$.subscribe(
+      imageUrl => {
+        if (imageUrl) {
+          this.imageUrl = imageUrl;
+        }
+      }
+    );
+    this.getUserProfile();
   }
 
     async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
+      if (this.unUser?.profileImage) {
+        this.imageUrl = this.unUser.profileImage;
+      }
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
