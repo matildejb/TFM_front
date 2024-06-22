@@ -25,7 +25,7 @@ export class GroupService {
 		return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
 	}
 
-	// Funcionalidad de pagos de carga grupo
+	// Funcionalidad de pagos de cada grupo
 	getPayments(group_id: number): Promise<any> {
 		return lastValueFrom(
 			this.httpClient.get<IPayment>(`${this.baseUrl}/payments/${group_id}/`)
