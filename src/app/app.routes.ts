@@ -14,6 +14,8 @@ import { SummaryComponent } from './pages/summary/summary.component';
 import { loginGuard } from './guards/login.guard';
 import { redirectGuard } from './guards/redirect.guard';
 import { FilterComponent } from './components/filter/filter.component';
+import { PaymentsComponent } from './pages/buttons/payments/payments.component';
+import { FormGroupComponent } from './pages/buttons/form-group/form-group.component';
 
 export const routes: Routes = [
   { path: 'updateUser/:userId', component: RegisterComponent },
@@ -32,6 +34,8 @@ export const routes: Routes = [
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },
   { path: 'group/:id/filter', component: FilterComponent, canActivate: [loginGuard] },
 
+  { path: 'payments', component: PaymentsComponent },
+  { path: 'createGroup', component: FormGroupComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];

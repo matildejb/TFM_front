@@ -62,15 +62,20 @@
 			<hr class="mx-auto mb-4">
 		</div>
 
-		<!-- Botonera -->
-		<div class="row justify-content-center">
-			<div class="col-12 d-flex justify-content-center">
-				<!-- <button [routerLink]="['/filter']" type="button" class="btn btn-menu"><i
-						class="fa-solid fa-user-plus"></i></button> -->
-				<button type="button" class="btn btn-menu"><i class="fa-solid fa-coins"></i></button>
-				<button type="button" class="btn btn-menu"><i class="fa-solid fa-handshake"></i></button>
-				<button type="button" class="btn btn-menu"><i class="fa-solid fa-users"></i></button>
-			</div>
-		</div>
-	</section>
+    <section class="row d-flex justify-content-center m-0 p-0">
+        <!-- Balance -->
+        <div class="row d-flex justify-content-center px-5 mb-0">
+            <div class="col d-flex justify-content-between">
+                <span>BALANCE</span>
+                <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
+                    {{ TotalBalance | currency: 'EUR' }}
+                </span>
+            </div>
+            <hr class="mx-auto mb-4">
+        </div>
+
+        <!-- Botonera -->
+        <app-menu-buttons [parent]="'detailGroup'"></app-menu-buttons>
+    </section>
+
 </section>

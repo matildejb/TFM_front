@@ -1,0 +1,20 @@
+<section class="container">
+    <div class="p-3 width">
+        <form [formGroup]="formNewGroup">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre del grupo</label>
+                <input type="text" placeholder="Introduce el nombre del grupo" id="name" class="form-control"
+                    formControlName="name" />
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción</label>
+                <input type="text" placeholder="Introduce una descripción para el grupo" id="description"
+                    class="form-control" formControlName="description" />
+            </div>
+            <div class="btn-exit">
+                <input type="submit" value="Añadir" class="btn btn-se" />
+                <a class="btn btn-danger" [routerLink]="['/groupsList']">X</a>
+            </div>
+        </form>
+    </div>
+</section>

@@ -3,16 +3,13 @@ import { GroupService } from '../../services/groups.service';
 import { IGroup } from '../../interfaces/igroup.interfaces';
 import { IPayment } from '../../interfaces/ipayments.interfaces';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../../services/users.service';
-import { IUser } from '../../interfaces/iuser.interfaces';
+import { MenuButtonsComponent } from '../menu/menu-buttons.components';
 
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [CommonModule],
-  styleUrls: ['./group.component.css'],
+  imports: [CommonModule, RouterModule, MenuButtonsComponent],
   templateUrl: './group.component.html',
 })
 export class GroupComponent implements OnInit {
