@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { IUser } from '../../../interfaces/iuser.interfaces';
@@ -18,38 +18,26 @@ export class UserProfileComponent {
   router = inject(Router);
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
-  imageUrl: string | undefined;
+  imageUrl: string = 'assets/images/default-img.png';
 
   unUser: IUser | null = null;
 
 
     ngOnInit(): void {
       this.getUserProfile();
+        this.userService.imageUrl$.subscribe(url => {
+      this.imageUrl = url || 'assets/images/default-img.png';
+    });
   }
 
      async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
-      this.loadProfileImage();
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
   }
-  
 
-      loadProfileImage(): void {
-   
-        // Verificar si la imagen está en localStorage
-    const savedImageUrl = localStorage.getItem('profileImage');
-    if (savedImageUrl) {
-      this.imageUrl = savedImageUrl;
-    } else if (this.unUser && this.unUser.profileImage) {
-      this.imageUrl = `http://localhost:3000/uploads/${this.unUser.profileImage}`;
-    } else {
-      this.imageUrl = 'assets/images/default-img.png';
-    }
-   
-  }
 
   //Cambiar foto
    onFileSelected(event: any): void {
@@ -81,13 +69,6 @@ export class UserProfileComponent {
 
     // Actualizar la URL de la imagen de perfil
     this.unUser.profileImage = response.profileImage;
-
-    // Construir la nueva URL completa de la imagen
-    this.imageUrl =  `http://localhost:3000/uploads/${this.unUser.profileImage}`;
-
-
-    // Guardar la URL en localStorage
-      localStorage.setItem('profileImage', this.imageUrl);
       
       // Resetear previewUrl para mostrar la imagen actualizada
       this.previewUrl = null;
@@ -99,52 +80,6 @@ export class UserProfileComponent {
   }
 }
 
-
-
-//  
-
-//  resizeImage(file: File, maxSize: number): Promise<File> {
-//     return new Promise((resolve, reject) => {
-//       const reader = new FileReader();
-//       reader.onload = (event: any) => {
-//         const img = new Image();
-//         img.onload = () => {
-//           const canvas = document.createElement('canvas');
-//           let width = img.width;
-//           let height = img.height;
-
-//           if (width > maxSize || height > maxSize) {
-//             if (width > height) {
-//               height *= maxSize / width;
-//               width = maxSize;
-//             } else {
-//               width *= maxSize / height;
-//               height = maxSize;
-//             }
-//           }
-
-//           canvas.width = width;
-//           canvas.height = height;
-
-//           const ctx = canvas.getContext('2d');
-//           if (ctx) {
-//             ctx.drawImage(img, 0, 0, width, height);
-//             canvas.toBlob((blob) => {
-//               const resizedFile = new File([blob!], file.name, {
-//                 type: file.type,
-//                 lastModified: Date.now()
-//               });
-//               resolve(resizedFile);
-//             }, file.type);
-//           } else {
-//             reject(new Error('Failed to create canvas context.'));
-//           }
-//         };
-//         img.src = event.target.result;
-//       };
-//       reader.readAsDataURL(file);
-//     });
- 
 
   async deleteUser(): Promise<void> {
     if (!this.unUser) {

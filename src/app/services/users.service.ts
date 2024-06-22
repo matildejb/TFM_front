@@ -33,6 +33,8 @@ export class UsersService {
   private baseUrl: string = `${environment.apiUrl}/users`;
   private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+
+  private imageUrlSubject = new BehaviorSubject<string | null>(null); // Subject para la URL de la imagen
   
 
   // autenticacion usuario
@@ -77,33 +79,90 @@ export class UsersService {
 
   getProfile(): Promise<IUser> {
     return lastValueFrom(
-      this.httpClient.get<IUser>(this.profileUrl));
+      this.httpClient.get<IUser>(this.profileUrl)
+    ).then(profile => {
+    let imageUrl: string;
+
+    // Intenta obtener la URL de la imagen desde localStorage
+    const storedImageUrl = this.getImageUrlFromLocalStorage();
+
+    if (storedImageUrl) {
+      imageUrl = storedImageUrl;
+    } else {
+      // Si no hay una URL almacenada, utiliza la URL por defecto
+      imageUrl = 'assets/images/default-img.png';
+    }
+
+    // Actualiza el Subject con la URL de la imagen
+    this.imageUrlSubject.next(imageUrl);
+      return profile;
+    });
   }
 
 
- async  uploadImage(id: number, file: File): Promise<any> {
+  async uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
     formData.append('profile_image', file);
        
-   try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No se encontró un token de autorización en el almacenamiento local.');
-    }
-
-    const response = await axios.put(`${this.profileUrl}/image/${id}`, formData, {
-      headers: {
-        'Authorization': token || `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No se encontró un token de autorización en el almacenamiento local.');
       }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error subiendo la imagen:', error);
-    throw error;
-  }
+
+      const response = await axios.put(`${this.profileUrl}/image/${id}`, formData, {
+        headers: {
+          'Authorization': token || `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+     
+      if (response.data.profileImage) {
+        const newImageUrl = `http://localhost:3000/uploads/${response.data.profileImage}`;
+        this.updateImageUrl(newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
+      } else {
+        console.error('La respuesta del servidor no contiene profileImage');
+        this.updateImageUrl('assets/images/default-img.png');
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Error subiendo la imagen:', error);
+      throw error;
+    }
   }
    
+  get imageUrl$(): Observable<string | null> {
+    return this.imageUrlSubject.asObservable();
+       
+  }
+    // Método para limpiar la URL de la imagen y actualizar el Subject
+  clearImageUrl(): void {
+    this.imageUrlSubject.next(null);
+    this.clearImageUrlFromLocalStorage();
+  }
+  
+  // Método para guardar la URL de la imagen en localStorage
+  private saveImageUrlToLocalStorage(imageUrl: string): void {
+    localStorage.setItem('profileImageUrl', imageUrl);
+  }
+
+  // Método para obtener la URL de la imagen desde localStorage
+  private getImageUrlFromLocalStorage(): string | null {
+    return localStorage.getItem('profileImageUrl');
+  }
+
+  // Método para limpiar la URL de la imagen en localStorage
+  private clearImageUrlFromLocalStorage(): void {
+    localStorage.removeItem('profileImageUrl');
+  }
+
+  // Actualizar el Subject con la nueva URL de la imagen y guardarla en localStorage
+  private updateImageUrl(imageUrl: string): void {
+    this.imageUrlSubject.next(imageUrl);
+    this.saveImageUrlToLocalStorage(imageUrl);
+  }
+
 
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(

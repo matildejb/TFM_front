@@ -16,10 +16,14 @@ export class MyAccountComponent {
   activatedRoute = inject(ActivatedRoute);
 
   unUser: IUser | null = null;
+  imageUrl: string | undefined;
 
 
     ngOnInit(): void {
       this.getUserProfile();
+      this.userService.imageUrl$.subscribe(url => {
+      this.imageUrl = url || 'assets/images/default-img.png';
+    });
   }
 
     async getUserProfile(): Promise<void> {
@@ -29,6 +33,5 @@ export class MyAccountComponent {
       console.error('Error fetching user profile', error);
     }
   }
-
 
 }
