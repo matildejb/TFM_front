@@ -18,21 +18,19 @@ export class UserProfileComponent {
   router = inject(Router);
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
-  imageUrl: string = 'assets/images/default-img.png';
+  imageUrl: string | undefined;
 
   unUser: IUser | null = null;
 
 
-    ngOnInit(): void {
+     ngOnInit(): void {
       this.getUserProfile();
-        this.userService.imageUrl$.subscribe(url => {
+      this.userService.imageUrl$.subscribe(url => {
       this.imageUrl = url || 'assets/images/default-img.png';
     });
   }
 
-
-  // Datos personales por usuario
-     async getUserProfile(): Promise<void> {
+    async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
     } catch (error) {
@@ -67,13 +65,10 @@ export class UserProfileComponent {
 
   try {
     const response = await this.userService.uploadImage(this.unUser.id, this.selectedFile);
-    console.log('Imagen subida con éxito', response);
-
-    // Actualizar la URL de la imagen de perfil
-    this.unUser.profileImage = response.profileImage;
-      
-      // Resetear previewUrl para mostrar la imagen actualizada
-      this.previewUrl = null;
+     if (response.profileImage) {
+      this.unUser.profileImage = response.profileImage;
+      this.imageUrl = this.unUser.profileImage; // Actualiza la imagen en la vista
+    }
     
     Swal.fire('Éxito', 'Imagen subida con éxito', 'success');
   } catch (error) {

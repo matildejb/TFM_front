@@ -36,6 +36,14 @@ export class UsersService {
 
   private imageUrlSubject = new BehaviorSubject<string | null>(null); // Subject para la URL de la imagen
   
+   constructor() {
+    // Al inicializar el servicio, obtener la URL de la imagen de localStorage si está disponible
+    const storedImageUrl = localStorage.getItem('profileImageUrl');
+    if (storedImageUrl) {
+      this.imageUrlSubject.next(storedImageUrl);
+    }
+  }
+
 
   // autenticacion usuario
   // REGISTAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
@@ -81,25 +89,9 @@ export class UsersService {
 
   getProfile(): Promise<IUser> {
     return lastValueFrom(
-      this.httpClient.get<IUser>(this.profileUrl)
-    ).then(profile => {
-    let imageUrl: string;
-
-    // Intenta obtener la URL de la imagen desde localStorage
-    const storedImageUrl = this.getImageUrlFromLocalStorage();
-
-    if (storedImageUrl) {
-      imageUrl = storedImageUrl;
-    } else {
-      // Si no hay una URL almacenada, utiliza la URL por defecto
-      imageUrl = 'assets/images/default-img.png';
-    }
-
-    // Actualiza el Subject con la URL de la imagen
-    this.imageUrlSubject.next(imageUrl);
-      return profile;
-    });
-  }
+      this.httpClient.get<IUser>(this.profileUrl))
+   };
+  
 
 
   async uploadImage(id: number, file: File): Promise<any> {
@@ -122,9 +114,9 @@ export class UsersService {
       if (response.data.profileImage) {
         const newImageUrl = `http://localhost:3000/uploads/${response.data.profileImage}`;
         this.updateImageUrl(newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
+         this.saveImageUrlToLocalStorage(newImageUrl);
       } else {
-        console.error('La respuesta del servidor no contiene profileImage');
-        this.updateImageUrl('assets/images/default-img.png');
+        console.error('La respuesta del servidor no contiene profileImage'); 
       }
 
       return response.data;
@@ -138,31 +130,22 @@ export class UsersService {
     return this.imageUrlSubject.asObservable();
        
   }
-    // Método para limpiar la URL de la imagen y actualizar el Subject
-  clearImageUrl(): void {
-    this.imageUrlSubject.next(null);
-    this.clearImageUrlFromLocalStorage();
-  }
   
-  // Método para guardar la URL de la imagen en localStorage
+   private updateImageUrl(imageUrl: string): void {
+    this.imageUrlSubject.next(imageUrl);
+  }
+
   private saveImageUrlToLocalStorage(imageUrl: string): void {
     localStorage.setItem('profileImageUrl', imageUrl);
   }
 
-  // Método para obtener la URL de la imagen desde localStorage
-  private getImageUrlFromLocalStorage(): string | null {
-    return localStorage.getItem('profileImageUrl');
+  getImageUrl(): Observable<string | null> {
+    return this.imageUrlSubject.asObservable();
   }
 
-  // Método para limpiar la URL de la imagen en localStorage
-  private clearImageUrlFromLocalStorage(): void {
+  clearImageUrl(): void {
+    this.imageUrlSubject.next(null);
     localStorage.removeItem('profileImageUrl');
-  }
-
-  // Actualizar el Subject con la nueva URL de la imagen y guardarla en localStorage
-  private updateImageUrl(imageUrl: string): void {
-    this.imageUrlSubject.next(imageUrl);
-    this.saveImageUrlToLocalStorage(imageUrl);
   }
 
 
