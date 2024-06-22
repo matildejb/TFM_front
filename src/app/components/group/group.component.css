@@ -1,4 +1,4 @@
-.wp {
+section.wp {
     padding: 0px 100px;
 }
 
@@ -7,7 +7,6 @@
     font-weight: 700;
     color: rgb(0, 212, 0);
 }
-
 
 .img-menu {
     height: 30px;

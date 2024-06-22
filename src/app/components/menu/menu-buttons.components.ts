@@ -3,29 +3,30 @@ import { RouterLink } from "@angular/router";
 import { GroupService } from "../../services/groups.service";
 
 @Component({
-    selector: 'app-menu-buttons',
-    standalone: true,
-    imports: [RouterLink],
-    templateUrl: './menu-buttons.component.html',
-    styleUrl: './menu-buttons.component.css'
+  selector: 'app-menu-buttons',
+  standalone: true,
+  imports: [RouterLink],
+  templateUrl: './menu-buttons.component.html',
+  styleUrl: './menu-buttons.component.css'
 })
 export class MenuButtonsComponent {
-   @Input() parent: string = "";
-@Input() id: string | undefined ="";
+  @Input() parent: string = "";
+  @Input() id: string | undefined = "";
+  group: any;
 
-    groupsService = inject(GroupService)
+  groupsService = inject(GroupService)
 
-    async deleteGroup(id: string | undefined){
-        //llamar al servicio para borrar la serie
-        if (id !== undefined) {
-              let confirmacion = confirm("¿Estás seguro de que quieres eliminar el grupo?" +  this.id);
-          if (confirmacion){
-            //borrar
-            let response = await this.groupsService.deleteGroup(Number(id));
-            if(response.id){
-              alert(`Grupo borrado correctamente`)
-            }
-          }
+  async deleteGroup(id: string | undefined) {
+    //llamar al servicio para borrar la serie
+    if (id !== undefined) {
+      let confirmacion = confirm("¿Estás seguro de que quieres eliminar el grupo?" + this.id);
+      if (confirmacion) {
+        //borrar
+        let response = await this.groupsService.deleteGroup(Number(id));
+        if (response.id) {
+          alert(`Grupo borrado correctamente`)
         }
       }
+    }
+  }
 }

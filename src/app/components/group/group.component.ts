@@ -4,6 +4,9 @@ import { IGroup } from '../../interfaces/igroup.interfaces';
 import { IPayment } from '../../interfaces/ipayments.interfaces';
 import { CommonModule } from '@angular/common';
 import { MenuButtonsComponent } from '../menu/menu-buttons.components';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { IUser } from '../../interfaces/iuser.interfaces';
 
 
 @Component({
@@ -11,6 +14,7 @@ import { MenuButtonsComponent } from '../menu/menu-buttons.components';
   standalone: true,
   imports: [CommonModule, RouterModule, MenuButtonsComponent],
   templateUrl: './group.component.html',
+  styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
   @Input() amount: number = 0;
@@ -31,7 +35,7 @@ export class GroupComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private groupsService: GroupService,
-    private userService: UsersService
+    private userService: UsersService,
   ) { }
 
   unUser: IUser | null = null;
@@ -61,7 +65,6 @@ export class GroupComponent implements OnInit {
         this.unGroup = group;
         this.arrPayments = await this.groupService.getPayments(group_id);
         console.log('Mis grupos obtenidos:', this.arrPayments);
-        this.unGroup = group;
         this.showNoPaymentsMessage = this.arrPayments.length === 0;
       }
     } catch (error) {

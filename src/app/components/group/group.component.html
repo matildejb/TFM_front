@@ -4,7 +4,6 @@
 	</div>
 	<section class="bg-comp container border border-2 rounded-4 align-items-center m-0 px-4 py-4 mt-4">
 		<div class="d-flex pt-1 w-100 align-items-center">
-			<!-- <a href="#"><i class="fa-solid {{ groupData?.icon}} fa-2x" style="color: #027184;"></i></a>  -->
 			<h3 class="fw-bold mb-0">{{ unGroup?.title || '' }}</h3>
 		</div>
 		<div class="d-flex justify-content-between align-items-center mt-1 w-100">
@@ -30,15 +29,14 @@
 		<!-- Fila de transacciones -->
 		<div *ngFor="let payment of arrPayments"
 			class="bg-card border-custom container align-items-center mt-1 border border-1 rounded-3 border-black">
-			<div class="container row align-items-center justify-content-center align-items-center m-0">
+			<div class="container row align-items-center justify-content-center m-0">
 				<table class="table container font-75 m-0 p-0">
 					<tr class="row align-items-center">
-						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.paid_by }}
+						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.paid_by }}</td>
+						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}
 						</td>
-						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{
-							payment.description }}</td>
 						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
-						<td class="col-2 d-flex amount font-110 fw-bold justify-content-center"
+						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
 							[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
 							{{ payment.amount | currency: 'EUR' }}
 						</td>
@@ -62,20 +60,7 @@
 			<hr class="mx-auto mb-4">
 		</div>
 
-    <section class="row d-flex justify-content-center m-0 p-0">
-        <!-- Balance -->
-        <div class="row d-flex justify-content-center px-5 mb-0">
-            <div class="col d-flex justify-content-between">
-                <span>BALANCE</span>
-                <span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
-                    {{ TotalBalance | currency: 'EUR' }}
-                </span>
-            </div>
-            <hr class="mx-auto mb-4">
-        </div>
-
-        <!-- Botonera -->
-        <app-menu-buttons [parent]="'detailGroup'"></app-menu-buttons>
-    </section>
-
+		<!-- Botonera -->
+		<app-menu-buttons [parent]="'detailGroup'"></app-menu-buttons>
+	</section>
 </section>

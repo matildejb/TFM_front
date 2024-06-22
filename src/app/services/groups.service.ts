@@ -2,7 +2,6 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Injectable, inject } from '@angular/core';
-import { IGroup } from '../interfaces/igroup.interfaces';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { IGroup } from '../interfaces/igroup.interfaces';
 import { IPayment } from '../interfaces/ipayments.interfaces';
@@ -34,8 +33,8 @@ export class GroupService {
 	}
 
 	deleteGroup(id: number): Promise<IGroup> {
-    return lastValueFrom(this.httpClient.delete<IGroup>(`${this.baseUrl}/${id}`));
-  }
+		return lastValueFrom(this.httpClient.delete<IGroup>(`${this.baseUrl}/${id}`));
+	}
 
 	getGroupById(group_id: number): Promise<IGroup> {
 		return lastValueFrom(
