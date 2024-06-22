@@ -1,5 +1,5 @@
 <section class="d-flex justify-content-center align-items-center flex-column">
-  <h1 class="h2 mt-4">{{ tipo }}</h1>
+  <h1 class="h2 mt-4">{{ title }} de usuario</h1>
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -14,7 +14,10 @@
         @if (checkControl('name', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('name', 'pattern')) {
-        <p class="error">Debes introducir un nombre propio válido</p>
+        <p class="error">
+          Debes introducir un nombre propio válido (con la primera letra de cada
+          palabra en mayúscula)
+        </p>
         }
       </div>
       <div class="mb-3">
@@ -48,8 +51,8 @@
         <p class="error">Campo requerido</p>
         } @if (checkControl('phone', 'pattern')) {
         <p class="error">
-          Debes introducir un número de teléfono móvil que sea español o que
-          tenga prefijo de España
+          Debes introducir un número de teléfono móvil que sea español (que
+          empiece por el número 6 o el 7) o que tenga prefijo de España (+34)
         </p>
         }
       </div>
@@ -87,7 +90,7 @@
           >
             <i
               class="bi {{
-                passwordFieldType === 'password' ? 'bi-eye' : 'bi-eye-slash'
+                passwordFieldType === 'password' ? 'bi-eye-slash' : 'bi-eye'
               }}"
             ></i>
           </button>
@@ -97,14 +100,14 @@
         } @if (checkControl('password', 'pattern')) {
         <p class="error">
           Debes introducir una contraseña de entre 8 y 16 caracteres que
-          contenga al menos una minúscula, una mayúscula, un número y un
+          contenga al menos una letra minúscula, una mayúscula, un número y un
           carácter especial
         </p>
         }
       </div>
       <input
         type="submit"
-        [value]="boton"
+        [value]="button"
         class="btn btn-se"
         [disabled]="!formRegister.valid"
       />

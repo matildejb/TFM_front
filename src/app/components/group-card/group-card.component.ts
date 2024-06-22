@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 export class GroupCardComponent {
 	@Input() icon: string = '';
 	@Input() title: string = '';
+	@Input() time: string = '';
 	@Input() amount: number = 0;
 	@Input() navigateTo: string = '';
 

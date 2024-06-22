@@ -50,20 +50,20 @@ export class LoginComponent {
     try {
       const response = await this.usersService.login(this.formLogin.value);
       localStorage.setItem('token', response.token!);
-       Swal.fire({
-          title: 'Login exitoso',
-          text: '¡Has iniciado sesión correctamente!',
-          icon: 'success',
-          timer: 1500,
-          showConfirmButton: false
-        });
+      Swal.fire({
+        title: 'Login exitoso',
+        text: '¡Has iniciado sesión correctamente!',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+      });
       this.router.navigateByUrl('/summary');
     } catch (err: any) {
-        Swal.fire({
+      Swal.fire({
         title: 'Error',
         text: 'Usuario o contraseña incorrectos',
         icon: 'error',
-        confirmButtonText: 'Inténtalo de nuevo'
+        confirmButtonText: 'Inténtalo de nuevo',
       });
     }
   }

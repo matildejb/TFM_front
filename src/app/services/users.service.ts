@@ -27,15 +27,12 @@ type LoginResponse = {
   providedIn: 'root',
 })
 export class UsersService {
-
   private httpClient = inject(HttpClient);
   private baseUrl: string = `${environment.apiUrl}/users`;
   private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
-  
 
-  // autenticacion usuario
-
+  // Autenticación de usuario
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
       this.httpClient.post<IUser & string[]>(
@@ -45,47 +42,50 @@ export class UsersService {
     );
   }
 
-  login(body: LoginBody): Promise<LoginResponse> {
-    return lastValueFrom(
+  async login(body: LoginBody): Promise<LoginResponse> {
+    const response = await lastValueFrom(
       this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, body)
-    ).then(response => {
-      if (response.token) {
-        localStorage.setItem('token', response.token);
-        this.loggedIn.next(true);  // Notifica a los suscriptores que el usuario ha iniciado sesión
-      }
-      return response;
-    });
+    );
+    if (response.token) {
+      localStorage.setItem('token', response.token);
+      this.loggedIn.next(true); // Notifica a los suscriptores que el usuario ha iniciado sesión
+    }
+    return response;
   }
 
-   logout(): void {
+  logout(): void {
     localStorage.removeItem('token');
-     this.loggedIn.next(false);  
+    this.loggedIn.next(false);
   }
-    //permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
-    get isLoggedIn(): Observable<boolean> {
+  // Permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
+  get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
 
   private hasToken(): boolean {
-    return !!localStorage.getItem('token');  // Verifica si el token está presente en el localStorage
+    return !!localStorage.getItem('token'); // Verifica si el token está presente en el localStorage
   }
 
-  
-  
-  // funcionalidades de los usuarios
-
+  // Funcionalidades de los usuarios
   getProfile(): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.get<IUser>(this.profileUrl));
+    return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
-  //Actualizar profile usuario????FALTA
-  updateProfile(formValue: IUser): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.put<IUser>(`${this.profileUrl}/${formValue._id}/update`, formValue));
+  getUserById(id: number): Promise<IUser> {
+    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
   }
 
-  //SUBIR IMAGEN USUARIO???FALTA
+  // Actualizar perfil de usuario
+  updateProfile(userData: IUser): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.put<IUser>(
+        `${this.baseUrl}/updateUser/${userData.id}`,
+        userData
+      )
+    );
+  }
+
+  // SUBIR IMAGEN USUARIO???FALTA
   uploadUserImage(userId: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
@@ -96,10 +96,9 @@ export class UsersService {
     );
   }
 
-  
   deleteUser(id: number): Promise<IUser> {
-     return lastValueFrom(
-       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
-     );
+    return lastValueFrom(
+      this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
+    );
   }
 }
