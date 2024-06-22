@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../../interfaces/iuser.interfaces';
+import { IGroup } from '../../interfaces/igroup.interfaces';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { UsersService } from '../../services/users.service';
 	styleUrls: ['./group-card.component.css']
 })
 export class GroupCardComponent implements OnInit {
-	arrGroups: any[] = [];
+	arrGroups: IGroup[] = [];
 	user_id: number = 1;
 	@Input() navigateTo: string = '';
 	@Input() amount: number = 0;
@@ -26,7 +27,6 @@ export class GroupCardComponent implements OnInit {
 	) { }
 
 	unUser: IUser | null = null;
-
 	amountColor: string = 'green';
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -34,7 +34,6 @@ export class GroupCardComponent implements OnInit {
 			this.amountColor = this.amount < 0 ? 'Crimson' : 'Limegreen';
 		}
 	}
-
 
 	ngOnInit(): void {
 		this.getMyGroups();
