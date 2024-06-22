@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
@@ -38,6 +38,7 @@ export class UsersService {
   
 
   // autenticacion usuario
+  // REGISTAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
 
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
@@ -75,7 +76,8 @@ export class UsersService {
 
   
   
-  // funcionalidades de los usuarios
+  // funcionalidades de los usuarios  
+  // DATOS POR USUARIO/ACTUALIZAR IMG/ ELIMINAR USUARIO
 
   getProfile(): Promise<IUser> {
     return lastValueFrom(

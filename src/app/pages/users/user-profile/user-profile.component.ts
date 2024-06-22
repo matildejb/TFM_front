@@ -30,6 +30,8 @@ export class UserProfileComponent {
     });
   }
 
+
+  // Datos personales por usuario
      async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
@@ -39,7 +41,7 @@ export class UserProfileComponent {
   }
 
 
-  //Cambiar foto
+  //Cambiar image
    onFileSelected(event: any): void {
      this.selectedFile = event.target.files[0] as File;
      this.previewImage();
@@ -80,17 +82,18 @@ export class UserProfileComponent {
   }
 }
 
-
+// Borrar cuenta usuario 
   async deleteUser(): Promise<void> {
     if (!this.unUser) {
       return;
     }
    Swal.fire({
     title: "¿Estás seguro?",
-    text: "Perderás tu cuenta definitivamente",
-    icon: "warning",
+    text: "Esta acción es irreversible. Perderás tu cuenta definitivamente.",
+     icon: "warning",
+     iconColor: '#FF0000',
     showCancelButton: true,
-    confirmButtonColor: "#004a59",
+    confirmButtonColor: "#027184",
     cancelButtonColor: "#d33",
     cancelButtonText: "Cancelar",
     confirmButtonText: "¡SÍ, Quiero hacerlo!"
