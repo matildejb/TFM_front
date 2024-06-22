@@ -118,7 +118,7 @@ export class UserProfileComponent {
       } catch (error) {
         Swal.fire({
           title: "Error",
-          text: "No se pudo eliminar tu usuario",
+          text: "Debes finalizar tus grupos activos para eliminar tu cuenta.",
           icon: "error"
         });
       }
