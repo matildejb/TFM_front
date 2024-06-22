@@ -38,7 +38,7 @@
 						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
 						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
 							[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
-							{{ payment.amount | currency: 'EUR' }}
+							{{ payment.amount.toString() | currency: 'EUR' }}
 						</td>
 					</tr>
 				</table>
@@ -61,6 +61,6 @@
 		</div>
 
 		<!-- Botonera -->
-		<app-menu-buttons [parent]="'detailGroup'"></app-menu-buttons>
+		<app-menu-buttons [parent]="'detailGroup'" [id]="group_id.toString()"></app-menu-buttons>
 	</section>
 </section>

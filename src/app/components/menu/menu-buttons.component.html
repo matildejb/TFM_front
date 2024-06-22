@@ -1,6 +1,6 @@
 <div class="menu-container">
 	@if (parent === 'detailGroup'){
-	<a class="btn btn-menu" [routerLink]="['/group/group.id/filter']" data-bs-toggle="tooltip" data-bs-placement="top"
+	<a class="btn btn-menu" [routerLink]="['/group', id, 'filter']" data-bs-toggle="tooltip" data-bs-placement="top"
 		title="Añadir amigos">
 		<i class="fa-solid fa-user-plus"></i></a>
 	<a type="button" class="btn btn-menu" [routerLink]="['/payments']" data-bs-toggle="modal"
@@ -8,7 +8,7 @@
 		<i class="fa-solid fa-coins"></i>
 	</a>
 	<a type="button" class="btn btn-menu" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar grupo"
-		(click)="deleteGroup(group)">
+		(click)="deleteGroup(id)">
 		<i class="fa-solid fa-users-rays"></i>
 	</a>
 	}@else if (parent === 'groups') {

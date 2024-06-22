@@ -13,6 +13,8 @@ export class MenuButtonsComponent {
   @Input() parent: string = "";
   @Input() id: string | undefined = "";
   group: any;
+  group_id: number = 0;
+  user_id: number = 1;
 
   groupsService = inject(GroupService)
 
