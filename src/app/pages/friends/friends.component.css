@@ -1,17 +1,9 @@
 
     .wp {
-      padding: 0px 75px 120px;
-      
-      
+      margin: auto;
+      max-width: 60%;  
   }
-    ul {
-        list-style-type: none; 
-        padding: 0; 
-        margin: 0; 
-    }
-    .box{
-        background-color: rgba(2, 113, 132, 0.15);
-    }
+
     .header {
         width: 100%;
         display: flex;
@@ -22,16 +14,23 @@
     span{
         padding-bottom: 100px;
     }
-  
-  
-  @media (min-width: 768px) and (max-width: 1200px) {
-      .wp {
-          padding: 0px 250px 150px;
-      }
+
+  .card-body{
+    margin: auto;
+    text-align: center;
   }
-  
-  @media (min-width: 1201px) {
-      .wp {
-          padding: 0px 400px 150px;
-      }
+  .card{
+    background-color: rgba(2, 113, 132, 0.15);
+  }
+
+  @media (min-width: 760px) and (max-width: 1024px) {
+    .wp {
+        margin: auto;
+        max-width: 80%;  
+    }
+    .card-title, .card-text {
+      max-width: 100%;
+      font-size: smaller;
+     
+    }
   }
