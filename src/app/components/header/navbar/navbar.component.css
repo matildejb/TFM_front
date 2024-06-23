@@ -17,11 +17,7 @@
 
 .offcanvas {
   width: 270px;
-  background: linear-gradient(
-    to bottom right,
-    white 60%,
-    rgba(2, 113, 132, 0.481)
-  );
+  background: linear-gradient(to bottom, white 90%, rgba(2, 113, 132, 0.925));
 }
 .offcanvas-header {
   margin-bottom: 0;
@@ -68,6 +64,11 @@ a {
     height: 100vh;
     z-index: 1030;
     font-size: 1.2rem;
+    background: linear-gradient(
+      to bottom right,
+      white 60%,
+      rgba(2, 113, 132, 0.481)
+    );
   }
 
   .navbar-toggler {

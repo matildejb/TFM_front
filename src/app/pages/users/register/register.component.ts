@@ -7,8 +7,6 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
-import { UsersService } from '../../../services/users.service';
-
 
 @Component({
   selector: 'app-register',
