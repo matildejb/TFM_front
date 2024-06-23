@@ -158,6 +158,7 @@ getMemberIds(userId: string): Promise<number[]> {
   return lastValueFrom(
     this.httpClient.get<any[]>(url, { headers }).pipe(
       map(members => members.map(member => member.id))
+      
     )
   );
   }

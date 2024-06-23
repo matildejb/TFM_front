@@ -16,18 +16,20 @@
            [ngClass]="{'show': isExpanded}"
            [attr.aria-labelledby]="'heading-' + title">
         <div class="acordeon_box accordion-body">
-          <ul class="list-unstyled">
+          <ul class="list-unstyled" *ngIf="userPayments.length > 0; else noPayments">
             <li *ngFor="let payment of userPayments" class="mb-2">
               <div class="box_resumen d-flex justify-content-between align-items-center">
                 <span class="description">{{ payment.description }}</span>
-                <span class="amount" >
-                  {{ payment.participant_amount }}€
-                </span>
+                <span class="amount">{{ payment.participant_amount }}€</span>
               </div>
             </li>
           </ul>
+          <ng-template #noPayments>
+            <p>No hay pagos recientes</p>
+          </ng-template>
         </div>
       </div>
     </div>
   </div>
 </section>
+

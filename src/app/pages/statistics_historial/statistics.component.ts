@@ -15,22 +15,30 @@ import { IMember } from '../../interfaces/imember';
 })
 export class StatisticsComponent {
   members: IMember[] = [];
-  userId: string = '11';
   userPayments: { [userId: string]: any[] } = {}; // Objeto para almacenar pagos por usuario
 
   constructor(private memberService: UsersService) {}
 
   ngOnInit(): void {
-    this.loadMembers();
+    this.loadUserProfileAndMembers();
   }
 
-  loadMembers(): void {
-    this.memberService.getMembersOfSharedGroups(this.userId)
+  private async loadUserProfileAndMembers(): Promise<void> {
+    try {
+      const userProfile = await this.memberService.getLoggedInUserProfile();
+      const userId = userProfile.id.toString();
+      this.loadMembers(userId);
+    } catch (error) {
+      console.error('Error al obtener el perfil del usuario logado:', error);
+    }
+  }
+
+  private loadMembers(userId: string): void {
+    this.memberService.getMembersOfSharedGroups(userId)
       .then(members => {
         this.members = members;
         console.log('Miembros que comparten grupos con el usuario:', members);
 
-        // Inicializar userPayments para cada usuario
         this.members.forEach(member => {
           this.userPayments[member.id.toString()] = [];
           this.loadUserPayments(member.id.toString());
@@ -41,7 +49,7 @@ export class StatisticsComponent {
       });
   }
 
-  loadUserPayments(userId: string): void {
+  private loadUserPayments(userId: string): void {
     this.memberService.getUserPayments(userId)
       .then(payments => {
         this.userPayments[userId] = payments;
@@ -52,4 +60,3 @@ export class StatisticsComponent {
       });
   }
 }
-
