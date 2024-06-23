@@ -108,7 +108,7 @@ export class UsersService {
   }
 
 
-// -------------------------------------------- page friends --------------------------------------------------
+// -------------------------------------------- page historial --------------------------------------------------
 
   private membersUrl = `${environment.apiUrl}/members`;
  
@@ -162,23 +162,47 @@ getMemberIds(userId: string): Promise<number[]> {
   );
   }
 
-// -------------------------------------------- page statistics--------------------------------------------------
+// -------------------------------------------- page amigos--------------------------------------------------
 
-getGroupDetails(groupId: string): Promise<any> {
-  const url = `${environment.apiUrl}/groups/${groupId}`;
+
+
+getLoggedInUserProfile(): Promise<IUser> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   });
-  return lastValueFrom(this.httpClient.get<any>(url, { headers }));
+  console.log('Requesting user profile...');
+  return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
+    console.log('User profile received:', profile);
+    return profile;
+  }).catch(error => {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  });
 }
 
-getMemberById(memberId: string): Promise<IMember> {
-  const url = `${environment.apiUrl}/members/${memberId}/known`;
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  });
-  return lastValueFrom(this.httpClient.get<IMember>(url, { headers }));
+async getMembersOfSharedGroupsForLoggedInUser(): Promise<any[]> {
+  try {
+    // Obtenemos el perfil del usuario logueado
+    const userProfile = await this.getLoggedInUserProfile();
+    const userId: string = userProfile.id.toString();
+    // Obtenemos los grupos del usuario
+    const groups = await this.getUserGroups(userId);
+    
+    // Obtenemos los miembros de los grupos (sin repetir)
+    const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
+    
+    // Filtramos y devolvemos los miembros únicos
+    const uniqueMembers = members.flat().filter((member, index, self) =>
+      index === self.findIndex((m) => m.id === member.id)
+    );
+    
+    return uniqueMembers;
+  } catch (error) {
+    console.error('Error fetching friends list:', error);
+    throw error;
+  }
 }
+
 
   // // apiUrl: 'http://localhost:3000/api',
 }
