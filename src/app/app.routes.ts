@@ -16,7 +16,7 @@ import { SummaryComponent } from './pages/summary/summary.component';
 import { loginGuard } from './guards/login.guard';
 import { redirectGuard } from './guards/redirect.guard';
 import { FriendsComponent } from './pages/friends/friends.component';
-import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { StatisticsComponent } from './pages/statistics_historial/statistics.component';
 import { FilterComponent } from './components/filter/filter.component';
 
 export const routes: Routes = [
@@ -66,10 +66,9 @@ export const routes: Routes = [
     canActivate: [loginGuard],
   },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
-
+  { path: 'friends', component: FriendsComponent, canActivate: [loginGuard] },
+  { path: 'historial', component: StatisticsComponent, canActivate: [loginGuard] },
   { path: 'filter', component: FilterComponent },
-  { path: 'friends', component: FriendsComponent },
-  { path: 'statistics', component: StatisticsComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];

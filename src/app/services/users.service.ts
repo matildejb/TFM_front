@@ -1,9 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, forkJoin, lastValueFrom, map, Observable, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
+import { IDebt } from '../interfaces/idebt';
+import { IMember } from '../interfaces/imember';
 import axios from 'axios';
+
 
 type RegisterBody = {
   name: string;
@@ -153,4 +156,118 @@ export class UsersService {
       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
     );
   }
+
+
+// -------------------------------------------- page historial --------------------------------------------------
+
+  private membersUrl = `${environment.apiUrl}/members`;
+ 
+  getMembersByGroupId(groupId:string): Observable<any>{
+    const url = `${this.membersUrl}/${groupId}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.httpClient.get<any>(url, {headers});
+  }
+
+   
+    getUserGroups(userId: string): Promise<any> {
+    const url = `${environment.apiUrl}/groups/${userId}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return lastValueFrom(this.httpClient.get<any>(url, { headers }));
+  }
+
+
+
+  async getMembersOfSharedGroups(userId: string): Promise<any[]> {
+    const groups = await this.getUserGroups(userId);
+    const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
+   const uniqueMembers = members.flat().filter((member, index, self) =>
+    index === self.findIndex((m) => m.id === member.id)
+  );
+  return uniqueMembers;
+}
+
+
+getUserPayments(userId: string): Promise<any> {
+  const url = `${environment.apiUrl}/payments/user/${userId}/participated`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(this.httpClient.get<any>(url, { headers }));
+}
+
+
+getMemberIds(userId: string): Promise<any[]> {
+  const url = `${environment.apiUrl}/members/${userId}/known`;
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  return lastValueFrom(
+    this.httpClient.get<any[]>(url, { headers }).pipe(
+      map(members => {
+        console.log('Members received:', members); // Log the entire response first
+        return members.map(member => ({
+          id: member.id,
+          name: member.name,
+          email: member.email,
+          imageUrl: member.imageUrl
+        }));
+      })
+    )
+  );
+}
+
+
+
+// -------------------------------------------- page amigos--------------------------------------------------
+
+
+
+getLoggedInUserProfile(): Promise<IUser> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  });
+  console.log('Requesting user profile...');
+  return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
+    console.log('User profile received:', profile);
+    return profile;
+  }).catch(error => {
+    console.error('Error fetching user profile:', error);
+    throw error;
+  });
+}
+
+async getMembersOfSharedGroupsForLoggedInUser(): Promise<any[]> {
+  try {
+    // Obtenemos el perfil del usuario logueado
+    const userProfile = await this.getLoggedInUserProfile();
+    const userId: string = userProfile.id.toString();
+    // Obtenemos los grupos del usuario
+    const groups = await this.getUserGroups(userId);
+    
+    // Obtenemos los miembros de los grupos (sin repetir)
+    const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
+    
+    // Filtramos y devolvemos los miembros únicos
+    const uniqueMembers = members.flat().filter((member, index, self) =>
+      index === self.findIndex((m) => m.id === member.id)
+    );
+    
+    return uniqueMembers;
+  } catch (error) {
+    console.error('Error fetching friends list:', error);
+    throw error;
+  }
+}
+
+private miembros = 'http://localhost:3000/api/members/11/known';
+getKnownMembers(): Observable<any[]> {
+  return this.httpClient.get<any[]>(this.miembros);
+}
+
+
+  // // apiUrl: 'http://localhost:3000/api',
 }

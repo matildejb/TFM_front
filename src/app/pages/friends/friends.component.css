@@ -1,0 +1,39 @@
+
+    .wp {
+      margin: auto;
+      max-width: 60%;  
+  }
+
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+    span{
+        padding-bottom: 100px;
+    }
+    .box{
+      background-color: rgba(2, 113, 132, 0.15);
+      width: 100%;
+  }
+  .card-body{
+    margin: auto;
+    text-align: center;
+  }
+  .card{
+    background-color: rgba(2, 113, 132, 0.15);
+  }
+
+  @media (min-width: 760px) and (max-width: 1024px) {
+    .wp {
+        margin: auto;
+        max-width: 80%;  
+    }
+    .card-title, .card-text {
+      max-width: 100%;
+      font-size: smaller;
+     
+    }
+  }
