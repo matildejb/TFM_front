@@ -150,18 +150,27 @@ getUserPayments(userId: string): Promise<any> {
 }
 
 
-getMemberIds(userId: string): Promise<number[]> {
+getMemberIds(userId: string): Promise<any[]> {
   const url = `${environment.apiUrl}/members/${userId}/known`;
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   });
   return lastValueFrom(
     this.httpClient.get<any[]>(url, { headers }).pipe(
-      map(members => members.map(member => member.id))
-      
+      map(members => {
+        console.log('Members received:', members); // Log the entire response first
+        return members.map(member => ({
+          id: member.id,
+          name: member.name,
+          email: member.email,
+          imageUrl: member.imageUrl
+        }));
+      })
     )
   );
-  }
+}
+
+
 
 // -------------------------------------------- page amigos--------------------------------------------------
 
@@ -202,6 +211,11 @@ async getMembersOfSharedGroupsForLoggedInUser(): Promise<any[]> {
     console.error('Error fetching friends list:', error);
     throw error;
   }
+}
+
+private miembros = 'http://localhost:3000/api/members/11/known';
+getKnownMembers(): Observable<any[]> {
+  return this.httpClient.get<any[]>(this.miembros);
 }
 
 
