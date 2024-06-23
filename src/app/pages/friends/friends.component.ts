@@ -2,7 +2,7 @@
     import { CommonModule, NgFor } from '@angular/common';
     import { UsersService } from '../../services/users.service';
     import { ActivatedRoute } from '@angular/router';
-import { FriendCardComponent} from '../../components/friend-card/friend-card.component';
+import { FriendCardComponent} from '../../components/friend-card_historial/friend-card.component';
 import { IMember } from '../../interfaces/imember';
     
     @Component({
