@@ -80,20 +80,11 @@ export class UsersService {
   getProfile(): Promise<IUser> {
       return lastValueFrom(
       this.httpClient.get<IUser>(this.profileUrl)
-    ).then(profile => {
-      const userId = profile.id;
-      let imageUrl: string | null = this.getImageUrlFromLocalStorage(userId);
-
-      if (!imageUrl) {
-        imageUrl = 'assets/images/default-img.png';
-      }
-
-      this.updateImageUrl(userId, imageUrl); // Guarda la URL de la imagen asociada al usuario
-
-      return profile;
-    });
+    )
   }
+  
 
+  //IMG
 
   async uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
@@ -113,7 +104,7 @@ export class UsersService {
       });
      
       if (response.data.profileImage) {
-        const newImageUrl = `http://localhost:3000/uploads/${response.data.profileImage}`;
+        const newImageUrl = response.data.profileImage;
         this.updateImageUrl(id, newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
       } else {
         console.error('La respuesta del servidor no contiene profileImage');
@@ -137,33 +128,31 @@ export class UsersService {
   }
 
 
-  private getImageUrlFromLocalStorage(userId: number): string | null {
-    return localStorage.getItem(`profileImageUrl_${userId}`);
-  }
-
- 
-private getCurrentUserId(): number | null {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return null;
+  async getUserImage(userId: number): Promise<any> {
+     try {
+    const response = await axios.get(`/api/users/${userId}/image`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      // Handle Axios specific errors
+      console.error(`Error getting user image: ${error.message}`, {
+        code: error.code,
+        response: error.response ? {
+          status: error.response.status,
+          data: error.response.data,
+        } : null,
+      });
+    } else {
+      // Handle other errors
+      console.error(`Unexpected error: ${error}`);
     }
-    try {
-      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-      return tokenPayload.user_id || null;
-    } catch (error) {
-      console.error('Error al decodificar el token JWT:', error);
-      return null;
-    }
+    throw error; 
   }
-
+  }
 
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
        this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
      );
-  }
-
-   private clearImageUrl(userId: number): void {
-    localStorage.removeItem(`imageUrl_${userId}`);
   }
 }

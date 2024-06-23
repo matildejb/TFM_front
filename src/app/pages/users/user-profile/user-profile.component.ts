@@ -3,80 +3,70 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { IUser } from '../../../interfaces/iuser.interfaces';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent {
-  userService = inject(UsersService);
+ private userService = inject(UsersService);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-  selectedFile: File | null = null;
-  previewUrl: string | ArrayBuffer | null = null;
-  imageUrl: string = 'assets/images/default-img.png';
+  image: File | null = null; 
+  imgURL = 'assets/images/default-img.png';
+  
 
   unUser: IUser | null = null;
 
 
      ngOnInit(): void {
-       this.userService.imageUrl$.subscribe(
-      imageUrl => {
-        if (imageUrl) {
-          this.imageUrl = imageUrl;
-        }
-      }
-    );
     this.getUserProfile();
   }
 
   // Datos personales por usuario
      async getUserProfile(): Promise<void> {
-    try {
+     try {
       this.unUser = await this.userService.getProfile();
-      if (this.unUser?.profileImage) {
-        this.imageUrl = this.unUser.profileImage;
+      if (this.unUser && this.unUser.id) {
+        this.imgURL = await this.userService.getUserImage(this.unUser.id);
       }
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
   }
 
-
-  //Cambiar image
-   onFileSelected(event: any): void {
-     this.selectedFile = event.target.files[0] as File;
-     this.previewImage();
+  //Elegir imagen y previsualizarla
+ onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imgURL = reader.result as string;
+      };
+      this.image = file;
+    }
   }
   
-     previewImage(): void {
-    if (!this.selectedFile) {
-      return;
-     }
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.previewUrl = e.target.result;
-    };
-    reader.readAsDataURL(this.selectedFile);
-  }
-
-
-   async onUpload(): Promise<void> {
-    if (!this.selectedFile || !this.unUser) {
+  // Subir la imagen y actualizar la URL de la imagen
+  async onSubmit(): Promise<void> {
+    if (!this.image || !this.unUser) {
       console.error('No se ha seleccionado ningún archivo o no se ha cargado el usuario');
       return;
     }
 
     try {
-      const response = await this.userService.uploadImage(this.unUser.id, this.selectedFile);
+      const response = await this.userService.uploadImage(this.unUser.id, this.image);
       if (response.profileImage) {
-        this.unUser.profileImage = response.profileImage;
-        this.imageUrl = this.unUser.profileImage!; // Actualiza la imagen en la vista
-        this.userService.updateImageUrl(this.unUser.id, this.imageUrl); 
+        this.unUser.profileImageUrl = response.profileImage;
+        this.imgURL = await this.userService.getUserImage(this.unUser.id); // Actualiza la imagen en la vista
+        this.userService.updateImageUrl(this.unUser.id, this.imgURL);
       }
 
       Swal.fire('Éxito', 'Imagen subida con éxito', 'success');
@@ -85,6 +75,7 @@ export class UserProfileComponent {
       Swal.fire('Error', 'Error subiendo la imagen', 'error');
     }
   }
+
 
 // Borrar cuenta usuario 
   async deleteUser(): Promise<void> {

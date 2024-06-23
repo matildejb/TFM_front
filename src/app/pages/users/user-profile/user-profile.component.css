@@ -23,6 +23,7 @@
       display: flex;
       color: #027184;
       padding-top: 0px;
+      width: 170px;
 
       &:hover {
         text-decoration: underline;

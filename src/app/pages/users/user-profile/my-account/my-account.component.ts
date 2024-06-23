@@ -12,30 +12,26 @@ import { IUser } from '../../../../interfaces/iuser.interfaces';
 export class MyAccountComponent {
 
   userService = inject(UsersService);
+  image: File | null = null; 
+  imgURL = 'assets/images/default-img.png';
   unUser: IUser | null = null;
-  imageUrl: string = 'assets/images/default-img.png';
-
-
-      ngOnInit(): void {
-       this.userService.imageUrl$.subscribe(
-      imageUrl => {
-        if (imageUrl) {
-          this.imageUrl = imageUrl;
-        }
-      }
-    );
+  
+  
+    ngOnInit(): void {
     this.getUserProfile();
   }
 
-    async getUserProfile(): Promise<void> {
+  // Datos personales por usuario
+     async getUserProfile(): Promise<void> {
     try {
       this.unUser = await this.userService.getProfile();
-      if (this.unUser?.profileImage) {
-        this.imageUrl = this.unUser.profileImage;
+       if (this.unUser?.profileImage) {
+        this.imgURL = this.unUser.profileImage; // Mostrar imagen del perfil si existe
       }
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
   }
+
 
 }
