@@ -5,4 +5,5 @@
 .btn:hover {
     background-color: rgb(12, 113, 132);
     color: white;
+    box-shadow: black 0px 2px 3px 0px;
 }

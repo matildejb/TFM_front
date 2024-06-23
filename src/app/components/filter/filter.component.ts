@@ -96,6 +96,13 @@
 // }
 
 
+
+
+
+
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -174,18 +181,7 @@ export class FilterComponent implements OnInit {
       this.message = 'No se pudo obtener el ID del grupo';
       console.error(this.message);
     }
-
-    const url = `${this.baseUrl}/${this.groupId}`;
-
-    this.httpClient.post(url, { email: user.email }).subscribe({
-      next: (response) => {
-        console.log('Usuario añadido al grupo exitosamente', response);
-        this.message = 'Usuario añadido al grupo exitosamente';
-      },
-      error: (error) => {
-        console.error('Error al añadir el usuario al grupo', error);
-        this.message = 'Error al añadir el usuario al grupo';
-      }
-    });
   }
 }
+
+

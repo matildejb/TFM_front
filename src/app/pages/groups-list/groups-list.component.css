@@ -2,6 +2,10 @@
     padding: 0px 100px 120px;
 }
 
+.groupSection {
+    padding-bottom: 200px;
+}
+
 .price-text {
     font-size: 2rem;
     font-weight: 700;

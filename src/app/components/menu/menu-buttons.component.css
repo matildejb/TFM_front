@@ -19,6 +19,7 @@
   &:hover {
     background-color: #027184;
     color: white;
+    box-shadow: black 0px 2px 3px 0px;
   }
 }
 
