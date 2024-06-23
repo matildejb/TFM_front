@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
+import axios from 'axios';
 
 type RegisterBody = {
   name: string;
@@ -32,7 +33,11 @@ export class UsersService {
   private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  // Autenticación de usuario
+  private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
+
+  // autenticacion usuario
+  // REGISTAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
+
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
       this.httpClient.post<IUser & string[]>(
@@ -57,7 +62,7 @@ export class UsersService {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
   }
-  // Permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
+  //permite actualizar la UI inmediatamente cuando el usuario cierra o inicia sesión
   get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
@@ -65,35 +70,82 @@ export class UsersService {
   private hasToken(): boolean {
     return !!localStorage.getItem('token'); // Verifica si el token está presente en el localStorage
   }
+  
+  
+  // funcionalidades de los usuarios  
+  // DATOS POR USUARIO/ACTUALIZAR IMG/ ELIMINAR USUARIO
 
-  // Funcionalidades de los usuarios
   getProfile(): Promise<IUser> {
-    return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
+      return lastValueFrom(
+      this.httpClient.get<IUser>(this.profileUrl)
+    )
   }
+  
 
-  getUserById(id: number): Promise<IUser> {
-    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
-  }
+  //IMG
 
-  // Actualizar perfil de usuario
-  updateProfile(userData: IUser): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.put<IUser>(
-        `${this.baseUrl}/updateUser/${userData.id}`,
-        userData
-      )
-    );
-  }
-
-  // SUBIR IMAGEN USUARIO???FALTA
-  uploadUserImage(userId: number, image: File) {
+  async uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('profile_image', file);
+       
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No se encontró un token de autorización en el almacenamiento local.');
+      }
 
-    return this.httpClient.post(
-      `${this.baseUrl}/${userId}/upload-image`,
-      formData
-    );
+      const response = await axios.put(`${this.profileUrl}/image/${id}`, formData, {
+        headers: {
+          'Authorization': token || `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+     
+      if (response.data.profileImage) {
+        const newImageUrl = response.data.profileImage;
+        this.updateImageUrl(id, newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
+      } else {
+        console.error('La respuesta del servidor no contiene profileImage');
+        this.updateImageUrl(id, 'assets/images/default-img.png');
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error('Error subiendo la imagen:', error);
+      throw error;
+    }
+  }
+   
+  get imageUrl$(): Observable<string> {
+    return this.imageUrlSubject.asObservable();
+  }
+
+ updateImageUrl(userId: number, imageUrl: string): void {
+    this.imageUrlSubject.next(imageUrl);
+    localStorage.setItem(`imageUrl_${userId}`, imageUrl); // Almacenar la URL de la imagen en el localStorage
+  }
+
+
+  async getUserImage(userId: number): Promise<any> {
+     try {
+    const response = await axios.get(`/api/users/${userId}/image`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      // Handle Axios specific errors
+      console.error(`Error getting user image: ${error.message}`, {
+        code: error.code,
+        response: error.response ? {
+          status: error.response.status,
+          data: error.response.data,
+        } : null,
+      });
+    } else {
+      // Handle other errors
+      console.error(`Unexpected error: ${error}`);
+    }
+    throw error; 
+  }
   }
 
   deleteUser(id: number): Promise<IUser> {

@@ -22,35 +22,34 @@
       </svg>
     </button>
 
-    <form (submit)="onSubmit()" class="d-flex flex-column gap-3">
-      <img
-        class="card-img-top mt-0 me-5"
-        [src]="unUser?.imageUrl || 'assets/images/default-img.png'"
-        [alt]="unUser?.name || 'img-personal '"
-        title="imagen-perfil"
-      />
-      <label class="custom-file-upload position-absolute">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-        <i class="bi bi-camera"></i
-      ></label>
-      <button type="submit" class="btn border-2 border-primary p-0 w-50">
-        Actualizar imagen
-      </button>
-    </form>
+    <div class="card flex-md-row">
+        <button class="btn edit-profile me-3 mt-3 mt-md-0" [routerLink]="['/update-user']">Editar
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f6a278"
+                class="bi bi-sliders setting ms-2" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z" />
+            </svg>
+        </button>
 
-    <div class="card-body mb-4">
-      <p>
-        Nombre:<b> {{ unUser?.name }}</b>
-      </p>
-      <p>
-        Usuario:<b> {{ unUser?.username }} </b>
-      </p>
-      <p>
-        Email:<b> {{ unUser?.email }} </b>
-      </p>
-      <p>
-        Teléfono: <b>{{ unUser?.phone }} </b>
-      </p>
+        <form (ngSubmit)="onSubmit()" method="PUT" enctype="multipart/form-data" class="d-flex flex-column gap-3">
+            <label class="custom-file-upload position-absolute">
+                <input type="file" (change)="onFileSelected($event)" name="profile_image" accept="image/*">
+                <i class="bi bi-camera"></i></label>
+
+            <img class="card-img-top mt-0 me-3" [src]="imgURL" [alt]="unUser?.name || 'img-personal '"
+                title="imagen-perfil">
+
+            <button type="submit" class="btn actualizar">Actualizar imagen</button>
+        </form>
+
+        <div class="card-body mb-4 pb-5">
+            <p>Nombre:<b> {{ unUser?.name }}</b></p>
+            <p>Nombre de usuario:<b> {{ unUser?.username }} </b></p>
+            <p>Correo electrónico:<b> {{ unUser?.email }} </b></p>
+            <p>Número de teléfono: <b>{{ unUser?.phone }} </b></p>
+        </div>
+
+        <a type="button" class="delete-account p-3 text-danger" (click)="deleteUser()">Eliminar cuenta</a>
     </div>
 
     <a type="button" class="delete-account p-3" (click)="deleteUser()"

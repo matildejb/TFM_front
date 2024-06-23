@@ -11,17 +11,30 @@
 
     .edit-profile {
       color: #f6a278;
+      font-weight: bolder;
       display: flex;
-      padding: 0;
+      padding: 2px 10px;
       position: absolute;
       right: 0;
+      border: 2px solid #f6a278;
+    }
+
+    .actualizar {
+      display: flex;
+      color: #027184;
+      padding-top: 0px;
+      width: 170px;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     img {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 100%;
-      border: 2px solid;
+      border: 1px solid;
       object-fit: contain;
     }
     /* Estilo para ocultar el input file original */
@@ -55,7 +68,6 @@
     }
   }
   .delete-account {
-    color: #004a59;
     text-decoration: none;
     font-size: 0.9rem;
     position: absolute;
@@ -83,5 +95,6 @@
     h2 {
       margin-left: 3rem;
     }
+
   }
 }
