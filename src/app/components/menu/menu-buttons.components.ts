@@ -11,15 +11,13 @@ import { GroupService } from "../../services/groups.service";
 })
 export class MenuButtonsComponent {
   @Input() parent: string = "";
-  @Input() id: string | undefined = "";
-  group: any;
-  group_id: number = 0;
-  user_id: number = 1;
+  @Input() id: string = "";
+  groupId: number | null = null;
 
-  groupsService = inject(GroupService)
+  groupsService = inject(GroupService);
 
-  async deleteGroup(id: string | undefined) {
-    //llamar al servicio para borrar la serie
+  async deleteGroup(id: string) {
+    //llamar al servicio para borrar el grupo
     if (id !== undefined) {
       let confirmacion = confirm("¿Estás seguro de que quieres eliminar el grupo?" + this.id);
       if (confirmacion) {

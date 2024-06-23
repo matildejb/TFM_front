@@ -36,7 +36,7 @@ export const routes: Routes = [
   { path: 'group/:id/filter', component: FilterComponent, canActivate: [loginGuard] },
   { path: 'group/:id/groupMembers', component: GroupMembersComponent, canActivate: [loginGuard] },
 
-  { path: 'payments', component: PaymentsComponent },
+  { path: 'group/:id/formPayments', component: PaymentsComponent },
   { path: 'createGroup', component: FormGroupComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },

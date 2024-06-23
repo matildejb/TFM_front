@@ -1,6 +1,6 @@
 <section class="container">
     <div class="p-3 width">
-        <form [formGroup]="formPayment" (ngSubmit)="onSubmit()">
+        <form [formGroup]="formNewPayment">
             <div class="mb-3">
                 <label for="description" class="form-label">Descripción</label>
                 <input type="text" placeholder="Introduce una descripción para el gasto" id="description"
@@ -12,14 +12,19 @@
                     formControlName="payment" />
             </div>
             <div class="mb-3">
-                <label for="user" class="form-label">Participante</label>
-                <select id="user" class="form-control" formControlName="user">
-                    <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                <label for="member" class="form-label">Pagador</label>
+                <select id="member" class="form-control" formControlName="member">
+                    <!-- <option *ngFor="let user of filteredUsers"></option> -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="member" class="form-label">A quien paga</label>
+                <select id="member" class="form-control" formControlName="member">
+                    <!-- <option *ngFor="let member of members" [value]="member.id">{{ member.name }}</option> -->
                 </select>
             </div>
 
-            <input type="submit" value="Añadir" class="btn btn-se" />
+            <input type="submit" value="Añadir" class="btn btn-se" (click)="createNewPayment()" />
         </form>
     </div>
 </section>
-
