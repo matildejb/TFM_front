@@ -68,9 +68,10 @@
 // groups.service.ts
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { lastValueFrom } from 'rxjs';
+import { IUser } from '../interfaces/iuser.interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -78,7 +79,8 @@ import { lastValueFrom } from 'rxjs';
 export class GroupService {
 	private baseUrl: string = `${environment.apiUrl}`;
 
-	constructor(private httpClient: HttpClient) { }
+	// constructor(private httpClient: HttpClient) { }
+	private httpClient = inject(HttpClient);
 
 	getMyGroups(user_id: number): Promise<any> {
 		return lastValueFrom(
@@ -119,7 +121,14 @@ export class GroupService {
 	}
 
 	addMember(groupId: string, userEmail: string): Promise<any> {
-		const url = `${this.baseUrl}/groups/${groupId}/add`;
+		const url = `${this.baseUrl}/members/${groupId}/add`;
 		return lastValueFrom(this.httpClient.post(url, { email: userEmail }));
 	}
+
+	getUserEmail(userId: number): Promise<any> {
+		return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/users/email/${userId}`));
+	}
 }
+
+
+// router.post('/:group_id/add', checkAdmin, addMember);

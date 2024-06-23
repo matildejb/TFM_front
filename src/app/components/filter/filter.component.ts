@@ -128,7 +128,7 @@ export class FilterComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private httpClient: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   private baseUrl: string = `${environment.apiUrl}/members`;
@@ -180,8 +180,34 @@ export class FilterComponent implements OnInit {
     if (!this.groupId) {
       this.message = 'No se pudo obtener el ID del grupo';
       console.error(this.message);
+    } else {
+      this.groupService.addMember(this.groupId, user.email).then(response => {
+        console.log('Usuario añadido al grupo exitosamente', response);
+        this.message = 'Usuario añadido al grupo exitosamente';
+        alert('Usuario añadido al grupo exitosamente');
+      }).catch(error => {
+        console.error('Error al añadir el usuario al grupo', error);
+        this.message = 'Error al añadir el usuario al grupo';
+      });
     }
+
+    // async addMember(userId: number, groupId: string): Promise<void> {
+    //   try {
+    //     // Obtener el email del usuario usando su ID
+    //     const email = await this.groupService.getUserEmail(userId);
+    //     console.log(`Email del usuario con ID ${userId}: ${email}`);
+
+    //     // Asegurarse de que se obtuvo un email válido
+    //     if (email) {
+    //       // Añadir al usuario como miembro del grupo
+    //       await this.groupService.addMember(groupId, email);
+    //       console.log(`Usuario con email ${email} añadido al grupo con ID ${groupId} correctamente`);
+    //     } else {
+    //       console.error('No se pudo obtener el email del usuario');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error al añadir el usuario al grupo', error);
+    //   }
+    // }
   }
 }
-
-
