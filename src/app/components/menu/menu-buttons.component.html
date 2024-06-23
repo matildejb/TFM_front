@@ -11,6 +11,9 @@
 		(click)="deleteGroup(id)">
 		<i class="fa-solid fa-users-rays"></i>
 	</a>
+	<a class="btn btn-menu" [routerLink]="['/group', id, 'groupMembers']" data-bs-toggle="tooltip" data-bs-placement="top"
+		title="Ver miembros">
+		<i class="fa-solid fa-user-group"></i></a>
 	}@else if (parent === 'groups') {
 	<a class="btn btn-menu" [routerLink]="['/createGroup']" data-bs-toggle="tooltip" data-bs-placement="top"
 		title="Añadir grupo">

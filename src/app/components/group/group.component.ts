@@ -18,23 +18,21 @@ import { IUser } from '../../interfaces/iuser.interfaces';
 })
 export class GroupComponent implements OnInit {
   @Input() amount: number = 0;
-
   unGroup: IGroup | null = null;
   arrGroups: IGroup[] = [];
   arrPayments: IPayment[] = [];
   groupService = inject(GroupService);
   group_id: number = 0;
   payment: any;
-  TotalBalance: number = 0;
-  user_id: number = 1;
-  amountColor: string = 'green';
+  user_id: number | null = null;
   showNoPaymentsMessage: boolean = false;
+  debts: number = 0;
+  balance: any;
 
   // paymentService = inject(PaymentService);
 
   constructor(
     private route: ActivatedRoute,
-    private groupsService: GroupService,
     private userService: UsersService,
   ) { }
 
@@ -42,19 +40,19 @@ export class GroupComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getMyGroups();
-    // Obtén el ID del grupo de la ruta
-    this.route.params.subscribe(params => {
+    Promise.all([
+      this.groupService.getLoggedInUserProfile(),
+      new Promise(resolve => this.route.params.subscribe(params => resolve(params)))
+    ]).then(([user, params]: [IUser, any]) => {
+      this.user_id = user.id;
       this.group_id = +params['id'];
-      // this.getPayments(this.group_id);
-      this.getPayments(this.group_id);
-    });
-  }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['amount']) {
-      this.amountColor = this.amount < 0 ? 'Crimson' : 'Limegreen';
-    }
+      this.getMyGroups();
+      this.getPayments(this.group_id);
+      this.getDebtsById(this.group_id, this.user_id);
+    }).catch(error => {
+      console.error('Error during initialization:', error);
+    });
   }
 
   async getPayments(group_id: any): Promise<void> {
@@ -78,11 +76,28 @@ export class GroupComponent implements OnInit {
       if (user) {
         this.unUser = user;
         this.arrGroups = await this.groupService.getMyGroups(user.id);
-        console.log('Mis grupos obtenidos:', this.arrGroups);
+        // console.log('Mis grupos obtenidos:', this.arrGroups);
       }
     } catch (error) {
       console.error('Error al obtener mis grupos:', error);
     }
   }
+
+  async getDebtsById(group_id: number, user_id: any): Promise<void> {
+    try {
+      const user = await this.userService.getProfile();
+      // this.user_id = user[0].id;
+      const debts = await this.groupService.getDebtsById(group_id, user_id);
+      if (debts && debts.length > 0) {
+        this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
+        // console.log('Balance actualizado:', this.balance);
+      } else {
+        this.balance = 0; // Si no hay deudas, asegura que el balance sea cero
+      }
+    } catch (error) {
+      console.error('Error al obtener deudas:', error);
+    }
+  }
+
 
 }

@@ -24,7 +24,7 @@
 		</div>
 
 		<div *ngIf="showNoPaymentsMessage" class="mt-5">
-			<p class="text-center fw-bold">No se han encontrado movimientos en este grupo.</p>
+			<p class="text-center fw-bold">No se han encontrado movimientos.</p>
 		</div>
 
 		<!-- Fila de transacciones -->
@@ -34,12 +34,11 @@
 				<table class="table container font-75 m-0 p-0">
 					<tr class="row align-items-center">
 						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.paid_by }}</td>
-						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}
-						</td>
+						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}</td>
 						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
 						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
 							[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
-							{{ payment.amount.toString() | currency: 'EUR' }}
+							{{ payment.amount | currency: 'EUR' }}
 						</td>
 					</tr>
 				</table>
@@ -53,10 +52,11 @@
 		<!-- Balance -->
 		<div class="row d-flex justify-content-center px-5 mb-0">
 			<div class="col d-flex justify-content-between">
-				<span>BALANCE</span>
-				<span class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
-					{{ TotalBalance | currency: 'EUR' }}
+				<span>MI DEUDA</span>
+				<span class="price-text" [ngStyle]="{'color': balance < 0 ? 'Crimson' : (balance > 0 ? 'Limegreen' : null)}">
+					{{ balance | currency: 'EUR' }}
 				</span>
+
 			</div>
 			<hr class="mx-auto mb-4">
 		</div>

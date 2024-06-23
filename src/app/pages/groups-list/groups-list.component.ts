@@ -13,7 +13,6 @@ import { GroupCardComponent } from '../../components/group-card/group-card.compo
 })
 export class GroupsListComponent implements OnInit {
 
-
   constructor(
     private groupService: GroupService
   ) { }

@@ -67,17 +67,20 @@
 
 // groups.service.ts
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
+import { IDebts } from '../interfaces/idebts.interfaces';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class GroupService {
 	private baseUrl: string = `${environment.apiUrl}`;
+	private profileUrl = `${this.baseUrl}/users/profile`;
+
 
 	// constructor(private httpClient: HttpClient) { }
 	private httpClient = inject(HttpClient);
@@ -120,6 +123,12 @@ export class GroupService {
 		);
 	}
 
+	getMembersInMyGroups(user_id: number): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/members/${user_id}/known`)
+		);
+	}
+
 	addMember(groupId: string, userEmail: string): Promise<any> {
 		const url = `${this.baseUrl}/members/${groupId}/add`;
 		return lastValueFrom(this.httpClient.post(url, { email: userEmail }));
@@ -128,7 +137,28 @@ export class GroupService {
 	getUserEmail(userId: number): Promise<any> {
 		return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/users/email/${userId}`));
 	}
+
+	// Funcionalidad de deudas de cada usuario
+	getDebtsById(group_id: number, user_id: number): Promise<IDebts[]> {
+		return lastValueFrom(
+			this.httpClient.get<IDebts[]>(`${this.baseUrl}/debts/${group_id}/${user_id}/`)
+		);
+	}
+
+	getLoggedInUserProfile(): Promise<IUser> {
+		const headers = new HttpHeaders({
+			'Authorization': `Bearer ${localStorage.getItem('token')}`
+		});
+		console.log('Requesting user profile...');
+		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => { // Obtén el perfil del usuario actual con el token almacenado en localStorage
+			console.log('User profile received:', profile);
+			return profile;
+		}).catch(error => {
+			console.error('Error fetching user profile:', error);
+			throw error;
+		});
+	}
 }
 
 
-// router.post('/:group_id/add', checkAdmin, addMember);
+

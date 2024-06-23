@@ -16,6 +16,7 @@ import { redirectGuard } from './guards/redirect.guard';
 import { FilterComponent } from './components/filter/filter.component';
 import { PaymentsComponent } from './pages/buttons/payments/payments.component';
 import { FormGroupComponent } from './pages/buttons/form-group/form-group.component';
+import { GroupMembersComponent } from './pages/group-members/group-members.component';
 
 export const routes: Routes = [
   { path: 'updateUser/:userId', component: RegisterComponent },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },
   { path: 'group/:id/filter', component: FilterComponent, canActivate: [loginGuard] },
+  { path: 'group/:id/groupMembers', component: GroupMembersComponent, canActivate: [loginGuard] },
 
   { path: 'payments', component: PaymentsComponent },
   { path: 'createGroup', component: FormGroupComponent },

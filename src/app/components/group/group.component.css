@@ -1,11 +1,10 @@
 section.wp {
-    padding: 0px 100px;
+    padding: 0px 100px 250px;
 }
 
 .price-text {
     font-size: 2rem;
     font-weight: 700;
-    color: rgb(0, 212, 0);
 }
 
 .img-menu {
@@ -28,16 +27,21 @@ section.wp {
     padding-bottom: 50px
 }
 
+.amount-positive {
+    color: Limegreen;
+}
+
+.amount-negative {
+    color: Crimson;
+}
+
 .bg-comp {
     background-color: rgb(2, 113, 132, 0.15);
+    margin-bottom: 350px;
 }
 
 .bg-card {
     background-color: white;
-}
-
-.trans-section {
-    padding-bottom: 150px;
 }
 
 

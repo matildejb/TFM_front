@@ -1,0 +1,28 @@
+<section class="wp container-fluid mt-5">
+  <h2>Miembros del grupo</h2>
+  <h5>{{ groupName }}</h5>
+
+  <!-- Lista de miembros del grupo -->
+  <div class="mt-4">
+    <ul class="list-group mt-3 mb-5">
+      <li *ngFor="let user of filteredUsers"
+        class="list-group-item d-flex justify-content-between align-items-center px-4 mb-3 border-2 border-radius shadow strong-shadow">
+        <div>
+          <h5 class="m-0 pt-1">{{ user.username }}</h5>
+          <p class="m-0 p-0 pb-1">{{ user.email }}</p>
+          <p class="m-0 p-0 pb-1">{{ user.name }}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Mensaje si no hay miembros en el grupo -->
+  <div class="mt-5" *ngIf="filteredUsers.length === 0">
+    <h3>No hay miembros en el grupo</h3>
+  </div>
+
+  <!-- Mensaje de respuesta o cualquier otro mensaje necesario -->
+  <div class="mt-5" *ngIf="message">
+    <h3>{{ message }}</h3>
+  </div>
+</section>
