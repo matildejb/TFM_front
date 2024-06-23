@@ -155,7 +155,7 @@ private getCurrentUserId(): number | null {
       return null;
     }
   }
-  
+
 
   deleteUser(id: number): Promise<IUser> {
      return lastValueFrom(
