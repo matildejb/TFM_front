@@ -1,80 +1,103 @@
-// import { Injectable } from '@angular/core';
-// import { lastValueFrom } from 'rxjs';
-// import { HttpClient } from '@angular/common/http'; // Import the HttpClient module
-// import { IUser } from '../interfaces/iuser.interfaces';
-
-// @Injectable({
-// 	providedIn: 'root'
-// })
-// export class GroupService {
-// 	private groups = [
-// 		{
-// 			id: 1,
-// 			icon: 'fa-plane-departure',
-// 			title: 'Viaje a Menorca',
-// 			amount: 210.00,
-// 			time: '2024-05-06 12:00:00',
-// 			transactions: [
-// 				{ user: 'Ibon', concept: 'Billetes de avión', time: '2024-06-05 12:05:08', amount: 50 },
-// 				{ user: 'Ramon', concept: 'Comida', time: '2024-06-05 12:05:08', amount: 30 },
-// 				{ user: 'Julia', concept: 'Reserva de hotel', time: '2024-06-05 12:05:08', amount: 60 },
-// 				{ user: 'María', concept: 'Museos y monumentos', time: '2024-06-05 12:05:08', amount: 20 },
-// 				{ user: 'Matilde', concept: 'Trenes y autobuses', time: '2024-06-05 12:05:08', amount: 25 },
-// 				{ user: 'Alberto', concept: 'Fiesta y copas', time: '2024-06-05 12:05:08', amount: 25 }
-// 			]
-// 		},
-// 	];
-
-// 	private baseUrl = 'http://localhost:3000';
-
-// 	constructor(private httpClient: HttpClient) { }
-
-// 	getGroups() {
-// 		return this.groups;
-// 	}
-
-// 	getGroupById(id: number) {
-// 		return this.groups.find(group => group.id === id);
-// 	}
-
-// 	getTotalBalance() {
-// 		return this.groups.reduce((acc, group) => acc + group.amount, 0);
-// 	}
-
-// 	getAllUsers(): Promise<IUser> {
-// 		return lastValueFrom(
-// 			this.httpClient.get<any>(`${this.baseUrl}/userList`));
-// 	}
-
-// 	searchUser(query: any): Promise<{ results: any[] }> {
-// 		return lastValueFrom(
-// 			this.httpClient.get<{ results: any[] }>(`${this.baseUrl}/getAllUsers`, { params: query })
-// 		);
-// 	}
-// }
-
-import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
+import { IDebts } from '../interfaces/idebts.interfaces';
+import { IGroup } from '../interfaces/igroup.interfaces';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class GroupService {
-	private baseUrl = 'http://localhost:3000';
+	private baseUrl: string = `${environment.apiUrl}`;
+	private profileUrl = `${this.baseUrl}/users/profile`;
+	private httpClient = inject(HttpClient);
+	private balanceSource = new BehaviorSubject<number | null>(null);
 
-	constructor(private httpClient: HttpClient) { }
 
-	getAllUsers(): Promise<IUser[]> {
+	getMyGroups(user_id: number): Promise<any> {
 		return lastValueFrom(
-			this.httpClient.get<IUser[]>(`${this.baseUrl}/userList`)
+			this.httpClient.get<any>(`${this.baseUrl}/groups/${user_id}`)
 		);
 	}
 
-	searchUser(query: any): Promise<{ results: any[] }> {
+	getUserById(id: number): Promise<any> {
+		return lastValueFrom(this.httpClient.get<any>(`${this.baseUrl}/${id}`));
+	}
+
+	getPayments(group_id: number): Promise<any> {
 		return lastValueFrom(
-			this.httpClient.get<{ results: any[] }>(`${this.baseUrl}/getAllUsers`, { params: query })
+			this.httpClient.get<any>(`${this.baseUrl}/payments/${group_id}/`)
 		);
 	}
+
+	deleteGroup(id: number): Promise<any> {
+		return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/${id}`));
+	}
+
+	getGroupById(group_id: number): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/groups/group/${group_id}/`)
+		);
+	}
+
+	getAllUsers(): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/users/userList`)
+		);
+	}
+
+	getAllMembers(): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/members/:group_id/`)
+		);
+	}
+
+	getMembersInMyGroups(user_id: number): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/members/${user_id}/known`)
+		);
+	}
+
+	addMember(groupId: string, userEmail: string): Promise<any> {
+		const url = `${this.baseUrl}/members/${groupId}/add`;
+		return lastValueFrom(this.httpClient.post(url, { email: userEmail }));
+	}
+
+	getUserEmail(userId: number): Promise<any> {
+		return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/users/email/${userId}`));
+	}
+
+	// Funcionalidad de deudas de cada usuario
+	getDebtsById(group_id: number, user_id: number): Promise<IDebts[]> {
+		return lastValueFrom(
+			this.httpClient.get<IDebts[]>(`${this.baseUrl}/debts/${group_id}/${user_id}/`)
+		);
+	}
+
+	getLoggedInUserProfile(): Promise<IUser> {
+		const headers = new HttpHeaders({
+			'Authorization': `Bearer ${localStorage.getItem('token')}`
+		});
+		console.log('Requesting user profile...');
+		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
+			return profile;
+		}).catch(error => {
+			throw error;
+		});
+	}
+
+	currentBalance = this.balanceSource.asObservable();
+	updateBalance(balance: number) {
+		this.balanceSource.next(balance);
+	}
+
+	createGroup(group: any): Promise<IGroup> {
+		return lastValueFrom(this.httpClient.post<IGroup>(`${this.baseUrl}/groups/create`, group));
+	}
+
 }
+
+
+

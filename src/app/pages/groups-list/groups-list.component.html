@@ -1,26 +1,33 @@
-<section class="wp justify-content-center">
-    <section>
-        <h2 class="mt-5 mb-4 text-left">Mis Grupos</h2>
-    </section>
-
-    <ng-container *ngFor="let card of groupCards">
-        <app-group-card [icon]="card.icon" [title]="card.title" [time]="card.time" [amount]="card.amount"
-            [navigateTo]="card.navigateTo">
-        </app-group-card>
-    </ng-container>
+<section class="container  mt-2 mb-5">
+	<div class="ps-5 pe-5">
+		<h2 class="mb-4">Mis Grupos</h2>
+		<app-group-card></app-group-card>
+	</div>
 </section>
+<section class="menu-container">
+	<div class="d-flex flex-column justify-content-center align-items-center">
+		<!-- Balance -->
+<<<<<<< HEAD
 
-<section class="menu-container pb-5 pt-3 strong-shadow">
-    <section class="row d-flex justify-content-center m-0 p-0">
-        <!-- Balance -->
-        <div class="row justify-content-center px-5 mb-0">
-            <div class="col-12 d-flex justify-content-between">
-                <p class="balance-text">BALANCE</p>
-                <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}">
-                    {{ TotalBalance | currency: 'EUR' }}
-                </p>
-            </div>
-            <hr class="mx-auto mb-4">
-        </div>
-    </section>
+		<div class="pt-3 balance">BALANCE</div>
+		<!-- <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> -->
+		<!-- {{ TotalBalance | currency: 'EUR' }} </p>-->
+
+		<hr class="mb-2 w-50">
+
+		<!-- Botonera -->
+		<app-menu-buttons [parent]="'groups'" class="pb-3"></app-menu-buttons>
+	</div>
+
+=======
+		<div class="row justify-content-center px-5 mb-0">
+			<div class="col-12 d-flex justify-content-between">
+				<!-- <p class="balance-text">BALANCE</p> -->
+				<!-- <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> -->
+				<!-- {{ TotalBalance | currency: 'EUR' }} </p> -->
+			</div>
+			<app-menu-buttons [parent]="'groups'"></app-menu-buttons>
+		</div>
+	</section>
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db
 </section>

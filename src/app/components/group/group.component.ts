@@ -1,80 +1,113 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Component, Input, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { GroupService } from '../../services/groups.service';
+import { IGroup } from '../../interfaces/igroup.interfaces';
+import { IPayment } from '../../interfaces/ipayments.interfaces';
 import { CommonModule } from '@angular/common';
+import { MenuButtonsComponent } from '../menu/menu-buttons.components';
+import { UsersService } from '../../services/users.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { IUser } from '../../interfaces/iuser.interfaces';
+
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MenuButtonsComponent],
   templateUrl: './group.component.html',
-  styleUrl: './group.component.css'
+  styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
-  groupId: number = 0;
-  groupData: any;
-  title: string = '';
-  TotalBalance: number = 0;
-  transactions: any[] = [];
+  @Input() amount: number = 0;
+  unGroup: IGroup | null = null;
+  arrGroups: IGroup[] = [];
+  arrPayments: IPayment[] = [];
+  groupService = inject(GroupService);
+  group_id: number = 0;
+  payment: any;
+  user_id: number | null = null;
+  showNoPaymentsMessage: boolean = false;
+  debts: number = 0;
+  // @Output() balance: any;
+  balance: any;
+  groupTitle: string = '';
 
-  groups = [
-    {
-      id: 1,
-      icon: 'fa-plane-departure',
-      title: 'Viaje a Menorca',
-      amount: 210.00,
-      time: '2024-05-06 12:00:00',
-      transactions: [
-        { user: 'Ibon', concept: 'Billetes de avión', time: '2024-06-05 12:05:08', amount: 50 },
-        { user: 'Ramon', concept: 'Comida', time: '2024-06-05 12:05:08', amount: 30 },
-        { user: 'Julia', concept: 'Reserva de hotel', time: '2024-06-05 12:05:08', amount: 60 },
-        { user: 'María', concept: 'Museos y monumentos', time: '2024-06-05 12:05:08', amount: 20 },
-        { user: 'Matilde', concept: 'Trenes y autobuses', time: '2024-06-05 12:05:08', amount: 25 },
-        { user: 'Alberto', concept: 'Fiesta y copas', time: '2024-06-05 12:05:08', amount: 25 }
-      ]
-    },
-    {
-      id: 2,
-      icon: 'fa-receipt',
-      title: 'Compras Súper',
-      amount: -75.00,
-      time: '2024-05-06 12:00:00',
-      transactions: [
-        { user: 'Ibon', concept: 'Productos del desayuno', time: '2024-06-05 12:05:08', amount: 10 },
-        { user: 'Ramon', concept: 'Frutas y verduras', time: '2024-06-05 12:05:08', amount: 20 },
-        { user: 'Julia', concept: 'Carne y pescado', time: '2024-06-05 12:05:08', amount: 25 },
-        { user: 'María', concept: 'Bebidas', time: '2024-06-05 12:05:08', amount: 10 },
-        { user: 'Matilde', concept: 'Productos de higiene', time: '2024-06-05 12:05:08', amount: 50 },
-        { user: 'Tú', concept: 'Compras en el súper', time: '2024-06-05 12:05:08', amount: -70 }
-      ]
-    },
-    {
-      id: 3,
-      icon: 'fa-gift',
-      title: 'Regalo cumpleaños',
-      amount: 28.00,
-      time: '2024-05-06 12:00:00',
-      transactions: [
-        { user: 'Ibon', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 10 },
-        { user: 'Ramon', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 15 },
-        { user: 'Julia', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 10 },
-        { user: 'María', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 5 },
-        { user: 'Matilde', concept: 'Contribución al regalo', time: '2024-06-05 12:05:08', amount: 5 },
-        { user: 'Tú', concept: 'Aportación adicional', time: '2024-06-05 12:05:08', amount: 48 }
-      ]
-    }
-  ];
+  // paymentService = inject(PaymentService);
 
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UsersService,
+  ) { }
+
+  unUser: IUser | null = null;
+
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.groupId = +params['id'];
-      this.groupData = this.groups.find(group => group.id === this.groupId);
-      this.title = this.groupData.title;
-      this.TotalBalance = this.groupData.amount;
-      this.transactions = this.groupData.transactions;
-      this.TotalBalance = this.transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
+    Promise.all([
+      this.groupService.getLoggedInUserProfile(),
+      new Promise(resolve => this.route.params.subscribe(params => resolve(params)))
+    ]).then(([user, params]: [IUser, any]) => {
+      this.user_id = user.id;
+      this.group_id = +params['id'];
+
+      this.getMyGroups();
+      this.getPayments(this.group_id);
+      this.getDebtsById(this.group_id, this.user_id);
+    }).catch(error => {
+      console.error('Error during initialization:', error);
     });
   }
+
+  async getPayments(group_id: any): Promise<void> {
+    try {
+      const group = await this.groupService.getGroupById(group_id);
+      if (group) {
+        this.unGroup = group;
+        this.arrPayments = await this.groupService.getPayments(group_id);
+        console.log('Mis movimientos son:', this.arrPayments);
+        this.showNoPaymentsMessage = this.arrPayments.length === 0;
+      }
+    } catch (error) {
+      console.error('Error al obtener mis grupos:', error);
+    }
+  }
+
+  async getMyGroups(): Promise<void> {
+    try {
+      const user = await this.userService.getProfile();
+      if (user) {
+        this.unUser = user;
+        this.arrGroups = await this.groupService.getMyGroups(user.id);
+      }
+    } catch (error) {
+      console.error('Error al obtener mis grupos:', error);
+    }
+  }
+
+  async getDebtsById(group_id: number, user_id: any): Promise<void> {
+    try {
+      const user = await this.userService.getProfile();
+      // this.user_id = user[0].id;
+      const debts = await this.groupService.getDebtsById(group_id, user_id);
+      console.log('El balance de deudas es:', debts);
+      if (debts && debts.length > 0) {
+        this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
+        // console.log('Balance actualizado:', this.balance);
+      } else {
+        this.balance = 0; // Si no hay deudas, asegura que el balance sea cero
+      }
+      this.groupService.updateBalance(this.balance);
+    } catch (error) {
+      console.error('Error al obtener deudas:', error);
+    }
+  }
+
+  async getUserById(id: number): Promise<void> {
+    try {
+      const user = await this.userService.getUserById(id);
+      console.log('Usuario obtenido:', user);
+    } catch (error) {
+      console.error('Error al obtener el usuario:', error);
+    }
+  }
+
 }
