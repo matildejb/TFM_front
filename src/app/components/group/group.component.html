@@ -33,7 +33,7 @@
 			<div class="container row align-items-center justify-content-center m-0">
 				<table class="table container font-75 m-0 p-0">
 					<tr class="row align-items-center">
-						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.paid_by }}</td>
+						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.payer_name}}</td>
 						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}</td>
 						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
 						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"

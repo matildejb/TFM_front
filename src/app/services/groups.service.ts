@@ -81,11 +81,9 @@ export class GroupService {
 			'Authorization': `Bearer ${localStorage.getItem('token')}`
 		});
 		console.log('Requesting user profile...');
-		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => { // Obtén el perfil del usuario actual con el token almacenado en localStorage
-			console.log('User profile received:', profile);
+		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
 			return profile;
 		}).catch(error => {
-			console.error('Error fetching user profile:', error);
 			throw error;
 		});
 	}
