@@ -11,3 +11,13 @@
 .search-form {
   padding-top: 200px;
 }
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(255, 66, 66);
+}
+
+.error {
+  color: red;
+  font-size: 80%;
+  margin: 0 0 0 20px;
+}
