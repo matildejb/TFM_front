@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { IUser } from '../../interfaces/iuser.interfaces';
 import { IGroup } from '../../interfaces/igroup.interfaces';
 import { UsersService } from '../../services/users.service';
+import { GroupComponent } from '../group/group.component';
 
 @Component({
 	selector: 'app-group-card',
 	standalone: true,
-	imports: [CommonModule, RouterLink],
+	inputs: ['balance'],
+	imports: [CommonModule, RouterLink, GroupComponent],
 	templateUrl: './group-card.component.html',
 	styleUrls: ['./group-card.component.css']
 })
@@ -21,7 +23,10 @@ export class GroupCardComponent implements OnInit {
 	@Input() navigateTo: string = '';
 	@Input() amount: number = 0;
 	balance: any;
+	// @Input() balance: any;
 	debts: number = 0;
+	groupTitle: string = '';
+
 
 
 
@@ -67,6 +72,7 @@ export class GroupCardComponent implements OnInit {
 	async getDebtsById(group_id: number, user_id: number): Promise<void> {
 		try {
 			const debts = await this.groupService.getDebtsById(group_id, user_id);
+			console
 			if (debts && debts.length > 0) {
 				this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
 				console.log('Balance actualizado:', this.balance);

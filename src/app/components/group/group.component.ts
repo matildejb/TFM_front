@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { GroupService } from '../../services/groups.service';
 import { IGroup } from '../../interfaces/igroup.interfaces';
 import { IPayment } from '../../interfaces/ipayments.interfaces';
@@ -27,7 +27,9 @@ export class GroupComponent implements OnInit {
   user_id: number | null = null;
   showNoPaymentsMessage: boolean = false;
   debts: number = 0;
-  balance: any;
+  // balance: any;
+  @Output() balance: any;
+  groupTitle: string = '';
 
   // paymentService = inject(PaymentService);
 
@@ -88,6 +90,7 @@ export class GroupComponent implements OnInit {
       const user = await this.userService.getProfile();
       // this.user_id = user[0].id;
       const debts = await this.groupService.getDebtsById(group_id, user_id);
+      console.log(debts);
       if (debts && debts.length > 0) {
         this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
         // console.log('Balance actualizado:', this.balance);
@@ -99,5 +102,13 @@ export class GroupComponent implements OnInit {
     }
   }
 
+  async getUserById(id: number): Promise<void> {
+    try {
+      const user = await this.userService.getUserById(id);
+      console.log('Usuario obtenido:', user);
+    } catch (error) {
+      console.error('Error al obtener el usuario:', error);
+    }
+  }
 
 }

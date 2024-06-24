@@ -20,7 +20,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="payee" class="form-label">Participantes</label>
-				<select id="payee" class="form-select" formControlName="payee">
+				<select id="payee" class="form-select" formControlName="payee" multiple>
 					<option selected disabled>Selecciona a quien paga</option>
 					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
 				</select>
