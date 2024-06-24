@@ -11,6 +11,7 @@
 				<p class="font-75 mt-2 mb-2">HISTORIAL DE TRANSACCIONES</p>
 			</div>
 
+<<<<<<< HEAD
 			<!-- Fila de títulos de tabla-->
 			<div class="d-flex mt-4">
 				<table class="table container font-75">
@@ -19,6 +20,25 @@
 						<th class="col-6 text-left px-5">CONCEPTO</th>
 						<th class="col-2 text-left">FECHA</th>
 						<th class="col-2 text-end">CANTIDAD</th>
+=======
+		<div *ngIf="showNoPaymentsMessage" class="mt-5">
+			<p class="text-center fw-bold">No se han encontrado movimientos.</p>
+		</div>
+
+		<!-- Fila de transacciones -->
+		<div *ngFor="let payment of arrPayments"
+			class="bg-card border-custom container align-items-center mt-1 border border-1 rounded-3 border-black">
+			<div class="container row align-items-center justify-content-center m-0">
+				<table class="table container font-75 m-0 p-0">
+					<tr class="row align-items-center">
+						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.payer_name}}</td>
+						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}</td>
+						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
+						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
+							[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
+							{{ payment.amount | currency: 'EUR' }}
+						</td>
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db
 					</tr>
 				</table>
 			</div>
@@ -60,7 +80,6 @@
 					[ngStyle]="{'color': balance < 0 ? 'Crimson' : (balance > 0 ? 'Limegreen' : null)}">
 					{{ balance | currency: 'EUR' }}
 				</span>
-
 			</div>
 			<hr class="mx-auto mb-3">
 		</div>

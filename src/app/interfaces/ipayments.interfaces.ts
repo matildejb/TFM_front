@@ -3,6 +3,7 @@ export interface IPayment {
 	amount: number;
 	description?: string;
 	paid_by: number;
+	payer_name?: string;
 	participants: { userId: number };
 	created_at?: number;
 	transaction_id?: number;

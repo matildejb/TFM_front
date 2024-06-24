@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <section class="container mt-3">
     <div class="ms-5 me-5 width">
         <h2>Creación de grupo</h2>
@@ -20,4 +21,25 @@
             </form>
         </div>
     </div>
+=======
+<section class="container">
+	<div class="p-3 width">
+		<form [formGroup]="formNewGroup">
+			<div class="mb-3">
+				<label for="title" class="form-label">Nombre del grupo</label>
+				<input type="text" placeholder="Introduce el nombre del grupo" id="title" class="form-control"
+					formControlName="title" />
+			</div>
+			<div class="mb-3">
+				<label for="description" class="form-label">Descripción</label>
+				<input type="text" placeholder="Introduce una descripción para el grupo" id="description" class="form-control"
+					formControlName="description" />
+			</div>
+			<div class="btn-exit">
+				<input type="submit" value="Añadir" class="btn btn-se" (click)="createNewGroup()" />
+				<a class="btn btn-danger" [routerLink]="['/groupsList']">X</a>
+			</div>
+		</form>
+	</div>
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db
 </section>

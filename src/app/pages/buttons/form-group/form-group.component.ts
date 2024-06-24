@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { IGroup } from '../../../interfaces/igroup.interfaces';
+import { GroupService } from '../../../services/groups.service';
 
 @Component({
   selector: 'app-form-group',
@@ -11,24 +13,25 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class FormGroupComponent {
 
-formNewGroup: FormGroup;
+  formNewGroup: FormGroup;
   router = inject(Router);
+  groupService: GroupService = inject(GroupService);
 
-    constructor() {
+  constructor() {
     this.formNewGroup = new FormGroup({
-      
-      description: new FormControl('', [
-        // Validators.required,
-        // Validators.minLength(3),
-        // Validators.maxLength(50),
+
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
       ]),
-      amount: new FormControl('', [
-        // Validators.required,
-        // Validators.min(1),
-        //Validators.pattern(/^\d+(\.\d{1,2})?$/) // Solo números positivos con 2 decimales
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(250),
       ]),
     });
-}
+  }
 
   checkControl(
     formControlName: string,
@@ -39,4 +42,27 @@ formNewGroup: FormGroup;
       this.formNewGroup.get(formControlName)?.touched
     );
   }
+
+
+  // Método para crear un nuevo grupo
+  async createNewGroup(): Promise<void> {
+    if (this.formNewGroup.invalid) {
+      return;
+    }
+    const newGroup: IGroup = {
+      title: this.formNewGroup.value.title,
+      description: this.formNewGroup.value.description,
+    };
+
+    try {
+      await this.groupService.createGroup(newGroup);
+      // Redireccionar a la página del grupo creado o a donde desees
+      this.router.navigate(['/groupsList']); // Ejemplo de redirección a la lista de grupos
+      alert('Grupo creado correctamente');
+    } catch (error) {
+      console.error('Error al crear el grupo:', error);
+      // Aquí puedes manejar el error como lo consideres adecuado
+    }
+  }
+
 }

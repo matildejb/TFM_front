@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { IDebts } from '../interfaces/idebts.interfaces';
+import { IGroup } from '../interfaces/igroup.interfaces';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,10 +12,9 @@ import { IDebts } from '../interfaces/idebts.interfaces';
 export class GroupService {
 	private baseUrl: string = `${environment.apiUrl}`;
 	private profileUrl = `${this.baseUrl}/users/profile`;
-
-
-	// constructor(private httpClient: HttpClient) { }
 	private httpClient = inject(HttpClient);
+	private balanceSource = new BehaviorSubject<number | null>(null);
+
 
 	getMyGroups(user_id: number): Promise<any> {
 		return lastValueFrom(
@@ -81,14 +81,22 @@ export class GroupService {
 			'Authorization': `Bearer ${localStorage.getItem('token')}`
 		});
 		console.log('Requesting user profile...');
-		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => { // Obtén el perfil del usuario actual con el token almacenado en localStorage
-			console.log('User profile received:', profile);
+		return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
 			return profile;
 		}).catch(error => {
-			console.error('Error fetching user profile:', error);
 			throw error;
 		});
 	}
+
+	currentBalance = this.balanceSource.asObservable();
+	updateBalance(balance: number) {
+		this.balanceSource.next(balance);
+	}
+
+	createGroup(group: any): Promise<IGroup> {
+		return lastValueFrom(this.httpClient.post<IGroup>(`${this.baseUrl}/groups/create`, group));
+	}
+
 }
 
 

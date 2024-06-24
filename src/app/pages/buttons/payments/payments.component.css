@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 .container {
   padding-left: 22%;
+=======
+.wp {
+  padding: 0px 100px;
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db
 }
 
-.width {
-  width: 100%;
+.btn:hover {
+  background-color: rgb(12, 113, 132);
+  color: white;
+  box-shadow: black 0px 2px 3px 0px;
 }
 
+<<<<<<< HEAD
 @media only screen and (min-width: 768px) {
   .width {
     width: 80%;
@@ -22,20 +30,21 @@
     height: 20%;
     width: 20%;
   }
+=======
+.search-form {
+  padding-top: 200px;
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db
 }
 
 input.ng-invalid.ng-touched {
   border: 2px solid rgb(255, 66, 66);
 }
 
-input.ng-valid.ng-touched {
-  border: 2px solid rgb(72, 255, 72);
-}
-
 .error {
   color: red;
   font-size: 80%;
   margin: 0 0 0 20px;
+<<<<<<< HEAD
 }
 
 .btn-se {
@@ -71,3 +80,6 @@ input.ng-valid.ng-touched {
     padding-left: 0%;
   }
 }
+=======
+}
+>>>>>>> 31c6aa239a5337e50c43aaeeb835689a00aae8db

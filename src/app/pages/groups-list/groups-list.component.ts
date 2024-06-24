@@ -12,6 +12,7 @@ import { GroupCardComponent } from '../../components/group-card/group-card.compo
   styleUrls: ['./groups-list.component.css']
 })
 export class GroupsListComponent implements OnInit {
+  TotalBalance: number = 0;
 
   constructor(
     private groupService: GroupService
