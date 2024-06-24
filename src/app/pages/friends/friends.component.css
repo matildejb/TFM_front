@@ -8,18 +8,10 @@
 }
 
 .header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
+  
   font-size: 1.3rem;
 }
-span {
-  padding-bottom: 100px;
-  width: 100%;
 
-}
 .box {
   background-color: rgba(2, 113, 132, 0.15);
   width: 100%;

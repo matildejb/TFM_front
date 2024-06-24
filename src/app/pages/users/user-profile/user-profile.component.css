@@ -86,13 +86,13 @@
   .container {
     .card {
       font-size: 1rem;
-      width: 80%;
-      margin: auto;
-    }
 
-    h2 {
-      margin-left: 3rem;
+      .edit-profile {
+        padding: 2px 6px;
+        border: 1px solid #f6a278;
+        top: 10px;
+        right: -5px;
+      }
     }
-
   }
 }
