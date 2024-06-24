@@ -2,5 +2,5 @@ export interface IMember {
     id: number;
     name: string;
     email: string;
-    imageUrl?: string;
+    profile_image?: string;
 }

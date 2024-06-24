@@ -15,7 +15,7 @@
       <ng-container *ngIf="members && members.length > 0; else noMembers">
         <div class="col mb-4" *ngFor="let member of members">
           <div class="card h-100">
-            <img [src]="member.imageUrl || 'https://placehold.co/400x300.png'" class="card-img-top img-fluid rounded" alt="Imagen de perfil de {{ member.username }}">
+            <img [src]="member.profile_image || 'https://placehold.co/400x300.png'" class="card-img-top img-fluid rounded" alt="Imagen de perfil de {{ member.username }}">
             <div class="card-body">
               <h5 class="card-title text-wrap text-truncate">{{ member.username }}</h5>
               <p class="card-text text-wrap text-truncate">{{ member.email }}</p>
