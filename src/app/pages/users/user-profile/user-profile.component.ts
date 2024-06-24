@@ -20,7 +20,6 @@ export class UserProfileComponent {
   image: File | null = null; 
   imgURL = 'assets/images/default-img.png';
   
-
   unUser: IUser | null = null;
 
 
