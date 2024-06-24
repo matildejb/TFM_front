@@ -1,0 +1,92 @@
+/* .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;  
+} */
+
+.container {
+  padding-left: 22%;
+}
+
+.btn-exit {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  .danger {
+    padding: 10px;
+  }
+}
+
+.width {
+  padding: 0px 80px;
+}
+
+.image {
+  height: 50%;
+  width: 50%;
+}
+/* 
+
+@media only screen and (min-width: 768px) {
+  .image {
+    height: 20%;
+    width: 20%;
+  }
+} */
+
+input.ng-invalid.ng-touched {
+  border: 2px solid rgb(255, 66, 66);
+}
+
+input.ng-valid.ng-touched {
+  border: 2px solid rgb(72, 255, 72);
+}
+
+.error {
+  color: red;
+  font-size: 80%;
+  margin: 0 0 0 20px;
+}
+
+.btn-se {
+  background-color: #027184;
+  color: white;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn-se {
+    padding: 10px;
+    border: 1px solid #027184;
+    background-color: white;
+    color: #027184;
+
+    &:hover {
+      background-color: #027184;
+      color: white;
+    }
+  }
+}
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+    margin: auto;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    padding-left: 0%;
+    padding: 0px;
+  }
+  .width {
+    padding: 0px;
+  }
+}

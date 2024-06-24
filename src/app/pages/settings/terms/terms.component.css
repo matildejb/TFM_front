@@ -1,0 +1,25 @@
+.container {
+  padding-left: 15rem;
+
+  p {
+    color: black;
+    text-align: justify;
+  }
+  span {
+    color: #027184;
+  }
+
+  h1 {
+    color: #027184;
+    text-align: justify;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+}
+
+/* Dispositivo movil y tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
+}

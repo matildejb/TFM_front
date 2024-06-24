@@ -1,0 +1,85 @@
+.container {
+  padding-left: 22%;
+  padding-bottom: 15%;
+}
+.balance {
+	color: #027184;
+	font-weight: 900;
+}
+
+.price-text {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-left: 100px;
+  color: rgb(0, 212, 0);
+}
+
+.price-groups {
+  font-size: 1.25rem;
+  color: rgb(0, 212, 0);
+}
+
+.img-gif {
+  width: 40%;
+  height: auto;
+}
+
+.img-gif2 {
+  width: 50%;
+  height: auto;
+}
+
+.img-bg-gif {
+  background-color: rgba(2, 113, 132, 0.15);
+}
+
+.img-menu {
+  height: 30px;
+}
+
+.menu-container {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding-left: 22%;
+  background-color: rgb(238, 250, 252);
+  font-size: 1.3rem;
+}
+
+.strong-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+/* 
+@media (min-width: 992px) and (max-width: 1200px) {
+	.wp {
+		padding: 0px 250px 150px;
+	}
+}
+
+@media (min-width: 1201px) {
+	.wp {
+		padding: 0px 500px 150px;
+	}
+} */
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+	padding-bottom: 20%;
+  }
+  .menu-container {
+    padding-left: 0%;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+	 .container {
+    padding-bottom: 30%;
+  }
+
+  .menu-container {
+    font-size: 1rem;
+  }
+}

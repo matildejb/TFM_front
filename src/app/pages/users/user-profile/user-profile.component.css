@@ -1,0 +1,98 @@
+.container {
+  padding-left: 22%;
+
+  .card {
+    background-color: rgba(2, 113, 132, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+
+    .edit-profile {
+      color: #f6a278;
+      font-weight: bolder;
+      display: flex;
+      padding: 2px 10px;
+      position: absolute;
+      right: 0;
+      border: 2px solid #f6a278;
+    }
+
+    .actualizar {
+      display: flex;
+      color: #027184;
+      padding-top: 0px;
+      width: 170px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    img {
+      width: 180px;
+      height: 180px;
+      border-radius: 100%;
+      border: 1px solid;
+      object-fit: contain;
+    }
+    /* Estilo para ocultar el input file original */
+    input[type="file"] {
+      display: none;
+    }
+    .bi-camera {
+      font-size: 1.5rem;
+    }
+
+    /* Estilo para el botón personalizado */
+    .custom-file-upload {
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 100%;
+      font-size: 14px;
+      top: 0;
+      left: 0;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #ddd;
+    }
+  }
+
+  .btn-success {
+    background-color: #027184;
+    &:hover {
+      background-color: #004a59;
+    }
+  }
+  .delete-account {
+    text-decoration: none;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    .card {
+      font-size: 1rem;
+
+      .edit-profile {
+        padding: 2px 6px;
+        border: 1px solid #f6a278;
+        top: 10px;
+        right: -5px;
+      }
+    }
+  }
+}

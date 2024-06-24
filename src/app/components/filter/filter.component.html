@@ -1,0 +1,42 @@
+<section class="container  mt-2 mb-5">
+	<div class="ps-5 pe-5">
+		<h2>Añadir amigos a grupo</h2>
+		<form class="d-flex flex-column mt-4" role="search" #searchform="ngForm" (ngSubmit)="onSearchClick()">
+			<div class="mb-2">
+				<label for="searchInput" class="form-label">Buscar amigos:</label>
+			</div>
+			<div class="d-flex">
+				<input id="searchInput" class="form-control me-2" type="text"
+					placeholder="Busca a alguien para añadirlo a un grupo" aria-label="Search" name="searchInput"
+					[(ngModel)]="name" (ngModelChange)="getMembersInMyGroups($event)">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			</div>
+		</form>
+
+		<!-- Resultados de búsqueda -->
+		<div class="mt-5" *ngIf="filteredUsers.length > 0">
+			<h4>Resultados de la búsqueda:</h4>
+			<ul class="list-group mt-3 mb-5">
+				<li *ngFor="let user of filteredUsers"
+					class="list-group-item d-flex justify-content-between align-items-center px-4 mb-3 border-2 border-radius shadow strong-shadow">
+					<div>
+						<h5 class="m-0 pt-1">{{ user.name }}</h5>
+						<p class="m-0 p-0 pb-1">{{ user.email }}</p>
+						<p class="m-0 p-0 pb-1">{{ user.id }}</p>
+					</div>
+					<button class="btn btn-primary" (click)="onButtonClick(user)">Añadir</button>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Mensaje si no hay resultados -->
+		<div class="mt-5" *ngIf="filteredUsers.length === 0 && searchform.submitted && name.trim()">
+			<h3>No se encontraron resultados</h3>
+		</div>
+
+		<!-- Mensaje de respuesta -->
+		<div class="mt-5" *ngIf="message">
+			<h3>{{ message }}</h3>
+		</div>
+	</div>
+</section>

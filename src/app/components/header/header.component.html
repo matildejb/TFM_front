@@ -1,0 +1,36 @@
+<nav class="navbar shadow  ps-3 ps-lg-5">
+
+  @if(!isLoggedIn)
+  {
+  <div class="botonNavbar-Logotipo">
+    <a class="navbar-brand fs-3 fs-md-2" [routerLink]="['/landing']">
+      <strong>SharExpen</strong>
+      <img src="assets/images/logo.png" alt="logotipo" width="70px">
+    </a>
+  </div>
+  }
+
+  @if(isLoggedIn)
+  {
+  <div>
+    <app-navbar></app-navbar>
+    <strong>SharExpen</strong>
+    <img src="assets/images/logo.png" alt="logotipo" width="70px">
+  </div>
+
+  <div class="btn-settings me-3 me-md-1 ms-3">
+    <button class="icon-settings" type="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-cog fa-lg"></i>
+    </button>
+    <div class="dropdown-settings">
+      <a class="element-settings" [routerLink]="['/settings/privacy']">Privacidad</a>
+      <a class="element-settings" [routerLink]="['/settings/terms']">Términos y condiciones</a>
+      <a class="element-settings" id="toggleDarkMode">Modo oscuro</a>
+      <a class="element-settings" [routerLink]="['/settings/about']">Aplicación</a>
+    </div>
+
+  </div>
+
+  }
+
+</nav>

@@ -1,0 +1,35 @@
+<section class="wp container">
+	<h2 class="mt-4">Añadir gastos</h2>
+	<form [formGroup]="formNewPayment">
+		<div class="mb-3 mt-2">
+			<label for="description" class="form-label mt-2">Descripción:</label>
+			<input type="text" class="form-control" id="description" placeholder="Ingrese una descripción"
+				formControlName="description" [(ngModel)]="newPayment.description">
+			@if (checkControl('description', 'required')) {
+			<p class="error">Campo requerido</p>
+			}
+		</div>
+		<div class="mb-3">
+			<label for="amount" class="form-label mt-2">Importe:</label>
+			<input type="number" class="form-control" id="amount" placeholder="Ingrese el importe" formControlName="amount"
+				[(ngModel)]="newPayment.amount">
+			@if (checkControl('amount', 'required')) {
+			<p class="error">Campo requerido</p>
+			}
+		</div>
+
+		<label for="payer" class="form-label mt-2">Pagador:</label>
+		<select id="payer" class="form-select" label="Selecciona quién pagará" formControlName="payer"
+			[(ngModel)]="newPayment.paid_by">
+			<option *ngFor="let user of arrUsers" [ngValue]="user.id">{{ user.name }}</option>
+		</select>
+
+		<label for="payee" class="form-label mt-3">Participantes:</label>
+		<select id="payee" class="form-select" multiple aria-label="Selecciona quiénes participarán" formControlName="payee"
+			[(ngModel)]="newPayment.payee">
+			<option *ngFor="let user of arrUsers" [ngValue]="user.id">{{ user.name }}</option>
+		</select>
+	</form>
+
+	<button class="btn btn-primary btn btn-lg mt-5" (click)="createPayment(groupId, newPayment)">Añadir</button>
+</section>

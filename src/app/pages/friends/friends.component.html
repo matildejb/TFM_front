@@ -1,0 +1,43 @@
+<section class="container mt-5 mb-5">
+  <div class="ps-5 pe-5">
+    <section class="header mb-5">
+      <span class="d-flex justify-content-end align-items-center mb-3">
+        <a class="icon-link icon-link-hover me-1" style="color:#027184;" href="/historial">
+          HISTORIAL GLOBAL
+        </a>
+        <i class="fa-solid fa-arrow-right" style="color:#027184; margin-right: -0.5rem;"></i>
+      </span>
+      <h2>Mis Amigos</h2>
+    </section>
+
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+      <ng-container *ngIf="members && members.length > 0; else noMembers">
+        <div class="col mb-4" *ngFor="let member of members">
+          <div class="card h-100">
+<<<<<<< HEAD
+            <img [src]="member.imageUrl || 'https://placehold.co/400x300.png'" class="card-img-top img-fluid rounded"
+              alt="Imagen de perfil de {{ member.username }}">
+=======
+            <img [src]="member.profile_image || 'https://placehold.co/400x300.png'" class="card-img-top img-fluid rounded" alt="Imagen de perfil de {{ member.username }}">
+>>>>>>> 8572a11f3d2855d13d464f2e7ea200d1a5a71487
+            <div class="card-body">
+              <h5 class="card-title text-wrap text-truncate">{{ member.username }}</h5>
+              <p class="card-text text-wrap text-truncate">{{ member.email }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #noMembers>
+        <section class="box img-bg-gif container border border-2 rounded-4 align-items-center px-4 py-4">
+          <div class="d-flex pt-1 w-100 align-items-center">
+            <h5 class="px-3 fw-bold mb-0 cb">No se encontraron miembros</h5>
+            <a href="#" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3" style="color: #027184;"></i></a>
+          </div>
+        </section>
+      </ng-template>
+    </div>
+  </div>
+</section>
