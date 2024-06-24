@@ -1,64 +1,75 @@
-<section class="wp trans-section justify-content-center">
-	<div>
-		<h2 class="mt-5 mb-3 w-700">Detalles de grupo</h2>
-	</div>
-	<section
-		class="bg-comp container border border-2 rounded-4 align-items-center m-0 px-4 py-4 mt-4 shadow strong-shadow">
-		<div class="d-flex pt-1 w-100 align-items-center">
-			<h3 class="fw-bold mb-0">{{ unGroup?.title || '' }}</h3>
-		</div>
-		<div class="d-flex justify-content-between align-items-center mt-1 w-100">
-			<p class="font-75 mt-2 mb-2">HISTORIAL DE TRANSACCIONES</p>
-		</div>
+<section class="container mt-2 mb-5">
+	<div class="ps-5 pe-5">
+		<h2 class="mb-3 w-700">Detalles de grupo</h2>
 
-		<!-- Fila de títulos de tabla-->
-		<div class="d-flex mt-4">
-			<table class="table container font-75">
-				<tr class="container row d-flex">
-					<th class="col-2 text-center">USUARIO</th>
-					<th class="col-6 text-left px-5">CONCEPTO</th>
-					<th class="col-2 text-left">FECHA</th>
-					<th class="col-2 text-end">CANTIDAD</th>
-				</tr>
-			</table>
-		</div>
 
-		<div *ngIf="showNoPaymentsMessage" class="mt-5">
-			<p class="text-center fw-bold">No se han encontrado movimientos.</p>
-		</div>
+		<section
+			class="bg-comp container border border-2 rounded-4 align-items-center m-0 px-4 py-4 mt-4 shadow strong-shadow">
+			<div class="d-flex pt-1 w-100 align-items-center">
+				<h3 class="fw-bold mb-0">{{ unGroup?.title || '' }}</h3>
+			</div>
+			<div class="d-flex justify-content-between align-items-center mt-1 w-100">
+				<p class="font-75 mt-2 mb-2">HISTORIAL DE TRANSACCIONES</p>
+			</div>
 
-		<!-- Fila de transacciones -->
-		<div *ngFor="let payment of arrPayments"
-			class="bg-card border-custom container align-items-center mt-1 border border-1 rounded-3 border-black">
-			<div class="container row align-items-center justify-content-center m-0">
-				<table class="table container font-75 m-0 p-0">
-					<tr class="row align-items-center">
-						<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.payer_name}}</td>
-						<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description }}</td>
-						<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
-						<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
-							[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
-							{{ payment.amount | currency: 'EUR' }}
-						</td>
+
+			<!-- Fila de títulos de tabla-->
+			<div class="d-flex mt-4">
+				<table class="table container font-75">
+					<tr class="container row d-flex">
+						<th class="col-2 text-center">USUARIO</th>
+						<th class="col-6 text-left px-5">CONCEPTO</th>
+						<th class="col-2 text-left">FECHA</th>
+						<th class="col-2 text-end">CANTIDAD</th>
 					</tr>
 				</table>
 			</div>
-		</div>
-	</section>
+
+
+			<div *ngIf="showNoPaymentsMessage" class="mt-5">
+				<p class="text-center fw-bold">No se han encontrado movimientos.</p>
+			</div>
+
+
+			<!-- Fila de transacciones -->
+			<div *ngFor="let payment of arrPayments"
+				class="bg-card border-custom container align-items-center mt-1 border border-1 rounded-3 border-black">
+				<div class="container row align-items-center justify-content-center m-0">
+					<table class="table container font-75 m-0 p-0">
+						<tr class="row align-items-center">
+							<td class="col-2 d-flex user-name py-0 my-0 justify-content-start">{{ payment.payer_name }}
+							</td>
+							<td class="col-5 d-flex concept fw-bold px-1 justify-content-start">{{ payment.description
+								}}</td>
+							<td class="col-3 d-flex justify-content-center">{{ payment.created_at | date:'short' }}</td>
+							<td class="col-2 d-flex amount font-110 fw-bold justify-content-end"
+								[ngStyle]="{'color': payment.amount < 0 ? 'Crimson' : 'Limegreen'}">
+								{{ payment.amount | currency: 'EUR' }}
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
 </section>
 
-<section class="menu-container pb-5 pt-3 shadow strong-shadow">
+
+<section class="menu-container pb-4 pt-3 shadow strong-shadow">
 	<section class="row d-flex justify-content-center m-0 p-0">
 		<!-- Balance -->
-		<div class="row d-flex justify-content-center px-5 mb-0">
-			<div class="col d-flex justify-content-between">
-				<span>MI DEUDA</span>
+		<div class="row  px-5 mb-0">
+			<div class="d-flex justify-content-between align-items-center">
+				<span class="miDeuda">MI DEUDA</span>
 				<span class="price-text" [ngStyle]="{'color': balance < 0 ? 'Crimson' : (balance > 0 ? 'Limegreen' : null)}">
 					{{ balance | currency: 'EUR' }}
 				</span>
+
+
 			</div>
-			<hr class="mx-auto mb-4">
+			<hr class="mx-auto mb-3">
 		</div>
+
 
 		<!-- Botonera -->
 		<app-menu-buttons [parent]="'detailGroup'" [id]="group_id.toString()"></app-menu-buttons>
