@@ -94,7 +94,7 @@ export class FilterComponent implements OnInit {
     } else {
       this.groupService.addMember(this.groupId, user.email).then(response => {
         console.log('Usuario añadido al grupo exitosamente', response);
-        this.message = 'Usuario añadido al grupo exitosamente';
+        // this.message = 'Usuario añadido al grupo exitosamente';
         alert('Usuario añadido al grupo exitosamente');
       }).catch(error => {
         alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');

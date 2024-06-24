@@ -14,7 +14,7 @@ export class PaymentsService {
   private paymentUrl: string = `${environment.apiUrl}/payments`;
   private membersUrl: string = `${environment.apiUrl}/members`;
 
-  grupoId: number | null = null;
+  groupId: number | null = null;
 
 
   getGroupById(groupId: number): Promise<any> {
@@ -23,19 +23,16 @@ export class PaymentsService {
     );
   }
 
-
   getMembersInMyGroups(user_id: number): Promise<any> {
     return lastValueFrom(
       this.httpClient.get<any>(`${this.membersUrl}/${user_id}/known`)
     );
   }
 
-
-  createPayment(payment: any): Promise<IPayment> {
+  createPayment(group_id: number, payment: any): Promise<IPayment> {
     return lastValueFrom(
-      this.httpClient.post<IPayment>(`${this.paymentUrl}/payments/create`, payment)
+      this.httpClient.post<IPayment>(`${this.paymentUrl}/${group_id}/create`, payment)
     );
   }
-
 
 }

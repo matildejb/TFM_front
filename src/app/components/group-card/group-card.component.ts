@@ -23,6 +23,8 @@ export class GroupCardComponent implements OnInit {
 	balance: any;
 	debts: number = 0;
 
+
+
 	constructor(
 		private http: HttpClient,
 		private groupService: GroupService,
@@ -64,12 +66,10 @@ export class GroupCardComponent implements OnInit {
 
 	async getDebtsById(group_id: number, user_id: number): Promise<void> {
 		try {
-			const user = await this.userService.getProfile();
-			// this.user_id = user[0].id;
 			const debts = await this.groupService.getDebtsById(group_id, user_id);
 			if (debts && debts.length > 0) {
 				this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
-				// console.log('Balance actualizado:', this.balance);
+				console.log('Balance actualizado:', this.balance);
 			} else {
 				this.balance = 0; // Si no hay deudas, asegura que el balance sea cero
 			}

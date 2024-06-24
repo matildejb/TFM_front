@@ -2,11 +2,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PaymentsService } from "../../../services/payments.service";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Component, inject } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import { IPayment } from "../../../interfaces/ipayments.interfaces";
 
 @Component({
   selector: 'app-payments',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.css'
 })
@@ -15,11 +17,11 @@ export class PaymentsComponent {
   router = inject(Router);
   paymentService: PaymentsService = inject(PaymentsService);
   members: any[] = [];
-  groupId: number | null = null;
-  id: number | null = null;
+  // groupId: number | null = null;
+  groupId: number = 0;
 
 
-  constructor(private route: ActivatedRoute, private paymentsService: PaymentsService) { // Inject ActivatedRoute
+  constructor(private route: ActivatedRoute) {
     this.formNewPayment = new FormGroup({
       description: new FormControl('', [
         Validators.required,
@@ -29,38 +31,47 @@ export class PaymentsComponent {
       amount: new FormControl('', [
         Validators.required,
         Validators.min(1),
-        Validators.pattern(/^\d+(\.\d{1,2})?$/) // Solo números positivos con 2 decimales
+        Validators.pattern(/^\d+(\.\d{1,2})?$/)
       ]),
-      member: new FormControl('', [Validators.required]),
+      payer: new FormControl('', [Validators.required]),
+      payee: new FormControl([], [Validators.required]) // payee como un arreglo para el select múltiple
     });
 
     this.route.params.subscribe(params => {
-      this.groupId = params['id'];
+      this.groupId = +params['id'];
       if (this.groupId) {
-        this.getMembersByGroupId(this.groupId); // Llamar al método para obtener los miembros del grupo
+        this.getMembersByGroupId(this.groupId);
       }
+    });
+
+    // React to changes in the payer control to update the payee options
+    this.formNewPayment.get('payer')?.valueChanges.subscribe(payerId => {
+      this.updatePayeeOptions(payerId);
     });
   }
 
-
-  checkControl(
-    formControlName: string,
-    validador: string
-  ): boolean | undefined {
-    return (
-      this.formNewPayment.get(formControlName)?.hasError(validador) &&
-      this.formNewPayment.get(formControlName)?.touched
-    );
+  async ngOnInit(): Promise<void> {
+    if (this.groupId) {
+      await this.getMembersByGroupId(this.groupId);
+    }
   }
 
   async getMembersByGroupId(groupId: number): Promise<void> {
-    const id = await this.paymentsService.getGroupById(groupId);
-    console.log(id)
     try {
-      const members = await this.paymentsService.getMembersInMyGroups(id);
-      this.members = members;
+      const members = await this.paymentService.getMembersInMyGroups(groupId);
+      this.members = members.map((member: any) => member.username);
     } catch (error) {
       console.error('Error al obtener los miembros del grupo:', error);
+    }
+  }
+
+  updatePayeeOptions(payerId: number) {
+    const payeeControl = this.formNewPayment.get('payee');
+    if (payeeControl) {
+      payeeControl.setValue([]);
+      // Filter out the payer from the payee options
+      const filteredMembers = this.members.filter(member => member.id !== payerId);
+      this.members = filteredMembers.map(member => member.name); // Solo mantener los nombres
     }
   }
 
@@ -68,19 +79,45 @@ export class PaymentsComponent {
     if (this.formNewPayment.invalid) {
       return;
     }
-    const newPayment = {
-      description: this.formNewPayment.value.description,
-      amount: this.formNewPayment.value.amount,
-      member: this.formNewPayment.value.member
+
+    const newPayment: IPayment = {
+      description: this?.formNewPayment.value.description,
+      amount: this?.formNewPayment.value.amount,
+      paid_by: this?.formNewPayment.value.payer,
+      participants: this?.formNewPayment.value.payee.map((id: any) => ({ userId: id })) // Convertir a la estructura esperada por el backend
     };
 
     try {
-      await this.paymentService.createPayment(newPayment);
-      // Redirigir a la página del grupo creado o a donde desees
-      this.router.navigate(['group/:id']);
+      await this.paymentService.createPayment(this.groupId, newPayment);
+      this.router.navigate([`group/${this.groupId}`]);
       alert('Pago creado correctamente');
     } catch (error) {
       console.error('Error al crear el pago:', error);
+      alert('Error al crear el pago');
     }
   }
+
+  // async createNewPayment(): Promise<void> {
+  //   if (this.formNewPayment.invalid) {
+  //     return;
+  //   }
+
+  //   const newPayment = {
+  //     description: this.formNewPayment.value.description,
+  //     amount: this.formNewPayment.value.amount,
+  //     payer: this.formNewPayment.value.payer,
+  //     participants: this.formNewPayment.value.payee.map((id: any) => ({ userId: id })) // Convertir a la estructura esperada por el backend
+  //   };
+
+  //   try {
+  //     await this.paymentService.createPayment(this.groupId, newPayment);
+  //     this.router.navigate([`group/${this.groupId}`]);
+  //     alert('Pago creado correctamente');
+  //   } catch (error) {
+  //     console.error('Error al crear el pago:', error);
+  //     alert('Error al crear el pago');
+  //   }
+  // }
 }
+
+

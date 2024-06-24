@@ -1,30 +1,31 @@
 <section class="container">
-    <div class="p-3 width">
-        <form [formGroup]="formNewPayment">
-            <div class="mb-3">
-                <label for="description" class="form-label">Descripción</label>
-                <input type="text" placeholder="Introduce una descripción para el gasto" id="description"
-                    class="form-control" formControlName="description" />
-            </div>
-            <div class="mb-3">
-                <label for="payment" class="form-label">Importe</label>
-                <input type="number" placeholder="Introduce el importe del gasto" id="payment" class="form-control"
-                    formControlName="payment" />
-            </div>
-            <div class="mb-3">
-                <label for="member" class="form-label">Pagador</label>
-                <select id="member" class="form-control" formControlName="member">
-                    <!-- <option *ngFor="let user of filteredUsers"></option> -->
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="member" class="form-label">A quien paga</label>
-                <select id="member" class="form-control" formControlName="member">
-                    <!-- <option *ngFor="let member of members" [value]="member.id">{{ member.name }}</option> -->
-                </select>
-            </div>
-
-            <input type="submit" value="Añadir" class="btn btn-se" (click)="createNewPayment()" />
-        </form>
-    </div>
+	<div class="p-3 width">
+		<form [formGroup]="formNewPayment" (ngSubmit)="createNewPayment()">
+			<div class="mb-3">
+				<label for="description" class="form-label">Descripción</label>
+				<input type="text" placeholder="Introduce una descripción para el gasto" id="description" class="form-control"
+					formControlName="description" />
+			</div>
+			<div class="mb-3">
+				<label for="amount" class="form-label">Importe</label>
+				<input type="number" placeholder="Introduce el importe del gasto" id="amount" class="form-control"
+					formControlName="amount" />
+			</div>
+			<div class="mb-3">
+				<label for="payer" class="form-label" aria-label="Default select example">Pagador</label>
+				<select id="payer" class="form-select" formControlName="payee">
+					<option selected disabled>Selecciona un pagador</option>
+					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<label for="payee" class="form-label">Participantes</label>
+				<select id="payee" class="form-select" formControlName="payee">
+					<option selected disabled>Selecciona a quien paga</option>
+					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
+				</select>
+			</div>
+			<input type="submit" value="Añadir" class="btn btn-se mt-2" />
+		</form>
+	</div>
 </section>
