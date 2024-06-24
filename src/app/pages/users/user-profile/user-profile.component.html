@@ -1,27 +1,5 @@
 <div class="container d-flex flex-column gap-2 mt-5 mb-5">
-  <h2>Mi cuenta</h2>
-
-  <div class="card flex-md-row">
-    <button
-      class="btn edit-profile me-3 mt-3 mt-md-0"
-      [routerLink]="['/updateUser', unUser?.id]"
-    >
-      Editar
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        fill="#f6a278 "
-        class="bi bi-sliders setting ms-2"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z"
-        />
-      </svg>
-    </button>
-
+    <h2>Mi Cuenta</h2>
     <div class="card flex-md-row">
         <button class="btn edit-profile me-3 mt-3 mt-md-0" [routerLink]="['/update-user']">Editar
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f6a278"
@@ -52,8 +30,5 @@
         <a type="button" class="delete-account p-3 text-danger" (click)="deleteUser()">Eliminar cuenta</a>
     </div>
 
-    <a type="button" class="delete-account p-3" (click)="deleteUser()"
-      >Eliminar cuenta</a
-    >
-  </div>
+
 </div>

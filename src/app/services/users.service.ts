@@ -83,6 +83,20 @@ export class UsersService {
       this.httpClient.get<IUser>(this.profileUrl)
     )
   }
+
+
+    getUserById(id: number): Promise<IUser> {
+    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
+  }
+
+  // Actualizar perfil de usuario
+  updateProfile(userData: IUser): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.put<IUser>(`${this.baseUrl}/updateUser/${userData.id}`,
+        userData
+      )
+    );
+  }
   
 
   //IMG
