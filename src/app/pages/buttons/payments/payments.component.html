@@ -1,31 +1,26 @@
-<section class="container">
-	<div class="p-3 width">
-		<form [formGroup]="formNewPayment" (ngSubmit)="createNewPayment()">
-			<div class="mb-3">
-				<label for="description" class="form-label">Descripción</label>
-				<input type="text" placeholder="Introduce una descripción para el gasto" id="description" class="form-control"
-					formControlName="description" />
-			</div>
-			<div class="mb-3">
-				<label for="amount" class="form-label">Importe</label>
-				<input type="number" placeholder="Introduce el importe del gasto" id="amount" class="form-control"
-					formControlName="amount" />
-			</div>
-			<div class="mb-3">
-				<label for="payer" class="form-label" aria-label="Default select example">Pagador</label>
-				<select id="payer" class="form-select">
-					<option selected disabled>Selecciona un pagador</option>
-					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
-				</select>
-			</div>
-			<div class="mb-3">
-				<label for="payee" class="form-label">Participantes</label>
-				<select id="payee" class="form-select" multiple>
-					<option selected disabled>Selecciona a quien paga</option>
-					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
-				</select>
-			</div>
-			<input type="submit" value="Añadir" class="btn btn-se mt-2" />
-		</form>
+<section class="wp container">
+	<h2 class="mt-4">Añadir gastos</h2>
+	<div class="mb-3 mt-2">
+		<label for="descripcion" class="form-label mt-2">Descripción:</label>
+		<input type="text" class="form-control" id="descripcion" placeholder="Ingrese una descripción"
+			[(ngModel)]="newPayment.description">
 	</div>
+	<div class="mb-3">
+		<label for="importe" class="form-label mt-2">Importe:</label>
+		<input type="number" class="form-control" id="importe" placeholder="Ingrese el importe"
+			[(ngModel)]="newPayment.amount">
+	</div>
+
+	<label for="payer" class="form-label mt-2">Pagador:</label>
+	<select id="payer" class="form-select" label="Selecciona quién pagará" [(ngModel)]="newPayment.paid_by">
+		<option *ngFor="let user of arrUsers" [ngValue]="user.id">{{ user.name }}</option>
+	</select>
+
+	<label for="payee" class="form-label mt-3">Participantes:</label>
+	<select id="payee" class="form-select" multiple aria-label="Selecciona quiénes participarán"
+		[(ngModel)]="newPayment.payee">
+		<option *ngFor="let user of arrUsers" [ngValue]="user.id">{{ user.name }}</option>
+	</select>
+
+	<button class="btn btn-primary btn btn-lg mt-5" (click)="createPayment(groupId, newPayment)">Añadir</button>
 </section>

@@ -11,8 +11,8 @@ import { IDebts } from '../interfaces/idebts.interfaces';
 export class GroupService {
 	private baseUrl: string = `${environment.apiUrl}`;
 	private profileUrl = `${this.baseUrl}/users/profile`;
-	private balanceSubject = new BehaviorSubject<number>(0);
-	private sharedInfo: string = '';
+	private httpClient = inject(HttpClient);
+	private balanceSource = new BehaviorSubject<number | null>(null);
 
 	// // Compartir balance entre componentes
 	// private balanceSubject = new BehaviorSubject<number>(0); // Inicializa el balance en 0 al principio de la aplicación (antes de que se cargue el balance real)
@@ -42,8 +42,6 @@ export class GroupService {
 
 
 
-	// constructor(private httpClient: HttpClient) { }
-	private httpClient = inject(HttpClient);
 
 	getMyGroups(user_id: number): Promise<any> {
 		return lastValueFrom(
@@ -115,6 +113,11 @@ export class GroupService {
 		}).catch(error => {
 			throw error;
 		});
+	}
+
+	currentBalance = this.balanceSource.asObservable();
+	updateBalance(balance: number) {
+		this.balanceSource.next(balance);
 	}
 }
 

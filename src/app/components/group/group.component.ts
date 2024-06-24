@@ -27,7 +27,8 @@ export class GroupComponent implements OnInit {
   user_id: number | null = null;
   showNoPaymentsMessage: boolean = false;
   debts: number = 0;
-  @Output() balance: any;
+  // @Output() balance: any;
+  balance: any;
   groupTitle: string = '';
 
   // paymentService = inject(PaymentService);
@@ -94,6 +95,7 @@ export class GroupComponent implements OnInit {
       } else {
         this.balance = 0; // Si no hay deudas, asegura que el balance sea cero
       }
+      this.groupService.updateBalance(this.balance);
     } catch (error) {
       console.error('Error al obtener deudas:', error);
     }
