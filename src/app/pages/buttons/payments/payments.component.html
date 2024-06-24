@@ -13,14 +13,14 @@
 			</div>
 			<div class="mb-3">
 				<label for="payer" class="form-label" aria-label="Default select example">Pagador</label>
-				<select id="payer" class="form-select" formControlName="payee">
+				<select id="payer" class="form-select">
 					<option selected disabled>Selecciona un pagador</option>
 					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
 				</select>
 			</div>
 			<div class="mb-3">
 				<label for="payee" class="form-label">Participantes</label>
-				<select id="payee" class="form-select" formControlName="payee" multiple>
+				<select id="payee" class="form-select" multiple>
 					<option selected disabled>Selecciona a quien paga</option>
 					<option *ngFor="let member of members" [value]="member.id">{{ member }}</option>
 				</select>

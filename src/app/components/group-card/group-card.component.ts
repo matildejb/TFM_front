@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
@@ -7,11 +7,11 @@ import { IUser } from '../../interfaces/iuser.interfaces';
 import { IGroup } from '../../interfaces/igroup.interfaces';
 import { UsersService } from '../../services/users.service';
 import { GroupComponent } from '../group/group.component';
+import { IPayment } from '../../interfaces/ipayments.interfaces';
 
 @Component({
 	selector: 'app-group-card',
 	standalone: true,
-	inputs: ['balance'],
 	imports: [CommonModule, RouterLink, GroupComponent],
 	templateUrl: './group-card.component.html',
 	styleUrls: ['./group-card.component.css']
@@ -19,20 +19,23 @@ import { GroupComponent } from '../group/group.component';
 export class GroupCardComponent implements OnInit {
 	arrGroups: IGroup[] = [];
 	group_id: number = 0;
-	user_id: number = 1;
-	@Input() navigateTo: string = '';
+	// user_id: number = 1;
+	user_id: number | null = null;
+	@Input() navigateTo: number | null = null;
 	@Input() amount: number = 0;
-	balance: any;
-	// @Input() balance: any;
+	// balance: number = 0;
+	@Input() balance: any;
 	debts: number = 0;
 	groupTitle: string = '';
+	unGroup: IGroup | null = null;
+	arrPayments: IPayment[] = [];
+	payment: any;
+	showNoPaymentsMessage: boolean = false;
 
-
-
+	groupService = inject(GroupService);
 
 	constructor(
 		private http: HttpClient,
-		private groupService: GroupService,
 		private userService: UsersService,
 		private route: ActivatedRoute,
 	) { }
@@ -42,16 +45,28 @@ export class GroupCardComponent implements OnInit {
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes['amount']) {
-			this.amountColor = this.amount < 0 ? 'Crimson' : 'Limegreen';
+			this.amountColor = this.amount !== null && this.amount < 0 ? 'Crimson' : 'Limegreen';
 		}
 	}
 
 	ngOnInit(): void {
+		this.groupService.balance$.subscribe(balance => {
+			this.balance = balance; // Suscribe al balance del servicio para actualizarlo en el componente
+		});
+		this.route.params.subscribe(params => {
+			this.group_id = +params['id'];
+			if (this.user_id !== null) {
+				this.getDebtsById(this.group_id, this.user_id);
+			}
+		});
+
 		this.getMyGroups();
 		// Obtén el ID del grupo de la ruta
 		this.route.params.subscribe(params => {
 			this.group_id = +params['id'];
-			this.getDebtsById(this.group_id, this.user_id); // Obtén las deudas del usuario con el ID obtenido de la ruta
+			if (this.user_id !== null) {
+				this.getDebtsById(this.group_id, this.user_id); // Obtén las deudas del usuario con el ID obtenido de la ruta
+			}
 			// this.getPayments(this.group_id);
 		});
 	}
@@ -69,10 +84,23 @@ export class GroupCardComponent implements OnInit {
 		}
 	}
 
+	// async getDebtsById(group_id: number, user_id: number): Promise<void> {
+	// 	try {
+	// 		const debts = await this.groupService.getDebtsById(group_id, user_id);
+	// 		console
+	// 		if (debts && debts.length > 0) {
+	// 			this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
+	// 			console.log('Balance actualizado:', this.balance);
+	// 		} else {
+	// 			this.balance = 0; // Si no hay deudas, asegura que el balance sea cero
+	// 		}
+	// 	} catch (error) {
+	// 		console.error('Error al obtener deudas:', error);
+	// 	}
+	// }
 	async getDebtsById(group_id: number, user_id: number): Promise<void> {
 		try {
 			const debts = await this.groupService.getDebtsById(group_id, user_id);
-			console
 			if (debts && debts.length > 0) {
 				this.balance = debts[0].balance; // Asigna el balance del primer objeto de deudas a la variable balance
 				console.log('Balance actualizado:', this.balance);
@@ -83,4 +111,5 @@ export class GroupCardComponent implements OnInit {
 			console.error('Error al obtener deudas:', error);
 		}
 	}
+
 }

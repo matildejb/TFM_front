@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { IDebts } from '../interfaces/idebts.interfaces';
 
@@ -11,6 +11,35 @@ import { IDebts } from '../interfaces/idebts.interfaces';
 export class GroupService {
 	private baseUrl: string = `${environment.apiUrl}`;
 	private profileUrl = `${this.baseUrl}/users/profile`;
+	private balanceSubject = new BehaviorSubject<number>(0);
+	private sharedInfo: string = '';
+
+	// // Compartir balance entre componentes
+	// private balanceSubject = new BehaviorSubject<number>(0); // Inicializa el balance en 0 al principio de la aplicación (antes de que se cargue el balance real)
+	// balance$ = this.balanceSubject.asObservable(); // Observable para que los componentes puedan suscribirse a él y recibir actualizaciones del balance
+
+	// setBalance(balance: number): void { // Método para actualizar el balance y notificar a los componentes suscritos al Observable 
+	// 	this.balanceSubject.next(balance);// 
+	// }
+
+
+	// // shared-data.service.ts
+	// setSharedInfo(info: number): void {
+	// 	this.balanceSubject.next(info);
+	// }
+
+	// getSharedInfo$(): Promise <number> {
+	// 	return this.balanceSubject.asObservable();
+	// }
+
+	// setSharedInfo(info: string): void {
+	// 	this.sharedInfo = info;
+	// }
+	// getSharedInfo(): string {
+	// 	return this.sharedInfo;
+	// }
+
+
 
 
 	// constructor(private httpClient: HttpClient) { }

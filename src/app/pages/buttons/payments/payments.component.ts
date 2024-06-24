@@ -75,25 +75,25 @@ export class PaymentsComponent {
     }
   }
 
-  async createNewPayment(): Promise<void> {
-    if (this.formNewPayment.invalid) {
-      return;
-    }
+  async createNewPayment(): Promise<void> { // Método para crear un nuevo pago en el grupo
+    // if (this.formNewPayment.invalid) { // Si el formulario es inválido, no hacer nada
+    //   return;
+    // }
 
-    const newPayment: IPayment = {
-      description: this?.formNewPayment.value.description,
-      amount: this?.formNewPayment.value.amount,
-      paid_by: this?.formNewPayment.value.payer,
+    const newPayment: IPayment = { // Crear un objeto con los datos del nuevo pago a partir de los valores del formulario de nuevo pago
+      description: this?.formNewPayment.value.description, // Obtener la descripción del formulario
+      amount: this?.formNewPayment.value.amount, // Obtener el monto del formulario
+      paid_by: this?.formNewPayment.value.payer.id, // Obtener el ID del pagador del formulario (ya que el formulario tiene el objeto completo)
       participants: this?.formNewPayment.value.payee.map((id: any) => ({ userId: id })) // Convertir a la estructura esperada por el backend
     };
 
     try {
-      await this.paymentService.createPayment(this.groupId, newPayment);
-      this.router.navigate([`group/${this.groupId}`]);
+      await this.paymentService.createPayment(this.groupId, newPayment); // Crear el pago en el backend con el nuevo pago y el ID del grupo actual 
+      this.router.navigate([`group/${this.groupId}`]); // Redirigir al grupo actual después de crear el pago con éxito 
       alert('Pago creado correctamente');
     } catch (error) {
       console.error('Error al crear el pago:', error);
-      alert('Error al crear el pago');
+      alert('Error al crear el pago!');
     }
   }
 
