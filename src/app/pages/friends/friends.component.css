@@ -1,14 +1,8 @@
 .container {
   padding-left: 22%;
-
-}
-
-.cb {
-  font-size: 1.3rem;
 }
 
 .header {
-  
   font-size: 1.3rem;
 }
 
@@ -40,7 +34,6 @@
 @media only screen and (max-width: 992px) {
   .container {
     padding-left: 0%;
-
   }
 }
 
@@ -48,10 +41,6 @@
 @media only screen and (max-width: 767px) {
   .container {
     font-size: 1rem;
-
-    .cb {
-      font-size: 1rem;
-    }
 
     .header {
       font-size: 1rem;
