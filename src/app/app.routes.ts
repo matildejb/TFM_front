@@ -67,7 +67,8 @@ export const routes: Routes = [
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
   { path: 'friends', component: FriendsComponent, canActivate: [loginGuard] },
   { path: 'historial', component: StatisticsComponent, canActivate: [loginGuard] },
-  { path: 'filter', component: FilterComponent },
+  { path: 'filter', component: FilterComponent, canActivate: [loginGuard] },
+  
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];

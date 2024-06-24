@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, forkJoin, lastValueFrom, map, Observable, switchMap } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
-import { IDebt } from '../interfaces/idebt';
-import { IMember } from '../interfaces/imember';
 import axios from 'axios';
 
 
@@ -36,10 +34,8 @@ export class UsersService {
   private profileUrl = `${this.baseUrl}/profile`;
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
-
-  // autenticacion usuario
-  // REGISTAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
+ // Autenticación usuario
+  // REGISTRAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
 
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
@@ -70,22 +66,44 @@ export class UsersService {
     return this.loggedIn.asObservable();
   }
 
+  // Verifica si el token está presente en el localStorage
   private hasToken(): boolean {
-    return !!localStorage.getItem('token'); // Verifica si el token está presente en el localStorage
+    return !!localStorage.getItem('token'); 
   }
   
   
-  // funcionalidades de los usuarios  
-  // DATOS POR USUARIO/ACTUALIZAR IMG/ ELIMINAR USUARIO
+  // Funcionalidades de los usuarios  
+  // DATOS POR USUARIO/ ACTUALIZAR / ELIMINAR 
 
   getProfile(): Promise<IUser> {
       return lastValueFrom(
       this.httpClient.get<IUser>(this.profileUrl)
     )
   }
+
+    getUserById(id: number): Promise<IUser> {
+    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
+  }
+
+  // Actualizar perfil de usuario
+  updateProfile(userData: IUser): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.put<IUser>(`${this.baseUrl}/updateUser/${userData.id}`,
+        userData
+      )
+    );
+  }
+
+    deleteUser(id: number): Promise<IUser> {
+    return lastValueFrom(
+      this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
+    );
+  }
   
 
-  //IMG
+  
+  //IMG  FALTA   implementar la llamada al back para traer la img 
+  private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
 
   async uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
@@ -128,7 +146,6 @@ export class UsersService {
     localStorage.setItem(`imageUrl_${userId}`, imageUrl); // Almacenar la URL de la imagen en el localStorage
   }
 
-
   async getUserImage(userId: number): Promise<any> {
      try {
     const response = await axios.get(`/api/users/${userId}/image`);
@@ -149,12 +166,6 @@ export class UsersService {
     }
     throw error; 
   }
-  }
-
-  deleteUser(id: number): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
-    );
   }
 
 
