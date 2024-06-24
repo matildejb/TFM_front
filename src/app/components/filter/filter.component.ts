@@ -5,6 +5,7 @@ import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filter',
@@ -87,19 +88,50 @@ export class FilterComponent implements OnInit {
     return withoutAccent;
   }
 
+  // onButtonClick(user: any): void {
+  //   if (!this.groupId) {
+  //     this.message = 'No se pudo obtener el ID del grupo';
+  //     console.error(this.message);
+  //   } else {
+  //     this.groupService.addMember(this.groupId, user.email).then(response => {
+  //       console.log('Usuario añadido al grupo exitosamente', response);
+  //       // this.message = 'Usuario añadido al grupo exitosamente';
+  //       alert('Usuario añadido al grupo exitosamente');
+  //     }).catch(error => {
+  //       alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');
+  //     });
+  //   }
+  // }
+
   onButtonClick(user: any): void {
     if (!this.groupId) {
       this.message = 'No se pudo obtener el ID del grupo';
       console.error(this.message);
+      Swal.fire({
+        title: 'Error',
+        text: this.message,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     } else {
       this.groupService.addMember(this.groupId, user.email).then(response => {
         console.log('Usuario añadido al grupo exitosamente', response);
-        // this.message = 'Usuario añadido al grupo exitosamente';
-        alert('Usuario añadido al grupo exitosamente');
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Usuario añadido al grupo correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
       }).catch(error => {
-        alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');
+        Swal.fire({
+          title: 'Error',
+          text: 'El usuario ya existe en este grupo.\nAñade a otro usuario.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       });
     }
+
   }
 
   onSearchClick(): void {

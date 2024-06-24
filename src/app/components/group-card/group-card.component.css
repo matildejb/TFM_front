@@ -3,15 +3,15 @@
 }
 
 .text-50 {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
 }
 
 .text-75 {
-    font-size: 0.75rem;
+    font-size: 1rem;
 }
 
 .text-125 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
 }
 
 .price-text {
@@ -56,4 +56,32 @@
     .wp {
         padding: 0px 400px 150px;
     }
+}
+
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+
+    .text-50 {
+    font-size: 0.5rem;
+}
+
+.text-75 {
+    font-size: 0.75rem;
+}
+
+.text-125 {
+    font-size: 1.2rem;
+}
+
+.price-text {
+    font-size: 1.5rem;
+}
+
+  
 }

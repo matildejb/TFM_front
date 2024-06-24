@@ -1,16 +1,23 @@
-.container{
+/* .container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;  
+} */
+
+.container {
+  padding-left: 22%;
 }
 
-.btn-exit{
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-
+.btn-exit {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  .danger {
+    padding: 10px;
+  }
 }
 
 .width {
@@ -19,7 +26,7 @@
 
 @media only screen and (min-width: 768px) {
   .width {
-    width: 35%;
+    width: 60%;
   }
 }
 
@@ -67,5 +74,12 @@ input.ng-valid.ng-touched {
       background-color: #027184;
       color: white;
     }
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    padding-left: 0%;
   }
 }

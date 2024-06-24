@@ -1,5 +1,5 @@
-section.wp {
-  padding: 0px 100px 100px;
+.container {
+  padding-left: 22%;
 }
 
 .price-text {
@@ -24,7 +24,7 @@ section.wp {
 }
 
 .balance {
-  padding-bottom: 50px
+  padding-bottom: 50px;
 }
 
 .amount-positive {
@@ -43,7 +43,6 @@ section.wp {
 .bg-card {
   background-color: white;
 }
-
 
 /* Botonera */
 .menu-container {
@@ -121,7 +120,7 @@ section.wp {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
+/* @media (min-width: 992px) and (max-width: 1200px) {
   .wp {
     padding: 0px 250px;
   }
@@ -130,5 +129,12 @@ section.wp {
 @media (min-width: 1201px) {
   .wp {
     padding: 0px 400px;
+  }
+} */
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
   }
 }
