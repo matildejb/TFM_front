@@ -99,7 +99,7 @@ export class FilterComponent implements OnInit {
       }).catch(error => {
         Swal.fire({
           title: 'Error',
-          text: 'El usuario ya existe en este grupo.\nAñade a otro usuario.',
+          text: 'El miembro ya existe en el grupo o no tienes funciones de administrador.',
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });

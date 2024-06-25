@@ -16,9 +16,9 @@ import { redirectGuard } from './guards/redirect.guard';
 import { FilterComponent } from './components/filter/filter.component';
 import { PaymentsComponent } from './pages/buttons/payments/payments.component';
 import { FormGroupComponent } from './pages/buttons/form-group/form-group.component';
-import { GroupMembersComponent } from './pages/group-members/group-members.component';
 import { FriendsComponent } from './pages/friends/friends.component';
 import { StatisticsComponent } from './pages/statistics_historial/statistics.component';
+import { GroupMembersComponent } from './pages/group-members/group-members.component';
 
 export const routes: Routes = [
   
@@ -59,3 +59,5 @@ export const routes: Routes = [
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];
+
+
