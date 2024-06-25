@@ -22,14 +22,26 @@ import { StatisticsComponent } from './pages/statistics_historial/statistics.com
 
 export const routes: Routes = [
   
+  { path: 'updateUser/:user_id', component: RegisterComponent },
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
-  { path: 'landing', component: LandingComponent, canActivate: [redirectGuard] },
-  { path: 'welcome', component: WelcomeComponent, canActivate: [redirectGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [redirectGuard] },
+  {
+    path: 'landing',
+    component: LandingComponent,
+    canActivate: [redirectGuard],
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
+    canActivate: [redirectGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [redirectGuard],
+  },
   { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },
 
   { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
-  { path: 'updateUser/:userId', component: RegisterComponent, canActivate: [loginGuard] },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
   { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },

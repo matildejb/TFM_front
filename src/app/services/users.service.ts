@@ -5,7 +5,6 @@ import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
 import axios from 'axios';
 
-
 type RegisterBody = {
   name: string;
   username: string;
@@ -35,7 +34,7 @@ export class UsersService {
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
   // Autenticación usuario
-  // REGISTRAR - INICIO SESION - CERRAR SESIÓN POR USUARIO, 
+  // REGISTRAR - INICIO SESION - CERRAR SESIÓN POR USUARIO,
 
   register(newUser: RegisterBody): Promise<IUser & string[]> {
     return lastValueFrom(
@@ -71,14 +70,11 @@ export class UsersService {
     return !!localStorage.getItem('token');
   }
 
-
-  // Funcionalidades de los usuarios  
-  // DATOS POR USUARIO/ ACTUALIZAR / ELIMINAR 
+  // Funcionalidades de los usuarios
+  // DATOS POR USUARIO/ ACTUALIZAR / ELIMINAR
 
   getProfile(): Promise<IUser> {
-    return lastValueFrom(
-      this.httpClient.get<IUser>(this.profileUrl)
-    )
+    return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl));
   }
 
   getUserById(id: number): Promise<IUser> {
@@ -88,7 +84,8 @@ export class UsersService {
   // Actualizar perfil de usuario
   updateProfile(userData: IUser): Promise<IUser> {
     return lastValueFrom(
-      this.httpClient.put<IUser>(`${this.baseUrl}/updateUser/${userData.id}`,
+      this.httpClient.put<IUser>(
+        `${this.baseUrl}/updateUser/${userData.id}`,
         userData
       )
     );
@@ -100,6 +97,10 @@ export class UsersService {
     );
   }
 
+  //IMG  FALTA   implementar la llamada al back para traer la img
+  private imageUrlSubject = new BehaviorSubject<string>(
+    'assets/images/default-img.png'
+  );
 
   //IMG  FALTA   implementar la llamada al back para traer la img 
   private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
@@ -111,19 +112,25 @@ export class UsersService {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        throw new Error('No se encontró un token de autorización en el almacenamiento local.');
+        throw new Error(
+          'No se encontró un token de autorización en el almacenamiento local.'
+        );
       }
 
-      const response = await axios.put(`${this.profileUrl}/image/${id}`, formData, {
-        headers: {
-          'Authorization': token || `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
+      const response = await axios.put(
+        `${this.profileUrl}/image/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: token || `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
         }
-      });
+      );
 
       if (response.data.profileImage) {
         const newImageUrl = response.data.profileImage;
-        this.updateImageUrl(id, newImageUrl);  // Actualizar el Subject con la nueva URL de la imagen
+        this.updateImageUrl(id, newImageUrl); // Actualizar el Subject con la nueva URL de la imagen
       } else {
         console.error('La respuesta del servidor no contiene profileImage');
         this.updateImageUrl(id, 'assets/images/default-img.png');
@@ -154,10 +161,12 @@ export class UsersService {
         // Handle Axios specific errors
         console.error(`Error getting user image: ${error.message}`, {
           code: error.code,
-          response: error.response ? {
-            status: error.response.status,
-            data: error.response.data,
-          } : null,
+          response: error.response
+            ? {
+                status: error.response.status,
+                data: error.response.data,
+              }
+            : null,
         });
       } else {
         // Handle other errors
@@ -167,7 +176,6 @@ export class UsersService {
     }
   }
 
-
   // -------------------------------------------- page historial --------------------------------------------------
 
   private membersUrl = `${environment.apiUrl}/members`;
@@ -175,79 +183,81 @@ export class UsersService {
   getMembersByGroupId(groupId: string): Observable<any> {
     const url = `${this.membersUrl}/${groupId}`;
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
     return this.httpClient.get<any>(url, { headers });
   }
 
-
   getUserGroups(userId: string): Promise<any> {
     const url = `${environment.apiUrl}/groups/${userId}`;
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
     return lastValueFrom(this.httpClient.get<any>(url, { headers }));
   }
 
-
-
   async getMembersOfSharedGroups(userId: string): Promise<any[]> {
     const groups = await this.getUserGroups(userId);
-    const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
-    const uniqueMembers = members.flat().filter((member, index, self) =>
-      index === self.findIndex((m) => m.id === member.id)
+    const members = await Promise.all(
+      groups.map(async (group: any) =>
+        lastValueFrom(this.getMembersByGroupId(group.id))
+      )
     );
+    const uniqueMembers = members
+      .flat()
+      .filter(
+        (member, index, self) =>
+          index === self.findIndex((m) => m.id === member.id)
+      );
     return uniqueMembers;
   }
-
 
   getUserPayments(userId: string): Promise<any> {
     const url = `${environment.apiUrl}/payments/user/${userId}/participated`;
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
     return lastValueFrom(this.httpClient.get<any>(url, { headers }));
   }
 
-
   getMemberIds(userId: string): Promise<any[]> {
     const url = `${environment.apiUrl}/members/${userId}/known`;
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
     return lastValueFrom(
       this.httpClient.get<any[]>(url, { headers }).pipe(
-        map(members => {
+        map((members) => {
           console.log('Members received:', members); // Log the entire response first
-          return members.map(member => ({
+          return members.map((member) => ({
             id: member.id,
             name: member.name,
             email: member.email,
-            imageUrl: member.imageUrl
+            imageUrl: member.imageUrl,
           }));
         })
       )
     );
   }
 
-
-
   // -------------------------------------------- page amigos--------------------------------------------------
-
-
 
   getLoggedInUserProfile(): Promise<IUser> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     });
     console.log('Requesting user profile...');
-    return lastValueFrom(this.httpClient.get<IUser>(this.profileUrl, { headers })).then(profile => {
-      console.log('User profile received:', profile);
-      return profile;
-    }).catch(error => {
-      console.error('Error fetching user profile:', error);
-      throw error;
-    });
+    return lastValueFrom(
+      this.httpClient.get<IUser>(this.profileUrl, { headers })
+    )
+      .then((profile) => {
+        console.log('User profile received:', profile);
+        return profile;
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+        throw error;
+      });
   }
 
   async getMembersOfSharedGroupsForLoggedInUser(): Promise<any[]> {
@@ -259,12 +269,19 @@ export class UsersService {
       const groups = await this.getUserGroups(userId);
 
       // Obtenemos los miembros de los grupos (sin repetir)
-      const members = await Promise.all(groups.map(async (group: any) => lastValueFrom(this.getMembersByGroupId(group.id))));
+      const members = await Promise.all(
+        groups.map(async (group: any) =>
+          lastValueFrom(this.getMembersByGroupId(group.id))
+        )
+      );
 
       // Filtramos y devolvemos los miembros únicos
-      const uniqueMembers = members.flat().filter((member, index, self) =>
-        index === self.findIndex((m) => m.id === member.id)
-      );
+      const uniqueMembers = members
+        .flat()
+        .filter(
+          (member, index, self) =>
+            index === self.findIndex((m) => m.id === member.id)
+        );
 
       return uniqueMembers;
     } catch (error) {
@@ -277,7 +294,6 @@ export class UsersService {
   getKnownMembers(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.miembros);
   }
-
 
   // // apiUrl: 'http://localhost:3000/api',
 }

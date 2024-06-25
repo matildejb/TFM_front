@@ -10,26 +10,52 @@
                 </svg>
             </button>
 
-            <form (ngSubmit)="onSubmit()" method="PUT" enctype="multipart/form-data" class="d-flex flex-column gap-3">
-                <label class="custom-file-upload position-absolute">
-                    <input type="file" (change)="onFileSelected($event)" name="profile_image" accept="image/*">
-                    <i class="bi bi-camera"></i></label>
+      <form
+        (ngSubmit)="onSubmit()"
+        method="PUT"
+        enctype="multipart/form-data"
+        class="d-flex flex-column gap-3"
+      >
+        <label class="custom-file-upload position-absolute">
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            name="profile_image"
+            accept="image/*" />
+          <i class="bi bi-camera"></i
+        ></label>
 
-                <img class="card-img-top mt-0 me-3" [src]="imgURL" [alt]="unUser?.name || 'img-personal '"
-                    title="imagen-perfil">
+        <img
+          class="card-img-top mt-0 me-3"
+          [src]="imgURL"
+          [alt]="unUser?.name || 'img-personal '"
+          title="imagen-perfil"
+        />
 
-                <button type="submit" class="btn actualizar">Actualizar imagen</button>
-            </form>
+        <button type="submit" class="btn actualizar">Actualizar imagen</button>
+      </form>
 
-            <div class="card-body mb-5 ">
-                <p>Nombre:<b> {{ unUser?.name }}</b></p>
-                <p>Nombre de usuario:<b> {{ unUser?.username }} </b></p>
-                <p>Correo electrónico:<b> {{ unUser?.email }} </b></p>
-                <p>Número de teléfono: <b>{{ unUser?.phone }} </b></p>
-            </div>
+      <div class="card-body mb-5">
+        <p>
+          Nombre:<b> {{ unUser?.name }}</b>
+        </p>
+        <p>
+          Nombre de usuario:<b> {{ unUser?.username }} </b>
+        </p>
+        <p>
+          Correo electrónico:<b> {{ unUser?.email }} </b>
+        </p>
+        <p>
+          Número de teléfono: <b>{{ unUser?.phone }} </b>
+        </p>
+      </div>
 
-            <a type="button" class="delete-account p-3 text-danger" (click)="deleteUser()">Eliminar cuenta</a>
-        </div>
+      <a
+        type="button"
+        class="delete-account p-3 text-danger"
+        (click)="deleteUser()"
+        >Eliminar cuenta</a
+      >
     </div>
-
+  </div>
 </div>

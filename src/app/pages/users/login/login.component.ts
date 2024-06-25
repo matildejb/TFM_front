@@ -23,7 +23,6 @@ export class LoginComponent {
 
   // Mostrar u ocultar contraseña
   passwordFieldType: string = 'password';
-
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
