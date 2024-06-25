@@ -56,7 +56,7 @@ async deleteGroup(id: string) {
       } catch (error) {
         Swal.fire(
           'Error!',
-          'No se puede eliminar un grupo con gastos pendientes.',
+          'Solo el administrador puede realizar esta acción.',
           'error'
         );
       }
