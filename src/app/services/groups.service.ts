@@ -33,8 +33,8 @@ export class GroupService {
 	}
 
 	deleteGroup(id: number): Promise<any> {
-        return lastValueFrom(this.httpClient.delete<IGroup>(`${this.baseUrl}/groups/delete/${id}`));
-    }
+		return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/groups/delete/${id}`));
+	}
 
 	getGroupById(group_id: number): Promise<any> {
 		return lastValueFrom(
