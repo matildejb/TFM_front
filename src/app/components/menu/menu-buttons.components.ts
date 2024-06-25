@@ -29,7 +29,7 @@ async deleteGroup(id: string) {
     // Obtener el grupo por su ID
     let group = await this.groupsService.getGroupById(Number(id));
     
-    // Mostrar el diálogo de confirmación usando Swal.fire
+
     const result = await Swal.fire({
       title: `¿Estás seguro de que quieres eliminar el grupo "${group.title}"?`,
       text: 'Esta acción no se puede deshacer.',
@@ -43,21 +43,16 @@ async deleteGroup(id: string) {
 
     if (result.isConfirmed) {
       try {
-        // Intentar eliminar el grupo
         const response = await this.groupsService.deleteGroup(Number(id));
-        
         if (response.id) {
-          // Mostrar notificación de éxito
           Swal.fire(
             'Eliminado!',
             'El grupo ha sido eliminado.',
             'success'
           );
-          // Redireccionar a la lista de grupos
           this.router.navigate(['/groupsList']);
         }
       } catch (error) {
-        // Mostrar notificación de error
         Swal.fire(
           'Error!',
           'No se puede eliminar un grupo con gastos pendientes.',
