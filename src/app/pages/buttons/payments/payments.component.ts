@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentsService } from '../../../services/payments.service';
 import { IPayment } from '../../../interfaces/ipayments.interfaces';
 import Swal from 'sweetalert2';
@@ -22,6 +22,7 @@ export class PaymentsComponent implements OnInit {
   message: string = '';
   newPayment: any = {};
   formNewPayment: FormGroup;
+  router = inject(Router);
 
   constructor(
     private groupService: GroupService,
@@ -142,4 +143,11 @@ export class PaymentsComponent implements OnInit {
       alert('Error al crear el pago');
     }
   }
+
+
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
 }

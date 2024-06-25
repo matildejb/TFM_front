@@ -164,8 +164,7 @@ export class RegisterComponent {
             title: 'Te has registrado correctamente',
             text: 'Por favor, revisa tu correo electrónico y haz inicio de sesión con tu nueva cuenta',
             icon: 'success',
-            timer: 2000,
-            showConfirmButton: false,
+            confirmButtonText: 'Aceptar',
           });
           this.router.navigateByUrl('/summary');
         }

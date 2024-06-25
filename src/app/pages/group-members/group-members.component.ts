@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { GroupService } from '../../services/groups.service';
 import { environment } from '../../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,6 +17,7 @@ export class GroupMembersComponent implements OnInit {
   groupId: string = '';
   message: string = '';
   groupName: string = ''; // Variable para almacenar el nombre del grupo
+  router = inject(Router);
 
   constructor(
     private groupService: GroupService,
@@ -58,5 +59,10 @@ export class GroupMembersComponent implements OnInit {
     }).catch((error: any) => {
       console.error('Error al obtener el nombre del grupo', error);
     });
+  }
+
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
