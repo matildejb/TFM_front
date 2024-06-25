@@ -21,12 +21,12 @@ export class FilterComponent implements OnInit {
   groupId: string = '';
   message: string = '';
   router = inject(Router);
-  
+
   constructor(
     private groupService: GroupService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
-    
+
   ) { }
 
   private baseUrl: string = `${environment.apiUrl}/members`;
@@ -108,12 +108,12 @@ export class FilterComponent implements OnInit {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-        this.router.navigate(['/friends']); // Redirigir a la ruta /friends
-      });
+          this.router.navigateByUrl(`/group/${this.groupId}/groupMembers`);
+        });
       }).catch(error => {
         Swal.fire({
           title: 'Error',
-          text: 'El usuario ya existe en este grupo.\nAñade a otro usuario.',
+          text: 'El usuario ya existe en este grupo.\nAñade otro usuario.',
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
@@ -127,7 +127,7 @@ export class FilterComponent implements OnInit {
   }
 
 
-   goBack(): void {
+  goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

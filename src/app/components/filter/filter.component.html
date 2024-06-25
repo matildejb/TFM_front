@@ -1,8 +1,7 @@
 <section class="container  mt-5 mb-5">
 	<div class="ps-5 pe-5">
-		<a (click)="goBack()" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3 mb-2"
-				style="color: #027184;"></i></a>
-		<h2>Añadir amigos a grupo</h2>
+		<a (click)="goBack()" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3 mb-2" style="color: #027184;"></i></a>
+		<h2>Añadir miembros a este grupo</h2>
 		<form class="d-flex flex-column mt-4" role="search" #searchform="ngForm" (ngSubmit)="onSearchClick()">
 			<div class="mb-2">
 				<label for="searchInput" class="form-label">Buscar amigos:</label>
@@ -24,7 +23,7 @@
 					<div>
 						<h5 class="m-0 pt-1">{{ user.name }}</h5>
 						<p class="m-0 p-0 pb-1">{{ user.email }}</p>
-	
+
 					</div>
 					<button class="btn btn-primary" (click)="onButtonClick(user)">Añadir</button>
 				</li>

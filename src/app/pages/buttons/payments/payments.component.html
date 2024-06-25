@@ -13,8 +13,8 @@
 			</div>
 			<div class="mb-3">
 				<label for="amount" class="form-label mt-2">Importe:</label>
-				<input type="number" class="form-control" id="amount" placeholder="Ingrese el importe"
-					formControlName="amount" [(ngModel)]="newPayment.amount">
+				<input type="number" class="form-control" id="amount" placeholder="Ingrese el importe" formControlName="amount"
+					[(ngModel)]="newPayment.amount">
 				@if (checkControl('amount', 'required')) {
 				<p class="error">Campo requerido</p>
 				}
@@ -29,12 +29,13 @@
 			<label for="payee" class="form-label mt-3">Participantes:</label>
 			<select id="payee" class="form-select" multiple aria-label="Selecciona quiénes participarán"
 				formControlName="payee" [(ngModel)]="newPayment.payee">
-				<option *ngFor="let user of arrUsers" [ngValue]="user.id">{{ user.name }}</option>
+				<option *ngFor="let user of arrUsers" [ngValue]="user.id" [disabled]="user.id === newPayment.paid_by">
+					{{ user.name }}
+				</option>
 			</select>
+			<button class="btn btn-primary btn btn-lg mt-5 add" [routerLink]="['/group', groupId]"
+				(click)="createPayment(groupId, newPayment)">Añadir</button>
 		</form>
 
-		<button class="btn btn-primary btn btn-lg mt-5 add" (click)="createPayment(groupId, newPayment)">Añadir</button>
 	</div>
 </section>
-
-

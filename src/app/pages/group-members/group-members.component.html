@@ -1,9 +1,9 @@
 <section class="container mt-5 mb-5">
   <div class="me-5 ms-5">
-    <a (click)="goBack()" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3 mb-2"
-				style="color: #027184;"></i></a>
+    <a (click)="goBack()" class="ms-auto">
+      <i class="fa-solid fa-arrow-left fs-3 mb-2" style="color: #027184;"></i>
+    </a>
     <h2>Miembros del grupo</h2>
-    <h5>{{ groupName }}</h5>
 
     <!-- Lista de miembros del grupo -->
     <div class="mt-4">
@@ -11,7 +11,7 @@
         <li *ngFor="let user of filteredUsers"
           class="list-group-item d-flex justify-content-center align-items-center px-4 mb-2 border-2 border-radius rounded-2 shadow strong-shadow">
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
-            <h5 class="col 7 m-0 p-0">{{ user.username }}</h5>
+            <h5 class="col-md-7 m-0 p-0">{{ user.name }}</h5>
             <p class="col-md-5 m-0 p-0 pb-1">{{ user.email }}</p>
           </div>
         </li>
@@ -19,7 +19,8 @@
     </div>
 
     <!-- Mensaje si no hay miembros en el grupo -->
-    <div  *ngIf="filteredUsers.length === 0" class="mt-5 border border-1 rounded-4 py-4 px-4 w-75 text-center "style="color: #027184;">
+    <div *ngIf="filteredUsers.length === 0" class="mt-5 border border-1 rounded-4 py-4 px-4 w-75 text-center"
+      style="color: #027184;">
       <h5>No hay miembros en el grupo</h5>
     </div>
 
