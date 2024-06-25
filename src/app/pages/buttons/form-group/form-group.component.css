@@ -2,19 +2,23 @@
   padding-left: 22%;
 }
 
+
 .btn-exit {
   display: flex;
   gap: 15px;
   justify-content: center;
   align-items: center;
+
   .danger {
     padding: 10px;
   }
 }
 
+
 .width {
   padding: 0px 80px;
 }
+
 
 .image {
   height: 50%;
@@ -25,15 +29,18 @@ input.ng-invalid.ng-touched {
   border: 2px solid rgb(255, 66, 66);
 }
 
+
 input.ng-valid.ng-touched {
   border: 2px solid rgb(72, 255, 72);
 }
+
 
 .error {
   color: red;
   font-size: 80%;
   margin: 0 0 0 20px;
 }
+
 
 .btn-se {
   background-color: #027184;
@@ -42,6 +49,7 @@ input.ng-valid.ng-touched {
   font-size: 1.2rem;
 }
 
+
 @media only screen and (min-width: 768px) {
   .btn-se {
     padding: 10px;
@@ -49,12 +57,14 @@ input.ng-valid.ng-touched {
     background-color: white;
     color: #027184;
 
+
     &:hover {
       background-color: #027184;
       color: white;
     }
   }
 }
+
 
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {
@@ -64,12 +74,14 @@ input.ng-valid.ng-touched {
   }
 }
 
+
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
   .container {
     padding-left: 0%;
     padding: 0px;
   }
+
   .width {
     padding: 0px;
   }

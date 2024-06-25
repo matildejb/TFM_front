@@ -58,9 +58,12 @@
 				<span class="price-text" [ngStyle]="{'color': balance < 0 ? 'Crimson' : (balance > 0 ? 'Limegreen' : null)}">
 					{{ balance | currency: 'EUR' }}
 				</span>
+
+
 			</div>
-			<hr class="mx-auto mb-4">
+			<hr class="mx-auto mb-3">
 		</div>
+
 
 		<!-- Botonera -->
 		<app-menu-buttons [parent]="'detailGroup'" [id]="group_id.toString()"></app-menu-buttons>

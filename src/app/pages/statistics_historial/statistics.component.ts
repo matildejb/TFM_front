@@ -6,6 +6,7 @@ import { IDebt } from '../../interfaces/idebt';
 import { FriendCardComponent } from '../../components/friend-card_historial/friend-card.component';
 import { IMember } from '../../interfaces/imember';
 
+
 @Component({
   selector: 'app-statistics',
   standalone: true,
@@ -17,11 +18,14 @@ export class StatisticsComponent {
   members: IMember[] = [];
   userPayments: { [userId: string]: any[] } = {}; // Objeto para almacenar pagos por usuario
 
-  constructor(private memberService: UsersService) {}
+
+  constructor(private memberService: UsersService) { }
+
 
   ngOnInit(): void {
     this.loadUserProfileAndMembers();
   }
+
 
   private async loadUserProfileAndMembers(): Promise<void> {
     try {
@@ -33,11 +37,13 @@ export class StatisticsComponent {
     }
   }
 
+
   private loadMembers(userId: string): void {
     this.memberService.getMembersOfSharedGroups(userId)
       .then(members => {
         this.members = members;
         console.log('Miembros que comparten grupos con el usuario:', members);
+
 
         this.members.forEach(member => {
           this.userPayments[member.id.toString()] = [];
@@ -48,6 +54,7 @@ export class StatisticsComponent {
         console.error('Error al cargar los miembros:', error);
       });
   }
+
 
   private loadUserPayments(userId: string): void {
     this.memberService.getUserPayments(userId)
@@ -60,3 +67,6 @@ export class StatisticsComponent {
       });
   }
 }
+
+
+
