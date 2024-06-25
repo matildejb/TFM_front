@@ -3,7 +3,7 @@
 }
 
 .header {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .box {
@@ -18,17 +18,7 @@
   background-color: rgba(2, 113, 132, 0.15);
 }
 
-/* @media (min-width: 760px) and (max-width: 1024px) {
-  .wp {
-    margin: auto;
-    max-width: 80%;
-  }
-  .card-title,
-  .card-text {
-    max-width: 100%;
-    font-size: smaller;
-  }
-} */
+
 
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {
@@ -47,3 +37,4 @@
     }
   }
 }
+

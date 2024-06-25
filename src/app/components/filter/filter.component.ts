@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,11 +20,13 @@ export class FilterComponent implements OnInit {
   name: string = '';
   groupId: string = '';
   message: string = '';
-
+  router = inject(Router);
+  
   constructor(
     private groupService: GroupService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
+    
   ) { }
 
   private baseUrl: string = `${environment.apiUrl}/members`;
@@ -117,11 +119,12 @@ export class FilterComponent implements OnInit {
       this.groupService.addMember(this.groupId, user.email).then(response => {
         console.log('Usuario añadido al grupo exitosamente', response);
         Swal.fire({
-          title: '¡Éxito!',
           text: 'Usuario añadido al grupo correctamente.',
           icon: 'success',
           confirmButtonText: 'Aceptar'
-        });
+        }).then(() => {
+        this.router.navigate(['/friends']); // Redirigir a la ruta /friends
+      });
       }).catch(error => {
         Swal.fire({
           title: 'Error',

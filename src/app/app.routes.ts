@@ -18,6 +18,7 @@ import { PaymentsComponent } from './pages/buttons/payments/payments.component';
 import { FormGroupComponent } from './pages/buttons/form-group/form-group.component';
 import { GroupMembersComponent } from './pages/group-members/group-members.component';
 import { FriendsComponent } from './pages/friends/friends.component';
+import { StatisticsComponent } from './pages/statistics_historial/statistics.component';
 
 export const routes: Routes = [
   { path: 'updateUser/:userId', component: RegisterComponent },
@@ -38,6 +39,9 @@ export const routes: Routes = [
   { path: 'group/:id/groupMembers', component: GroupMembersComponent, canActivate: [loginGuard] },
   {
     path: 'friends', component: FriendsComponent, canActivate: [loginGuard]
+  },
+  {
+    path: 'historial', component: StatisticsComponent, canActivate: [loginGuard]
   },
   { path: 'group/:id/formPayments', component: PaymentsComponent, canActivate: [loginGuard] },
   { path: 'createGroup', component: FormGroupComponent, canActivate: [loginGuard] },
