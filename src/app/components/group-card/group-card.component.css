@@ -46,18 +46,6 @@
     cursor: pointer;
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
-    .wp {
-        padding: 0px 250px 150px;
-    }
-}
-
-@media (min-width: 1201px) {
-    .wp {
-        padding: 0px 400px 150px;
-    }
-}
-
 
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {

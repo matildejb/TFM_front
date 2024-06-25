@@ -3,8 +3,8 @@
   padding-bottom: 15%;
 }
 .balance {
-	color: #027184;
-	font-weight: 900;
+  color: #027184;
+  font-weight: 900;
 }
 
 .price-text {
@@ -49,24 +49,12 @@
 .strong-shadow {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
 }
-/* 
-@media (min-width: 992px) and (max-width: 1200px) {
-	.wp {
-		padding: 0px 250px 150px;
-	}
-}
-
-@media (min-width: 1201px) {
-	.wp {
-		padding: 0px 500px 150px;
-	}
-} */
 
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {
   .container {
     padding-left: 0%;
-	padding-bottom: 20%;
+    padding-bottom: 20%;
   }
   .menu-container {
     padding-left: 0%;
@@ -75,7 +63,7 @@
 
 /* Dispositivo movil*/
 @media only screen and (max-width: 767px) {
-	 .container {
+  .container {
     padding-bottom: 30%;
   }
 

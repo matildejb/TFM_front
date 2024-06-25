@@ -39,10 +39,10 @@ export const routes: Routes = [
   {
     path: 'friends', component: FriendsComponent, canActivate: [loginGuard]
   },
+  { path: 'group/:id/formPayments', component: PaymentsComponent, canActivate: [loginGuard] },
+  { path: 'createGroup', component: FormGroupComponent, canActivate: [loginGuard] },
 
 
-  { path: 'group/:id/formPayments', component: PaymentsComponent },
-  { path: 'createGroup', component: FormGroupComponent },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: 'page-not-found' },
 ];
