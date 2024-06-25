@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, forkJoin, lastValueFrom, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, map, Observable } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { environment } from '../../environments/environment.development';
 import axios from 'axios';
@@ -99,7 +99,6 @@ export class UsersService {
       this.httpClient.delete<IUser>(`${this.profileUrl}/delete/${id}`)
     );
   }
-
 
 
   //IMG  FALTA   implementar la llamada al back para traer la img 
