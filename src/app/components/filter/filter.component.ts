@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
@@ -139,5 +139,10 @@ export class FilterComponent implements OnInit {
 
   onSearchClick(): void {
     this.getMembersInMyGroups(this.name);
+  }
+
+
+   goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -1,6 +1,7 @@
 <section class="container mt-5 mb-5">
 	<div class="ms-5 me-5">
-		<h2 class="mt-4">Añadir gastos</h2>
+		<a (click)="goBack()" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3" style="color: #027184;"></i></a>
+		<h2 class="mt-2">Añadir gastos</h2>
 		<form [formGroup]="formNewPayment">
 			<div class="mb-3 mt-2">
 				<label for="description" class="form-label mt-2">Descripción:</label>
@@ -35,3 +36,5 @@
 		<button class="btn btn-primary btn btn-lg mt-5 add" (click)="createPayment(groupId, newPayment)">Añadir</button>
 	</div>
 </section>
+
+
