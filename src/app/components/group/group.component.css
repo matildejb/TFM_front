@@ -130,6 +130,7 @@
   .container {
     padding-left: 0%;
   }
+
   .menu-container {
     padding-left: 0%;
   }
@@ -145,6 +146,10 @@
     font-size: 2rem;
   }
 
+  .font-50 {
+    font-size: 0.5rem;
+  }
+
   .font-75 {
     font-size: 0.75rem;
   }
@@ -156,4 +161,19 @@
   .font-125 {
     font-size: 1.25rem;
   }
+
+  .th {
+    font-size: 0.5rem;
+    padding: 0px 10px;
+    margin: 0px 0px;
+  }
+
+  .th-cant {
+    text-align: right;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
 }
