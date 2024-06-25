@@ -90,21 +90,6 @@ export class FilterComponent implements OnInit {
     return withoutAccent;
   }
 
-  // onButtonClick(user: any): void {
-  //   if (!this.groupId) {
-  //     this.message = 'No se pudo obtener el ID del grupo';
-  //     console.error(this.message);
-  //   } else {
-  //     this.groupService.addMember(this.groupId, user.email).then(response => {
-  //       console.log('Usuario añadido al grupo exitosamente', response);
-  //       // this.message = 'Usuario añadido al grupo exitosamente';
-  //       alert('Usuario añadido al grupo exitosamente');
-  //     }).catch(error => {
-  //       alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');
-  //     });
-  //   }
-  // }
-
   onButtonClick(user: any): void {
     if (!this.groupId) {
       this.message = 'No se pudo obtener el ID del grupo';

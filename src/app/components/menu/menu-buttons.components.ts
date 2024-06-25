@@ -40,6 +40,8 @@ async deleteGroup(id: string) {
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     });
+    // Redireccionar a la lista de grupos
+          this.router.navigate(['/groupsList']);
 
     if (result.isConfirmed) {
       try {
@@ -52,9 +54,7 @@ async deleteGroup(id: string) {
             'Eliminado!',
             'El grupo ha sido eliminado.',
             'success'
-          );
-          // Redireccionar a la lista de grupos
-          this.router.navigate(['/groupsList']);
+          );   
         }
       } catch (error) {
         // Mostrar notificación de error
