@@ -35,6 +35,7 @@
     color: #027184;
     font-weight: bolder;
     text-decoration: underline;
+    margin-left: 10px;
   }
 
   .active-border {

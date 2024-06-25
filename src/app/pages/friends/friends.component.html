@@ -11,16 +11,16 @@
     </section>
 
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
 
       <ng-container *ngIf="members && members.length > 0; else noMembers">
         <div class="col mb-4" *ngFor="let member of members">
           <div class="card h-100">
             <img [src]="member.imageUrl || 'https://placehold.co/400x300.png'" class="card-img-top img-fluid rounded"
               alt="Imagen de perfil de {{ member.username }}">
-            <div class="card-body">
-              <h5 class="card-title text-wrap text-truncate">{{ member.username }}</h5>
-              <p class="card-text text-wrap text-truncate">{{ member.email }}</p>
+            <div class="card-body mx-1">
+              <h5 class="card-title">{{ member.username }}</h5>
+              <p class="card-text">{{ member.email }}</p>
             </div>
           </div>
         </div>

@@ -11,15 +11,15 @@
         <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
+        <ul class="navbar-nav ms-2">
+            <li class="nav-item ms-0">
                 <a class="nav-link d-block" aria-current="page" [routerLink]="['/user-profile']"
                     routerLinkActive="active-border" (click)="collapseNavbar()">
                     <app-my-account></app-my-account>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/summary']" routerLinkActive="active"
+                <a class="nav-link li" aria-current="page" [routerLink]="['/summary']" routerLinkActive="active"
                     (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -31,7 +31,7 @@
                     Area personal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/groupsList']" routerLinkActive="active" (click)="collapseNavbar()">
+                <a class="nav-link li" [routerLink]="['/groupsList']" routerLinkActive="active" (click)="collapseNavbar()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
                         <path
@@ -40,7 +40,7 @@
                     Mis grupos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/friends']" routerLinkActive="active" (click)="collapseNavbar()">
+                <a class="nav-link li" [routerLink]="['/friends']" routerLinkActive="active" (click)="collapseNavbar()">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">
