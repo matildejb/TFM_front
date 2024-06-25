@@ -22,7 +22,7 @@ import { StatisticsComponent } from './pages/statistics_historial/statistics.com
 
 export const routes: Routes = [
   
-  { path: 'updateUser/:user_id', component: RegisterComponent },
+  
   { path: '', pathMatch: 'full', redirectTo: '/landing' },
   {
     path: 'landing',
@@ -42,6 +42,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [redirectGuard] },
 
   { path: 'user-profile', component: UserProfileComponent, canActivate: [loginGuard] },
+  { path: 'updateUser/:user_id', component: RegisterComponent, canActivate: [loginGuard] },
   { path: 'summary', component: SummaryComponent, canActivate: [loginGuard] },
   { path: 'groupsList', component: GroupsListComponent, canActivate: [loginGuard] },
   { path: 'group/:id', component: GroupComponent, canActivate: [loginGuard] },

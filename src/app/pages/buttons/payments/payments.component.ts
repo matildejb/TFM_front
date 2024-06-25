@@ -144,8 +144,6 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
-
-
   goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
   }

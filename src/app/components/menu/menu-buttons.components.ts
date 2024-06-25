@@ -60,7 +60,7 @@ async deleteGroup(id: string) {
         // Mostrar notificación de error
         Swal.fire(
           'Error!',
-          'Hubo un problema al eliminar el grupo.',
+          'No se puede eliminar un grupo con gastos pendientes.',
           'error'
         );
       }
