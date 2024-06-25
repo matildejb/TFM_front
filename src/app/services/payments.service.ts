@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from '../../environments/environment.development';
-import { lastValueFrom, Observable } from "rxjs";
+import { lastValueFrom } from "rxjs";
 import { IPayment } from "../interfaces/ipayments.interfaces";
 
 @Injectable({

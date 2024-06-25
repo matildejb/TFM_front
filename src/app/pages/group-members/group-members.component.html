@@ -1,29 +1,32 @@
-<section class="container mt-2 mb-5">
+<section class="container mt-5 mb-5">
   <div class="me-5 ms-5">
-  <h2>Miembros del grupo</h2>
-  <h5>{{ groupName }}</h5>
+    <a (click)="goBack()" class="ms-auto">
+      <i class="fa-solid fa-arrow-left fs-3 mb-2" style="color: #027184;"></i>
+    </a>
+    <h2>Miembros del grupo</h2>
 
-  <!-- Lista de miembros del grupo -->
-  <div class="mt-4">
-    <ul class="list-group mt-3 mb-5">
-      <li *ngFor="let user of filteredUsers"
-        class="list-group-item d-flex justify-content-center align-items-center px-4 mb-2 border-2 border-radius rounded-2 shadow strong-shadow">
-        <div class="d-flex row align-items-center justify-content-center">
-          <h5 class="col 7 m-0 p-0">{{ user.username }}</h5>
-          <p class="col-5 m-0 p-0 pb-1 text-end">{{ user.email }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
+    <!-- Lista de miembros del grupo -->
+    <div class="mt-4">
+      <ul class="list-group mt-3 mb-5">
+        <li *ngFor="let user of filteredUsers"
+          class="list-group-item d-flex justify-content-center align-items-center mb-2 border-2 border-radius rounded-2 shadow strong-shadow">
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center m-0 p-0 w-100">
+            <h5 class="col-md-6 m-0 p-0 text-center">{{ user.name }}</h5>
+            <p class="col-md-6 m-0 p-0 pb-1">{{ user.email }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-  <!-- Mensaje si no hay miembros en el grupo -->
-  <div class="mt-5" *ngIf="filteredUsers.length === 0">
-    <h3>No hay miembros en el grupo</h3>
-  </div>
+    <!-- Mensaje si no hay miembros en el grupo -->
+    <div *ngIf="filteredUsers.length === 0" class="mt-5 border border-1 rounded-4 py-4 px-4 w-75 text-center"
+      style="color: #027184;">
+      <h5>No hay miembros en el grupo</h5>
+    </div>
 
-  <!-- Mensaje de respuesta o cualquier otro mensaje necesario -->
-  <div class="mt-5" *ngIf="message">
-    <h3>{{ message }}</h3>
-  </div>
+    <!-- Mensaje de respuesta o cualquier otro mensaje necesario -->
+    <div class="mt-5" *ngIf="message">
+      <h3>{{ message }}</h3>
+    </div>
   </div>
 </section>

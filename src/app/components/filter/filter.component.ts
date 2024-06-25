@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
@@ -20,6 +20,7 @@ export class FilterComponent implements OnInit {
   name: string = '';
   groupId: string = '';
   message: string = '';
+  router = inject(Router);
 
   constructor(
     private groupService: GroupService,
@@ -39,25 +40,12 @@ export class FilterComponent implements OnInit {
   }
 
   getMembersInMyGroups(searchTerm: string = ''): void {
-    const userId = Number(this.groupId); // Assuming `groupId` is the group ID
-
-    // 1. Get all users
+    // Obtener todos los usuarios
     this.groupService.getAllUsers().then((allUsers: any) => {
       if (Array.isArray(allUsers)) {
-        // 2. Get members of the specific group
-        this.groupService.getMembersInMyGroups(userId).then((groupMembers: any) => {
-          if (Array.isArray(groupMembers)) {
-            // 3. Filter users not in the group
-            const groupMemberIds = new Set(groupMembers.map((member: any) => member.id));
-            this.arrUsers = allUsers.filter((user: any) => !groupMemberIds.has(user.id));
-            this.filterUsers(searchTerm); // Execute filtering after getting users
-            console.log('Miembros existentes obtenidos:', this.arrUsers);
-          } else {
-            console.error('El dato recibido de miembros del grupo no es un arreglo válido', groupMembers);
-          }
-        }).catch((error: any) => {
-          console.error('Error al obtener los miembros del grupo', error);
-        });
+        this.arrUsers = allUsers;
+        this.filterUsers(searchTerm); // Ejecutar el filtro después de obtener los usuarios
+        console.log('Usuarios obtenidos:', this.arrUsers);
       } else {
         console.error('El dato recibido de todos los usuarios no es un arreglo válido', allUsers);
       }
@@ -88,21 +76,6 @@ export class FilterComponent implements OnInit {
     return withoutAccent;
   }
 
-  // onButtonClick(user: any): void {
-  //   if (!this.groupId) {
-  //     this.message = 'No se pudo obtener el ID del grupo';
-  //     console.error(this.message);
-  //   } else {
-  //     this.groupService.addMember(this.groupId, user.email).then(response => {
-  //       console.log('Usuario añadido al grupo exitosamente', response);
-  //       // this.message = 'Usuario añadido al grupo exitosamente';
-  //       alert('Usuario añadido al grupo exitosamente');
-  //     }).catch(error => {
-  //       alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');
-  //     });
-  //   }
-  // }
-
   onButtonClick(user: any): void {
     if (!this.groupId) {
       this.message = 'No se pudo obtener el ID del grupo';
@@ -117,10 +90,11 @@ export class FilterComponent implements OnInit {
       this.groupService.addMember(this.groupId, user.email).then(response => {
         console.log('Usuario añadido al grupo exitosamente', response);
         Swal.fire({
-          title: '¡Éxito!',
           text: 'Usuario añadido al grupo correctamente.',
           icon: 'success',
           confirmButtonText: 'Aceptar'
+        }).then(() => {
+          this.router.navigate(['/friends']); // Redirigir a la ruta /friends
         });
       }).catch(error => {
         Swal.fire({
@@ -131,10 +105,13 @@ export class FilterComponent implements OnInit {
         });
       });
     }
-
   }
 
   onSearchClick(): void {
     this.getMembersInMyGroups(this.name);
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

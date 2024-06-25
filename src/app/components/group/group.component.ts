@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { GroupService } from '../../services/groups.service';
 import { IGroup } from '../../interfaces/igroup.interfaces';
 import { IPayment } from '../../interfaces/ipayments.interfaces';
 import { CommonModule } from '@angular/common';
 import { MenuButtonsComponent } from '../menu/menu-buttons.components';
 import { UsersService } from '../../services/users.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IUser } from '../../interfaces/iuser.interfaces';
 
 
@@ -30,7 +30,7 @@ export class GroupComponent implements OnInit {
   // @Output() balance: any;
   balance: any;
   groupTitle: string = '';
-
+  
   // paymentService = inject(PaymentService);
 
   constructor(
@@ -109,5 +109,7 @@ export class GroupComponent implements OnInit {
       console.error('Error al obtener el usuario:', error);
     }
   }
+
+
 
 }

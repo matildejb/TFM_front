@@ -161,11 +161,10 @@ export class RegisterComponent {
           alert(response.join('\n'));
         } else {
           Swal.fire({
-            title: 'Registro exitoso',
-            text: `Te has registrado correctamente`,
+            title: 'Te has registrado correctamente',
+            text: 'Por favor, revisa tu correo electrónico y haz inicio de sesión con tu nueva cuenta',
             icon: 'success',
-            timer: 2000,
-            showConfirmButton: false,
+            confirmButtonText: 'Aceptar',
           });
           this.router.navigateByUrl('/summary');
         }

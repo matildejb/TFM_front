@@ -5,6 +5,7 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { IUser } from '../interfaces/iuser.interfaces';
 import { IDebts } from '../interfaces/idebts.interfaces';
 import { IGroup } from '../interfaces/igroup.interfaces';
+import { IMember } from '../interfaces/imember';
 
 @Injectable({
 	providedIn: 'root'
@@ -33,7 +34,7 @@ export class GroupService {
 	}
 
 	deleteGroup(id: number): Promise<any> {
-		return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/${id}`));
+		return lastValueFrom(this.httpClient.delete<any>(`${this.baseUrl}/groups/delete/${id}`));
 	}
 
 	getGroupById(group_id: number): Promise<any> {
@@ -48,15 +49,21 @@ export class GroupService {
 		);
 	}
 
-	getAllMembers(): Promise<any> {
+	getAllMembers(group_id: number): Promise<any> {
 		return lastValueFrom(
-			this.httpClient.get<any>(`${this.baseUrl}/members/:group_id/`)
+			this.httpClient.get<IMember>(`${this.baseUrl}/members/${group_id}/`)
 		);
 	}
 
 	getMembersInMyGroups(user_id: number): Promise<any> {
 		return lastValueFrom(
 			this.httpClient.get<any>(`${this.baseUrl}/members/${user_id}/known`)
+		);
+	}
+
+	getMembersByGroupId(groupId: number): Promise<any> {
+		return lastValueFrom(
+			this.httpClient.get<any>(`${this.baseUrl}/members/${groupId}`)
 		);
 	}
 

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { IGroup } from '../../../interfaces/igroup.interfaces';
 import { GroupService } from '../../../services/groups.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-group',
@@ -56,13 +57,25 @@ export class FormGroupComponent {
 
     try {
       await this.groupService.createGroup(newGroup);
-      // Redireccionar a la página del grupo creado o a donde desees
-      this.router.navigate(['/groupsList']); // Ejemplo de redirección a la lista de grupos
-      alert('Grupo creado correctamente');
+      Swal.fire({
+        icon: 'success',
+        text: 'Grupo creado correctamente',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        // Redireccionar a la página del grupo creado 
+        this.router.navigate(['/groupsList']); 
+      });
+    
     } catch (error) {
       console.error('Error al crear el grupo:', error);
       // Aquí puedes manejar el error como lo consideres adecuado
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al crear el grupo. Por favor, inténtalo de nuevo.',
+        confirmButtonText: 'OK'
+      });
     }
-  }
 
+  }
 }

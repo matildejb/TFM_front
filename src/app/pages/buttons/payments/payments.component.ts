@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GroupService } from '../../../services/groups.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaymentsService } from '../../../services/payments.service';
 import { IPayment } from '../../../interfaces/ipayments.interfaces';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: '../payments/payments.component.html',
   styleUrls: ['../payments/payments.component.css']
 })
@@ -21,12 +22,16 @@ export class PaymentsComponent implements OnInit {
   message: string = '';
   newPayment: any = {};
   formNewPayment: FormGroup;
+  // router = inject(Router);
+  filteredUsers: any = [];
+  groupName: string = '';
 
   constructor(
     private groupService: GroupService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private paymentService: PaymentsService,
+    private router: Router
   ) {
 
     this.formNewPayment = new FormGroup({
@@ -57,7 +62,7 @@ export class PaymentsComponent implements OnInit {
     if (!this.groupId) {
       console.error('No se pudo obtener el ID del grupo de la ruta');
     }
-    this.getMembersInMyGroups(); // Cargar los miembros al inicializar
+    this.getMembersInMyGroup(); // Cargar los miembros al inicializar
   }
 
   checkControl(
@@ -70,32 +75,25 @@ export class PaymentsComponent implements OnInit {
     );
   }
 
-
-
-  getMembersInMyGroups(): void {
-    const userId = Number(this.groupId); // Assuming `groupId` is the group ID
-
-    // 1. Get all users
-    this.groupService.getAllUsers().then((allUsers: any) => {
-      if (Array.isArray(allUsers)) {
-        // 2. Get members of the specific group
-        this.groupService.getMembersInMyGroups(userId).then((groupMembers: any) => {
-          if (Array.isArray(groupMembers)) {
-            // 3. Filter users not in the group
-            const groupMemberIds = new Set(groupMembers.map((member: any) => member.id));
-            this.arrUsers = allUsers.filter((user: any) => !groupMemberIds.has(user.id));
-            console.log('Miembros existentes obtenidos:', this.arrUsers);
-          } else {
-            console.error('El dato recibido de miembros del grupo no es un arreglo válido', groupMembers);
-          }
-        }).catch((error: any) => {
-          console.error('Error al obtener los miembros del grupo', error);
-        });
+  getMembersInMyGroup(): void {
+    this.groupService.getAllMembers(Number(this.groupId)).then((data: any) => {
+      if (Array.isArray(data)) {
+        this.arrUsers = data;
+        this.filteredUsers = this.arrUsers; // Mostrar todos los miembros al principio
+        console.log('Miembros del grupo obtenidos:', this.arrUsers);
       } else {
-        console.error('El dato recibido de todos los usuarios no es un arreglo válido', allUsers);
+        console.error('El dato recibido no es un arreglo válido', data);
       }
     }).catch((error: any) => {
-      console.error('Error al obtener todos los usuarios', error);
+      console.error('Error al obtener los usuarios', error);
+    });
+  }
+
+  getGroupName(): void {
+    this.groupService.getGroupById(Number(this.groupId)).then((group: any) => {
+      this.groupName = group.name;
+    }).catch((error: any) => {
+      console.error('Error al obtener el nombre del grupo', error);
     });
   }
 
@@ -104,12 +102,21 @@ export class PaymentsComponent implements OnInit {
       this.message = 'No se pudo obtener el ID del grupo';
       console.error(this.message);
     } else {
-      this.groupService.addMember(this.groupId, user.email).then(response => {
-        console.log('Usuario añadido al grupo exitosamente', response);
-        // this.message = 'Usuario añadido al grupo exitosamente';
-        alert('Usuario añadido al grupo exitosamente');
+      this.paymentService.createPayment(this.groupId, user).then(response => {
+        Swal.fire({
+          text: 'Gasto añadido al grupo correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then(() => {
+          this.router.navigateByUrl(`groupList`);
+        });
       }).catch(error => {
-        alert('El usuario ya existe en este grupo.\nAñade a otro usuario.');
+        Swal.fire({
+          title: 'Error',
+          text: 'El usuario pagador no puede estar incluido dentro de los participantes.\nAñade otro usuario.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       });
     }
   }
@@ -126,8 +133,11 @@ export class PaymentsComponent implements OnInit {
 
     try {
       this.paymentService.createPayment(group_id, newPayment).then(response => {
-        console.log('Pago creado exitosamente', response);
-        alert('Pago creado exitosamente');
+        Swal.fire({
+          text: 'Pago creado exitosamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
       }).catch(error => {
         console.error('Error al crear el pago:', error);
         alert('Error al crear el pago');
@@ -137,4 +147,10 @@ export class PaymentsComponent implements OnInit {
       alert('Error al crear el pago');
     }
   }
+
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
 }

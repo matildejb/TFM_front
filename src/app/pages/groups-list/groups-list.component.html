@@ -1,23 +1,22 @@
-<section class="wp groupSection justify-content-center mb-5">
-	<section>
-		<h2 class="mt-5 mb-4 text-left">Mis Grupos</h2>
-	</section>
-
-	<section>
-		<app-group-card></app-group-card>
-	</section>
+<section class="container  mt-5 mb-5">
+    <div class="ps-5 pe-5">
+        <h2 class="mb-4">Mis Grupos</h2>
+        <app-group-card></app-group-card>
+    </div>
 </section>
 
-<section class="menu-container pb-5 pt-3">
-	<section class="row d-flex justify-content-center m-0 p-0">
-		<!-- Balance -->
-		<div class="row justify-content-center px-5 mb-0">
-			<div class="col-12 d-flex justify-content-between">
-				<!-- <p class="balance-text">BALANCE</p> -->
-				<!-- <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> -->
-				<!-- {{ TotalBalance | currency: 'EUR' }} </p> -->
-			</div>
-			<app-menu-buttons [parent]="'groups'"></app-menu-buttons>
-		</div>
-	</section>
+<section class="menu-container">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <!-- Balance 
+
+        <div class="pt-3 balance">BALANCE</div>
+     <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> 
+        {{ TotalBalance | currency: 'EUR' }} </p>
+
+        <hr class="mb-2 w-50"> -->
+
+        <!-- Botonera -->
+        <app-menu-buttons [parent]="'groups'" class="pb-3 pt-3"></app-menu-buttons>
+    </div>
+
 </section>

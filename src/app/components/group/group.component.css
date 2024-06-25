@@ -41,7 +41,7 @@
 
 .bg-comp {
   background-color: rgb(2, 113, 132, 0.15);
-  margin-bottom: 350px;
+  margin-bottom: 250px;
 }
 
 .bg-card {
@@ -125,23 +125,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* @media (min-width: 992px) and (max-width: 1200px) {
-    .wp {
-        padding: 0px 250px;
-    }
-}
-
-@media (min-width: 1201px) {
-    .wp {
-        padding: 0px 400px;
-    }
-} */
-
 /* Dispositivo  tablet */
 @media only screen and (max-width: 992px) {
   .container {
     padding-left: 0%;
   }
+
   .menu-container {
     padding-left: 0%;
   }
@@ -157,6 +146,10 @@
     font-size: 2rem;
   }
 
+  .font-50 {
+    font-size: 0.5rem;
+  }
+
   .font-75 {
     font-size: 0.75rem;
   }
@@ -168,4 +161,19 @@
   .font-125 {
     font-size: 1.25rem;
   }
+
+  .th {
+    font-size: 0.5rem;
+    padding: 0px 10px;
+    margin: 0px 0px;
+  }
+
+  .th-cant {
+    text-align: right;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
 }
