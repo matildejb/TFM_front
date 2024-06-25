@@ -102,9 +102,6 @@ export class UsersService {
     'assets/images/default-img.png'
   );
 
-  //IMG  FALTA   implementar la llamada al back para traer la img 
-  private imageUrlSubject = new BehaviorSubject<string>('assets/images/default-img.png');
-
   async uploadImage(id: number, file: File): Promise<any> {
     const formData = new FormData();
     formData.append('profile_image', file);
