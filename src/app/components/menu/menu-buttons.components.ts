@@ -35,7 +35,7 @@ export class MenuButtonsComponent {
   async deleteGroup(id: string) {
     if (id !== undefined) {
       const result = await Swal.fire({
-        title: '¿Estás seguro de que quieres eliminar el grupo ' + this.id + '?',
+        title: '¿Estás seguro de que quieres eliminar el grupo ?', //+ this.id + '?',
         text: 'Esta acción no se puede deshacer.',
         icon: 'warning',
         showCancelButton: true,

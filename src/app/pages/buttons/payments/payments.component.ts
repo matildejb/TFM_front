@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment.development';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentsService } from '../../../services/payments.service';
 import { IPayment } from '../../../interfaces/ipayments.interfaces';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filter',
@@ -127,7 +128,11 @@ export class PaymentsComponent implements OnInit {
     try {
       this.paymentService.createPayment(group_id, newPayment).then(response => {
         console.log('Pago creado exitosamente', response);
-        alert('Pago creado exitosamente');
+        Swal.fire({
+        text: 'Pago creado exitosamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
       }).catch(error => {
         console.error('Error al crear el pago:', error);
         alert('Error al crear el pago');
