@@ -1,0 +1,179 @@
+.container {
+  padding-left: 22%;
+}
+
+.price-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.miDeuda {
+  font-size: 1.3rem;
+}
+
+.img-menu {
+  height: 30px;
+}
+
+.font-75 {
+  font-size: 0.9rem;
+}
+
+.font-110 {
+  font-size: 1.2rem;
+}
+
+.font-125 {
+  font-size: 1.3rem;
+}
+
+.balance {
+  padding-bottom: 50px;
+}
+
+.amount-positive {
+  color: Limegreen;
+}
+
+.amount-negative {
+  color: Crimson;
+}
+
+.bg-comp {
+  background-color: rgb(2, 113, 132, 0.15);
+  margin-bottom: 250px;
+}
+
+.bg-card {
+  background-color: white;
+}
+
+/* Botonera */
+.menu-container {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+  background-color: rgb(238, 250, 252);
+  padding-left: 22%;
+}
+
+.btn-menu {
+  margin: 0 3px;
+  color: #027184;
+  padding: 8px;
+  border: 1px solid #027184;
+  font-size: 11px;
+  text-align: center;
+  line-height: 10px;
+  width: 60px;
+  height: 40px;
+
+  &:hover {
+    background-color: #027184;
+    color: white;
+  }
+}
+
+.btn-menu i {
+  font-size: 20px;
+}
+
+.btn-settings {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-settings {
+  background: none;
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  color: #027184;
+}
+
+.dropdown-settings {
+  position: absolute;
+  top: 80%;
+  right: 0;
+  background-color: white;
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+.element-settings {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.element-settings:hover {
+  background-color: #027184;
+  color: white;
+}
+
+.btn-settings:hover .dropdown-settings {
+  display: block;
+}
+
+.strong-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+  }
+
+  .menu-container {
+    padding-left: 0%;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .miDeuda {
+    font-size: 1.1rem;
+  }
+
+  .price-text {
+    font-size: 2rem;
+  }
+
+  .font-50 {
+    font-size: 0.5rem;
+  }
+
+  .font-75 {
+    font-size: 0.75rem;
+  }
+
+  .font-110 {
+    font-size: 1.1rem;
+  }
+
+  .font-125 {
+    font-size: 1.25rem;
+  }
+
+  .th {
+    font-size: 0.5rem;
+    padding: 0px 10px;
+    margin: 0px 0px;
+  }
+
+  .th-cant {
+    text-align: right;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
+}

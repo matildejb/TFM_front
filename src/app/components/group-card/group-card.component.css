@@ -1,0 +1,78 @@
+.wp {
+    padding: 0px 100px;
+}
+
+.text-50 {
+    font-size: 0.7rem;
+}
+
+.text-75 {
+    font-size: 1rem;
+}
+
+.text-110 {
+    font-size: 1.1rem;
+
+}
+
+.text-120 {
+    font-size: 1.2rem;
+}
+
+.price-text {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.price-groups {
+    font-size: 1.25rem;
+    color: rgb(0, 212, 0);
+}
+
+.img-gif {
+    width: 40%;
+    height: auto;
+}
+
+.img-gif2 {
+    width: 50%;
+    height: auto;
+}
+
+.img-bg-gif {
+    background-color: rgba(2, 113, 132, 0.15);
+}
+
+.img-menu {
+    height: 30px;
+}
+
+.container {
+    cursor: pointer;
+}
+
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+
+    .text-50 {
+        font-size: 0.5rem;
+    }
+
+    .text-75 {
+        font-size: 0.75rem;
+    }
+
+    .text-125 {
+        font-size: 1.2rem;
+    }
+
+    .price-text {
+        font-size: 1.5rem;
+    }
+
+
+}

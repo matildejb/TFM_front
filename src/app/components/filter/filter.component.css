@@ -1,0 +1,36 @@
+.container {
+    padding-left: 22%;
+
+     .form-label{
+        font-size: 1.3rem;
+    }
+
+}
+
+.btn:hover {
+    background-color: rgb(12, 113, 132);
+    color: white;
+    box-shadow: black 0px 2px 3px 0px;
+}
+
+.search-form {
+	padding-top: 200px;
+}
+
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    .form-label{
+        font-size: 1rem;
+    }
+
+  }
+}

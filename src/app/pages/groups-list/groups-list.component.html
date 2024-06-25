@@ -1,0 +1,22 @@
+<section class="container  mt-5 mb-5">
+    <div class="ps-5 pe-5">
+        <h2 class="mb-4">Mis Grupos</h2>
+        <app-group-card></app-group-card>
+    </div>
+</section>
+
+<section class="menu-container">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <!-- Balance 
+
+        <div class="pt-3 balance">BALANCE</div>
+     <p class="price-text" [ngStyle]="{'color': TotalBalance < 0 ? 'Crimson' : 'Limegreen'}"> 
+        {{ TotalBalance | currency: 'EUR' }} </p>
+
+        <hr class="mb-2 w-50"> -->
+
+        <!-- Botonera -->
+        <app-menu-buttons [parent]="'groups'" class="pb-3 pt-3"></app-menu-buttons>
+    </div>
+
+</section>
