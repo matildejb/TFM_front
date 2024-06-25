@@ -26,7 +26,6 @@ export class FilterComponent implements OnInit {
     private groupService: GroupService,
     private httpClient: HttpClient,
     private route: ActivatedRoute,
-
   ) { }
 
   private baseUrl: string = `${environment.apiUrl}/members`;
@@ -41,25 +40,12 @@ export class FilterComponent implements OnInit {
   }
 
   getMembersInMyGroups(searchTerm: string = ''): void {
-    const userId = Number(this.groupId); // Assuming `groupId` is the group ID
-
-    // 1. Get all users
+    // Obtener todos los usuarios
     this.groupService.getAllUsers().then((allUsers: any) => {
       if (Array.isArray(allUsers)) {
-        // 2. Get members of the specific group
-        this.groupService.getMembersInMyGroups(userId).then((groupMembers: any) => {
-          if (Array.isArray(groupMembers)) {
-            // 3. Filter users not in the group
-            const groupMemberIds = new Set(groupMembers.map((member: any) => member.id));
-            this.arrUsers = allUsers.filter((user: any) => !groupMemberIds.has(user.id));
-            this.filterUsers(searchTerm); // Execute filtering after getting users
-            console.log('Miembros existentes obtenidos:', this.arrUsers);
-          } else {
-            console.error('El dato recibido de miembros del grupo no es un arreglo válido', groupMembers);
-          }
-        }).catch((error: any) => {
-          console.error('Error al obtener los miembros del grupo', error);
-        });
+        this.arrUsers = allUsers;
+        this.filterUsers(searchTerm); // Ejecutar el filtro después de obtener los usuarios
+        console.log('Usuarios obtenidos:', this.arrUsers);
       } else {
         console.error('El dato recibido de todos los usuarios no es un arreglo válido', allUsers);
       }
@@ -108,24 +94,22 @@ export class FilterComponent implements OnInit {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigateByUrl(`/group/${this.groupId}/groupMembers`);
+          this.router.navigate(['/friends']); // Redirigir a la ruta /friends
         });
       }).catch(error => {
         Swal.fire({
           title: 'Error',
-          text: 'El usuario ya existe en este grupo.\nAñade otro usuario.',
+          text: 'El usuario ya existe en este grupo.\nAñade a otro usuario.',
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
       });
     }
-
   }
 
   onSearchClick(): void {
     this.getMembersInMyGroups(this.name);
   }
-
 
   goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.route });

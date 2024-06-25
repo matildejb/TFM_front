@@ -9,10 +9,10 @@
     <div class="mt-4">
       <ul class="list-group mt-3 mb-5">
         <li *ngFor="let user of filteredUsers"
-          class="list-group-item d-flex justify-content-center align-items-center px-4 mb-2 border-2 border-radius rounded-2 shadow strong-shadow">
-          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
-            <h5 class="col-md-7 m-0 p-0">{{ user.name }}</h5>
-            <p class="col-md-5 m-0 p-0 pb-1">{{ user.email }}</p>
+          class="list-group-item d-flex justify-content-center align-items-center mb-2 border-2 border-radius rounded-2 shadow strong-shadow">
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center m-0 p-0 w-100">
+            <h5 class="col-md-6 m-0 p-0 text-center">{{ user.name }}</h5>
+            <p class="col-md-6 m-0 p-0 pb-1">{{ user.email }}</p>
           </div>
         </li>
       </ul>
