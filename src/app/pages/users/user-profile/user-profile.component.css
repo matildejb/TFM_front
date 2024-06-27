@@ -31,7 +31,7 @@
     img {
       width: 180px;
       height: 180px;
-      border-radius: 100%;
+      border-radius: 10%;
       border: 1px solid;
       object-fit: contain;
     }
@@ -55,7 +55,7 @@
     }
 
     .custom-file-upload:hover {
-      background-color: #ddd;
+      color: #004a59;
     }
   }
 

@@ -9,11 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../../interfaces/iuser.interfaces';
 import { UsersService } from '../../../services/users.service';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
@@ -27,6 +28,7 @@ export class RegisterComponent {
   // Reutilización del formulario para la actualización de datos
   title: string = 'Registro';
   button: string = 'Registrarse';
+  showCancelButton: boolean = false; 
 
   // Mostrar u ocultar contraseña
   passwordFieldType: string = 'password';
@@ -85,6 +87,7 @@ export class RegisterComponent {
       if (id) {
         this.title = 'Actualización';
         this.button = 'Actualizar';
+        this.showCancelButton = true;
         let userById: any = await this.usersService.getUserById(id);
         const response: IUser = userById[0];
 
@@ -178,5 +181,9 @@ export class RegisterComponent {
         });
       }
     }
+  }
+
+   cancel() {
+    this.router.navigate(['/user-profile']);
   }
 }

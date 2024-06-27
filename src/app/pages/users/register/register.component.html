@@ -1,16 +1,10 @@
 <section class="d-flex justify-content-center align-items-center flex-column mb-5">
-  <h1 class="h2 mt-4">{{ title }} de usuario</h1>
+  <h1 class="h2 mt-4 p-1">{{ title }} de usuario</h1>
   <div class="p-3 width">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Nombre:</label>
-        <input
-          type="text"
-          placeholder="Introduce tu nombre"
-          id="name"
-          class="form-control"
-          formControlName="name"
-        />
+        <input type="text" placeholder="Introduce tu nombre" id="name" class="form-control" formControlName="name" />
         @if (checkControl('name', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('name', 'pattern')) {
@@ -22,13 +16,8 @@
       </div>
       <div class="mb-3">
         <label for="username" class="form-label">Nombre de usuario:</label>
-        <input
-          type="text"
-          placeholder="Introduce un nombre de usuario"
-          id="username"
-          class="form-control"
-          formControlName="username"
-        />
+        <input type="text" placeholder="Introduce un nombre de usuario" id="username" class="form-control"
+          formControlName="username" />
         @if (checkControl('username', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('username', 'pattern')) {
@@ -40,13 +29,8 @@
       </div>
       <div class="mb-3">
         <label for="phone" class="form-label">Número de teléfono:</label>
-        <input
-          type="tel"
-          placeholder="Introduce tu número de teléfono móvil"
-          id="phone"
-          class="form-control"
-          formControlName="phone"
-        />
+        <input type="tel" placeholder="Introduce tu número de teléfono móvil" id="phone" class="form-control"
+          formControlName="phone" />
         @if (checkControl('phone', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('phone', 'pattern')) {
@@ -58,13 +42,8 @@
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico:</label>
-        <input
-          type="email"
-          placeholder="Introduce tu dirección de correo electrónico"
-          id="email"
-          class="form-control"
-          formControlName="email"
-        />
+        <input type="email" placeholder="Introduce tu dirección de correo electrónico" id="email" class="form-control"
+          formControlName="email" />
         @if (checkControl('email', 'required')) {
         <p class="error">Campo requerido</p>
         } @if (checkControl('email', 'pattern')) {
@@ -76,23 +55,14 @@
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña:</label>
         <div class="position-relative">
-          <input
-            [type]="passwordFieldType"
-            placeholder="Introduce una contraseña"
-            id="password"
-            class="form-control pe-5"
-            formControlName="password"
-          />
-          <button
-            type="button"
+          <input [type]="passwordFieldType" placeholder="Introduce una contraseña" id="password"
+            class="form-control pe-5" formControlName="password" />
+          <button type="button"
             class="btn btn-outline-secondary btn-sm position-absolute top-50 end-0 translate-middle-y me-1"
-            (click)="togglePasswordVisibility()"
-          >
-            <i
-              class="bi {{
+            (click)="togglePasswordVisibility()">
+            <i class="bi {{
                 passwordFieldType === 'password' ? 'bi-eye-slash' : 'bi-eye'
-              }}"
-            ></i>
+              }}"></i>
           </button>
         </div>
         @if (checkControl('password', 'required')) {
@@ -105,12 +75,9 @@
         </p>
         }
       </div>
-      <input
-        type="submit"
-        [value]="button"
-        class="btn btn-se"
-        [disabled]="!formRegister.valid"
-      />
+      <input type="submit" [value]="button" class="btn btn-se" [disabled]="!formRegister.valid" />
+      <button type="button" class="btn  btn-lg bg-danger  ms-4 text-white" *ngIf="showCancelButton"
+        (click)="cancel()">Cancelar</button>
     </form>
   </div>
 </section>
