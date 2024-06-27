@@ -94,7 +94,7 @@ export class FilterComponent implements OnInit {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/friends']); // Redirigir a la ruta /friends
+         this.router.navigate([`/group/${this.groupId}/groupMembers`]); // Redirigir a la ruta /members
         });
       }).catch(error => {
         Swal.fire({
