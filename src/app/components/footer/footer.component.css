@@ -2,6 +2,7 @@
   color: black;
   font-weight: bolder;
   font-size: 0.8rem;
+  position: relative;
 
   span {
     color: #027184;
@@ -16,16 +17,54 @@
   a {
     text-decoration: none;
     color: black;
+    &:hover {
+      color: #027184;
+      font-weight: bolder;
+    }
   }
 
   .github {
     color: black;
     font-size: 1.5rem;
+    border: 0;
+    border-radius: 100%;
+    background-color: white;
     &:hover {
       color: white;
       background-color: black;
-      border-radius: 50%;
     }
+  }
+
+  .github-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .github-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    bottom: 30px;
+    right: 0;
+  }
+
+  .github-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    display: block;
+  }
+
+  .github-dropdown-content a:hover {
+    background-color: black;
+    color: white;
+  }
+
+  .github-dropdown:hover .github-dropdown-content {
+    display: block;
   }
 }
 
