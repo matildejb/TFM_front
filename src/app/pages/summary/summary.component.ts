@@ -10,24 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent {
-  isGroupsModalOpen = false;
-  isFriendsModalOpen = false;
 
-  openGroupsModal() {
-    this.isGroupsModalOpen = true;
-    this.isFriendsModalOpen = false;
-  }
-
-  openFriendsModal() {
-    this.isFriendsModalOpen = true;
-    this.isGroupsModalOpen = false;
-  }
-
-  closeGroupsModal() {
-    this.isGroupsModalOpen = false;
-  }
-
-  closeFriendsModal() {
-    this.isFriendsModalOpen = false;
-  }
 }
