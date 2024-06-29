@@ -35,13 +35,6 @@ input.ng-invalid.ng-touched {
   font-size: 1.2rem;
 }
 
-@media only screen and (min-width: 767px) {
-  .image {
-    height: 15%;
-    width: 15%;
-  }
-}
-
 @media only screen and (min-width: 992px) {
   .width {
     width: 500px;
