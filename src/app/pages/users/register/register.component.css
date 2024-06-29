@@ -1,11 +1,7 @@
 .width {
-  width: 70%;
-}
-
-@media only screen and (min-width: 992px) {
-  .width {
-    width: 35%;
-  }
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 input.ng-invalid.ng-touched {
@@ -39,6 +35,9 @@ input.ng-valid.ng-touched {
 }
 
 @media only screen and (min-width: 992px) {
+  .width {
+    width: 500px;
+  }
   .btn-se {
     padding: 10px;
     border: 1px solid #027184;
