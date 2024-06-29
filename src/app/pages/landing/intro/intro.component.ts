@@ -11,7 +11,7 @@ import Typed from 'typed.js';
 })
 export class IntroComponent {
 
-   texts: string[] = ["Amigos", "Compañeros de piso", "Pareja", "Familiares"];
+  texts: string[] = ["Amigos", "Compañeros de piso", "Pareja", "Familiares"];
   currentText: string = this.texts[0];
   currentIndex: number = 0;
 
@@ -35,8 +35,14 @@ export class IntroComponent {
       backSpeed: 50,
       backDelay: 6000,
       loop: true
-    };
+     };
+     
+     const typed = new Typed('#typed', options);
 
-    new Typed('#typed', options);
+     setTimeout(() => {
+       typed.stop();
+     }, 10000)
+
+    
   }
 }
