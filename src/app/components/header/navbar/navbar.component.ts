@@ -54,7 +54,9 @@ export class NavbarComponent {
       timer: 1500, 
       showConfirmButton: false
     }).then(() => {
-      this.router.navigate(['/welcome']);
+      this.router.navigate(['/welcome']).then(() => {
+        window.location.reload();
+      });
     });
   }
 
