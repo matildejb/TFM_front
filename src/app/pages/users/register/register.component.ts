@@ -169,7 +169,7 @@ export class RegisterComponent {
             icon: 'success',
             confirmButtonText: 'Aceptar',
           });
-          this.router.navigateByUrl('/summary');
+          this.router.navigateByUrl('/login');
         }
       } catch (error) {
         console.log(error);
