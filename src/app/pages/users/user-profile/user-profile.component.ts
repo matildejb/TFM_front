@@ -64,7 +64,7 @@ export class UserProfileComponent {
       const response = await this.userService.uploadImage(this.unUser.id, this.image);
       if (response.profileImage) {
         this.unUser.profileImageUrl = response.profileImage;
-        this.imgURL = await this.userService.getUserImage(this.unUser.id); // Actualiza la imagen en la vista
+        this.imgURL = response.profileImage; // Actualiza la imagen en la vista
         this.userService.updateImageUrl(this.unUser.id, this.imgURL);
       }
 

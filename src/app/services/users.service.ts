@@ -124,16 +124,17 @@ export class UsersService {
           },
         }
       );
-
-      if (response.data.profileImage) {
-        const newImageUrl = response.data.profileImage;
-        this.updateImageUrl(id, newImageUrl); // Actualizar el Subject con la nueva URL de la imagen
-      } else {
-        console.error('La respuesta del servidor no contiene profileImage');
-        this.updateImageUrl(id, 'assets/images/default-img.png');
-      }
-
       return response.data;
+
+      // if (response.data.profileImage) {
+      //   const newImageUrl = response.data.profileImage;
+      //   this.updateImageUrl(id, newImageUrl); // Actualizar el Subject con la nueva URL de la imagen
+      //   return response.data;
+      // } else {
+      //   console.error('La respuesta del servidor no contiene profileImage');
+      //   this.updateImageUrl(id, 'assets/images/default-img.png');
+      // }
+
     } catch (error) {
       console.error('Error subiendo la imagen:', error);
       throw error;
@@ -149,26 +150,22 @@ export class UsersService {
     localStorage.setItem(`imageUrl_${userId}`, imageUrl); // Almacenar la URL de la imagen en el localStorage
   }
 
-  async getUserImage(userId: number): Promise<any> {
+
+  async getUserImage(userId: number): Promise<string> {
     try {
-      const response = await axios.get(`/api/users/${userId}/image`);
-      return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        // Handle Axios specific errors
-        console.error(`Error getting user image: ${error.message}`, {
-          code: error.code,
-          response: error.response
-            ? {
-                status: error.response.status,
-                data: error.response.data,
-              }
-            : null,
-        });
-      } else {
-        // Handle other errors
-        console.error(`Unexpected error: ${error}`);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No se encontró un token de autorization en el local storage')
       }
+
+      const response = await axios.get(`${this.profileUrl}/photo/${userId}`, {
+        headers: {
+          Authorization: token || `Bearer ${token}`,
+        },
+      });
+      return response.data.profile_image;
+    } catch (error) {
+      console.error('Error getting user image:', error);
       throw error;
     }
   }
