@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UsersService } from '../../../../services/users.service';
 import { IUser } from '../../../../interfaces/iuser.interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-account',
@@ -15,10 +16,12 @@ export class MyAccountComponent {
   image: File | null = null; 
   imgURL = 'assets/images/default-img.png';
   unUser: IUser | null = null;
+  private imageUrlSubscription: Subscription | undefined;
   
   
     ngOnInit(): void {
-    this.getUserProfile();
+      this.getUserProfile();
+        this.subscribeToImageUrlChanges();
   }
 
   // Datos personales por usuario
@@ -31,6 +34,14 @@ export class MyAccountComponent {
     } catch (error) {
       console.error('Error fetching user profile', error);
     }
+  }
+
+   private subscribeToImageUrlChanges(): void {
+    this.imageUrlSubscription = this.userService.imageUrl$.subscribe(
+      (imageUrl) => {
+        this.imgURL = imageUrl; // Actualiza la imagen cuando cambie en el servicio
+      }
+    );
   }
 
 
