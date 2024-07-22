@@ -1,0 +1,42 @@
+.container {
+  padding-left: 22%;
+
+  .s {
+    font-size: 1.3rem;
+  }
+}
+
+.price-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(0, 212, 0);
+}
+
+.img-gif {
+  width: 45%;
+}
+
+.img-bg-gif {
+  background-color: rgba(2, 113, 132, 0.15);
+  height: 125px;
+}
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+    .img-gif {
+      width: 40%;
+    }
+    .s {
+      margin: auto;
+    }
+  }
+}
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+}

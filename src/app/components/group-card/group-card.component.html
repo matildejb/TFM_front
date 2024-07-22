@@ -1,0 +1,24 @@
+<div *ngIf="arrGroups && arrGroups.length > 0; else noGroups">
+	<section *ngFor="let group of arrGroups"
+		class="img-bg-gif container border border-2 rounded-3 align-items-start shadow strong-shadow py-2 mt-3 m-0"
+		[routerLink]="['/group', group.id]">
+		<div class="mx-3">
+			<div class="row pt-1 w-100 align-items-center mx-0">
+				<div class="d-flex row w-100 justify-content-between align-items-center px-0 m-0 p-0">
+					<p class="d-flex col-12 text-left m-0 p-0 text-110 fw-bold wrap-nowrap">{{ group.title }}</p>
+					<p class="m-0 p-0 pb-2 pt-0 text-75 d-flex col-12">{{ group.description }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<ng-template #noGroups>
+	<section class="box img-bg-gif container border border-2 rounded-4 align-items-center px-4 py-4 mt-4">
+		<div class="d-flex pt-1 w-100 align-items-center">
+			<h5 class="px-3 fw-bold mb-0 cb">No hay grupos disponibles</h5>
+			<a href="#" class="ms-auto"><i class="fa-solid fa-arrow-left fs-3" style="color: #027184;"></i></a>
+		</div>
+	</section>
+</ng-template>

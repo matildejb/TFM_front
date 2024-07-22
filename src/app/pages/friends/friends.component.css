@@ -1,0 +1,49 @@
+.container {
+  padding-left: 22%;
+}
+
+
+.header {
+  font-size: 1.2rem;
+}
+
+
+.box {
+  background-color: rgba(2, 113, 132, 0.15);
+  width: 100%;
+}
+
+.card-body {
+  margin: auto;
+  text-align: center;
+}
+
+.card {
+  background-color: rgba(2, 113, 132, 0.15);
+  width: 100%; /* Asegura que las tarjetas ocupen el 100% del ancho disponible */
+}
+.card-title, .card-text {
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; /* Oculta el texto que se desborda */
+  text-overflow: ellipsis; /* Añade "..." al final del texto que se desborda */
+}
+
+/* Dispositivo  tablet */
+@media only screen and (max-width: 992px) {
+  .container {
+    padding-left: 0%;
+  }
+}
+
+
+/* Dispositivo movil*/
+@media only screen and (max-width: 767px) {
+  .container {
+    font-size: 1rem;
+
+
+    .header {
+      font-size: 1rem;
+    }
+  }
+}
